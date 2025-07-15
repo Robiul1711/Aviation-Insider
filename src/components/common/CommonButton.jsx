@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 // Define style variants
 const variants = {
   primary: "px-7 py-3 border rounded-full text-white",
-  secondary: "bg-gray-200 hover:bg-gray-300 text-gray-800",
+  secondary: "bg-Secondary-light hover:bg-Secondary/80 text-white px-7 py-3 border rounded-md text-white",
   danger: "bg-red-500 hover:bg-red-600 text-white",
 };
 

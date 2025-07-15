@@ -1,12 +1,24 @@
-
 import { motion } from "framer-motion";
 import Title from "../common/Title";
+import { cn } from "@/lib/utils";
 
-const CommonBanner = ({ image, title, description, link, linkText, logo }) => {
+const CommonBanner = ({
+  image,
+  title,
+  description,
+  link,
+  linkText,
+  logo,
+  className,
+}) => {
   const MotionTitle = motion(Title);
 
   return (
-    <section className="relative w-full section-padding-x h-[350px] md:h-[400px] overflow-hidden">
+    <section
+      className={cn(
+        `relative w-full section-padding-x h-[350px] md:h-[400px] overflow-hidden ${className}`
+      )}
+    >
       {/* Video Background */}
 
       <img
@@ -50,14 +62,15 @@ const CommonBanner = ({ image, title, description, link, linkText, logo }) => {
               ease: "easeOut",
             }}
             viewport={{ once: true }}
-            className="mb-5 md:mt-6 max-w-[1070px] w-full md:text-lg !font-normal"
+            className="mb-5 md:mt-6  md:text-lg !font-normal"
           >
             {description}
           </MotionTitle>
-
-          {/* <motion.button className="px-10 py-3 rounded-full font-semibold transition duration-200 bg-white text-Primary">
-            {linkText}
-          </motion.button> */}
+          {linkText && (
+              <motion.button className="px-10 py-3 rounded-md font-semibold transition duration-200 bg-Secondary  text-white">
+                {linkText}
+              </motion.button>
+            )}
         </div>
       </div>
     </section>
