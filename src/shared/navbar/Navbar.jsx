@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/images/logo.png";
 import CommonButton from "@/components/common/CommonButton";
 import AllDropdown from "./AllDropdown";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const location = useLocation()
-    const isActive = (path) => location.pathname === path;
-    console.log(isActive)
+
+  const isActive = (path) => location.pathname === path;
+
   const aboutLinks = [
     { label: "FAQS", path: "/faq" },
     { label: "Pilot Network Explained", path: "/pilot-network" },
@@ -35,14 +37,14 @@ const Navbar = () => {
 
   const navLinks = [
     { label: "Home", path: "/" },
-    // { label: "AboutUs", path: "/about-us" },
     { label: "Leave a Review", path: "/review" },
     { label: "Become a Pilot", path: "/become-pilot" },
     { label: "Contact", path: "/contact" },
   ];
 
+
   return (
-    <header className="bg-Primary text-white  z-50 sticky top-0">
+    <header className="bg-Primary text-white z-50 sticky top-0">
       <div className="section-padding-x py-5 flex justify-between items-center">
         {/* Logo */}
         <Link to="/">
@@ -55,20 +57,39 @@ const Navbar = () => {
             {navLinks.map((item, index) => (
               <React.Fragment key={item.path}>
                 <li>
-                  <Link to={item.path}>{item.label}</Link>
+                  <Link
+                    to={item.path}
+                    className={`transition-colors duration-200 ${
+                      isActive(item.path)
+                        ? "text-yellow-400 "
+                        : "text-white"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
                 </li>
                 {index === 0 && (
-                  <Link to="/about-us">
+                  <Link to="/about-us" className={`${
+                      location.pathname==='/about-us' 
+                        ? "text-yellow-400 "
+                        : "text-white"
+                    }`}>
                     <AllDropdown label="About Us" items={aboutLinks} />
                   </Link>
                 )}
                 {index === 2 && (
                   <>
+                    <Link to={"/training-providers"}>
+                      <AllDropdown
+                        label="Training Providers"
+                        items={traningProviders}
+                      />
+                    </Link>
                     <li>
-                      <AllDropdown label="Training Providers" items={traningProviders} />
-                    </li>
-                    <li>
-                      <AllDropdown label="Aviation Insights" items={aviationInsights} />
+                      <AllDropdown
+                        label="Aviation Insights"
+                        items={aviationInsights}
+                      />
                     </li>
                   </>
                 )}
@@ -76,7 +97,11 @@ const Navbar = () => {
             ))}
           </ul>
 
-          <CommonButton type="button" variant="primary">
+          <CommonButton
+            onClick={() => navigate("/auth/sign-in")}
+            type="button"
+            variant="primary"
+          >
             Login
           </CommonButton>
         </nav>
@@ -104,6 +129,11 @@ const Navbar = () => {
                   <Link
                     to={item.path}
                     onClick={() => setIsMobileOpen(false)}
+                    className={`transition-colors duration-200 ${
+                      isActive(item.path)
+                        ? "text-yellow-400 font-medium"
+                        : "text-white"
+                    }`}
                   >
                     {item.label}
                   </Link>
@@ -132,7 +162,15 @@ const Navbar = () => {
               </React.Fragment>
             ))}
           </ul>
-          <CommonButton type="button" variant="primary" fullWidth>
+          <CommonButton
+            onClick={() => {
+              navigate("/auth/sign-in");
+              setIsMobileOpen(false);
+            }}
+            type="button"
+            variant="primary"
+            fullWidth
+          >
             Login
           </CommonButton>
         </div>
