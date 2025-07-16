@@ -1,10 +1,28 @@
 import Banner from '@/components/home_components/Banner'
+import BannerBottom from '@/components/home_components/BannerBottom'
+import BrandSection from '@/components/home_components/BrandSection'
+import ContactForm from '@/components/home_components/ContactForm'
+import ImageGallery from '@/components/home_components/ImageGallery'
+import LatestArticles from '@/components/home_components/LatestArticles'
+import LatestFlightSchool from '@/components/home_components/LatestFlightSchool'
+import LeaveReview from '@/components/home_components/LeaveReview'
+import MoreFlightSchool from '@/components/home_components/MoreFlightSchool'
+import OurPartner from '@/components/home_components/OurPartner'
 import React from 'react'
 
 const Home = () => {
   return (
     <div>
       <Banner />
+      <BannerBottom />
+      <LatestFlightSchool />
+      <BrandSection />
+      <ImageGallery />
+      <MoreFlightSchool />
+      <LeaveReview />
+      <LatestArticles />
+      <ContactForm />
+      <OurPartner />
     </div>
   )
 }

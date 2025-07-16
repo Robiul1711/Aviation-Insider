@@ -21,8 +21,43 @@ import FullTimeEducation from "@/pages/BecomePilot_Page/other_Page/FullTimeEduca
 import OlderThan16 from "@/pages/BecomePilot_Page/other_Page/OlderThan16";
 import YoungerThan16 from "@/pages/BecomePilot_Page/other_Page/YoungerThan16";
 import FullTimeEmployment from "@/pages/BecomePilot_Page/other_Page/FullTimeEmployment";
+import AuthLayout from "@/layout/AuthLayout";
+import SignIn from "@/pages/Auth_Pages/SignIn";
+import SignUp from "@/pages/Auth_Pages/SignUp";
+import ForgetPassword from "@/pages/Auth_Pages/ForgetPassword";
+import VerifyCode from "@/pages/Auth_Pages/VerifyCode";
+import ResetPassword from "@/pages/Auth_Pages/ResetPassword";
+
 
 const router = createBrowserRouter([
+  {
+    path: "/auth",
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "/auth/sign-in",
+        element: <SignIn />,
+      },
+      {
+        path: "/auth/sign-up",
+        element: <SignUp />,
+      },
+      {
+        path: "/auth/forget-password",
+        element: <ForgetPassword />,
+      },
+      {
+        path: "/auth/verify-code",
+        element: <VerifyCode />,
+      },
+      {
+        path: "/auth/reset-password",
+        element: <ResetPassword />,
+      },
+
+
+    ],
+  },
   {
     path: "/",
     element: <Layout />,
