@@ -9,6 +9,11 @@ import {
 } from "../common/icons/HomeIcons";
 
 const data = [
+    {
+    name: "Search & Compare",
+    icon: <SearchIcon />,
+    description: "Find and compare schools that meet your needs.",
+  },
   {
     name: "Flight School",
     icon: <PlaneIcon />,
@@ -24,11 +29,7 @@ const data = [
     icon: <MessageIcon />,
     description: "Connect with instructors and fellow students.",
   },
-  {
-    name: "Search & Compare",
-    icon: <SearchIcon />,
-    description: "Find and compare schools that meet your needs.",
-  },
+
 ];
 
 const Banner = () => {

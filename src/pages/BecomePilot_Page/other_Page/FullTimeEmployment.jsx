@@ -31,13 +31,13 @@ const FullTimeEmployment = () => {
         <div className="flex flex-wrap justify-center items-center gap-5 mt-10">
           <CommonButton
             variant="secondary"
-            onClick={() => (window.location.href = "/older-than-16")}
+            onClick={() => (window.location.href = "/training-courses-menu")}
           >
             I know which course suits me
           </CommonButton>
           <CommonButton
             variant="secondary"
-            onClick={() => (window.location.href = "/younger-than-16")}
+            onClick={() => (window.location.href = "/find-the-right-course")}
           >
             I DON'T know which course suits me
           </CommonButton>

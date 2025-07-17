@@ -19,13 +19,13 @@ const Navbar = () => {
   ];
 
   const traningProviders = [
-    { label: "TOP FLIGHT SCHOOLS", path: "/faq" },
+    { label: "TOP FLIGHT SCHOOLS", path: "/top-flight-schools" },
     { label: "ALL FLIGHT SCHOOLS", path: "/pilot-network" },
-    { label: "FLIGHT SCHOOL REVIEWS", path: "/partner" },
-    { label: "FLIGHT SCHOOLS - MAP", path: "/partner" },
-    { label: "MODULAR COURSES", path: "/partner" },
+    { label: "FLIGHT SCHOOL REVIEWS", path: "/flight-school-reviews" },
+    { label: "FLIGHT SCHOOLS - MAP", path: "/flight-school-map" },
+    { label: "MODULAR COURSES", path: "/modular-courses" },
     { label: "LICENCE PROFICIENCY CHECKS", path: "/partner" },
-    { label: "INTEGRATED COURSES", path: "/partner" },
+    { label: "INTEGRATED COURSES", path: "/integrated-courses" },
     { label: "VERIFIED SCHOOLS", path: "/partner" },
     { label: "ENHANCED FLIGHT SCHOOLS", path: "/partner" },
   ];
@@ -79,7 +79,7 @@ const Navbar = () => {
                 )}
                 {index === 2 && (
                   <>
-                    <Link to={"/training-providers"}>
+                    <Link to={"/training-providers"} className={`${location.pathname==='/training-providers' ? "text-yellow-400 " : "text-white"}`}>
                       <AllDropdown
                         label="Training Providers"
                         items={traningProviders}

@@ -1,15 +1,15 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import logo from "../assets/images/logo.png";
-import auth from "../assets/images/auth.png";
+import auth from "../assets/images/auth2.png";
 
 const AuthLayout = () => {
   return (
     <div className="h-screen w-full flex flex-col bg-[#F4F4F7]">
       {/* Header */}
-      <div className="py-6 section-padding-x flex items-center">
+      <div className="mt-10 section-padding-x flex items-center ">
         <Link to="/">
-          <img src={logo} alt="Logo" className="h-12" />
+          <img src={logo} alt="Logo" className="w-[400px] " />
         </Link>
 
       </div>
