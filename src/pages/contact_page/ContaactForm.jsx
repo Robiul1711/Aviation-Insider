@@ -1,0 +1,106 @@
+import React from "react";
+import { useForm } from "react-hook-form";
+import { MdEmail } from "react-icons/md";
+
+const ContaactForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = data => {
+    console.log(data);
+  };
+
+  return (
+    <div className="py-12 bg-white flex flex-col lg:flex-row gap-10 max-w-7xl mx-auto section-padding-x">
+      {/* Left: Contact Info */}
+      <div className="flex-1 space-y-4">
+        <h2 className="text-2xl font-semibold">Contact Us</h2>
+        <p className=" text-gray-700 max-w-sm">
+          Whether you have a question, need a quote, or want to schedule a service we're here to help. Fast, friendly, and ready when you are.
+        </p>
+        <div className="flex items-center gap-3 mt-4">
+          <div className="w-10 h-10 rounded-full border flex items-center justify-center">
+            <MdEmail size={20} />
+          </div>
+          <span className="text-gray-800 font-medium text-base">
+            contact@pilot-network.com
+          </span>
+        </div>
+      </div>
+
+      {/* Right: Contact Form */}
+      <div className="flex-1">
+        <h2 className="text-2xl font-semibold mb-4">Contact Form</h2>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div>
+            <label className="block mb-1 text-gray-700 text-base">Name</label>
+            <input
+              {...register("name", { required: "Name is required" })}
+              placeholder="Enter your name."
+              className="w-full px-4 py-2 border rounded-md text-base bg-gray-100 outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            {errors.name && <p className="text-red-500 text-base">{errors.name.message}</p>}
+          </div>
+          <div>
+            <label className="block mb-1 text-gray-700 text-base">Email</label>
+            <input
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^\S+@\S+$/i,
+                  message: "Invalid email format",
+                },
+              })}
+              placeholder="Enter your email."
+              className="w-full px-4 py-2 border rounded-md text-base bg-gray-100 outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            {errors.email && <p className="text-red-500 text-base">{errors.email.message}</p>}
+          </div>
+          <div>
+            <label className="block mb-1 text-gray-700 text-base">Subject</label>
+            <input
+              {...register("subject", { required: "Subject is required" })}
+              placeholder="Enter your subject."
+              className="w-full px-4 py-2 border rounded-md text-base bg-gray-100 outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            {errors.subject && <p className="text-red-500 text-base">{errors.subject.message}</p>}
+          </div>
+          <div>
+            <label className="block mb-1 text-gray-700 text-base">Message</label>
+            <textarea
+              {...register("message", { required: "Message is required" })}
+              rows="4"
+              placeholder="Enter your message."
+              className="w-full px-4 py-2 border rounded-md text-base bg-gray-100 outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            {errors.message && <p className="text-red-500 text-base">{errors.message.message}</p>}
+          </div>
+
+          {/* Terms Checkbox */}
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              {...register("terms", { required: "You must agree before submitting." })}
+            />
+            <span className="text-base text-gray-600">
+              I agree to the terms of service and privacy policy
+            </span>
+          </div>
+          {/* {errors.terms && <p className="text-red-500 text-base">{errors.terms.message}</p>} */}
+
+          <button
+            type="submit"
+            className="w-full bg-Secondary-light text-white py-2 rounded-md text-base hover:bg-blue-700 transition"
+          >
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default ContaactForm;
