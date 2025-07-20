@@ -39,6 +39,18 @@ import IntegratedCoursesPage from "@/pages/training_providers_Page/othetr_pages/
 import ModularCoursesPage from "@/pages/training_providers_Page/othetr_pages/ModularCoursesPage";
 import FlightSchoolReviewPage from "@/pages/training_providers_Page/othetr_pages/FlightSchoolReviewPage";
 import FlightSchoolMap from "@/pages/training_providers_Page/othetr_pages/FlightSchoolMap";
+import AllTrainingProviders from "@/pages/training_providers_Page/othetr_pages/AllTrainingProviders";
+import LicenceProficiencyChecks from "@/pages/training_providers_Page/othetr_pages/LicenceProficiencyChecks";
+import VERIFIEDSCHOOLS from "@/pages/training_providers_Page/othetr_pages/VERIFIEDSCHOOLS";
+import PlusSchools from "@/pages/training_providers_Page/othetr_pages/PlusSchools";
+import AviationInsights_Page from "@/pages/aviation_Insights_Page/AviationInsights_Page";
+import AviationAdvice from "@/pages/aviation_Insights_Page/other_Insight_Page/AviationAdvice";
+import Article from "@/pages/aviation_Insights_Page/other_Insight_Page/Article";
+import AviationAdviceDetails from "@/pages/aviation_Insights_Page/other_Insight_Page/AviationAdviceDetails";
+import AviationArticleDetails from "@/pages/aviation_Insights_Page/other_Insight_Page/AviationArticleDetails";
+import Setting from "@/components/admin/Setting";
+import NotificationPanel from "@/components/admin/NotificationPanel";
+import SchoolProfilePage from "@/pages/school_profile_page/SchoolProfilePage";
 
 
 const router = createBrowserRouter([
@@ -82,32 +94,49 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <ContactUs />,
       },
-      //
+      // training providers srtart
       {
         path: "/training-providers",
         element: <TrainingprovidersPage />,
       },
       {
         path: "/top-flight-schools",
-        element: <TOPFLIGHTSCHOOLS />,
+        element: <TOPFLIGHTSCHOOLS />
+      },
+      {
+        path: "/all-training-providers",
+        element: <AllTrainingProviders />
       },
       {
         path: "/modular-courses",
-        element: <ModularCoursesPage />,
+        element: <ModularCoursesPage />
       },
       {
         path: "/flight-school-map",
-        element: <FlightSchoolMap />,
+        element: <FlightSchoolMap />
+      },
+      {
+        path: "/licence-proficiency-checks",
+        element: <LicenceProficiencyChecks />
       },
       {
         path: "/flight-school-reviews",
-        element: <FlightSchoolReviewPage />,
+        element: <FlightSchoolReviewPage />
       },
       {
         path: "/integrated-courses",
-        element: <IntegratedCoursesPage />,
+        element: <IntegratedCoursesPage />
       },
-      // 
+      {
+        path: "/verified-schools",
+        element: <VERIFIEDSCHOOLS />
+      },
+      {
+        path: "/plus-schools",
+        element: <PlusSchools />
+      },
+      // training providers end
+      // about start
       {
         path: "/about-us",
         element: <AboutUs />,
@@ -124,7 +153,7 @@ const router = createBrowserRouter([
         path: "/partner",
         element: <Parthner />,
       },
-      // 
+      // about end
       {
         path: "/review",
         element: <LeaveReview />,
@@ -133,6 +162,7 @@ const router = createBrowserRouter([
         path: "/add-your-review",
         element: <AddYourReview />,
       },
+      // Become a pilot start
       {
         path: "/become-pilot",
         element: <BecomeAPilot />,
@@ -147,65 +177,96 @@ const router = createBrowserRouter([
       },
       {
         path: "/europe-ppl",
-        element: <EuropePPL />,
+        element: <EuropePPL />
       },
       {
         path: "/uk-ppl",
-        element: <UKPPL />,
+        element: <UKPPL />
       },
       {
         path: "/commercial-flying",
-        element: <CommercialFlying />,
+        element: <CommercialFlying />
       },
+  
+      
       // 
       {
         path: "/full-time-education",
-        element: <FullTimeEducation />,
+        element: <FullTimeEducation />
       },
       {
         path: "/older-than-16",
-        element: <OlderThan16 />,
+        element: <OlderThan16 />
       },
       {
         path: "/training-courses-menu",
-        element: <TrainingCoursesMenu />,
+        element: <TrainingCoursesMenu />
       },
       {
         path: "/find-the-right-course",
-        element: <FindTheRightCourse />,
+        element: <FindTheRightCourse />
       },
       {
         path: "/pilot-with-previous-experience",
-        element: <PilotwithPreviousExperience />,
+        element: <PilotwithPreviousExperience />
       },
       {
         path: "/modular-fast-track-training",
-        element: <ModularFastTrackTraining />,
+        element: <ModularFastTrackTraining />
       },
       {
         path: "/first-time-flyer",
-        element: <FirstTimeFlyer />,
+        element: <FirstTimeFlyer />
       },
       {
         path: "/full-time-training-options",
-        element: <FullTimeTrainingOptions />,
+        element: <FullTimeTrainingOptions />
       },
       
       //
       {
         path: "/younger-than-16",
-        element: <YoungerThan16 />,
+        element: <YoungerThan16 />
       },
       {
         path: "/younger-than-16",
-        element: <YoungerThan16 />,
+        element: <YoungerThan16 />
       },
       // 
             {
         path: "/full-time-employment",
-        element: <FullTimeEmployment />,
+        element: <FullTimeEmployment />
       }
+      // aviation_Insights_Page start
+      ,
+      {
+        path: "/aviation-insights",
+        element: <AviationInsights_Page />
+      },
+      {
+        path: "/aviation-advice",
+        element: <AviationAdvice />
+      },
+      {
+        path: "/aviation-advice-details/:id",
+        element: <AviationAdviceDetails />
+      },
+      {
+        path: "/aviation-articles",
+        element: <Article />
+      },
+      {
+        path: "/aviation-article-details/:id",
+        element: <AviationArticleDetails />
+      },
+      // aviation_Insights_Page end
 
+      //school profile page start
+      {
+        path: "/school-profile",
+        element: <SchoolProfilePage />
+      },
+      //school profile page end
     ],
   },
   // Admin routes
@@ -216,6 +277,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />, // ✅ Fixed typo
+      },
+      {
+        path: "/dashboard/settings",
+        element: <Setting />, 
+      },
+      {
+        path: "/dashboard/notifications",
+        element: <NotificationPanel />, 
       },
     ],
   },

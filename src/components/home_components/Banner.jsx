@@ -8,26 +8,32 @@ import {
   SearchIcon,
 } from "../common/icons/HomeIcons";
 
+import { Link } from "react-router-dom";
+
 const data = [
     {
-    name: "Search & Compare",
+    name: "Find an ATO",
     icon: <SearchIcon />,
     description: "Find and compare schools that meet your needs.",
+    link: "/all-training-providers",
   },
   {
-    name: "Flight School",
+    name: "Future Pilot",
     icon: <PlaneIcon />,
-    description: "Learn to fly with hands-on aviation training.",
+    description: "interactive guide to starting YOUR aviation career",
+    link: "/training-providers",
   },
   {
-    name: "Course Material",
+    name: "Trainee Pilot",
     icon: <BookIcon />,
-    description: "Access resources and guides to support your studies.",
+    description: "All the tools you need through your training",
+    link: "/modular-courses",
   },
   {
-    name: "Community",
+    name: "CommunLeave A Reviewity",
     icon: <MessageIcon />,
-    description: "Connect with instructors and fellow students.",
+    description: "Review your flight training experience",
+    link: "/pilot-network",
   },
 
 ];
@@ -52,7 +58,8 @@ const Banner = () => {
 
         <div className="lg:w-[20%] w-full grid grid-rows-4 gap-2">
           {data.map((item, index) => (
-            <div
+            <Link
+              to={item.link}
               key={index}
               className="p-4 rounded-2xl bg-Primary/50 hover:bg-Primary/80 duration-300 flex flex-col items-center gap-2"
             >
@@ -68,7 +75,7 @@ const Banner = () => {
               >
                 {item.description}
               </Title>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
