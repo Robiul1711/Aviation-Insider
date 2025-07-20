@@ -1,8 +1,6 @@
-import CommonBanner from '@/components/common/CommonBanner'
 import React from 'react'
-import triningprovider from '@/assets/images/flightschool.png'
-import CommonAds from '@/components/common/CommonAds'
-import TopratedProviders from '@/components/trainingProvidersAllComponents/TopratedProviders'
+import Title from '../common/Title'
+import TopratedProviders from '../trainingProvidersAllComponents/TopratedProviders'
 import TrainingProviders from "@/assets/images/TrainingProviders.png";
 const data = [
   { id: 1, name: "Flight Performance Training LTD", percentage: 66, image: TrainingProviders, review: "24", category: "EGKA" },
@@ -11,20 +9,13 @@ const data = [
   { id: 4, name: "FlyElite", percentage: 90, image: TrainingProviders, review: "45", category: "EGKA" },
   { id: 5, name: "AeroMax", percentage: 58, image: TrainingProviders, review: "12", category: "EGKA" },
 ];
-const FlightSchoolReviewPage = () => {
+const ReviewsForSchool = () => {
   return (
-    <div>
-    <CommonBanner image={triningprovider} title="Flight School Review"/>
-    <div className='section-padding-x pb-10'>
-
-      <div className='mt-10'>
-       <TopratedProviders data={data}/>
-
-      </div>
-    </div>
-      <CommonAds />
+    <div className='section-padding-x  py-20'>
+      <Title level="title32" className=" mb-8">Reviews for this School</Title>
+             <TopratedProviders data={data}/>
     </div>
   )
 }
 
-export default FlightSchoolReviewPage
+export default ReviewsForSchool

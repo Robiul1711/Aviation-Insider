@@ -1,6 +1,5 @@
 import { IoIosNotifications } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
-import React, { use } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link, useLocation } from "react-router-dom";
 
@@ -15,17 +14,18 @@ const CommonNavbar = ({ open, setOpen }) => {
         >
           <GiHamburgerMenu color="black" size={26} />
         </span>
-        <div className="flex items-center gap-4">
-          <p className=" text-black text-3xl font-bold">Admin Header</p>
+        <div className="">
+          <p className=" text-black text-3xl font-bold">Welcome back, Ekramul</p>
+          <p className="text-gray-500 mt-1">User since - 1 week ago</p>
         </div>
       </div>
 
       <div className="flex items-start md:gap-4 gap-2">
         <span>
-          <IoIosNotifications color="black" size={24} />
+          <IoIosNotifications color="white" className="p-2 bg-Secondary-light rounded-full cursor-pointer" size={44} />
         </span>
         <span>
-          <CgProfile color="black" size={24} />
+          <CgProfile color="white" className="p-2 bg-Secondary-light rounded-full cursor-pointer" size={44} />
         </span>
       </div>
     </div>

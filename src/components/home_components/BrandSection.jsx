@@ -41,15 +41,7 @@ const BrandSection = () => {
           ))}
         </Marquee>
       </div>
-      <div className="mt-20 mx-auto flex flex-col items-center gap-5">
-        <Title level="title40" className="text-black text-center">
-        The Leading Flight School Review Website
-        </Title>
-        <Title level="title20" className="text-black text-center max-w-6xl mx-auto ">
-       Pilot Network Plus allows flight schools the ability to market themselves directly to our thousands of monthly website visitors with custom images, videos and over 35 editable sections of information. Click below to find out more.
-        </Title>
-        <CommonButton variant="secondary" onClick={() => window.location.href = "/about"}>Find Out More</CommonButton>
-      </div>
+
     </div>
   );
 };

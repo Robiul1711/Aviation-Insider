@@ -153,7 +153,7 @@ const SchoolFinder = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <span className="text-lg font-medium text-gray-900">{school.name}</span>
+              <Link to="/school-profile" className="text-lg font-medium text-gray-900 hover:text-blue-600">{school.name}</Link>
             </div>
             
             <Link to="/add-your-review" className="px-6 py-2 bg-Secondary text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">

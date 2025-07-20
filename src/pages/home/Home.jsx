@@ -5,6 +5,7 @@ import ContactForm from '@/components/home_components/ContactForm'
 import ImageGallery from '@/components/home_components/ImageGallery'
 import LatestArticles from '@/components/home_components/LatestArticles'
 import LatestFlightSchool from '@/components/home_components/LatestFlightSchool'
+import LeadingFlightSchool from '@/components/home_components/LeadingFlightSchool'
 import LeaveReview from '@/components/home_components/LeaveReview'
 import MoreFlightSchool from '@/components/home_components/MoreFlightSchool'
 import OurPartner from '@/components/home_components/OurPartner'
@@ -16,7 +17,7 @@ const Home = () => {
       <Banner />
       <BannerBottom />
       <LatestFlightSchool />
-      <BrandSection />
+      <LeadingFlightSchool />
       <ImageGallery />
       <MoreFlightSchool />
       <LeaveReview />

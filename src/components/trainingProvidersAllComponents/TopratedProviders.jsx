@@ -1,22 +1,16 @@
 import React from "react";
-import TrainingProviders from "@/assets/images/TrainingProviders.png";
+
 import {
   CircularProgressbar,
   buildStyles,
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-const data = [
-  { id: 1, name: "Flight Performance Training LTD", percentage: 66, image: TrainingProviders, review: "24", category: "EGKA" },
-  { id: 2, name: "Euro Flight Training", percentage: 82, image: TrainingProviders, review: "31", category: "EGKA" },
-  { id: 3, name: "SkyWings", percentage: 74, image: TrainingProviders, review: "18", category: "EGKA" },
-  { id: 4, name: "FlyElite", percentage: 90, image: TrainingProviders, review: "45", category: "EGKA" },
-  { id: 5, name: "AeroMax", percentage: 58, image: TrainingProviders, review: "12", category: "EGKA" },
-];
 
-const TopratedProviders = () => {
+
+const TopratedProviders = ({ data}) => {
   return (
-    <div className="space-y-4 pb-10">
+    <div className="space-y-4 ">
       {data.map((item) => (
         <div
           key={item.id}

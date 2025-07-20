@@ -20,19 +20,19 @@ const Navbar = () => {
 
   const traningProviders = [
     { label: "TOP FLIGHT SCHOOLS", path: "/top-flight-schools" },
-    { label: "ALL FLIGHT SCHOOLS", path: "/pilot-network" },
+    { label: "ALL FLIGHT SCHOOLS", path: "/all-training-providers" },
     { label: "FLIGHT SCHOOL REVIEWS", path: "/flight-school-reviews" },
     { label: "FLIGHT SCHOOLS - MAP", path: "/flight-school-map" },
     { label: "MODULAR COURSES", path: "/modular-courses" },
-    { label: "LICENCE PROFICIENCY CHECKS", path: "/partner" },
+    { label: "LICENCE PROFICIENCY CHECKS", path: "/licence-proficiency-checks" },
     { label: "INTEGRATED COURSES", path: "/integrated-courses" },
-    { label: "VERIFIED SCHOOLS", path: "/partner" },
-    { label: "ENHANCED FLIGHT SCHOOLS", path: "/partner" },
+    { label: "VERIFIED SCHOOLS", path: "/verified-schools" },
+    { label: "ENHANCED FLIGHT SCHOOLS", path: "/plus-schools" },
   ];
 
   const aviationInsights = [
-    { label: "Aviation Advice", path: "/faq" },
-    { label: "Aviation Articles", path: "/pilot-network" },
+    { label: "Aviation Advice", path: "/aviation-advice" },
+    { label: "Aviation Articles", path: "/aviation-articles" },
   ];
 
   const navLinks = [
@@ -85,12 +85,12 @@ const Navbar = () => {
                         items={traningProviders}
                       />
                     </Link>
-                    <li>
+                    <Link to={"/aviation-insights"} className={`${location.pathname==='/aviation-insights' ? "text-yellow-400 " : "text-white"}`}>
                       <AllDropdown
                         label="Aviation Insights"
                         items={aviationInsights}
                       />
-                    </li>
+                    </Link>
                   </>
                 )}
               </React.Fragment>
