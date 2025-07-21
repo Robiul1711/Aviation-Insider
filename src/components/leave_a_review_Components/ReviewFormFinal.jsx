@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function ReviewFormFinal() {
   const [formData, setFormData] = useState({
@@ -103,12 +104,12 @@ export default function ReviewFormFinal() {
 
         {/* Submit Button */}
         <div>
-          <button
+          <Link to="/review-view"
             type="submit"
             className="bg-Secondary hover:bg-blue-700 text-white font-medium py-2 px-10 rounded-sm transition duration-200"
           >
             Submit
-          </button>
+          </Link>
         </div>
       </form>
     </div>

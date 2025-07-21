@@ -51,6 +51,7 @@ import AviationArticleDetails from "@/pages/aviation_Insights_Page/other_Insight
 import Setting from "@/components/admin/Setting";
 import NotificationPanel from "@/components/admin/NotificationPanel";
 import SchoolProfilePage from "@/pages/school_profile_page/SchoolProfilePage";
+import ReviewViewPage from "@/components/leave_a_review_Components/ReviewViewPage";
 
 
 const router = createBrowserRouter([
@@ -161,6 +162,10 @@ const router = createBrowserRouter([
       {
         path: "/add-your-review",
         element: <AddYourReview />,
+      },
+      {
+        path: "/review-view",
+        element: <ReviewViewPage />,
       },
       // Become a pilot start
       {

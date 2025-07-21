@@ -1,5 +1,30 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa6";
+
+const StarRating = ({ rating, onChange, readOnly = false }) => {
+  const [hovered, setHovered] = useState(0);
+
+  return (
+    <div className="flex space-x-1">
+      {[1, 2, 3, 4, 5].map((i) => (
+        <button
+          key={i}
+          type="button"
+          onMouseEnter={() => !readOnly && setHovered(i)}
+          onMouseLeave={() => !readOnly && setHovered(0)}
+          onClick={() => !readOnly && onChange(i)}
+          disabled={readOnly}
+          className={`text-2xl transition-colors duration-200 ${
+            i <= (hovered || rating) ? "text-yellow-400" : "text-gray-300"
+          }`}
+        >
+          <FaStar />
+        </button>
+      ))}
+    </div>
+  );
+};
+
 const ReviewForm = () => {
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [headline, setHeadline] = useState("");
@@ -12,26 +37,6 @@ const ReviewForm = () => {
     rating1: 1,
     rating5_2: 5,
   });
-
-  const StarRating = ({ rating, onChange, readOnly = false }) => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      stars.push(
-        <button
-          key={i}
-          type="button"
-          className={`text-2xl ${
-            i <= rating ? "text-yellow-400" : "text-gray-300"
-          } ${!readOnly ? "hover:text-yellow-400" : ""}`}
-          onClick={() => !readOnly && onChange && onChange(i)}
-          disabled={readOnly}
-        >
-          <FaStar />
-        </button>
-      );
-    }
-    return <div className="flex space-x-1">{stars}</div>;
-  };
 
   const handleRatingChange = (key, value) => {
     setRatings((prev) => ({ ...prev, [key]: value }));
@@ -160,15 +165,15 @@ const ReviewForm = () => {
             />
           </div>
 
-          <div className=" text-lg text-gray-600">
-            In this section you will be asked to rate different parts of the
-            ATO. Please only rate the areas relevant to the training you
-            completed. Use the following scale:
+          <div className="text-lg text-gray-600">
+            In this section you will be asked to rate different parts of the ATO.
+            Please only rate the areas relevant to the training you completed.
+            Use the following scale:
           </div>
         </div>
       </div>
 
-      {/* Rating Scale */}
+      {/* Rating Scale Legend */}
       <div className="grid grid-cols-5 gap-4 mb-8">
         <div className="text-center p-4 bg-red-100 rounded-lg">
           <FaStar className="text-2xl text-red-500 mb-2 mx-auto" />
@@ -179,9 +184,7 @@ const ReviewForm = () => {
             <FaStar />
             <FaStar />
           </div>
-          <div className="text-lg font-medium text-orange-600">
-            Satisfactory
-          </div>
+          <div className="text-lg font-medium text-orange-600">Satisfactory</div>
         </div>
         <div className="text-center p-4 bg-yellow-100 rounded-lg relative">
           <div className="text-2xl text-yellow-500 mb-2 flex items-center justify-center gap-2">

@@ -11,7 +11,7 @@ const FirstTimeFlyer = () => {
       <CommonBanner image={image} title="First Time Flyer" />
       <div className="section-padding-x py-10">
         <div className="space-y-5 pb-10">
-              <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
+              <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-md">
       <h1 className="text-2xl font-bold text-gray-800 mb-4">Commercial Pilot Training Guide</h1>
       
       <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
@@ -145,7 +145,7 @@ const FirstTimeFlyer = () => {
           </CommonButton>
           <CommonButton
             variant="secondary"
-            onClick={() => (window.location.href = "/first-time-flyer")}
+            onClick={() => (window.location.href = "/training-courses-menu")}
           >
      Part Time
           </CommonButton>

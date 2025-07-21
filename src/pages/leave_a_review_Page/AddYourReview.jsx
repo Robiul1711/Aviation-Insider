@@ -15,6 +15,7 @@ const AddYourReview = () => {
         <AirAlliance />
         <div className="mt-10 flex justify-between gap-10 w-full">
           <div className="w-[80%]">
+            
             <ReviewForm />
             <ReviewAccodion />
             <ResultsForm />

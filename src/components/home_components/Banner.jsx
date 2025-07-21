@@ -27,7 +27,7 @@ const data = [
     name: "Trainee Pilot",
     icon: <BookIcon />,
     description: "All the tools you need through your training",
-    link: "/modular-courses",
+    link: "/become-pilot",
   },
   {
     name: "CommunLeave A Reviewity",
