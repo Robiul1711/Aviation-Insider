@@ -11,7 +11,7 @@ import "react-circular-progressbar/dist/styles.css";
 const TopratedProviders = ({ data}) => {
   return (
     <div className="space-y-4 ">
-      {data.map((item) => (
+      {data?.map((item) => (
         <div
           key={item.id}
           className="grid grid-cols-1 sm:grid-cols-3 items-center bg-gray-100 p-5 rounded-xl shadow-sm hover:shadow-md transition"
