@@ -11,7 +11,7 @@ const LeaveReview = () => {
       <CommonBanner image={leave_a_review} title="Leave a Review" />
       <ReviewDetails />
       <SchoolFinder />
-      <OtherCommonLinks className={'flex flex-wrap justify-center items-center gap-5 section-padding-x py-14'}/>
+      <OtherCommonLinks className={'gap-4 grid grid-cols-2 md:grid-cols-4 py-8 md:py-16 section-padding-x'}/>
       <CommonAds />
     </div>
   )

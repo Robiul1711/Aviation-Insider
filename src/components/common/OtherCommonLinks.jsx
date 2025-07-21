@@ -14,7 +14,7 @@ const OtherCommonLinks = ({className, image}) => {
   ];
 
   return (
-      <div className={`${className}`}>
+      <div className={`${className}  `} >
         {imageLinks.map((item, index) => (
           <Link key={index} to={item.path}>
             <img src={item.src} alt={`link-${index + 1}`} className={`${image}`} />

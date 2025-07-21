@@ -13,7 +13,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="py-16 bg-[#eaf2f9] flex items-center justify-center section-padding-x">
+    <div className="py-8 md:py-16 bg-[#eaf2f9] flex items-center justify-center section-padding-x">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-md"

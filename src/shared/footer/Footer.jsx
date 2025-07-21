@@ -17,10 +17,10 @@ const navLinks = [
 
 const Footer = () => {
   return (
-    <footer className="bg-Primary text-white py-12 px-6 md:px-20">
-      <div className="flex flex-col items-center gap-10 text-center">
+    <footer className="bg-Primary text-white py-6 md:py-12 section-padding-x">
+      <div className="flex flex-col items-center gap-8 md:gap-10 text-center">
         {/* Logo */}
-        <img src={logo} alt="Aviation Insider Logo" className="h-12" />
+        <img src={logo} alt="Aviation Insider Logo" className="w-40 md:w-48 lg:w-56 xl:w-auto" />
 
         {/* Navigation Links */}
         <ul className="flex flex-wrap justify-center gap-6 text-base md:text-lg font-medium">
@@ -37,8 +37,8 @@ const Footer = () => {
         </ul>
 
         {/* Bottom Section */}
-        <div className="w-full border-t border-white/20 pt-8 flex flex-col md:flex-row items-center justify-between gap-6 text-sm">
-          <p className="text-center md:text-left text-xl">Terms & Conditions | Privacy Policy</p>
+        <div className="w-full border-t border-white/20 pt-5 md:pt-8 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 text-sm">
+          <p className="text-center md:text-left md:text-xl">Terms & Conditions | Privacy Policy</p>
 
           <div className="flex gap-8 ">
             <FaFacebook className="hover:text-gray-300 cursor-pointer text-xl" />
@@ -48,7 +48,7 @@ const Footer = () => {
             <IoLogoLinkedin className="hover:text-gray-300 cursor-pointer text-xl" />
           </div>
 
-          <p className="text-center md:text-right text-xl">
+          <p className="text-center md:text-right md:text-xl">
             © {new Date().getFullYear()} Aviation Insider. All rights reserved.
           </p>
         </div>

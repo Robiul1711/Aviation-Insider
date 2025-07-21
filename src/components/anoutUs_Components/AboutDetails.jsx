@@ -3,7 +3,7 @@ import Title from "../common/Title";
 
 const AboutDetails = () => {
   return (
-    <div className="section-padding-x py-16">
+    <div className="section-padding-x pt-10 md:pt-0 md:py-16">
       <Title level="title20" className="text-black text-center">
         Pilot Network was constructed from the idea of there being one place
         where all future and current pilots can go to find out about their

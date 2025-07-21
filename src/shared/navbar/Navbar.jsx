@@ -52,7 +52,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-10">
+        <nav className="hidden xlg:flex items-center gap-10">
           <ul className="flex items-center gap-6 text-lg">
             {navLinks.map((item, index) => (
               <React.Fragment key={item.path}>
@@ -108,7 +108,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Icon */}
         <button
-          className="md:hidden z-50"
+          className="xlg:hidden z-50"
           onClick={() => setIsMobileOpen(!isMobileOpen)}
         >
           {isMobileOpen ? <X size={28} /> : <Menu size={28} />}
@@ -122,6 +122,7 @@ const Navbar = () => {
         }`}
       >
         <div className="p-6 space-y-6">
+          <img src={logo} className="w-40" alt="" />
           <ul className="flex flex-col gap-4 text-lg">
             {navLinks.map((item, index) => (
               <React.Fragment key={item.path}>
@@ -139,24 +140,28 @@ const Navbar = () => {
                   </Link>
                 </li>
                 {index === 0 && (
-                  <li>
+                  <Link to="/about-us" className={`${
+                      location.pathname==='/about-us' 
+                        ? "text-yellow-400 "
+                        : "text-white"
+                    }`}>
                     <AllDropdown label="About Us" items={aboutLinks} />
-                  </li>
+                  </Link>
                 )}
                 {index === 2 && (
                   <>
-                    <li>
+                    <Link to={"/training-providers"} className={`${location.pathname==='/training-providers' ? "text-yellow-400 " : "text-white"}`}>
                       <AllDropdown
                         label="Training Providers"
                         items={traningProviders}
                       />
-                    </li>
-                    <li>
+                    </Link>
+                    <Link to={"/aviation-insights"} className={`${location.pathname==='/aviation-insights' ? "text-yellow-400 " : "text-white"}`}>
                       <AllDropdown
                         label="Aviation Insights"
                         items={aviationInsights}
                       />
-                    </li>
+                    </Link>
                   </>
                 )}
               </React.Fragment>

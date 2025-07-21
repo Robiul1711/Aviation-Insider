@@ -25,15 +25,15 @@ const partnerLogos = [
 
 const OurPartner = () => {
   return (
-    <div className="section-padding-x py-16">
+    <div className="section-padding-x py-8 md:py-16">
       <Title level="title40" className="text-black text-center">
         Our Partners
       </Title>
-      <Title level="title20" className="text-black text-center mt-5 max-w-3xl mx-auto">
+      <Title level="title20" className="text-black text-center mt-3 md:mt-5 max-w-3xl mx-auto">
         We are recognised as a source of flight school information and reviews by leading aviation media outlets.
       </Title>
 
-      <div className="flex flex-wrap justify-center gap-6 mt-10">
+      <div className="flex flex-wrap justify-center gap-6 mt-6 md:mt-10">
         {partnerLogos.map((partner, index) => (
           <a
             key={index}

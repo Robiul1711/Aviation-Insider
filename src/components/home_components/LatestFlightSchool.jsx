@@ -66,8 +66,8 @@ const LatestFlightSchool = () => {
   const navigationNextRef = useRef(null);
 
   return (
-    <div className="section-padding-x py-16">
-      <Title level="title40" className="text-black text-center mb-10">
+    <div className="section-padding-x py-8 md:py-16">
+      <Title level="title40" className="text-black text-center mb-5 md:mb-10">
         Latest Flight School Reviews
       </Title>
 
@@ -75,13 +75,13 @@ const LatestFlightSchool = () => {
         {/* Navigation Buttons */}
         <div
           ref={navigationPrevRef}
-          className="absolute top-[40%] -left-5 z-10 cursor-pointer bg-white shadow-md rounded-full p-2 hover:bg-Primary hover:text-white transition"
+          className="absolute top-[40%] left-0 md:-left-5 z-10 cursor-pointer bg-white shadow-md rounded-full p-2 hover:bg-Primary hover:text-white transition"
         >
           <ChevronLeft size={24} />
         </div>
         <div
           ref={navigationNextRef}
-          className="absolute top-[40%] -right-5 z-10 cursor-pointer bg-white shadow-md rounded-full p-2 hover:bg-Primary hover:text-white transition"
+          className="absolute top-[40%] right-0 md:-right-5 z-10 cursor-pointer bg-white shadow-md rounded-full p-2 hover:bg-Primary hover:text-white transition"
         >
           <ChevronRight size={24} />
         </div>

@@ -5,8 +5,8 @@ import CommonButton from '../common/CommonButton'
 
 const LeadingFlightSchool = () => {
   return (
-    <div>
-            <div className="py-14 mx-auto flex flex-col items-center gap-5">
+    <div >
+            <div className=" py-8 md:py-14 mx-auto flex flex-col items-center gap-5 px-4">
         <Title level="title40" className="text-black text-center">
         The Leading Flight School Review Website
         </Title>

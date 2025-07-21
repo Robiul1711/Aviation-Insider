@@ -10,6 +10,7 @@ import p8 from "../../assets/images/p8.png";
 import p9 from "../../assets/images/p9.png";
 import p10 from "../../assets/images/p10.png";
 import Title from "../common/Title";
+import { Link } from "react-router-dom";
 
 const data = [
   {
@@ -91,7 +92,7 @@ const ParthnerLink = () => {
         OUR PARTNERS
       </Title>
 
-      <div className="grid grid-cols-1 md:grid-cols-2  gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2  gap-4 md:gap-8">
         {data.map((item) => (
           <div
             key={item.id}
@@ -100,7 +101,7 @@ const ParthnerLink = () => {
             <img
               src={item.image}
               alt={`partner-${item.id}`}
-              className="w-40 object-contain rounded-md"
+              className="w-20 sm:w-28 md:w-40 object-contain rounded-md"
             />
             {item.discription && (
               <Title level="title16" className="text-[#111827] !font-normal">
@@ -108,14 +109,14 @@ const ParthnerLink = () => {
               </Title>
             )}
             {item.link && (
-              <a
-                href={item.link}
+              <Link
+                to={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-Secondary text-lg underline"
+                className="text-Secondary text-lg underline  break-all"
               >
                 {item.link}
-              </a>
+              </Link>
             )}
           </div>
         ))}

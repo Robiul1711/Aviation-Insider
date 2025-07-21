@@ -77,7 +77,7 @@ const faqData = [
 
 const FaqAccoridion = () => {
   return (
-    <div className='section-padding-x py-16'>
+    <div className='section-padding-x py-5 md:py-16'>
       <Accordion
         type="single"
         collapsible
@@ -86,10 +86,10 @@ const FaqAccoridion = () => {
       >
         {faqData.map((faq) => (
           <AccordionItem key={faq.id} value={`item-${faq.id}`} className={"my-3 bg-[#F3F4F6] px-5 rounded-md"}>
-            <AccordionTrigger className="text-xl font-semibold">
+            <AccordionTrigger className="sm:text-lg md:text-xl font-semibold">
               {faq.question}
             </AccordionTrigger>
-            <AccordionContent className="flex flex-col gap-4 text-balance text-base">
+            <AccordionContent className="flex flex-col gap-4 text-balance text-sm md:text-base">
               <p>{faq.answer}</p>
             </AccordionContent>
           </AccordionItem>

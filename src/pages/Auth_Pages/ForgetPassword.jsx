@@ -2,6 +2,7 @@ import React, { use } from 'react';
 import { useForm } from 'react-hook-form';
 import { Mail } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import CommonButton from '@/components/common/CommonButton';
 
 export default function ForgetPassword() {
     const navigate=useNavigate();
@@ -23,7 +24,7 @@ export default function ForgetPassword() {
 
   return (
     <div className="flex items-center justify-center ">
-      <div className="w-full max-w-lg bg-white rounded-xl shadow-lg p-8">
+      <div className="w-full max-w-lg bg-white rounded-xl p-8">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-2xl font-semibold text-gray-800 mb-2">
@@ -63,12 +64,13 @@ export default function ForgetPassword() {
           </div>
 
           {/* Submit Button */}
-          <button
+         <CommonButton
             type="submit"
-            className="w-full bg-Secondary-light text-white py-3 px-4 rounded-lg font-medium hover:bg-Secondary transition-colors"
+           variant='secondary'
+           className='w-full '
           >
-           Send OTP
-          </button>
+            Reset Password
+          </CommonButton>
                 <div className="text-center text-sm text-gray-600">
           <Link to={'/auth/sign-in'} className="text-Secondary hover:underline font-medium">Go back to Sign In</Link>
         </div>

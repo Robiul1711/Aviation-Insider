@@ -1,10 +1,13 @@
 import React from "react";
 import anouthero from "../../assets/images/abouthero.png";
 import Title from "../common/Title";
+
 const AboutHero = () => {
   return (
-    <div className="section-padding-x flex justify-center items-center gap-20 py-16 bg-Secondary">
-      <div className="w-1/2">
+    <div className="section-padding-x flex flex-col-reverse lg:flex-row items-center gap-10 lg:gap-20 py-10 md:py-16 bg-Secondary">
+      
+      {/* Text Section */}
+      <div className="w-full lg:w-1/2 text-center lg:text-left">
         <Title level="title20" className="text-white">
           Pilot Network was constructed from the idea of there being one place
           where all future and current pilots can go to find out about their
@@ -22,8 +25,14 @@ const AboutHero = () => {
           journey to the flight deck.
         </Title>
       </div>
-      <div className="w-1/2">
-        <img src={anouthero} alt="" />
+
+      {/* Image Section */}
+      <div className="w-full lg:w-1/2 flex justify-center">
+        <img
+          src={anouthero}
+          alt="About Hero"
+          className="max-w-full h-auto object-contain"
+        />
       </div>
     </div>
   );

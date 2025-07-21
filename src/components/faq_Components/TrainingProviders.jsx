@@ -8,15 +8,15 @@ const TrainingProviders = () => {
   const [activeTab, setActiveTab] = useState("enhanced");
 
   return (
-    <div className="section-padding-x py-16 ">
-      <div className="flex justify-between gap-16">
-        <div className="w-[80%]">
+    <div className="section-padding-x py-8 md:py-16 ">
+      <div className="flex flex-col md:flex-row justify-between gap-16">
+        <div className="md:w-[80%] w-full">
           {/* Tab Headers */}
           <div className="flex gap-10 mb-10 border-b border-gray-300">
             <Title
               level="title32"
               onClick={() => setActiveTab("enhanced")}
-              className={`cursor-pointer pb-2 ${
+              className={`cursor-pointer pb-2 text-sm sm:text-base${
                 activeTab === "enhanced"
                   ? "text-Secondary border-b-2 border-Secondary"
                   : "text-gray-500"
@@ -27,7 +27,7 @@ const TrainingProviders = () => {
             <Title
               level="title32"
               onClick={() => setActiveTab("top")}
-              className={`cursor-pointer pb-2 ${
+              className={`cursor-pointer pb-2 text-sm sm:text-base ${
                 activeTab === "top"
                   ? "text-Secondary border-b-2 border-Secondary"
                   : "text-gray-500"
@@ -43,8 +43,8 @@ const TrainingProviders = () => {
             {activeTab === "top" && <TopTrainingProviders />}
           </div>
         </div>
-        <div className="w-[20%] flex justify-end">
-          <OtherCommonLinks className={"flex flex-col gap-4"}  />
+        <div className="md:w-[20%] w-full flex justify-end">
+          <OtherCommonLinks className={" gap-4 grid grid-cols-2 md:grid-cols-1"}  />
         </div>
       </div>
     </div>

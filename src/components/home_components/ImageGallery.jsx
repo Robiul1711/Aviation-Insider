@@ -61,8 +61,8 @@ const imageData = [
 
 const ImageGallery = () => {
   return (
-    <div className="px-4 sm:px-6 lg:px-8 py-12 md:py-16 max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-4 auto-rows-[minmax(180px,auto)]">
+    <div className="px-4 sm:px-6 lg:px-8 py-12  max-w-7xl mx-auto">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 auto-rows-[minmax(180px,auto)]">
         {imageData.map((image) => (
           <div
             key={image.id}
@@ -76,7 +76,7 @@ const ImageGallery = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent flex flex-col justify-end p-4 md:p-6">
               <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="text-lg font-bold text-white line-clamp-1">{image.title}</h3>
+                <h3 className="sm:text-lg font-bold text-white line-clamp-1">{image.title}</h3>
                 <p className="text-sm text-gray-300 mt-1 line-clamp-1">{image.subtitle}</p>
               </div>
               <button className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-gray-900 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium hover:bg-gray-100 w-max">

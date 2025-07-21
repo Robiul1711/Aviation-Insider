@@ -16,13 +16,13 @@ const Home = () => {
     <div>
       <Banner />
       <BannerBottom />
-      <LatestFlightSchool />
+       <LatestFlightSchool />
       <LeadingFlightSchool />
       <ImageGallery />
-      <MoreFlightSchool />
-      <LeaveReview />
+ <MoreFlightSchool />
+           <LeaveReview />
       <LatestArticles />
-      <ContactForm />
+     <ContactForm />
       <OurPartner />
     </div>
   )
