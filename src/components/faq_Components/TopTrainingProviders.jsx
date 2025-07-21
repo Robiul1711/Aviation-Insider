@@ -24,8 +24,8 @@ const TopTrainingProviders = () => {
           <div className="flex items-center gap-8">
             <img src={item.image} alt={item.name} className="w-16 h-16 object-contain" />
             <div className="flex flex-col gap-1">
-              <p className="text-xl font-bold">{item.name}</p>
-              <p className="text-gray-600">{item.review} reviews</p>
+              <p className="sm:text-xl font-bold">{item.name}</p>
+              <p className="text-gray-600 text-sm sm:text-base">{item.review} reviews</p>
             </div>
           </div>
           <div style={{ width: 50, height: 50 }}>

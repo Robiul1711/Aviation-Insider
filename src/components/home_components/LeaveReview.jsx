@@ -30,12 +30,12 @@ const reviewSteps = [
 
 const LeaveReview = () => {
   return (
-    <div className="section-padding-x py-16 bg-[#EBF2F8]">
+    <div className="section-padding-x py-8 md:py-16 bg-[#EBF2F8]">
       <Title level="title40" className="text-black text-center">
         Leave a Review
       </Title>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+      <div className="md:mt-10 mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
         {reviewSteps.map((step) => (
           <a
             key={step.id}

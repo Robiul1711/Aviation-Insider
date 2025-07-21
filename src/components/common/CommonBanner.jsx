@@ -16,7 +16,7 @@ const CommonBanner = ({
   return (
     <section
       className={cn(
-        `relative w-full section-padding-x h-[350px] md:h-[400px] overflow-hidden ${className}`
+        `relative w-full section-padding-x h-[250px] sm:h-[300px] lg:h-[400px] overflow-hidden ${className}`
       )}
     >
       {/* Video Background */}
@@ -33,7 +33,7 @@ const CommonBanner = ({
       {/* Overlay Content */}
       <div className="relative z-20 flex flex-col justify-center items-center h-full text-white px-4 text-center">
         <div className="pb-3">{logo}</div>
-        <div className="mx-auto w-full">
+        <div className="mx-auto w-full text-center">
           <MotionTitle
             initial={{ x: -100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}

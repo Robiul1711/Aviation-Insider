@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import CommonButton from '@/components/common/CommonButton';
 
 export default function SignIn() {
   const {
@@ -26,7 +27,7 @@ export default function SignIn() {
 
   return (
     <div className=" flex items-center justify-center">
-      <div className="w-full max-w-lg bg-white rounded-xl shadow-lg p-8">
+      <div className="w-full max-w-lg bg-white rounded-xl  p-8">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-2xl font-semibold text-gray-800 mb-2">
@@ -114,12 +115,13 @@ export default function SignIn() {
           </div>
 
           {/* Submit Button */}
-          <button
+          <CommonButton
             type="submit"
-            className="w-full bg-Secondary-light text-white py-3 px-4 rounded-lg font-medium hover:bg-Secondary transition-colors"
+           variant='secondary'
+           className='w-full '
           >
             Sign In
-          </button>
+          </CommonButton>
         </form>
 
         {/* Sign Up Link */}

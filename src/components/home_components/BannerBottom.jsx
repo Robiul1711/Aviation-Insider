@@ -10,23 +10,23 @@ import Title from "../common/Title";
 const data = [
   {
     name: "Reviews",
-    icon: <MessageIcon />,
+    icon: <MessageIcon className="size-6 md:size-auto" />,
     description: "XX verified reviews from flight school students",
   },
   {
     name: "Training Providers",
-    icon: <PlaneIcon />,
+    icon: <PlaneIcon className="size-6 md:size-auto" />,
     description: "Up-to-date database featuring XX flight schools",
   },
   {
     name: "Aviator Tips",
-    icon: <AviatorIcon />,
+    icon: <AviatorIcon className="size-6 md:size-auto" />,
     description:
       "Honest insights into the aviation industry from pilots of all experience levels",
   },
   {
     name: "Become a Pilot",
-    icon: <BecomePilotIcon />,
+    icon: <BecomePilotIcon className="size-6 md:size-auto" />,
     description:
       "A powerful interactive guide to help you plan your route to the flight deck",
   },
@@ -41,7 +41,7 @@ const BannerBottom = () => {
             key={index}
             className="flex items-start gap-4 p-4 "
           >
-            <div className="min-w-12 h-12 w-12 rounded-full bg-Primary flex items-center justify-center">
+            <div className="md:min-w-12 min-w-10 md:h-12 md:w-12 size-10 rounded-full bg-Primary flex items-center justify-center">
               {item.icon}
             </div>
             <div>

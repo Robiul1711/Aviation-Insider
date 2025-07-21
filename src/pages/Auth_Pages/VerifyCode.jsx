@@ -2,6 +2,7 @@ import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import OTPInput from "otp-input-react";
 import { useNavigate } from "react-router-dom";
+import CommonButton from "@/components/common/CommonButton";
 
 const VerifyCode = () => {
     const navigate=useNavigate();
@@ -23,7 +24,7 @@ const VerifyCode = () => {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="bg-white p-8 rounded-2xl w-full max-w-lg shadow-lg border">
+      <div className="bg-white p-8 rounded-2xl w-full max-w-lg  border">
         {/* Header */}
         <h2 className="text-center text-2xl font-semibold text-gray-800 mb-2">
           Verify Your Email
@@ -74,12 +75,13 @@ const VerifyCode = () => {
             <p className="text-center text-sm text-red-500">{errors.otp.message}</p>
           )}
 
-          <button
+         <CommonButton
             type="submit"
-            className="w-full py-3 bg-Secondary-light hover:bg-Secondary text-white font-semibold rounded-lg hover:bg-opacity-90 transition"
+           variant='secondary'
+           className='w-full '
           >
-            Verify OTP
-          </button>
+            Verify
+          </CommonButton>
         </form>
       </div>
     </div>

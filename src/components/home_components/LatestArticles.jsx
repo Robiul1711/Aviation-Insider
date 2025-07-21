@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import Title from "../common/Title";
 import { Calendar } from "lucide-react";
 import CommonButton from "../common/CommonButton";
- 
+
 const LatestArticles = () => {
   const items = [
     {
@@ -40,68 +40,77 @@ const LatestArticles = () => {
       date: "May 21, 2025",
     },
   ];
-  return (
-    <div className=" section-gap section-padding-x py-16">
-      <div className=" flex w-full justify-center mb-10 items-center gap-6">
-        <Title level="title40" className={`!text-center`}>Latest Article</Title>
 
+  return (
+    <div className="section-gap section-padding-x py-8 md:py-16">
+      {/* Heading */}
+      <div className="flex w-full justify-center mb-10 items-center gap-6">
+        <Title level="title40" className="!text-center">
+          Latest Article
+        </Title>
       </div>
-      <div className=" w-full flex gap-6 items-start">
-        <Link to={`#`} className=" w-[40%] flex flex-col ">
-          <div className=" w-full h-[700px]">
+
+      {/* Content */}
+      <div className="flex flex-col lg:flex-row gap-6 items-start">
+        {/* Left Large Article */}
+        <Link to="#" className="w-full lg:w-[40%] flex flex-col">
+          <div className="w-full h-[250px] sm:h-[400px] lg:h-[700px]">
             <img
               src={L1}
               alt="latest news"
-              className=" w-full h-full object-fill"
+              className="w-full h-full object-cover rounded-lg"
             />
           </div>
-          <div className=" w-full p-6 bg-[#E9EAEB]  flex flex-col gap-2">
-            <Title level="title24" className={`text-[#010101]`}>
-              Ryanair Invests $500 Million in 30 Spare LEAP-1B Engines to Boost
-              Fleet Reliability
+          <div className="w-full p-6 bg-[#E9EAEB] flex flex-col gap-2">
+            <Title level="title24" className="text-[#010101]">
+              Ryanair Invests $500 Million in 30 Spare LEAP-1B Engines to Boost Fleet Reliability
             </Title>
-            <div className=" flex items-center gap-1">
-              <span>
-                <Calendar />
-              </span>
-              <Title level="title16" className={`!text-[#010101]`}>May 21, 2025</Title>
+            <div className="flex items-center gap-2">
+              <Calendar className="w-4 h-4 text-gray-700" />
+              <Title level="title16" className="!text-[#010101]">
+                May 21, 2025
+              </Title>
             </div>
           </div>
         </Link>
-        <div className=" w-[60%] grid grid-cols-2 gap-4">
-          {items?.map((item, index) => (
-            <Link to={`#`} className=" flex flex-col" key={index}>
-              <div className=" w-full h-[291px]">
+
+        {/* Right Grid of Articles */}
+        <div className="w-full lg:w-[60%] grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {items.map((item, index) => (
+            <Link to="#" className="flex flex-col" key={index}>
+              <div className="w-full h-[220px] sm:h-[260px] md:h-[291px]">
                 <img
-                  src={item?.image}
+                  src={item.image}
                   alt="latest news"
-                  className=" w-full h-full object-fill"
+                  className="w-full h-full object-cover rounded-lg"
                 />
               </div>
-              <div className=" w-full p-6 bg-[#E9EAEB] rounded-2xl flex flex-col gap-2">
-                <Title level="title24" className={`text-[#010101]`}>{item?.title}</Title>
-                <div className=" flex items-center gap-1">
-                  <span>
-                 <Calendar />
-                  </span>
-                  <Title className={`!text-[#010101]`}>{item.date}</Title>
+              <div className="w-full p-6 bg-[#E9EAEB] rounded-2xl flex flex-col gap-2">
+                <Title level="title24" className="text-[#010101]">
+                  {item.title}
+                </Title>
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-gray-700" />
+                  <Title level="title16" className="!text-[#010101]">
+                    {item.date}
+                  </Title>
                 </div>
               </div>
             </Link>
           ))}
         </div>
       </div>
-        <CommonButton
-        className="!mt-10 text-center mx-auto"
-          variant="secondary"
-          onClick={() => (window.location.href = "/blog")}
-        >
-         More Articles
-        </CommonButton>
+
+      {/* Button */}
+      <CommonButton
+        className="!mt-10 text-center mx-auto block"
+        variant="secondary"
+        onClick={() => (window.location.href = "/blog")}
+      >
+        More Articles
+      </CommonButton>
     </div>
   );
 };
- 
+
 export default LatestArticles;
- 
- 

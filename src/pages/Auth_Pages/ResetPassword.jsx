@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Lock, Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import CommonButton from "@/components/common/CommonButton";
 
 const ResetPassword = () => {
     const navigate = useNavigate();
@@ -23,7 +24,7 @@ const ResetPassword = () => {
 
   return (
     <div className="flex items-center justify-center ">
-      <div className="w-full max-w-lg bg-white p-8 rounded-2xl shadow-lg">
+      <div className="w-full max-w-lg bg-white p-8 rounded-2xl ">
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-3">
           Reset Your Password
         </h2>
@@ -94,12 +95,13 @@ const ResetPassword = () => {
           </div>
 
           {/* Submit Button */}
-          <button
+          <CommonButton
             type="submit"
-            className="w-full bg-Secondary-light text-white py-3 px-4 rounded-lg font-medium hover:bg-Secondary  transition"
+           variant='secondary'
+           className='w-full '
           >
             Reset Password
-          </button>
+          </CommonButton>
         </form>
       </div>
     </div>

@@ -9,7 +9,7 @@ const MoreFlightSchool = () => {
   const [activeTab, setActiveTab] = useState("enhanced");
 
   return (
-    <div className="section-padding-x py-16 ">
+    <div className="section-padding-x py-8 md:py-16 ">
       <div className="max-w-7xl mx-auto">
         <div className="">
           {/* Tab Headers */}
@@ -17,7 +17,7 @@ const MoreFlightSchool = () => {
             <Title
               level="title32"
               onClick={() => setActiveTab("enhanced")}
-              className={`cursor-pointer pb-2 ${
+              className={`cursor-pointer pb-2 text-sm sm:text-base ${
                 activeTab === "enhanced"
                   ? "text-Secondary border-b-2 border-Secondary"
                   : "text-gray-500"
@@ -28,7 +28,7 @@ const MoreFlightSchool = () => {
             <Title
               level="title32"
               onClick={() => setActiveTab("top")}
-              className={`cursor-pointer pb-2 ${
+              className={`cursor-pointer pb-2 text-sm sm:text-base ${
                 activeTab === "top"
                   ? "text-Secondary border-b-2 border-Secondary"
                   : "text-gray-500"

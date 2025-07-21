@@ -3,6 +3,7 @@ import { Search } from 'lucide-react';
 import s1 from '../../assets/images/s1.png';
 import s2 from '../../assets/images/s2.png';
 import { Link } from 'react-router-dom';
+import CommonButton from '../common/CommonButton';
 const SchoolFinder = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -118,7 +119,7 @@ const SchoolFinder = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white min-h-screen">
+    <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-white min-h-screen">
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-3xl font-semibold text-gray-900 mb-6">Find a School</h1>
@@ -139,29 +140,37 @@ const SchoolFinder = () => {
       </div>
 
       {/* School Listings */}
-      <div className="space-y-4 mb-8">
-        {filteredSchools.map((school) => (
-          <div
-            key={school.id}
-            className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
-          >
-            <div className="flex items-center space-x-4">
-              <div className="w-16 h-12 bg-gray-100 rounded border flex items-center justify-center overflow-hidden">
-                <img
-                  src={school.logo}
-                  alt={`${school.name} logo`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <Link to="/school-profile" className="text-lg font-medium text-gray-900 hover:text-blue-600">{school.name}</Link>
-            </div>
-            
-            <Link to="/add-your-review" className="px-6 py-2 bg-Secondary text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
-              Add Your Review
-            </Link>
-          </div>
-        ))}
+<div className="space-y-4 mb-8">
+  {filteredSchools.map((school) => (
+    <div
+      key={school.id}
+      className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
+    >
+      <div className="flex items-center space-x-4">
+        <div className="w-16 h-12 bg-gray-100 rounded border flex items-center justify-center overflow-hidden">
+          <img
+            src={school.logo}
+            alt={`${school.name} logo`}
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <Link
+          to="/school-profile"
+          className="text-base sm:text-lg font-medium text-gray-900 hover:text-blue-600 break-words"
+        >
+          {school.name}
+        </Link>
       </div>
+
+      <CommonButton
+        to="/add-your-review"
+variant='secondary'      >
+        Add Your Review
+      </CommonButton>
+    </div>
+  ))}
+</div>
+
 
       {/* Pagination */}
       <div className="flex justify-center items-center space-x-1">
