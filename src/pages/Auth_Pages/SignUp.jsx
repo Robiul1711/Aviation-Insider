@@ -28,7 +28,6 @@ export default function SignUp() {
     console.log('Sign Up Submitted:', data);
     // 🔐 Handle signup logic here
   };
-
   return (
     <div className="flex items-center justify-center ">
       <div className="w-full max-w-lg bg-white rounded-xl p-4 sm:p-8">
