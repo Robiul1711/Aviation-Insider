@@ -67,7 +67,7 @@ const CommonBanner = ({
             {description}
           </MotionTitle>
           {linkText && (
-              <motion.button className="px-10 py-3 rounded-md font-semibold transition duration-200 bg-Secondary  text-white">
+              <motion.button className="px-6 py-2 md:px-12 md:py-3 rounded-md font-semibold transition duration-200 bg-Secondary  text-white">
                 {linkText}
               </motion.button>
             )}

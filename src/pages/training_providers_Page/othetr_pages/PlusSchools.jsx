@@ -18,8 +18,8 @@ const PlusSchools = () => {
         image={triningprovider}
         title="Plus Schools​​​​"
       />
-        <div className="flex py-16 gap-20 bg-Secondary section-padding-x">
-          <div className="space-y-10">
+        <div className="flex flex-col-reverse md:flex-row items-center py-16 gap-10 md:gap-20 bg-Secondary section-padding-x">
+          <div className="space-y-10 flex-1">
             <Title level="title20" className="text-white">
               At Pilot Network we are building the largest database of flight
               schools, training courses and student reviews with the aim of
@@ -43,7 +43,10 @@ const PlusSchools = () => {
               Pilot Network Team.
             </Title>
           </div>
-          <img src={tiq} alt="" />
+         {/* Image */}
+         <div className="flex-1 w-full max-w-xs md:max-w-md">
+           <img src={tiq} alt="Training Info" className="w-full h-auto object-contain" />
+         </div>
         </div>
         <BrandSection />
         <VTPSFAQSection2 />
