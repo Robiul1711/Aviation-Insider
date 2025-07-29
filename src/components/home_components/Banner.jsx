@@ -29,7 +29,7 @@ const data = [
     link: "/become-pilot",
   },
   {
-    name: "Community",
+    name: "Leave A Review",
     icon: <MessageIcon className="size-6 md:size-auto"/>,
     description: "Review your flight training experience",
     link: "/pilot-network",
