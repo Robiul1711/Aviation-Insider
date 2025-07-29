@@ -49,8 +49,6 @@ onSuccess: (response) => {
   // Navigate to home page
   navigate('/');
 },
-
-
     onError: (error) => {
       console.log(error);
       const errorMessage =
