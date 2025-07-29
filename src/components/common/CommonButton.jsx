@@ -1,7 +1,5 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Link } from "react-router-dom";
-
 // Define style variants
 const variants = {
 primary: "px-4 py-2 sm:px-5 sm:py-2 md:px-7  border rounded-full text-white text-sm sm:text-base",
@@ -21,7 +19,7 @@ const CommonButton = ({
   ...props
 }) => {
   return (
-    <Link to={props.to || "#"}
+    <button to={props.to || "#"}
       type={type}
       onClick={onClick}
       disabled={disabled || isLoading}
@@ -58,7 +56,7 @@ const CommonButton = ({
       ) : (
         children
       )}
-    </Link>
+    </button>
   );
 };
 
