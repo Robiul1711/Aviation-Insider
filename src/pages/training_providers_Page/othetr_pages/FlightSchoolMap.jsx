@@ -9,7 +9,7 @@ const FlightSchoolMap = () => {
   return (
     <div>
       <CommonBanner image={triningprovider} title="Flight School - Map" />
-      <div className="section-padding-x pb-10">
+      <div className="section-padding-x md:pb-10">
         <Title level="title20" className="text-black  py-10">
           Below is a map of the variety of schools available across Europe on
           our database. A local school may allow you to save money on travel and
@@ -20,9 +20,9 @@ const FlightSchoolMap = () => {
           please feel free to contact us.
         </Title>
 
-        <div className="mt-10 section-padding-x ">
+        <div className="md:mt-10 ">
           <iframe
-  className="w-full h-[500px] border-0 rounded-lg"
+  className="w-full h-[350px] sm:h-[500px] border-0 rounded-lg"
   loading="lazy"
   allowFullScreen
   referrerPolicy="no-referrer-when-downgrade"

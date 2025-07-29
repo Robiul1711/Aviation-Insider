@@ -31,15 +31,15 @@ export default function SignUp() {
 
   return (
     <div className="flex items-center justify-center ">
-      <div className="w-full max-w-lg bg-white rounded-xl  p-8">
+      <div className="w-full max-w-lg bg-white rounded-xl p-4 sm:p-8">
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-4 sm:mb-8">
           <h1 className="text-2xl font-semibold text-gray-800 mb-2">Create an Account</h1>
           <p className="text-gray-600 text-sm">Let’s get started on your aviation journey.</p>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 sm:space-y-6">
           {/* Full Name */}
           <div>
             <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">

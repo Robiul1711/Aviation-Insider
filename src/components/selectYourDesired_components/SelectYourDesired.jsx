@@ -26,12 +26,12 @@ const SelectYourDesired = () => {
       },
     ]
   return (
-    <div className="section-padding-x py-16">
+    <div className="section-padding-x py-10 md:py-16">
       <Title level="title40" className="text-black text-center">
         Select Your Desired Flight Path
       </Title>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-5 md:mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {
           data.map((item) => (
                <Link to={item.link} key={item.id} className="w-full  rounded-md relative group overflow-hidden">
@@ -39,12 +39,12 @@ const SelectYourDesired = () => {
           <img
             src={item.image}
             alt="animated_cards"
-            className="w-full h-[450px] object-cover"
+            className="w-full h-[300px] md:h-[450px] object-cover"
           />
 
           {/*  texts  */}
-          <div className="flex flex-col h-[100px] items-center justify-center bg-Secondary/20 backdrop-blur-md text-white absolute bottom-0 w-full ">
-            <h3 className="text-[1.7rem]  font-bold tracking-[5px] leading-[30px] ">
+          <div className="flex flex-col h-[60px] md:h-[100px] items-center justify-center bg-Secondary/20 backdrop-blur-md text-white absolute bottom-0 w-full ">
+            <h3 className="sm:text-[1.7rem]  font-bold tracking-[5px] leading-[30px] ">
               {item.name}
             </h3>
         
