@@ -3,9 +3,16 @@ import { useForm, Controller } from "react-hook-form";
 import OTPInput from "otp-input-react";
 import { useNavigate } from "react-router-dom";
 import CommonButton from "@/components/common/CommonButton";
-
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import { useEmail } from "@/hooks/useEmail";
+import { BeatLoader } from "react-spinners";
 const VerifyCode = () => {
+  const {email}=useEmail();
+  console.log(email);
     const navigate=useNavigate();
+       const axiosPublic = useAxiosPublic();
   const {
     handleSubmit,
     control,
@@ -16,11 +23,27 @@ const VerifyCode = () => {
     },
   });
 
-  const onSubmit = (data) => {
-    console.log("Submitted OTP:", data.otp);
-    navigate('/auth/reset-password');
-    // Handle OTP verification logic here
-  };
+  const OTPMutation = useMutation({
+    mutationFn: async (data) => {
+      const response = await axiosPublic.post("/verify/registration", data);
+      return response?.data;
+    },
+    onSuccess: (response) => {
+      toast.success(response?.message || "OTP sent successfully");
+       navigate('/auth/sign-in');
+    },
+    onError: (error) => {
+      console.log(error);
+      const errorMessage =
+        error.response?.data?.message || "Something went wrong, try again later!!";
+      toast.error(errorMessage);
+    },
+  })
+const onSubmit = (data) => {
+  console.log("Submitted OTP:", data.otp);
+  OTPMutation.mutate({ ...data, email });
+};
+
 
   return (
     <div className="flex items-center justify-center">
@@ -78,9 +101,19 @@ const VerifyCode = () => {
          <CommonButton
             type="submit"
            variant='secondary'
-           className='w-full '
+          className="w-full h-[44px] flex items-center justify-center"
           >
-            Verify
+           {OTPMutation?.isPending ? (
+            <BeatLoader
+              loading={OTPMutation?.isPending}
+              color="white"
+              size={10}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          ) : (
+            "Verify"
+          )}
           </CommonButton>
         </form>
       </div>

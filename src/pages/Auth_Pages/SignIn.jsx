@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CommonButton from '@/components/common/CommonButton';
-
+import { useMutation } from '@tanstack/react-query';
+import useAxiosPublic from '@/hooks/useAxiosPublic';
+import toast from 'react-hot-toast';
+import { BeatLoader } from "react-spinners";
+import { useAuth } from '@/hooks/useAuth';
 export default function SignIn() {
+    const {  setUser } = useAuth  ();
+    const navigate=useNavigate();
+       const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -19,9 +26,40 @@ export default function SignIn() {
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const LoginMutation = useMutation({
+    mutationFn: async (data) => {
+      const response = await axiosPublic.post("/login", data);
+      return response?.data;
+    },
+onSuccess: (response) => {
+  console.log(response);
+  toast.success(response?.message || "Login successful");
 
+  // Extract token and userData
+  const token = response?.token;
+  const userData = response?.userData;
+
+  // Store token and userData in localStorage
+  localStorage.setItem("token", token);
+  localStorage.setItem("user", JSON.stringify(userData));
+
+  // Set user in state (if needed)
+  setUser(userData);
+
+  // Navigate to home page
+  navigate('/');
+},
+
+    onError: (error) => {
+      console.log(error);
+      const errorMessage =
+        error.response?.data?.message || "Something went wrong, try again later!!";
+      toast.error(errorMessage);
+    },
+  })
   const onSubmit = (data) => {
     console.log('Form Submitted:', data);
+    LoginMutation.mutate(data);
     // 🔐 Handle login logic here
   };
 
@@ -118,9 +156,19 @@ export default function SignIn() {
           <CommonButton
             type="submit"
            variant='secondary'
-           className='w-full '
+                 className="w-full h-[44px] flex items-center justify-center"
           >
-            Sign In
+            {LoginMutation?.isPending ? (
+            <BeatLoader
+              loading={LoginMutation?.isPending}
+              color="white"
+              size={10}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
+          ) : (
+            "Sign In"
+          )}
           </CommonButton>
         </form>
 
