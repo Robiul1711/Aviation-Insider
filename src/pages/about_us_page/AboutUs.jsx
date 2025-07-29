@@ -8,6 +8,7 @@ import CommonAds from '@/components/common/CommonAds'
 const AboutUs = () => {
   return (
     <div>
+      
       <CommonBanner image={aboutbanner} title="An Introduction to Pilot Network" />
       <AboutHero />
       <AboutDetails />
