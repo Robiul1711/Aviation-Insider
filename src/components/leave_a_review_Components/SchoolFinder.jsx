@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { Search } from 'lucide-react';
-import s1 from '../../assets/images/s1.png';
-import s2 from '../../assets/images/s2.png';
-import { Link } from 'react-router-dom';
-import CommonButton from '../common/CommonButton';
+import React, { useState } from "react";
+import { Search } from "lucide-react";
+import s1 from "../../assets/images/s1.png";
+import s2 from "../../assets/images/s2.png";
+import { Link } from "react-router-dom";
+import CommonButton from "../common/CommonButton";
 const SchoolFinder = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
   const schools = [
@@ -42,26 +42,26 @@ const SchoolFinder = () => {
     {
       id: 7,
       name: "Advanced Flight Training",
-      logo: s1
+      logo: s1,
     },
     {
       id: 8,
       name: "Adventia - European Aviation College",
-      logo: s2
+      logo: s2,
     },
     {
       id: 9,
       name: "Aeolus Aviation Academy",
-      logo: s1
+      logo: s1,
     },
     {
       id: 10,
       name: "Aerbrava",
-      logo: s2
-    }
+      logo: s2,
+    },
   ];
 
-  const filteredSchools = schools.filter(school =>
+  const filteredSchools = schools.filter((school) =>
     school.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -73,7 +73,7 @@ const SchoolFinder = () => {
 
   const renderPaginationButtons = () => {
     const buttons = [];
-    
+
     // Previous button
     buttons.push(
       <button
@@ -94,8 +94,8 @@ const SchoolFinder = () => {
           onClick={() => handlePageChange(i)}
           className={`px-3 py-2 mx-1 rounded ${
             currentPage === i
-              ? 'bg-gray-800 text-white'
-              : 'text-gray-600 hover:bg-gray-100'
+              ? "bg-gray-800 text-white"
+              : "text-gray-600 hover:bg-gray-100"
           }`}
         >
           {i}
@@ -122,8 +122,10 @@ const SchoolFinder = () => {
     <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-white min-h-screen">
       {/* Header */}
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-semibold text-gray-900 mb-6">Find a School</h1>
-        
+        <h1 className="text-3xl font-semibold text-gray-900 mb-6">
+          Find a School
+        </h1>
+
         {/* Search Bar */}
         <div className="relative max-w-2xl mx-auto">
           <input
@@ -140,37 +142,34 @@ const SchoolFinder = () => {
       </div>
 
       {/* School Listings */}
-<div className="space-y-4 mb-8">
-  {filteredSchools.map((school) => (
-    <div
-      key={school.id}
-      className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
-    >
-      <div className="flex items-center space-x-4">
-        <div className="w-16 h-12 bg-gray-100 rounded border flex items-center justify-center overflow-hidden">
-          <img
-            src={school.logo}
-            alt={`${school.name} logo`}
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <Link
-          to="/school-profile"
-          className="text-base sm:text-lg font-medium text-gray-900 hover:text-blue-600 break-words"
-        >
-          {school.name}
-        </Link>
+      <div className="space-y-4 mb-8">
+        {filteredSchools.map((school) => (
+          <div
+            key={school.id}
+            className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
+          >
+            <div className="flex items-center space-x-4">
+              <div className="w-16 h-12 bg-gray-100 rounded border flex items-center justify-center overflow-hidden">
+                <img
+                  src={school.logo}
+                  alt={`${school.name} logo`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <Link
+                to="/school-profile"
+                className="text-base sm:text-lg font-medium text-gray-900 hover:text-blue-600 break-words"
+              >
+                {school.name}
+              </Link>
+            </div>
+
+            <CommonButton  link="/add-your-review" variant="secondary">
+              Add Your Review
+            </CommonButton>
+          </div>
+        ))}
       </div>
-
-      <CommonButton
-        to="/add-your-review"
-variant='secondary'      >
-        Add Your Review
-      </CommonButton>
-    </div>
-  ))}
-</div>
-
 
       {/* Pagination */}
       <div className="flex justify-center items-center space-x-1">

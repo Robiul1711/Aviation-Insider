@@ -1,10 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
-// Define style variants
+
 const variants = {
-primary: "px-4 py-2 sm:px-5 sm:py-2 md:px-7  border rounded-full text-white text-sm sm:text-base",
-secondary: "bg-Secondary-light hover:bg-Secondary/80 text-white border rounded-md px-4 py-2 text-sm sm:px-6 sm:py-2.5 sm:text-base md:px-7 md:py-3 md:text-base",
-danger: "bg-red-500 hover:bg-red-600 text-white",
+  primary:
+    "px-4 py-2 sm:px-5 sm:py-2 md:px-7 border rounded-full text-white text-sm sm:text-base",
+  secondary:
+    "bg-Secondary-light hover:bg-Secondary/80 text-white border rounded-md px-4 py-2 text-sm sm:px-6 sm:py-2.5 sm:text-base md:px-7 md:py-3 md:text-base",
+  danger: "bg-red-500 hover:bg-red-600 text-white",
 };
 
 const CommonButton = ({
@@ -16,20 +19,31 @@ const CommonButton = ({
   disabled = false,
   fullWidth = false,
   className = "",
+  link = null,
   ...props
 }) => {
+  const buttonClasses = cn(
+    "py-3 px-6 rounded-lg font-semibold transition duration-300 flex items-center justify-center gap-2",
+    variants[variant] || variants.primary,
+    (disabled || isLoading) && "opacity-60 cursor-not-allowed",
+    fullWidth && "w-full",
+    className
+  );
+
+  if (link) {
+    return (
+      <Link to={link} className={buttonClasses} {...props}>
+        {children}
+      </Link>
+    );
+  }
+
   return (
-    <button to={props.to || "#"}
+    <button
       type={type}
       onClick={onClick}
       disabled={disabled || isLoading}
-      className={cn(
-        "py-3 px-6 rounded-lg font-semibold transition duration-300 flex items-center justify-center gap-2",
-        variants[variant] || variants.primary,
-        (disabled || isLoading) && "opacity-60 cursor-not-allowed",
-        fullWidth && "w-full",
-        className
-      )}
+      className={buttonClasses}
       {...props}
     >
       {isLoading ? (

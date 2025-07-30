@@ -6,6 +6,7 @@ import gal4 from "../../assets/images/gal4.png";
 import gal5 from "../../assets/images/gal5.png";
 import gal6 from "../../assets/images/gal6.png";
 import gal7 from "../../assets/images/gal7.png";
+import { Link } from "react-router-dom";
 
 const imageData = [
     {
@@ -14,13 +15,15 @@ const imageData = [
       subtitle: "Our interactive guide to becoming a pilot",
       className: "md:col-span-2 md:row-span-2",
       src: gal1,
+      link: "/become-pilot",
     },
   {
     id: 2,
-    title: "ADVICE & GUIDES",
-    subtitle: "Read our training advice and guides",
+    title: "Top Rated Training Providers",
+    subtitle: "View our top rated training providers",
     className: "md:col-span-2",
     src: gal2,
+    link: "/all-training-providers",
   },
   {
     id: 3,
@@ -28,34 +31,39 @@ const imageData = [
     subtitle: "View our database of integrated courses",
     className: "md:col-span-2 md:row-span-2",
     src: gal3,
+    link: "/integrated-courses",
   },
   {
     id: 4,
-    title: "Mustard Field",
-    subtitle: "ADVICE & GUIDES",
+    title: "MODULAR COURSES",
+    subtitle: "View our database of modular providers",
     className: "md:col-span-2",
     src: gal4,
+    link: "/modular-courses",
   },
   {
     id: 5,
-    title: "Floating Island",
-    subtitle: "Fantasy Scene",
+    title: "OUR MAP OF ATOS",
+    subtitle: "Find your nearest ATO",
     className: "md:col-span-2",
     src: gal5,
+    link: "/flight-school-map",
   },
   {
     id: 6,
-    title: "Mountain Lake",
-    subtitle: "Serene Waters",
+    title: "ALL TRAINING PROVIDERS",
+    subtitle: "View our database of training providers",
     className: "md:col-span-2",
     src: gal6,
+    link: "/all-training-providers",
   },
   {
     id: 7,
-    title: "Sunset Birds",
-    subtitle: "Golden Hour",
+    title: "FLIGHT SCHOOL REVIEWS",
+    subtitle: "Read all of our reviews",
     className: "md:col-span-2",
     src: gal7,
+    link: "/review",
   },
 ];
 
@@ -79,9 +87,9 @@ const ImageGallery = () => {
                 <h3 className="sm:text-lg font-bold text-white line-clamp-1">{image.title}</h3>
                 <p className="text-sm text-gray-300 mt-1 line-clamp-1">{image.subtitle}</p>
               </div>
-              <button className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-gray-900 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium hover:bg-gray-100 w-max">
+              <Link to={image.link} className="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-gray-900 px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium hover:bg-gray-100 w-max">
                 View Details
-              </button>
+              </Link>
             </div>
           </div>
         ))}

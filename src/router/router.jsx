@@ -52,6 +52,7 @@ import Setting from "@/components/admin/Setting";
 import NotificationPanel from "@/components/admin/NotificationPanel";
 import SchoolProfilePage from "@/pages/school_profile_page/SchoolProfilePage";
 import ReviewViewPage from "@/components/leave_a_review_Components/ReviewViewPage";
+import ForgetVerifyCode from "@/pages/Auth_Pages/ForgetVerifyCode";
 
 
 const router = createBrowserRouter([
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: "/auth/verify-code",
         element: <VerifyCode />,
+      },
+      {
+        path: "/auth/forget-verify-code",
+        element: <ForgetVerifyCode />,
       },
       {
         path: "/auth/reset-password",

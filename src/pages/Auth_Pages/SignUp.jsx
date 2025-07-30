@@ -5,7 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 import CommonButton from "@/components/common/CommonButton";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useMutation } from "@tanstack/react-query";
-import toast from "react-hot-toast";
+import {
+  showLoadingToast,
+  updateToastSuccess,
+  updateToastError,
+} from "@/lib/utils";
 import { BeatLoader } from "react-spinners";
 import { useEmail } from "@/hooks/useEmail";
 export default function SignUp() {
@@ -35,16 +39,21 @@ export default function SignUp() {
       const response = await axiosPublic.post("/register", data);
       return response?.data;
     },
-    onSuccess: (response) => {
-      toast.success(response?.message || "Registered successfully");
+    onMutate: () => {
+      const toastId = showLoadingToast("Registering...");
+      return { toastId };
+    },
+    onSuccess: (response, _variables, context) => {
+      updateToastSuccess(context.toastId, response?.message || "Sign-up successful");
+
       navigate("/auth/verify-code");
     },
-    onError: (error) => {
+    onError: (error, _variables, context) => {
       console.log(error);
       const errorMessage =
         error.response?.data?.message ||
         "Something went wrong, try again later!!";
-      toast.error(errorMessage);
+      updateToastError(context.toastId, errorMessage);
     },
   });
 
