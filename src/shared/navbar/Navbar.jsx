@@ -4,13 +4,10 @@ import { Menu, X } from "lucide-react";
 import logo from "@/assets/images/logo.png";
 import CommonButton from "@/components/common/CommonButton";
 import AllDropdown from "./AllDropdown";
+import { useAuth } from "@/hooks/useAuth";
+import UserDropdown from "./UserDropdown";
+import toast from "react-hot-toast";
 
-const Navbar = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
-
-  const isActive = (path) => location.pathname === path;
 
   const aboutLinks = [
     { label: "FAQS", path: "/faq" },
@@ -41,6 +38,29 @@ const Navbar = () => {
     { label: "Become a Pilot", path: "/become-pilot" },
     { label: "Contact", path: "/contact" },
   ];
+
+
+
+const Navbar = () => {
+  const {user, setUser}=useAuth();
+
+
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+
+  const isActive = (path) => location.pathname === path;
+
+const handleLogout = () => {
+  localStorage.clear();
+  toast.success("Logout successful");
+  setUser(null); 
+};
+
+  const handleSettings = () => {
+    navigate("/settings");
+  };
 
 
   return (
@@ -97,13 +117,19 @@ const Navbar = () => {
             ))}
           </ul>
 
-          <CommonButton
-            onClick={() => navigate("/auth/sign-in")}
-            type="button"
-            variant="primary"
-          >
-            Login
-          </CommonButton>
+     <div className="flex items-center gap-4">
+      {user?.role ? (
+        <UserDropdown
+          user={user}
+          onLogout={handleLogout}
+          onSettings={handleSettings}
+        />
+      ) : (
+        <CommonButton onClick={() => navigate("/auth/sign-in")}>
+          Login
+        </CommonButton>
+      )}
+    </div>
         </nav>
 
         {/* Mobile Menu Icon */}

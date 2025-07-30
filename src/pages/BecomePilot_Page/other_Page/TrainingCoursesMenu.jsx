@@ -8,60 +8,65 @@ import ModularFastTrack from "@/components/trainingCoursesMenu_Components/Modula
 import IntegratedCourse from "@/components/trainingCoursesMenu_Components/IntegratedCourse";
 import UKModularFastTrackCourse from "@/components/trainingCoursesMenu_Components/UKModularFastTrackCourse";
 import UKIntegratedCourse from "@/components/trainingCoursesMenu_Components/UKIntegratedCourse";
-
-const courseButtons = [
-  "Modular Course",
-  "Modular Fast Track Course",
-  "Integrated Course",
-  "UK Modular FastTrack Course",
-  "UK Integrated Course",
-];
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const courseComponents = {
   "Modular Course": ModularCourse,
-  "Modular Fast Track Course": ModularFastTrack,
+  "UK Modular First Track Course": ModularFastTrack,
   "Integrated Course": IntegratedCourse,
-  "UK Modular FastTrack Course": UKModularFastTrackCourse,
+  "Modular First Track Course": UKModularFastTrackCourse,
   "UK Integrated Course": UKIntegratedCourse,
 };
 
-const bannetTitle=[
-  "Modular Flight Training",
-  "Modular Fast Track Training in Europe",
-  "Integrated Training in Europe",
-  "Modular Fast Track Training in the UK",
-  "Integrated Training in the UK",
-]
-const TrainingCoursesMenu = () => {
-  const [activeCourse, setActiveCourse] = useState("Modular Course"); 
+const bannerTitles = {
+  "Modular Course": "Modular Flight Training",
+  "Modular Fast Track Course": "Modular Fast Track Training in Europe",
+  "Integrated Course": "Integrated Training in Europe",
+  "UK Modular FastTrack Course": "Modular Fast Track Training in the UK",
+  "UK Integrated Course": "Integrated Training in the UK",
+};
 
-  const ActiveComponent = courseComponents[activeCourse]; 
+const TrainingCoursesMenu = () => {
+  const axiosPublic = useAxiosPublic();
+
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: () => axiosPublic.get("/course-categories"),
+  });
+
+  const allCategories = categories?.data?.data || [];
+
+  const [activeCourse, setActiveCourse] = useState("Modular Course");
+
+  const ActiveComponent = courseComponents[activeCourse];
+  const bannerTitle = bannerTitles[activeCourse] || "Training Courses";
 
   return (
     <div>
-      <CommonBanner image={image} title={bannetTitle[courseButtons.indexOf(activeCourse)]} />
+      <CommonBanner image={image} title={bannerTitle} />
 
       <div className="section-padding-x py-16 w-full flex justify-between gap-12">
         {/* Sidebar Buttons */}
         <div className="w-[20%] flex flex-col gap-5">
-          {courseButtons.map((label, index) => (
+          {allCategories.map((category, index) => (
             <button
               key={index}
-              onClick={() => setActiveCourse(label)}
+              onClick={() => setActiveCourse(category.title)}
               className={`px-10 py-3 rounded-md text-white duration-300 ${
-                activeCourse === label
+                activeCourse === category.title
                   ? "bg-Secondary"
                   : "bg-Secondary-light hover:bg-Secondary/80"
               }`}
             >
-              {label}
+              {category.title}
             </button>
           ))}
         </div>
 
         {/* Main Content */}
         <div className="w-[80%]">
-          <ActiveComponent />
+          {ActiveComponent ? <ActiveComponent /> : <p>Course not available</p>}
         </div>
       </div>
 

@@ -4,8 +4,6 @@ import { Dropdown, Space } from "antd";
 import { Link } from "react-router-dom";
 
 const AllDropdown = ({ label = "Dropdown", items = [] }) => {
-const pathname = location.pathname;
-  console.log(pathname);
   const menuItems = items.map((item, index) => ({
     key: item.path || index,
     label: <Link className="text-base " to={item.path}>{item.label}</Link>,
