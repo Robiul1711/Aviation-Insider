@@ -2,9 +2,8 @@ import axios from "axios";
 import { useAuth } from "./useAuth";
 
 const useAxiosSecure = () => {
-  const auth = useAuth();
-  // Ensure that auth and user are defined before destructuring
-  const access_token = auth?.user?.token;
+  const { user } = useAuth();
+  const token = localStorage.getItem("token") || user?.token;
 
   const axiosSecure = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
@@ -12,11 +11,8 @@ const useAxiosSecure = () => {
   });
 
   axiosSecure.interceptors.request.use((config) => {
-    if (access_token) {
-      config.headers = {
-        ...config.headers,
-        Authorization: `Bearer ${access_token}`,
-      };
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   });

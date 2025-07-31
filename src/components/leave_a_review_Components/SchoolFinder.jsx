@@ -157,7 +157,7 @@ const SchoolFinder = () => {
                 />
               </div>
               <Link
-                to="/school-profile"
+                to={`/school-profile/${school.id}`}
                 className="text-base sm:text-lg font-medium text-gray-900 hover:text-blue-600 break-words"
               >
                 {school.name}

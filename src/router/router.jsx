@@ -273,7 +273,7 @@ const router = createBrowserRouter([
 
       //school profile page start
       {
-        path: "/school-profile",
+        path: "/school-profile/:id",
         element: <SchoolProfilePage />
       },
       //school profile page end
@@ -292,10 +292,10 @@ const router = createBrowserRouter([
         path: "/dashboard/settings",
         element: <Setting />, 
       },
-      {
-        path: "/dashboard/notifications",
-        element: <NotificationPanel />, 
-      },
+      // {
+      //   path: "/dashboard/notifications",
+      //   element: <NotificationPanel />, 
+      // },
     ],
   },
 ]);

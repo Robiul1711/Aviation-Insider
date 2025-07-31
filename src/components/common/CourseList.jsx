@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 const CourseList = ({ courseData }) => {
   return (
     <div className="space-y-8">
-      {courseData.map((school, index) => (
+      {courseData?.map((school, index) => (
         <div
-          key={index}
-          className="border border-gray-200 rounded-lg overflow-hidden"
+        key={index}
+        className="border border-gray-200 rounded-lg overflow-hidden"
         >
-          {/* School Header */}
+          {console.log(courseData)}
+
           <div className="flex items-center gap-4 p-4 bg-gray-50 border-b border-gray-200">
             <img
               src={school.logo}
@@ -22,12 +23,11 @@ const CourseList = ({ courseData }) => {
                 to="#"
                 className="font-semibold text-lg text-blue-600 hover:underline"
               >
-                {school.school}
+                {school?.school}
               </Link>
             </div>
           </div>
 
-          {/* Table Header (hidden on mobile) */}
           <div className="hidden md:grid grid-cols-5 gap-4 text-sm font-semibold px-4 pt-4 text-gray-700">
             <div>Course Name</div>
             <div>Details</div>
@@ -36,7 +36,7 @@ const CourseList = ({ courseData }) => {
             <div>Country</div>
           </div>
 
-          {/* Courses */}
+
           <div className="px-4 py-2 space-y-3">
             {school.courses.map((course, idx) => (
               <div

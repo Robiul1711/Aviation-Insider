@@ -1,16 +1,47 @@
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { showLoadingToast, updateToastError, updateToastSuccess } from "@/lib/utils";
+import { useMutation } from "@tanstack/react-query";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { BeatLoader } from "react-spinners";
 import { MdEmail } from "react-icons/md";
 
 const ContaactForm = () => {
+    const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm();
 
+  const ContactMutation=useMutation({
+    mutationFn: async (data) => {
+      const response = await axiosPublic.post("/contact", data);
+      return response?.data;
+    },
+    onMutate: () => {
+      const toastId = showLoadingToast("Sending message...");
+      return { toastId };
+    },
+    onSuccess: (response, _variables, context) => {
+       updateToastSuccess(
+              context.toastId,
+              response?.message || "Message sent successful"
+            );
+            reset();
+    },
+    onError: (error, _variables, context) => {
+      console.log(error);
+      const errorMessage =
+        error.response?.data?.message || "Something went wrong, try again later!!";
+    updateToastError(context.toastId, errorMessage);
+    },
+  })
+  
   const onSubmit = data => {
     console.log(data);
+    ContactMutation.mutate(data);
   };
 
   return (
@@ -95,7 +126,17 @@ const ContaactForm = () => {
             type="submit"
             className="w-full bg-Secondary-light text-white py-2 rounded-md text-base hover:bg-blue-700 transition"
           >
-            Send Message
+             {ContactMutation?.isPending ? (
+              <BeatLoader
+                loading={ContactMutation?.isPending}
+                color="white"
+                size={10}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            ) : (
+              "Submit"
+            )}
           </button>
         </form>
       </div>

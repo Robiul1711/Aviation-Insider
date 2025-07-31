@@ -6,15 +6,14 @@ import {
 } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
-const SchoolBanner = () => {
+const SchoolBanner = ({SchoolDetail}) => {
   const item = {
     percentage: 75,
   };
-
   return (
     <div className="w-full h-200 relative overflow-hidden">
       <img
-        src={schoolpp}
+        src={SchoolDetail?.image || schoolpp}
         alt="School Banner"
         className="w-full h-full object-cover object-center"
       />

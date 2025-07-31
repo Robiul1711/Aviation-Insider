@@ -1,15 +1,54 @@
-import React, { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
+import {
+  showLoadingToast,
+  updateToastError,
+  updateToastSuccess,
+} from "@/lib/utils";
+import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 
 const CommentArticle = () => {
-  const [subject, setSubject] = useState("");
-  const [comment, setComment] = useState("");
+  const {id} = useParams();
+  const { user } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission
-    console.log({ subject, comment });
+  const axiosSecure = useAxiosSecure();
+  const CommentMutation = useMutation({
+    mutationFn: async (data) => {
+      const response = await axiosSecure.post("/comment", data);
+      return response.data;
+    },
+    onMutate: () => {
+      const toastId = showLoadingToast("Comment submitting...");
+      return { toastId };
+    },
+    onSuccess: (response, _variables, context) => {
+      updateToastSuccess(
+        context.toastId,
+        response?.message || "Comment submitted successfully"
+      );
+          reset();
+    },
+    onError: (error, _variables, context) => {
+      const errorMessage =
+        error.response?.data?.message ||
+        "Something went wrong, try again later!!";
+
+      updateToastError(context.toastId, errorMessage);
+    },
+  });
+  const onSubmit = (data) => {
+    console.log("Submitted Data:", data);
+    CommentMutation.mutate({ ...data , article_id: id});
+
   };
-
   return (
     <div className="max-w-7xl mx-auto p-6 bg-white">
       {/* Article Header */}
@@ -107,89 +146,115 @@ const CommentArticle = () => {
         </p>
       </div>
 
-<div className="mt-12 border rounded-2xl border-gray-200">
-  {/* Header */}
-  <h2 className="text-xl font-semibold text-gray-900 p-6 rounded-t-2xl bg-gray-50 border-b border-gray-200">
-    Comments
-  </h2>
-
-  {/* Single Comment */}
-  <div className="flex items-start gap-4 p-6 rounded-b-2xl bg-white">
-    {/* Avatar */}
-    <img
-      src=""
-      alt="User avatar"
-      className="w-10 h-10 rounded-md bg-Primary object-cover flex-shrink-0"
-    />
-
-    {/* Comment Content */}
-    <div className="flex-1">
-      <div className="mb-1">
-        <p className="font-medium text-gray-900">Nice Attractive</p>
-        <p className="text-sm text-gray-700 mt-1 leading-relaxed">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-          tincidunt, nunc ut blandit fermentum, massa orci egestas purus.
-        </p>
-      </div>
-
-      {/* Actions */}
-      <div className="flex items-center gap-4 text-sm text-gray-500 mt-2">
-        <button className="hover:underline hover:text-blue-600">Reply</button>
-        <span>•</span>
-        <span>2 days ago</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-        {/* Comment Form */}
-      <div className="mt-12 bg-gray-50 p-6 rounded-lg">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">
-          Leave A Comment
+      <div className="mt-12 border rounded-2xl border-gray-200">
+        {/* Header */}
+        <h2 className="text-xl font-semibold text-gray-900 p-6 rounded-t-2xl bg-gray-50 border-b border-gray-200">
+          Comments
         </h2>
 
-        <div className="space-y-4">
-          <div>
-            <label
-              htmlFor="subject"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              Subject
-            </label>
-            <input
-              type="text"
-              id="subject"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
+        {/* Single Comment */}
+        <div className="flex items-start gap-4 p-6 rounded-b-2xl bg-white">
+          {/* Avatar */}
+          <img
+            src=""
+            alt="User avatar"
+            className="w-10 h-10 rounded-md bg-Primary object-cover flex-shrink-0"
+          />
 
-          <div>
-            <label
-              htmlFor="comment"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              Comment
-            </label>
-            <textarea
-              id="comment"
-              rows={6}
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
-            />
-          </div>
+          {/* Comment Content */}
+          <div className="flex-1">
+            <div className="mb-1">
+              <p className="font-medium text-gray-900">Nice Attractive</p>
+              <p className="text-sm text-gray-700 mt-1 leading-relaxed">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                tincidunt, nunc ut blandit fermentum, massa orci egestas purus.
+              </p>
+            </div>
 
-          <button
-            onClick={handleSubmit}
-            className="bg-Secondary-light hover:bg-Secondary text-white font-medium px-6 py-2 rounded-md transition-colors duration-200"
-          >
-            Post Comment
-          </button>
+            {/* Actions */}
+            <div className="flex items-center gap-4 text-sm text-gray-500 mt-2">
+              <button className="hover:underline hover:text-blue-600">
+                Reply
+              </button>
+              <span>•</span>
+              <span>2 days ago</span>
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Comment Form */}
+      {user ? (
+        <div className="mt-12 bg-gray-50 p-6 rounded-lg">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+            Leave A Comment
+          </h2>
+
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            {/* Subject */}
+            <div>
+              <label
+                htmlFor="subject"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Subject
+              </label>
+              <input
+                type="text"
+                id="subject"
+                {...register("subject", { required: "Subject is required" })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+              {errors.subject && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.subject.message}
+                </p>
+              )}
+            </div>
+
+            {/* Comment */}
+            <div>
+              <label
+                htmlFor="comment"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Comment
+              </label>
+              <textarea
+                id="comment"
+                rows={6}
+                {...register("comment", { required: "Comment is required" })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
+              />
+              {errors.comment && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.comment.message}
+                </p>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              className="bg-Secondary-light hover:bg-Secondary text-white font-medium px-6 py-2 rounded-md transition-colors duration-200"
+            >
+              Post Comment
+            </button>
+          </form>
+        </div>
+      ) : (
+        <div className="mt-12 bg-yellow-50 border border-yellow-200 text-yellow-800 px-6 py-5 rounded-lg">
+          <p className="text-base font-medium">
+            You must{" "}
+            <a
+              href="/auth/sign-in"
+              className="underline text-Secondary hover:text-Secondary-dark font-semibold"
+            >
+              login
+            </a>{" "}
+            first to leave a comment.
+          </p>
+        </div>
+      )}
     </div>
   );
 };

@@ -5,12 +5,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import schools1 from '@/assets/images/schools1.png';
-import schools2 from '@/assets/images/schools2.png';
-
-const SchoolSwiper = () => {
-  const images = [schools1, schools2, schools1, schools2, schools1, schools2, schools1, schools2]; // example repeated images
-
+const SchoolSwiper = ({SchoolDetail}) => {
+console.log(SchoolDetail?.gallery);
   return (
     <div className="section-padding-x py-10">
       <Swiper
@@ -22,7 +18,7 @@ const SchoolSwiper = () => {
         loop
         className=" overflow-hidden"
       >
-        {images.map((image, index) => (
+        {SchoolDetail?.gallery?.map((image, index) => (
           <SwiperSlide key={index}>
             <img
               src={image}
