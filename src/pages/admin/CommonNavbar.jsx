@@ -1,10 +1,11 @@
 import { IoIosNotifications } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 const CommonNavbar = ({ open, setOpen }) => {
-  const { pathname } = useLocation();
+  const {user}=useAuth();
+  // console.log(user);
   return (
     <div className="flex items-center gap-5 justify-between w-full py-3 md:py-6 px-0  rounded-2xl">
       <div className="flex items-center gap-4">
@@ -21,9 +22,9 @@ const CommonNavbar = ({ open, setOpen }) => {
       </div>
 
       <div className="flex items-start md:gap-4 gap-2">
-        <span>
+        {/* <span>
           <IoIosNotifications color="white" className="p-2 bg-Secondary-light rounded-full cursor-pointer" size={44} />
-        </span>
+        </span> */}
         <span>
           <CgProfile color="white" className="p-2 bg-Secondary-light rounded-full cursor-pointer" size={44} />
         </span>

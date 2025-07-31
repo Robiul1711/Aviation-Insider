@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import Title from "@/components/common/Title";
 import SearchAndSort from "@/components/common/SearchAndSort";
 import CourseList from "../common/CourseList";
-import { courseData } from "@/utils/data";
 
-const ModularCourse = () => {
+const ModularCourse = ({details}) => {
   const [school, setSchool] = useState("");
   const [course, setCourse] = useState("");
   const [sort, setSort] = useState("Low to High");
-
+  
   const handleSearch = () => {
     console.log("Searching for:", school, course, sort);
   };
+  const courseData=details?.data?.data?.flight_schools
 
   return (
     <div className="text-black">

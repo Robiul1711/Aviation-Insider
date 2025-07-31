@@ -11,14 +11,24 @@ import SchoolStatsSection from '@/components/School_Profile_Components/SchoolSta
 import SchoolSwiper from '@/components/School_Profile_Components/SchoolSwiper'
 import StudentStatsSection from '@/components/School_Profile_Components/StudentStatsSection'
 import TrainingOverview from '@/components/School_Profile_Components/TrainingOverview'
+import useAxiosPublic from '@/hooks/useAxiosPublic'
+import { useQuery } from '@tanstack/react-query'
 import React from 'react'
+import { useParams } from 'react-router-dom'
 
 const SchoolProfilePage = () => {
+  const {id}=useParams()
+  const axiosPublic = useAxiosPublic();
+  const {data:schoolDetals ,isLoading } = useQuery({
+    queryKey: ['school-details'],
+    queryFn: () => axiosPublic.get(`/flight-school/details/${id}`),
+  })
+  const SchoolDetail = schoolDetals?.data?.data || [];
   return (
     <div>
-      <SchoolBanner />
-      <QualityFlyProfile />
-      <SchoolSwiper />
+      <SchoolBanner SchoolDetail={SchoolDetail}/>
+      <QualityFlyProfile SchoolDetail={SchoolDetail} />
+      <SchoolSwiper SchoolDetail={SchoolDetail} />
       <SchoolDetails />
       <StudentStatsSection />
       <QualityFlyReviews />

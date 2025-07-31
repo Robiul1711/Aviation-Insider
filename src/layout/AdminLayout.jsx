@@ -27,14 +27,14 @@ const AdminLayout = () => {
         sublink: false,
       },
       
-    {
-        id: 3,
-        icon: <Bell />,
-        text: "Notifications",
-        path: "/dashboard/notifications", // main path (optional, if you still want to keep it)
-        activePaths: ["/dashboard/notifications"], // all paths that should make this item active
-        sublink: false,
-      },
+    // {
+    //     id: 3,
+    //     icon: <Bell />,
+    //     text: "Notifications",
+    //     path: "/dashboard/notifications", // main path (optional, if you still want to keep it)
+    //     activePaths: ["/dashboard/notifications"], // all paths that should make this item active
+    //     sublink: false,
+    //   },
       
 
   ];

@@ -6,21 +6,21 @@ import { FaCircleArrowUp } from "react-icons/fa6";
 const Layout = () => {
   return (
     <>
-    <ScrollRestoration />
-<ScrollToTop
- style={{
-    backgroundColor: "#1E40AF",
-    opacity: "0.8",
-    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.15)",
-  }}
-  smooth
-  top={150}
-  component={
-    <div className=" rounded-full text-white text-2xl flex items-center justify-center">
-    <FaCircleArrowUp />
-    </div>
-  }
-/>
+      <ScrollRestoration />
+      <ScrollToTop
+        style={{
+          backgroundColor: "#1E40AF",
+          opacity: "0.8",
+          boxShadow: "0 4px 10px rgba(0, 0, 0, 0.15)",
+        }}
+        smooth
+        top={150}
+        component={
+          <div className=" rounded-full text-white text-2xl flex items-center justify-center">
+            <FaCircleArrowUp />
+          </div>
+        }
+      />
 
       <Navbar />
       <Outlet />

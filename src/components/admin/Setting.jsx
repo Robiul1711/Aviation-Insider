@@ -8,7 +8,7 @@ const Setting = () => {
 
   const tabs = [
     { key: "personalInfo", label: "Personal Information" },
-    { key: "preferences", label: "Preferences" },
+    // { key: "preferences", label: "Preferences" },
     { key: "security", label: "Security" },
   ];
 
@@ -34,7 +34,7 @@ const Setting = () => {
       {/* Content */}
       <div>
         {activeTab === "personalInfo" && <PersonalInformation />}
-        {activeTab === "preferences" && <Preferences />}
+        {/* {activeTab === "preferences" && <Preferences />} */}
         {activeTab === "security" && <Security />}
       </div>
     </div>
