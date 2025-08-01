@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa6";
 
+// StarRating Component
 const StarRating = ({ rating, onChange, readOnly = false }) => {
   const [hovered, setHovered] = useState(0);
 
@@ -25,17 +26,18 @@ const StarRating = ({ rating, onChange, readOnly = false }) => {
   );
 };
 
+// ReviewForm Component
 const ReviewForm = () => {
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [headline, setHeadline] = useState("");
   const [ratings, setRatings] = useState({
-    rating4: 4,
-    rating5: 5,
-    rating2: 2,
-    rating0: 0,
-    rating3: 3,
-    rating1: 1,
-    rating5_2: 5,
+    facilities1: 4,
+    facilities2: 5,
+    facilities3: 2,
+    facilities4: 0,
+    facilities5: 3,
+    facilities6: 1,
+    facilities7: 5,
   });
 
   const handleRatingChange = (key, value) => {
@@ -43,38 +45,37 @@ const ReviewForm = () => {
   };
 
   return (
-    <div className="border p-6 rounded-lg">
-      {/* Anonymous Review Section */}
-      <div className="mb-8 bg-gray-50 p-4 rounded-lg">
-        <h2 className="text-lg font-semibold text-gray-700 mb-4">
+    <div className="border p-4 md:p-6 rounded-lg bg-white shadow-sm">
+      {/* Anonymous Section */}
+      <section className="mb-10 bg-gray-50 p-4 rounded-lg">
+        <h2 className="text-xl font-semibold text-gray-800 mb-3">
           Anonymous Review
         </h2>
-        <div className="flex items-center mb-4">
+        <div className="flex items-center mb-3">
           <input
-            type="checkbox"
             id="anonymous"
+            type="checkbox"
             checked={isAnonymous}
             onChange={(e) => setIsAnonymous(e.target.checked)}
-            className="mr-3 h-4 w-4 text-blue-600"
+            className="mr-2 h-4 w-4 text-blue-600"
           />
           <label htmlFor="anonymous" className="text-gray-700">
-            Anonymous
+            Submit anonymously
           </label>
         </div>
-        <p className="text-lg text-gray-600">
-          If you would like to leave a review anonymously please select the box
-          below. Once your review passes moderation Pilot Network will contact
-          you for a supporting document to verify your review.
+        <p className="text-gray-600 text-sm leading-relaxed">
+          If you would like to leave a review anonymously, please select the box.
+          After moderation, Pilot Network will contact you for supporting documents.
         </p>
-      </div>
+      </section>
 
-      {/* Section 1 - Write a Headline */}
-      <div className="mb-8">
-        <h3 className="text-lg font-semibold text-gray-700 mb-4">
+      {/* Headline Section */}
+      <section className="mb-10">
+        <h3 className="text-xl font-semibold text-gray-800 mb-3">
           Section 1 - Write a Headline
         </h3>
         <div className="bg-gray-50 p-4 rounded-lg">
-          <label className="block text-lg font-medium text-gray-700 mb-2">
+          <label className="block mb-2 text-gray-700 font-medium">
             Add A Headline
           </label>
           <input
@@ -85,135 +86,78 @@ const ReviewForm = () => {
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
-      </div>
+      </section>
 
-      {/* Section 2 - Ratings */}
-      <div className="mb-8">
-        <h3 className="text-lg font-semibold text-gray-700 mb-6">
+      {/* Ratings Section */}
+      <section className="mb-10">
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">
           Section 2 - Ratings
         </h3>
-
-        <div className="grid grid-cols-3 gap-6 mb-8">
-          {/* First Row */}
-          <div className="bg-[#F9FAFB] p-4 rounded-lg">
-            <div className="text-lg text-gray-600 mb-2">
-              Facilities Rating 4
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+          {[
+            { key: "facilities1", label: "Facilities Rating 4" },
+            { key: "facilities2", label: "Facilities Rating 5" },
+            { key: "facilities3", label: "Facilities Rating 2" },
+            { key: "facilities4", label: "Facilities Rating 0" },
+            { key: "facilities5", label: "Facilities Rating 3" },
+            { key: "facilities6", label: "Facilities Rating 1" },
+          ].map(({ key, label }) => (
+            <div key={key} className="bg-gray-50 p-4 rounded-lg">
+              <div className="mb-2 text-gray-700 font-medium">{label}</div>
+              <StarRating
+                rating={ratings[key]}
+                onChange={(value) => handleRatingChange(key, value)}
+              />
             </div>
-            <StarRating
-              rating={ratings.rating4}
-              onChange={(value) => handleRatingChange("rating4", value)}
-            />
-          </div>
-          <div className="bg-[#F9FAFB] p-4 rounded-lg">
-            <div className="text-lg text-gray-600 mb-2">
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <div className="mb-2 text-gray-700 font-medium">
               Facilities Rating 5
             </div>
             <StarRating
-              rating={ratings.rating5}
-              onChange={(value) => handleRatingChange("rating5", value)}
+              rating={ratings.facilities7}
+              onChange={(value) => handleRatingChange("facilities7", value)}
             />
           </div>
-          <div className="bg-[#F9FAFB] p-4 rounded-lg">
-            <div className="text-lg text-gray-600 mb-2">
-              Facilities Rating 2
-            </div>
-            <StarRating
-              rating={ratings.rating2}
-              onChange={(value) => handleRatingChange("rating2", value)}
-            />
+          <div className="text-gray-600 text-sm p-2 leading-relaxed">
+            Please rate only the areas relevant to your training. Use the scale below:
           </div>
+        </div>
+      </section>
 
-          {/* Second Row */}
-          <div className="bg-[#F9FAFB] p-4 rounded-lg">
-            <div className="text-lg text-gray-600 mb-2">
-              Facilities Rating 0
+      {/* Legend Section */}
+      <section className="mb-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          {[
+            { count: 1, label: "Unsatisfactory", color: "red" },
+            { count: 2, label: "Satisfactory", color: "orange" },
+            { count: 3, label: "Good", color: "yellow" },
+            { count: 4, label: "Very Good", color: "green" },
+            { count: 5, label: "Perfect", color: "blue" },
+          ].map(({ count, label, color }) => (
+            <div
+              key={label}
+              className={`text-center p-4 bg-${color}-100 rounded-lg`}
+            >
+              <div
+                className={`text-${color}-500 text-2xl flex justify-center mb-2 gap-1`}
+              >
+                {Array.from({ length: count }).map((_, i) => (
+                  <FaStar key={i} />
+                ))}
+              </div>
+              <div
+                className={`text-${color}-600 font-medium text-base`}
+              >
+                {label}
+              </div>
             </div>
-            <StarRating
-              rating={ratings.rating0}
-              onChange={(value) => handleRatingChange("rating0", value)}
-            />
-          </div>
-          <div className="bg-[#F9FAFB] p-4 rounded-lg">
-            <div className="text-lg text-gray-600 mb-2">
-              Facilities Rating 3
-            </div>
-            <StarRating
-              rating={ratings.rating3}
-              onChange={(value) => handleRatingChange("rating3", value)}
-            />
-          </div>
-          <div className="bg-[#F9FAFB] p-4 rounded-lg">
-            <div className="text-lg text-gray-600 mb-2">
-              Facilities Rating 1
-            </div>
-            <StarRating
-              rating={ratings.rating1}
-              onChange={(value) => handleRatingChange("rating1", value)}
-            />
-          </div>
+          ))}
         </div>
-
-        {/* Bottom Left Rating */}
-        <div className="grid grid-cols-2 gap-6">
-          <div className="bg-[#F9FAFB] p-4 rounded-lg">
-            <div className="text-lg text-gray-600 mb-2">
-              Facilities Rating 5
-            </div>
-            <StarRating
-              rating={ratings.rating5_2}
-              onChange={(value) => handleRatingChange("rating5_2", value)}
-            />
-          </div>
-
-          <div className="text-lg text-gray-600">
-            In this section you will be asked to rate different parts of the ATO.
-            Please only rate the areas relevant to the training you completed.
-            Use the following scale:
-          </div>
-        </div>
-      </div>
-
-      {/* Rating Scale Legend */}
-      <div className="grid grid-cols-5 gap-4 mb-8">
-        <div className="text-center p-4 bg-red-100 rounded-lg">
-          <FaStar className="text-2xl text-red-500 mb-2 mx-auto" />
-          <div className="text-lg font-medium text-red-600">Unsatisfactory</div>
-        </div>
-        <div className="text-center p-4 bg-orange-100 rounded-lg">
-          <div className="text-2xl text-orange-500 mb-2 flex items-center justify-center gap-2">
-            <FaStar />
-            <FaStar />
-          </div>
-          <div className="text-lg font-medium text-orange-600">Satisfactory</div>
-        </div>
-        <div className="text-center p-4 bg-yellow-100 rounded-lg relative">
-          <div className="text-2xl text-yellow-500 mb-2 flex items-center justify-center gap-2">
-            <FaStar />
-            <FaStar />
-            <FaStar />
-          </div>
-          <div className="text-lg font-medium text-yellow-600">Good</div>
-        </div>
-        <div className="text-center p-4 bg-green-100 rounded-lg">
-          <div className="text-2xl text-green-500 mb-2 flex items-center justify-center gap-2">
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-          </div>
-          <div className="text-lg font-medium text-green-600">Very Good</div>
-        </div>
-        <div className="text-center p-4 bg-blue-100 rounded-lg">
-          <div className="text-2xl text-blue-500 mb-2 flex items-center justify-center gap-2">
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-          </div>
-          <div className="text-lg font-medium text-blue-600">Perfect</div>
-        </div>
-      </div>
+      </section>
     </div>
   );
 };

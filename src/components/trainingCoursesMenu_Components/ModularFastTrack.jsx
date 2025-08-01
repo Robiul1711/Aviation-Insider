@@ -2,12 +2,11 @@ import React from "react";
 import Title from "@/components/common/Title";
 import SearchAndSort from "@/components/common/SearchAndSort";
 import CourseList from "../common/CourseList";
-import { courseData } from "@/utils/data";
 import { Link } from "react-router-dom";
 
-const ModularFastTrack = ({details}) => {
-    const courseData=details?.data?.data?.flight_schools
-    console.log(courseData);
+const ModularFastTrack = ({ details }) => {
+  const courseData = details?.data?.data?.flight_schools;
+
   return (
     <div className="text-black">
       {/* Title */}

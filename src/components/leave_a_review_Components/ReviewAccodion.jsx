@@ -93,7 +93,7 @@ const ReviewAccordion = () => {
   };
 
   return (
-    <div className="py-10">
+    <div className=" py-5 md:py-10">
       <Accordion
         type="single"
         collapsible
@@ -106,7 +106,7 @@ const ReviewAccordion = () => {
             value={`item-${faq.id}`}
             className="my-3 border rounded-md"
           >
-            <AccordionTrigger className="text-xl font-semibold bg-[#F3F4F6] px-5">
+            <AccordionTrigger className="md:text-xl text-lg font-semibold bg-[#F3F4F6] px-5">
               {faq.question}
             </AccordionTrigger>
             <AccordionContent className="px-5 py-4 text-base">

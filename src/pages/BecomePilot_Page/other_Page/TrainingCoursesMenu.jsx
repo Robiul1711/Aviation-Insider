@@ -3,34 +3,16 @@ import image from "@/assets/images/CommercialFlying.png";
 
 import CommonBanner from "@/components/common/CommonBanner";
 import CommonAds from "@/components/common/CommonAds";
-import ModularCourse from "@/components/trainingCoursesMenu_Components/ModularCourse";
-import ModularFastTrack from "@/components/trainingCoursesMenu_Components/ModularFastTrack";
-import IntegratedCourse from "@/components/trainingCoursesMenu_Components/IntegratedCourse";
-import UKModularFastTrackCourse from "@/components/trainingCoursesMenu_Components/UKModularFastTrackCourse";
-import UKIntegratedCourse from "@/components/trainingCoursesMenu_Components/UKIntegratedCourse";
 
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-
-const courseComponents = {
-  "Modular Course": ModularCourse,
-  "UK Modular Fast Track Course": ModularFastTrack,
-  "Integrated Course": IntegratedCourse,
-  "Modular Fast Track Course": UKModularFastTrackCourse,
-  "UK Integrated Course": UKIntegratedCourse,
-};
-
-const bannerTitles = {
-  "Modular Course": "Modular Flight Training",
-  "UK Modular Fast Track Course": "Modular Fast Track Training in the UK",
-  "Integrated Course": "Integrated Training in Europe",
-  "Modular Fast Track Course": "Modular Fast Track Training in Europe",
-  "UK Integrated Course": "Integrated Training in the UK",
-};
+import DynamicCourseDetail from "./DynamicCourseDetail";
 
 const TrainingCoursesMenu = () => {
   const axiosPublic = useAxiosPublic();
-const [categoryId, setcategoryId] = useState(5);
+  const [categoryId, setCategoryId] = useState(null);
+  const [activeCategory, setActiveCategory] = useState({ id: null, title: "" });
+
   // Fetch all course categories
   const { data: categoryResponse } = useQuery({
     queryKey: ["categories"],
@@ -39,47 +21,44 @@ const [categoryId, setcategoryId] = useState(5);
 
   const allCategories = categoryResponse?.data?.data || [];
 
-  // Default active category
-  const [activeCategory, setActiveCategory] = useState({ id: null, title: "" });
-
   // Set default category when data is loaded
   useEffect(() => {
     if (allCategories.length && !activeCategory.id) {
       const first = allCategories[0];
       setActiveCategory({ id: first.id, title: first.title });
+      setCategoryId(first.id);
     }
   }, [allCategories]);
 
-  // Fetch category details based on active category
-  const { data: detailResponse, isLoading, error } = useQuery({
+  // Fetch category details based on active category ID
+  const {
+    data: detailResponse,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["category-details", categoryId],
-    queryFn: () =>
-      axiosPublic.get(`/course-category/details/${categoryId}`),
-    enabled: !!activeCategory.id,
+    queryFn: () => axiosPublic.get(`/course-category/details/${categoryId}`),
+    enabled: !!categoryId,
     onError: (err) => console.error("Error fetching details:", err),
   });
-  console.log(detailResponse);
-  const ActiveComponent = courseComponents[activeCategory.title];
-  const bannerTitle = bannerTitles[activeCategory.title] || "Training Courses";
 
   return (
     <div>
-      <CommonBanner image={image} title={bannerTitle} />
+      <CommonBanner
+        image={image}
+        title={activeCategory.title || "Training Courses"}
+      />
 
       <div className="section-padding-x py-16 w-full flex justify-between gap-12">
-        {/* Sidebar Buttons */}
+        {/* Sidebar */}
         <div className="w-[20%] flex flex-col gap-5">
           {allCategories.map((category) => (
             <button
               key={category.id}
-              // onClick={() => setcategoryId(category.id)}
-              onClick={() =>
-              {
-                setActiveCategory({ id: category.id, title: category.title })
-                setcategoryId(category.id)
-              }
-                
-              }
+              onClick={() => {
+                setActiveCategory({ id: category.id, title: category.title });
+                setCategoryId(category.id);
+              }}
               className={`px-10 py-3 rounded-md text-white text-center font-semibold duration-300 ${
                 activeCategory.title === category.title
                   ? "bg-Secondary shadow-md scale-[1.03]"
@@ -94,13 +73,19 @@ const [categoryId, setcategoryId] = useState(5);
         {/* Main Content */}
         <div className="w-[80%]">
           {isLoading ? (
-            <div className="text-gray-500 text-lg">Loading course details...</div>
+            <div className="flex items-center justify-center w-full h-40">
+              <div className="animate-spin rounded-full h-10 w-10 border-4 border-Secondary border-t-transparent"></div>
+            </div>
           ) : error ? (
-            <div className="text-red-500 text-lg">Failed to load course details.</div>
-          ) : ActiveComponent ? (
-            <ActiveComponent details={detailResponse || null} />
+            <div className="text-red-500 text-lg">
+              Failed to load course details.
+            </div>
           ) : (
-            <div className="text-red-500 text-lg">Course not available.</div>
+            <DynamicCourseDetail
+              details={detailResponse}
+              categoryId={categoryId}
+              categoryTitle={activeCategory.title}
+            />
           )}
         </div>
       </div>

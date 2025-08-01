@@ -1,12 +1,10 @@
-import React, { useState } from "react";
 import Title from "@/components/common/Title";
 import SearchAndSort from "@/components/common/SearchAndSort";
 import CourseList from "../common/CourseList";
-import { courseData } from "@/utils/data";
 import { Link } from "react-router-dom";
 
-const IntegratedCourse = () => {
-  
+const IntegratedCourse = ({details}) => {
+    const courseData = details?.data?.data?.flight_schools;
   return (
     <div className="text-black">
       {/* Title */}

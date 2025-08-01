@@ -1,33 +1,39 @@
-import React, { useState } from "react";
 import Title from "@/components/common/Title";
 import SearchAndSort from "@/components/common/SearchAndSort";
 import CourseList from "../common/CourseList";
-import { courseData } from "@/utils/data";
 import { Link } from "react-router-dom";
 
-const UKIntegratedCourse = () => {
-  
+const UKIntegratedCourse = ({ details }) => {
+  const courseData = details?.data?.data?.flight_schools;
   return (
     <div className="text-black">
       {/* Title */}
       <Title level="title40" className="text-black mb-6">
-     We recommend you consider an integrated course in the UK.
+        We recommend you consider an integrated course in the UK.
       </Title>
 
       {/* Content Section */}
       <div className="space-y-4 sm:text-lg text-base leading-relaxed">
         <p>
-    Pilot Network has compiled a list of courses available to you. Deciding which school or course is best for you is a difficult decision.
-
+          Pilot Network has compiled a list of courses available to you.
+          Deciding which school or course is best for you is a difficult
+          decision.
         </p>
         <p>
-         We recommend you <span className="font-semibold text-blue-500"> read our advice page </span> on how to choose the right school for you.
-
+          We recommend you{" "}
+          <span className="font-semibold text-blue-500">
+            {" "}
+            read our advice page{" "}
+          </span>{" "}
+          on how to choose the right school for you.
         </p>
         <p>
-          If you would like to explore the other routes available to you <Link to="/contact" className="font-semibold text-blue-500">click here</Link>. Course prices may not include VAT depending on the country.
+          If you would like to explore the other routes available to you{" "}
+          <Link to="/contact" className="font-semibold text-blue-500">
+            click here
+          </Link>
+          . Course prices may not include VAT depending on the country.
         </p>
-       
       </div>
 
       {/* Search and Sort Section */}
@@ -43,13 +49,14 @@ const UKIntegratedCourse = () => {
         />
       </div>
       <div className="pt-10">
-                <Title level="title40" className="text-black mb-6">Schools Integrated Courses</Title>
+        <Title level="title40" className="text-black mb-6">
+          Schools Integrated Courses
+        </Title>
 
-        <CourseList  courseData={courseData}/>
+        <CourseList courseData={courseData} />
       </div>
     </div>
   );
 };
 
 export default UKIntegratedCourse;
-

@@ -12,10 +12,10 @@ const AviationAdviceDetails = () => {
       <CommonBanner image={aviationadvice} title="Medical requirements for pilots" />
 
       {/* Content Section */}
-      <div className="section-padding-x py-16 max-w-7xl mx-auto">
-        <img src={details} alt="Medical details" className="w-full h-[500px] mb-8 rounded-md shadow-md" />
+      <div className="section-padding-x py-10 md:py-16 max-w-7xl mx-auto">
+        <img src={details} alt="Medical details" className="w-full h-[250px] md:h-[500px] mb-8 rounded-md shadow-md" />
 
-        <div className="prose lg:prose-lg max-w-none text-gray-800">
+        <div className=" max-w-none text-gray-800">
           <p>
             When first starting out in flying there is often a bit of confusion about what medical certification is required and when you need it. Here we provide the information you need to know about medicals and flying.
           </p>
@@ -42,7 +42,7 @@ const AviationAdviceDetails = () => {
       </div>
 
       {/* Links and Ads */}
-      <OtherCommonLinks className="flex flex-wrap justify-center items-center gap-5 section-padding-x py-14" />
+      <OtherCommonLinks className="flex flex-wrap justify-center items-center gap-5 section-padding-x py-7 md:py-14" />
       <CommonAds />
     </div>
   );

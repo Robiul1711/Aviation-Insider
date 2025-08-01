@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaSignOutAlt, FaCog, FaUserCircle } from "react-icons/fa";
+import { MdDashboard } from "react-icons/md";
 
 const UserDropdown = ({ user, onLogout, onSettings }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,7 +36,7 @@ const UserDropdown = ({ user, onLogout, onSettings }) => {
         onClick={toggleDropdown}
         className="flex items-center gap-2 text-white text-lg"
       >
-        <FaUserCircle className="text-3xl" />
+        <FaUserCircle className="text-3xl text-white bg-Primary rounded-full" />
       </button>
 
       {isOpen && (
@@ -52,8 +53,9 @@ const UserDropdown = ({ user, onLogout, onSettings }) => {
               }}
               className="flex w-full items-center px-4 py-2 text-sm hover:bg-gray-100"
             >
-              <FaCog className="mr-2" /> Settings
+              <MdDashboard className="mr-2" /> Dashboard
             </button>
+           
             <button
               onClick={() => {
                 onLogout?.();

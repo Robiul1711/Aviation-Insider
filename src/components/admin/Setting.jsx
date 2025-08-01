@@ -13,7 +13,7 @@ const Setting = () => {
   ];
 
   return (
-    <div className="text-black p-6">
+    <div className="text-black">
       {/* Tabs */}
       <div className="flex gap-6 border-b border-gray-200 mb-6">
         {tabs.map((tab) => (
