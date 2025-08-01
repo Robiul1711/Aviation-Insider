@@ -9,11 +9,11 @@ const Recreational = () => {
   return (
     <div>
       <CommonBanner image={image} title="Military" />
-    <div className="section-padding-x py-16">
+    <div className="section-padding-x py-10 md:py-16">
         <Title level="title40" className="text-black text-center">
         Where do you want to train?
         </Title>
-        <div className="flex flex-wrap justify-center items-center gap-5 mt-10">
+        <div className="flex flex-wrap justify-center items-center gap-5 pt-5 md:mt-10">
         <CommonButton variant='secondary' onClick={() => window.location.href = "/europe-ppl"} >Europe</CommonButton>
         <CommonButton variant='secondary' onClick={() => window.location.href = "/uk-ppl"}>United Kingdom</CommonButton>
         </div>

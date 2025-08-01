@@ -11,7 +11,8 @@ const SchoolBanner = ({SchoolDetail}) => {
     percentage: 75,
   };
   return (
-    <div className="w-full h-200 relative overflow-hidden">
+    <div className="w-full h-130 md:h-160 relative overflow-hidden ">
+      <div className="absolute top-0 left-0 w-full h-full bg-black/10 backdrop-blur-sm"></div>
       <img
         src={SchoolDetail?.image || schoolpp}
         alt="School Banner"
@@ -37,7 +38,7 @@ const SchoolBanner = ({SchoolDetail}) => {
     <p className="text-sm">7 reviews - Rank 9</p>
 
     {/* Sub Categories Grid */}
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 mt-6">
+    <div className="grid grid-cols-5 gap-6 mt-6">
       {[
         { label: 'General', color: '#53AEFB' },
         { label: 'Aircraft', color: '#F04EFF' },
@@ -58,7 +59,7 @@ const SchoolBanner = ({SchoolDetail}) => {
               })}
             />
           </div>
-          <p className="mt-2">{stat.label}</p>
+          <p className="mt-2 text-sm md:text-base">{stat.label}</p>
         </div>
       ))}
     </div>

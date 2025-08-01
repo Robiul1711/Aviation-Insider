@@ -11,10 +11,10 @@ import React from "react";
 const AddYourReview = () => {
   return (
     <div>
-      <div className="section-padding-x py-16">
+      <div className="section-padding-x py-8 ">
         <AirAlliance />
-        <div className="mt-10 flex justify-between gap-10 w-full">
-          <div className="w-[80%]">
+        <div className="mt-5 md:mt-10 flex flex-col md:flex-row justify-between gap-8 md:gap-10 w-full">
+          <div className="md:w-[80%]">
             
             <ReviewForm />
             <ReviewAccodion />
@@ -22,7 +22,7 @@ const AddYourReview = () => {
             <ReviewSubmitForm />
             <ReviewFormFinal />
           </div>
-          <div className="w-[20%]">
+          <div className="md:w-[20%]">
             <OtherCommonLinks className={"flex flex-col  gap-5 "} />
           </div>
         </div>

@@ -14,7 +14,7 @@ const data = [
 
 const Dashboard = () => {
   return (
-    <div className="p-6 text-black">
+    <div className=" text-black">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-semibold">My Reviews</h1>

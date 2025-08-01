@@ -50,7 +50,7 @@ export default function ReviewSubmitForm() {
   };
 
   return (
-    <div className="border rounded-md mt-10 p-6 ">
+    <div className="border rounded-md mt-5 md:mt-10 p-4 md:p-6 ">
       <div className="bg-gray-100 px-4 py-3 mb-6 rounded-sm">
         <h2 className="text-lg font-medium text-gray-800">Section 4 – Your Review</h2>
       </div>
@@ -66,7 +66,7 @@ export default function ReviewSubmitForm() {
             onChange={handleReviewChange}
             rows={8}
             className="w-full px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-            placeholder=""
+            placeholder="Write your review here..."
           />
         </div>
 

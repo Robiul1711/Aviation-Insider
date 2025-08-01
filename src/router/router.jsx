@@ -53,6 +53,7 @@ import NotificationPanel from "@/components/admin/NotificationPanel";
 import SchoolProfilePage from "@/pages/school_profile_page/SchoolProfilePage";
 import ReviewViewPage from "@/components/leave_a_review_Components/ReviewViewPage";
 import ForgetVerifyCode from "@/pages/Auth_Pages/ForgetVerifyCode";
+import PrivateRoute from "./PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -281,23 +282,24 @@ const router = createBrowserRouter([
   },
   // Admin routes
   {
-    path: "/dashboard",
-    element: <AdminLayout />,
-    children: [
-      {
-        path: "/dashboard",
-        element: <Dashboard />, // ✅ Fixed typo
-      },
-      {
-        path: "/dashboard/settings",
-        element: <Setting />, 
-      },
-      // {
-      //   path: "/dashboard/notifications",
-      //   element: <NotificationPanel />, 
-      // },
-    ],
-  },
+  path: "/dashboard",
+  element: (
+    <PrivateRoute>
+      <AdminLayout />
+    </PrivateRoute>
+  ),
+  children: [
+    {
+      index: true, // default route for /dashboard
+      element: <Dashboard />,
+    },
+    {
+      path: "settings",
+      element: <Setting />,
+    },
+  ],
+}
+
 ]);
 
 export default router;

@@ -17,11 +17,11 @@ const LicenceProficiencyChecks = () => {
 <div className='mb-8 flex items-center gap-4'>
   <div className='relative w-full '>
   <input type="text" name="" id="" placeholder='Search School...' className='w-full h-10 px-4 py-2 border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500' />
-<Search className='absolute right-4 top-1/2 transform -translate-y-1/2' />
+<Search  className='absolute right-4 top-1/2 transform -translate-y-1/2 hidden sm:block' />
   </div>
   <div className='relative w-full '>
   <input type="text" name="" id="" placeholder='Search Course...' className='w-full h-10 px-4 py-2 border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500' />
-<Search className='absolute right-4 top-1/2 transform -translate-y-1/2' />
+<Search  className='absolute right-4 top-1/2 transform -translate-y-1/2 hidden sm:block' />
   </div>
 </div>
      <CourseList  courseData={courseData}/>

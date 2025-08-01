@@ -83,10 +83,9 @@ export default function CommonCourseList() {
       highlighted: false,
     },
   ];
-
   const TableRow = ({ school }) => (
-    <div className={`grid grid-cols-5 gap-4 py-4 border-b border-gray-200 `}>
-      <div className="pl-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 py-4 border-b border-gray-200 px-4">
+      <div>
         <div className="text-sm font-medium text-gray-700 mb-1">
           School Name
         </div>
@@ -101,7 +100,7 @@ export default function CommonCourseList() {
       </div>
       <div>
         <div className="text-sm font-medium text-gray-700 mb-1">Duration</div>
-        <div className="text-sm text-gray-900">{school.duration}</div>
+        <div className="text-sm text-gray-900">{school.duration || "-"}</div>
       </div>
       <div>
         <div className="text-sm font-medium text-gray-700 mb-1">Price</div>
@@ -115,10 +114,10 @@ export default function CommonCourseList() {
   );
 
   return (
-    <div className=" mx-auto p-6 bg-white">
+    <div className="w-full mx-auto bg-white">
       <div className="border border-gray-200 rounded-lg overflow-hidden">
-        {/* Header */}
-        <div className="grid grid-cols-5 gap-4 bg-gray-50 py-3 px-4 border-b border-gray-200">
+        {/* Header (hidden on mobile, visible on md+) */}
+        <div className="hidden lg:grid grid-cols-5 gap-4 bg-gray-50 py-3 px-4 border-b border-gray-200">
           <div className="text-sm font-medium text-gray-700">School Name</div>
           <div className="text-sm font-medium text-gray-700">Course Name</div>
           <div className="text-sm font-medium text-gray-700">Duration</div>

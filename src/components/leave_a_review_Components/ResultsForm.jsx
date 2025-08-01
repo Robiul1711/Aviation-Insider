@@ -35,7 +35,7 @@ export default function ResultsForm() {
             onChange={(e) => onChange(e.target.value)}
             className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
           />
-          <span className="text-xl text-gray-700">{option.label}</span>
+          <span className="md:text-xl text-gray-700">{option.label}</span>
         </label>
       ))}
     </div>
@@ -48,7 +48,7 @@ export default function ResultsForm() {
   ];
 
   return (
-    <div className=" p-6 border rounded-md">
+    <div className=" p-4 md:p-6 border rounded-md">
       <div className="bg-gray-100 px-4 py-3 mb-6 rounded-sm">
         <h2 className="text-xl font-medium text-gray-800">Section 3 – Your Results</h2>
       </div>
@@ -56,7 +56,7 @@ export default function ResultsForm() {
       <div className="space-y-6">
         {/* CPL Test Question */}
         <div>
-          <h3 className="text-xl font-medium text-gray-800 mb-3">
+          <h3 className="md:text-xl font-medium text-gray-800 mb-3">
             Did you pass your CPL test first time?
           </h3>
           <RadioGroup
@@ -69,7 +69,7 @@ export default function ResultsForm() {
 
         {/* MEIR Test Question */}
         <div>
-          <h3 className="text-xl font-medium text-gray-800 mb-3">
+          <h3 className="md:text-xl font-medium text-gray-800 mb-3">
             Did you pass your MEIR test first time, yes no?
           </h3>
           <RadioGroup
@@ -82,7 +82,7 @@ export default function ResultsForm() {
 
         {/* ATPL Theory Question */}
         <div>
-          <h3 className="text-xl font-medium text-gray-800 mb-3">
+          <h3 className="md:text-xl font-medium text-gray-800 mb-3">
             Did you pass your ATPL theory exams, with first time passes in all 14 subjects?
           </h3>
           <RadioGroup
@@ -95,14 +95,14 @@ export default function ResultsForm() {
 
         {/* ATPL Average Question */}
         <div>
-          <h3 className="text-xl font-medium text-gray-800 mb-3">
+          <h3 className="md:text-xl font-medium text-gray-800 mb-3">
             What was your ATPL Average?
           </h3>
           <div className="relative">
             <select
               value={formData.atplAverage}
               onChange={handleAverageChange}
-              className="w-full px-3 py-2 text-xl border border-gray-300 rounded-sm bg-white appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 md:text-xl border border-gray-300 rounded-sm bg-white appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="75">75</option>
               <option value="80">80</option>

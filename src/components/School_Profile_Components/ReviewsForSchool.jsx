@@ -11,7 +11,7 @@ const data = [
 ];
 const ReviewsForSchool = () => {
   return (
-    <div className='section-padding-x  py-20'>
+    <div className='section-padding-x  md:py-20'>
       <Title level="title32" className=" mb-8">Reviews for this School</Title>
              <TopratedProviders data={data}/>
     </div>

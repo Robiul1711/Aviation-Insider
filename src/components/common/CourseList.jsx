@@ -9,8 +9,6 @@ const CourseList = ({ courseData }) => {
         key={index}
         className="border border-gray-200 rounded-lg overflow-hidden"
         >
-          {console.log(courseData)}
-
           <div className="flex items-center gap-4 p-4 bg-gray-50 border-b border-gray-200">
             <img
               src={school.logo}

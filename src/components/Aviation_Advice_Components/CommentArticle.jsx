@@ -50,7 +50,7 @@ const CommentArticle = () => {
 
   };
   return (
-    <div className="max-w-7xl mx-auto p-6 bg-white">
+    <div className="max-w-7xl mx-auto  bg-white">
       {/* Article Header */}
       <div className="mb-6">
         <h1 className="text-xl font-bold text-gray-900 mb-2">

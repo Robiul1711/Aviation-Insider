@@ -52,7 +52,7 @@ const articleData = [
 
 const LatestArticle = () => {
   return (
-    <div className="section-padding-x py-16 relative">
+    <div className="section-padding-x py-10 md:py-16 relative">
       <h2 className="text-2xl font-bold text-Secondary mb-8">Latest Articles</h2>
 
       <div className="relative">

@@ -25,7 +25,7 @@ const FlightSchoolsTable = () => {
   ];
 
   return (
-    <div className="p-6 bg-white">
+    <div className="md:p-6 bg-white">
       {/* Search Input */}
       <div className="relative mb-6">
         <input
@@ -62,13 +62,13 @@ const FlightSchoolsTable = () => {
             </div>
 
             {/* Base Code */}
-            <div className="text-gray-700 font-medium sm:text-center">
+            <div className="text-gray-700 font-medium ">
               <span className="sm:hidden font-semibold text-sm text-gray-500">Base Code: </span>
               {school.baseCode}
             </div>
 
             {/* Country */}
-            <div className="text-gray-600 sm:text-center">
+            <div className="text-gray-600 ">
               <span className="sm:hidden font-semibold text-sm text-gray-500">Country: </span>
               {school.country}
             </div>

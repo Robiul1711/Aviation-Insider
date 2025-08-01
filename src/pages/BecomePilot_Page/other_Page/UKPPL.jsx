@@ -11,7 +11,7 @@ const UKPPL = () => {
       <CommonBanner image={image} title="UK PPL" />
       <EuropeDetail />
       <div className="section-padding-x">
-        <Title level="title40" className="text-black text-center py-10">
+        <Title level="title40" className="text-black text-center py-5 md:py-10">
           Flight Training Courses
         </Title>
         <CommonCourseList />

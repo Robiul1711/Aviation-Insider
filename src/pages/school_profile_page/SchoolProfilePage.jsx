@@ -34,13 +34,13 @@ const SchoolProfilePage = () => {
       <QualityFlyReviews />
       <TrainingOverview />
       <SchoolStatsSection />
-      <div className=' py-16'>
+      <div className='py-8 md:py-16'>
     <h1 className='text-3xl font-semibold mb-4 text-center'>Students went on to work at these airlines</h1>
       <BrandSection />
       </div>
       <ContactInfoSection />
       <ReviewsForSchool />
-      <OtherCommonLinks className={'flex flex-wrap justify-center items-center gap-5 section-padding-x py-14'} />
+      <OtherCommonLinks className={'flex flex-wrap justify-center items-center gap-5 section-padding-x py-7 md:py-14'} />
       <CommonAds />
     </div>
   )

@@ -35,7 +35,7 @@ const CommercialFlying = () => {
           </CommonButton>
           <CommonButton
             variant="secondary"
-            onClick={() => (window.location.href = "/full-time-employment")}
+           link={"/full-time-employment"}
           >
             In Full Time Employment
           </CommonButton>
