@@ -3,54 +3,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-
-import latest1 from "@/assets/images/latest1.png";
-import latest2 from "@/assets/images/latest2.png";
-import latest3 from "@/assets/images/latest3.png";
 import { Link } from "react-router-dom";
-import { CiCalendar } from "react-icons/ci";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { CiCalendar } from "react-icons/ci";
 
-const articleData = [
-  {
-    id: 1,
-    image: latest1,
-    title: "Insurance for students and pilots",
-    description:
-      "There are many websites with information .",
-    date: "2023-08-15",
-  },
-  {
-    id: 2,
-    image: latest2,
-    title: "Insurance",
-    description: "Everything you need to know about insurance",
-    date: "2023-09-10",
-  },
-  {
-    id: 3,
-    image: latest3,
-    title: "Training",
-    description: "Everything you need to know about training",
-    date: "2023-08-20",
-  },
-  {
-    id: 4,
-    image: latest1,
-    title: "Licensing",
-    description: "Everything you need to know about licensing",
-    date: "2023-09-15",
-  },
-  {
-    id: 5,
-    image: latest2,
-    title: "Career",
-    description: "Everything you need to know about career",
-    date: "2023-10-01",
-  },
-];
+const LatestArticle = ({ articleDetails }) => {
+  const LatestArticles = articleDetails?.data?.data?.latest_articles || [];
 
-const LatestArticle = () => {
   return (
     <div className="section-padding-x py-10 md:py-16 relative">
       <h2 className="text-2xl font-bold text-Secondary mb-8">Latest Articles</h2>
@@ -86,25 +45,37 @@ const LatestArticle = () => {
             1280: { slidesPerView: 4 },
           }}
         >
-          {articleData.map((article) => (
-            <SwiperSlide key={article.id}>
-              <Link
-                to={`/aviation-article-details/${article.id}`}
-                className="block w-full shadow-md bg-[#F3F4F6] rounded overflow-hidden hover:shadow-lg transition"
-              >
-                <img src={article.image} alt="" className="w-full object-cover" />
-                <div className="p-4">
-                  <h2 className="font-semibold text-xl text-Secondary">
-                    {article.title}
-                  </h2>
-                  <p className="mt-2 text-gray-700">{article.description}</p>
-                  <p className="text-sm text-gray-500 mt-1 flex items-center gap-1">
-                    <CiCalendar /> {article.date}
-                  </p>
-                </div>
-              </Link>
-            </SwiperSlide>
-          ))}
+          {LatestArticles.length > 0 ? (
+            LatestArticles.map((article) => (
+              <SwiperSlide key={article.id}>
+                <Link
+                  to={`/aviation-article-details/${article.id}`}
+                  className="block w-full shadow-md bg-[#F3F4F6] rounded overflow-hidden hover:shadow-lg transition"
+                >
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    className="w-full object-cover"
+                  />
+                  <div className="p-4">
+                    <h2 className="font-semibold text-xl text-Secondary line-clamp-1">
+                      {article.title}
+                    </h2>
+                    <p className="mt-2 text-gray-700 line-clamp-2">
+                      {article.description}
+                    </p>
+                    <p className="text-sm text-gray-500 mt-1 flex items-center gap-1">
+                      <CiCalendar /> {article.published_at}
+                    </p>
+                  </div>
+                </Link>
+              </SwiperSlide>
+            ))
+          ) : (
+            <p className="text-gray-500 text-center py-10 col-span-full">
+              No latest articles available.
+            </p>
+          )}
         </Swiper>
       </div>
     </div>

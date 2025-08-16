@@ -1,15 +1,45 @@
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { showLoadingToast, updateToastError, updateToastSuccess } from "@/lib/utils";
+import { useMutation } from "@tanstack/react-query";
 import React from "react";
 import { useForm } from "react-hook-form";
 
 const ContactForm = () => {
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const axiosPublic = useAxiosPublic();
+  const GetInTouchMutation = useMutation({
+    mutationFn: async (data) => {
+      const response = await axiosPublic.post("/get-in-touch", data);
+      return response?.data;
+    },
+    onMutate: () => {
+      const toastId = showLoadingToast("Message sending...");
+      return { toastId };
+    },
+    onSuccess: (response, _variables, context) => {
+      updateToastSuccess(
+        context.toastId,
+        response?.message || "Message sent successful"
+      );
+      reset();
+
+    },
+    onError: (error, _variables, context) => {
+      const errorMessage =
+        error.response?.data?.message ||
+        "Something went wrong, try again later!!";
+
+      updateToastError(context.toastId, errorMessage);
+    },
+  });
   const onSubmit = (data) => {
-    console.log(data); // Send this to backend
+    GetInTouchMutation.mutate(data);
   };
 
   return (

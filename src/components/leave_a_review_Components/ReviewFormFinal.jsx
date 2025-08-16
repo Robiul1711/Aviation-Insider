@@ -102,15 +102,7 @@ export default function ReviewFormFinal() {
           </p>
         </div>
 
-        {/* Submit Button */}
-        <div>
-          <Link to="/review-view"
-            type="submit"
-            className="bg-Secondary hover:bg-blue-700 text-white font-medium py-2 px-10 rounded-sm transition duration-200"
-          >
-            Submit
-          </Link>
-        </div>
+
       </form>
     </div>
   );

@@ -1,47 +1,12 @@
 import React from "react";
-import medical from "@/assets/images/medical.png";
-import insurance from "@/assets/images/insurance.png";
 import { Link } from "react-router-dom";
-const articleData = [
-  {
-    id: 1,
-    image: medical,
-    title: "Insurance for students and pilots",
-    description:
-      "There are many websites with information on insurance, as well as adverts here there and everywhere, but what should…",
-  },
-  {
-    id: 2,
-    image: insurance,
-    title: "Insurance",
-    description: "Everything you need to know about insurance",
-    
-  },
-  {
-    id: 3,
-    image: medical,
-    title: "Training",
-    description: "Everything you need to know about training",
 
-  },
-  {
-    id: 4,
-    image: insurance,
-    title: "Licensing",
-    description: "Everything you need to know about licensing",
-    
-  },
-  {
-    id: 5,
-    image: medical,
-    title: "Career",
-    description: "Everything you need to know about career"
-  },
-];
-const AllArticles = () => {
+const AllArticles = ({ article }) => {
+const articles = Array.isArray(article?.data?.data) ? article.data.data : [];
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {articleData.map((article) => (
+      {articles?.map((article) => (
         <Link 
           to={`/aviation-article-details/${article.id}`}
           key={article.id}
@@ -53,7 +18,10 @@ const AllArticles = () => {
               {article.title}
             </h2>
 
-            <p className=" mt-2 text-gray-700">{article.description}</p>
+           <p
+  className="mt-2 text-gray-700 line-clamp-3"
+  dangerouslySetInnerHTML={{ __html: article.description }}
+></p>
           
           </div>
         </Link>
