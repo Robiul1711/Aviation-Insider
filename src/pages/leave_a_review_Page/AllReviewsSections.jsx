@@ -3,17 +3,56 @@ import ReviewAccodion from "@/components/leave_a_review_Components/ReviewAccodio
 import ReviewForm from "@/components/leave_a_review_Components/ReviewForm";
 import ReviewFormFinal from "@/components/leave_a_review_Components/ReviewFormFinal";
 import ReviewSubmitForm from "@/components/leave_a_review_Components/ReviewSubmitForm";
-import React from "react";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
+import {
+  showLoadingToast,
+  updateToastError,
+  updateToastSuccess,
+} from "@/lib/utils";
+import { useMutation } from "@tanstack/react-query";
+import React, { use } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AllReviewsSections = () => {
   const methods = useForm();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
+  const { id } = useParams();
 
+  const ReviewMutation = useMutation({
+    mutationFn: async (data) => {
+      const response = await axiosSecure.post("/reviews", data);
+      return response?.data;
+    },
+    onMutate: () => {
+      const toastId = showLoadingToast("Sending review...");
+      return { toastId };
+    },
+    onSuccess: (response, _variables, context) => {
+      updateToastSuccess(
+        context.toastId,
+        response?.message || "Review sent successfully"
+      );
+
+      navigate("/review-view");
+    },
+    onError: (error, _variables, context) => {
+      const errorMessage =
+        error.response?.data?.message ||
+        "Something went wrong, try again later!!";
+
+      updateToastError(context.toastId, errorMessage);
+    },
+  });
   const onSubmit = (data) => {
-    console.log("Final form data:", data);
-    navigate("/review-view"); // redirect after submit
+    const payload = {
+      ...data,
+      flight_school_id: id, // or whatever field your backend expects
+    };
+
+    console.log("Final form data:", payload);
+    ReviewMutation.mutate(payload);
   };
 
   return (

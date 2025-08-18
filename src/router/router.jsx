@@ -166,7 +166,7 @@ const router = createBrowserRouter([
         element: <LeaveReview />,
       },
       {
-        path: "/add-your-review",
+        path: "/add-your-review/:id",
         element: <AddYourReview />,
       },
       {
