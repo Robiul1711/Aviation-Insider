@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Accordion,
   AccordionContent,
@@ -6,19 +6,24 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Star } from "lucide-react";
+import { useFormContext } from "react-hook-form";
 
-const RatingRow = ({ title, rating, onRate }) => {
+// ⭐ RatingRow with FormContext
+const RatingRow = ({ name, label }) => {
+  const { watch, setValue } = useFormContext();
+  const rating = watch(name) || 0;
+
   return (
     <div className="flex flex-col gap-1 w-full sm:w-1/3">
-      <p className="font-medium">{title}</p>
+      <p className="font-medium">{label}</p>
       <div className="flex gap-1 cursor-pointer">
         {[1, 2, 3, 4, 5].map((i) => (
           <Star
             key={i}
             size={20}
-            fill={i <= rating ? "#FBBF24" : "none"} // Filled if active
+            fill={i <= rating ? "#FBBF24" : "none"}
             stroke="#FBBF24"
-            onClick={() => onRate(i)}
+            onClick={() => setValue(name, i)}
             className="hover:scale-110 transition-transform"
           />
         ))}
@@ -28,17 +33,19 @@ const RatingRow = ({ title, rating, onRate }) => {
 };
 
 const ReviewAccordion = () => {
-  const [faqData, setFaqData] = useState([
+  const { watch } = useFormContext();
+
+  const sections = [
     {
       id: 1,
       question: "Review Aircraft Section",
       answer: "If you used aircraft at this school, please check the box below",
       ratings: [
-        { title: "Aircraft Overall Rating", rating: 4 },
-        { title: "Aircraft Availability Rating", rating: 5 },
-        { title: "Aircraft Reliability Rating", rating: 3 },
-        { title: "Aircraft Age Rating", rating: 1 },
-        { title: "Aircraft Maintenance Rating", rating: 3 },
+        { name: "aircraft_overall_rating", label: "Aircraft Overall Rating" },
+        { name: "aircraft_availability_rating", label: "Aircraft Availability Rating" },
+        { name: "aircraft_reliability_rating", label: "Aircraft Reliability Rating" },
+        { name: "aircraft_age_rating", label: "Aircraft Age Rating" },
+        { name: "aircraft_maintenance_rating", label: "Aircraft Maintenance Rating" },
       ],
     },
     {
@@ -46,11 +53,11 @@ const ReviewAccordion = () => {
       question: "Review Simulators Section",
       answer: "If you used simulators at this school, please check the box below",
       ratings: [
-        { title: "Simulator Age Rating", rating: 4 },
-        { title: "Simulator Maintenance Rating", rating: 5 },
-        { title: "Simulator Reliability Rating", rating: 3 },
-        { title: "Simulator Availability Rating", rating: 1 },
-        { title: "Simulator Overall Rating", rating: 3 },
+        { name: "simulator_overall_rating", label: "Simulator Overall Rating" },
+        { name: "simulator_availability_rating", label: "Simulator Availability Rating" },
+        { name: "simulator_reliability_rating", label: "Simulator Reliability Rating" },
+        { name: "simulator_age_rating", label: "Simulator Age Rating" },
+        { name: "simulator_maintenance_rating", label: "Simulator Maintenance Rating" },
       ],
     },
     {
@@ -58,71 +65,45 @@ const ReviewAccordion = () => {
       question: "Review Theory Section",
       answer: "If you studied theory at this school, please check the box below",
       ratings: [
-        { title: "Quality of Instruction", rating: 4 },
-        { title: "Instructors per Student", rating: 5 },
-        { title: "Extra Tuition Support", rating: 3 },
-        { title: "Value for Money", rating: 1 },
-        { title: "Learning Material Rating", rating: 3 },
-        { title: "Classroom Overall Rating", rating: 2 },
-        { title: "Class Size Rating", rating: 1 },
-        { title: "Class/Life Balance Rating", rating: 2 },
+        { name: "theory_quality_instruction", label: "Quality of Instruction" },
+        { name: "theory_instructors_per_student", label: "Instructors per Student" },
+        { name: "theory_extra_tuition_support", label: "Extra Tuition Support" },
+        { name: "theory_value_for_money", label: "Value for Money" },
+        { name: "theory_learning_material", label: "Learning Material Rating" },
+        { name: "theory_classroom_overall", label: "Classroom Overall Rating" },
+        { name: "theory_class_size", label: "Class Size Rating" },
+        { name: "theory_class_life_balance", label: "Class/Life Balance Rating" },
       ],
     },
     {
       id: 4,
       question: "Review Practical Training",
-      answer: "If you studied theory at this school, please check the box below",
+      answer: "If you studied practical training at this school, please check the box below",
       ratings: [
-        { title: "Quality of Practical Instruction Rating", rating: 4 },
-        { title: "School Manuals Rating", rating: 5 },
-        { title: "Lesson Regularity Rating", rating: 3 },
-        { title: "Standard Operating Procedures Rating", rating: 1 },
-        { title: "Practical Instructors per Student", rating: 3 },
-        { title: "Lesson Scheduling Rating", rating: 2 },
+        { name: "practical_quality_instruction", label: "Quality of Practical Instruction Rating" },
+        { name: "practical_school_manual", label: "School Manuals Rating" },
+        { name: "practical_lesson_regularity", label: "Lesson Regularity Rating" },
+        { name: "practical_lesson_scheduling", label: "Lesson Scheduling Rating" },
+        { name: "practical_instructor_per_student", label: "Practical Instructors per Student" },
       ],
     },
-  ]);
-
-  // Handle rating update
-  const updateRating = (sectionIndex, ratingIndex, newRating) => {
-    setFaqData((prev) => {
-      const updated = [...prev];
-      updated[sectionIndex].ratings[ratingIndex].rating = newRating;
-      return updated;
-    });
-  };
+  ];
 
   return (
-    <div className=" py-5 md:py-10">
-      <Accordion
-        type="single"
-        collapsible
-        className="w-full rounded-md"
-        defaultValue="item-1"
-      >
-        {faqData.map((faq, sectionIdx) => (
-          <AccordionItem
-            key={faq.id}
-            value={`item-${faq.id}`}
-            className="my-3 border rounded-md"
-          >
+    <div className="py-5 md:py-10">
+      <Accordion type="single" collapsible className="w-full rounded-md" defaultValue="item-1">
+        {sections.map((section) => (
+          <AccordionItem key={section.id} value={`item-${section.id}`} className="my-3 border rounded-md">
             <AccordionTrigger className="md:text-xl text-lg font-semibold bg-[#F3F4F6] px-5">
-              {faq.question}
+              {section.question}
             </AccordionTrigger>
             <AccordionContent className="px-5 py-4 text-base">
               <div className="flex flex-wrap gap-6">
-                {faq.ratings.map((r, ratingIdx) => (
-                  <RatingRow
-                    key={ratingIdx}
-                    title={r.title}
-                    rating={r.rating}
-                    onRate={(newRating) =>
-                      updateRating(sectionIdx, ratingIdx, newRating)
-                    }
-                  />
+                {section.ratings.map((r) => (
+                  <RatingRow key={r.name} name={r.name} label={r.label} />
                 ))}
               </div>
-              <p className="mt-6 italic text-sm text-gray-600">{faq.answer}</p>
+              <p className="mt-6 italic text-sm text-gray-600">{section.answer}</p>
             </AccordionContent>
           </AccordionItem>
         ))}

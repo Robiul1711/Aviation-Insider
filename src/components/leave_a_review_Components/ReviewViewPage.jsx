@@ -2,9 +2,11 @@ import React from "react";
 import { FaStar } from "react-icons/fa6";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import CommonAds from "../common/CommonAds";
 import OtherCommonLinks from "../common/OtherCommonLinks";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const StarRow = ({ label, value }) => (
   <div className="flex flex-col items-center bg-white border p-4 rounded-lg min-w-[180px]">
@@ -49,18 +51,30 @@ const Section = ({ title, items }) => (
 );
 
 const ReviewViewPage = () => {
+
   const location = useLocation();
   const currentPath = location.pathname;
 
   const isViewActive = currentPath === "/review-view"; // Adjust path as needed
   const isEditActive = currentPath === "/add-your-review";
 
+  const axiosSecure = useAxiosSecure();
+  const { id } = useParams();
+
+  const {data: review} = useQuery({
+    queryKey: ['review', id],
+    queryFn: async () => {
+      const response = await axiosSecure.get(`/reviews`);
+      return response.data;
+    }
+  })
+  console.log('review', review)
   return (
     <>
     <div className="flex section-padding-x py-16 gap-10">
     <div className="p-6 max-w-7xl mx-auto ">
       {/* Tab Navigation */}
-      <div className="flex items-center gap-6 mb-6 border-b pb-2">
+      <div className="flex items-center gap-6 mb-6 border-b pb-2 font-bold">
         <Link
           to="/review-view"
           className={` ${

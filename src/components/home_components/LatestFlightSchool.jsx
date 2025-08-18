@@ -7,6 +7,8 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const reviews = [
   {
@@ -64,7 +66,11 @@ const reviews = [
 const LatestFlightSchool = () => {
   const navigationPrevRef = useRef(null);
   const navigationNextRef = useRef(null);
-
+  const axiosPublic=useAxiosPublic();
+  const {data:LatestFlight}=useQuery({
+    queryKey:["larestflight"],
+    queryFn:()=>axiosPublic.get("/reviews/latest-flight-schools")
+  })
   return (
     <div className="section-padding-x py-8 md:py-16">
       <Title level="title40" className="text-black text-center mb-5 md:mb-10">
@@ -107,24 +113,25 @@ const LatestFlightSchool = () => {
             },
           }}
         >
-          {reviews.map((review) => (
+          {LatestFlight?.data?.data?.map((review) => (
             <SwiperSlide key={review.id}>
               <div className="w-full p-6 rounded-2xl  border  h-full">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-4 ">
                     <img
-                      src={review.image}
+                      src={review?.image || "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg"}
                       alt={review.commentTitle}
                       className="w-[40px] h-[40px] object-cover rounded-full"
                     />
+
                     <h2 className="text-[1rem] font-[500] text-[#414652]">
-                      {review.commentTitle}
+                      {review?.name}
                     </h2>
                   </div>
                   <div style={{ width: 50, height: 50 }}>
                     <CircularProgressbar
-                      value={review.rating}
-                      text={`${review.rating}%`}
+                      value={review.overall_percentage}
+                      text={`${review.overall_percentage}%`}
                       styles={buildStyles({
                         pathColor: "#10B981",
                         textColor: "#111827",
@@ -135,11 +142,11 @@ const LatestFlightSchool = () => {
                 </div>
 
                 <h2 className="text-[1.2rem] font-semibold mt-5">
-                  {review.school}
+                  {review?.description}
                 </h2>
 
                 <p className="text-justify text-[0.9rem] my-3 text-[#414652]">
-                  {review.comment}
+                  {review?.message}
                 </p>
               </div>
             </SwiperSlide>

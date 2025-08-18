@@ -99,7 +99,7 @@ const SchoolFinder = () => {
                   </Link>
                 </div>
 
-                <CommonButton link="/add-your-review" variant="secondary">
+                <CommonButton link={`/add-your-review/${school.id}`} variant="secondary">
                   Add Your Review
                 </CommonButton>
               </div>
