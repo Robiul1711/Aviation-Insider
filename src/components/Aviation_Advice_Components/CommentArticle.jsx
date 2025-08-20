@@ -5,6 +5,7 @@ import {
   updateToastError,
   updateToastSuccess,
 } from "@/lib/utils";
+import CommentsSection from "@/pages/aviation_Insights_Page/other_Insight_Page/CommentsSection";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
@@ -64,6 +65,10 @@ const CommentArticle = ({articleDetails}) => {
           </p>
         </div>
       )}
+      </div>
+
+      <div>
+          <CommentsSection />
       </div>
       {/* Comment Form */}
       {user ? (
