@@ -35,7 +35,7 @@ const { data: articleDetails } = useQuery({
           alt={articleDetails?.data?.data?.article?.title}
           className="w-full h-[250px] md:h-[500px] mb-8 rounded-md shadow-md"
         />
-
+      
         <CommentArticle articleDetails={articleDetails} />
       </div>
 
