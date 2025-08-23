@@ -9,6 +9,7 @@ import "swiper/css/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 const reviews = [
   {
@@ -124,9 +125,9 @@ const LatestFlightSchool = () => {
                       className="w-[40px] h-[40px] object-cover rounded-full"
                     />
 
-                    <h2 className="text-[1rem] font-[500] text-[#414652]">
+                    <Link to={`/school-profile/${review?.flight_school_id}`} className="text-[1rem] font-[500] text-[#414652]">
                       {review?.name}
-                    </h2>
+                    </Link>
                   </div>
                   <div style={{ width: 50, height: 50 }}>
                     <CircularProgressbar

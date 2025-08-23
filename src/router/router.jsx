@@ -111,7 +111,7 @@ const router = createBrowserRouter([
         element: <TOPFLIGHTSCHOOLS />
       },
       {
-        path: "/all-training-providers",
+        path: "/all-flight-schools",
         element: <AllTrainingProviders />
       },
       {

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const CourseList = ({ courseData }) => {
+  console.log(courseData);
   return (
     <div className="space-y-8">
       {courseData?.map((school, index) => (
@@ -18,7 +19,7 @@ const CourseList = ({ courseData }) => {
             <div>
               <p className="text-sm text-gray-500">School Name</p>
               <Link
-                to="#"
+                to={`/school-profile/${school.id}`}
                 className="font-semibold text-lg text-blue-600 hover:underline"
               >
                 {school?.school}

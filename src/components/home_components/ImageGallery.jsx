@@ -23,7 +23,7 @@ const imageData = [
     subtitle: "View our top rated training providers",
     className: "md:col-span-2",
     src: gal2,
-    link: "/all-training-providers",
+    link: "/all-flight-schools",
   },
   {
     id: 3,
@@ -55,7 +55,7 @@ const imageData = [
     subtitle: "View our database of training providers",
     className: "md:col-span-2",
     src: gal6,
-    link: "/all-training-providers",
+    link: "/all-flight-schools",
   },
   {
     id: 7,

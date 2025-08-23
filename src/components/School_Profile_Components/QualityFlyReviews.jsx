@@ -1,6 +1,7 @@
 import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import EnhancedTrainingProviders from "../faq_Components/EnhancedTrainingProviders";
 
 const reviews = [
   "best in quality-price",
@@ -12,13 +13,7 @@ const reviews = [
   "Unbeatable place to start your aviation career",
 ];
 
-const EnhancedProviders = [
-  { name: "ASG", reviews: 24 },
-  { name: "JETEX Simulation", reviews: 3 },
-  { name: "Quality Fly", reviews: null },
-  { name: "Aeros Flight Training", reviews: null },
-  { name: "EAS Barcelona", reviews: null },
-];
+
 
 const Progress = () => (
   <div className="w-10 h-10">
@@ -65,26 +60,11 @@ export default function QualityFlyReviews() {
             Training providers require a minimum of 3 reviews to be ranked
           </p>
           <div className="space-y-4">
-            {EnhancedProviders.map((provider, idx) => (
-              <div
-                key={idx}
-                className="flex justify-between items-center bg-gray-100 p-4 rounded shadow"
-              >
-                <div>
-                  <p className="font-semibold">{provider.name}</p>
-                  {provider.reviews && (
-                    <p className="text-xs text-gray-500">
-                      {provider.reviews} reviews
-                    </p>
-                  )}
-                </div>
-                <Progress />
-              </div>
-            ))}
+           <EnhancedTrainingProviders />
           </div>
-          <button className="mt-4 px-4 py-2 bg-Secondary-light text-white rounded hover:bg-Secondary">
+          {/* <button className="mt-4 px-4 py-2 bg-Secondary-light text-white rounded hover:bg-Secondary">
             Find Out More
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
