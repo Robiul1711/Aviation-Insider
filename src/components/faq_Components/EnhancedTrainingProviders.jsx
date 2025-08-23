@@ -1,47 +1,89 @@
-import React from 'react';
-import TrainingProviders from '@/assets/images/TrainingProviders.png';
 import {
   CircularProgressbar,
   buildStyles,
-} from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
-
-const data = [
-  { id: 1, name: "ASG", percentage: 66, image: TrainingProviders, review: "24" },
-  { id: 2, name: "PilotPro", percentage: 82, image: TrainingProviders, review: "31" },
-  { id: 3, name: "SkyWings", percentage: 74, image: TrainingProviders, review: "18" },
-  { id: 4, name: "FlyElite", percentage: 90, image: TrainingProviders, review: "45" },
-  { id: 5, name: "AeroMax", percentage: 58, image: TrainingProviders, review: "12" },
-];
+} from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+import ReactPaginate from "react-paginate";
+import { useState } from "react";
 
 const EnhancedTrainingProviders = () => {
+  const [pageCount, setPageCount] = useState(1);
+  const axiosPublic = useAxiosPublic();
+
+  const { data: fetchedData, isLoading, error } = useQuery({
+    queryKey: ["enhancedTrainingProviders", pageCount],
+    queryFn: async () => {
+      const response = await axiosPublic.get(
+        "/reviews/top-rated-training-providers",
+        {
+          params: { page: pageCount, per_page: 5 }, // ✅ request 5 per page
+        }
+      );
+      return response.data;
+    },
+    keepPreviousData: true, // keeps old data while fetching new page
+  });
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error fetching data</p>;
+
   return (
     <div className="space-y-4">
-      {data.map((item) => (
+      {fetchedData?.data?.map((item) => (
         <div
-          key={item.id}
+          key={item.flight_school_id}
           className="flex items-center justify-between bg-[#F3F4F6] p-4 rounded-md"
         >
           <div className="flex items-center gap-8">
-            <img src={item.image} alt={item.name} className="w-16 h-16 object-contain" />
+            <img
+              src={item.image}
+              alt={item.name}
+              className="w-16 h-16 object-contain"
+            />
             <div className="flex flex-col gap-1">
               <p className="sm:text-xl font-bold">{item.name}</p>
-              <p className="text-gray-600 text-sm sm:text-base">{item.review} reviews</p>
+              <p className="text-gray-600 text-sm sm:text-base">
+                {item.total_review_count} reviews
+              </p>
             </div>
           </div>
           <div style={{ width: 50, height: 50 }}>
             <CircularProgressbar
-              value={item.percentage}
-              text={`${item.percentage}%`}
+              value={item.overall_percentage}
+              text={`${item.overall_percentage}%`}
               styles={buildStyles({
-                pathColor: "#10B981",        // ✅ Main circle (green in this case)
-                textColor: "#111827",        // Text inside
-                trailColor: "#D1D5DB",       // Background circle
+                pathColor: "#10B981", // ✅ circle color
+                textColor: "#111827", // ✅ text color
+                trailColor: "#D1D5DB", // ✅ background circle
               })}
             />
           </div>
         </div>
       ))}
+
+      {/* Pagination */}
+      <div className="flex">
+        <ReactPaginate
+          breakLabel="..."
+          pageCount={fetchedData?.meta?.last_page || 1} // ✅ use backend last_page
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={2}
+          onPageChange={(event) => {
+            setPageCount(event.selected + 1);
+            // window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          containerClassName="flex items-center md:gap-3 gap-1 flex-wrap"
+          previousClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md cursor-pointer xxs:block hidden"
+          nextClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md cursor-pointer xxs:block hidden"
+          activeLinkClassName="font-[700] bg-Secondary rounded-lg text-white border-none"
+          disabledClassName="bg-none cursor-not-allowed"
+          breakClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700"
+          pageLinkClassName="w-[42px] h-[42px] border-[1px] border-primary flex justify-center items-center text-primary rounded-lg"
+          forcePage={pageCount - 1}
+        />
+      </div>
     </div>
   );
 };

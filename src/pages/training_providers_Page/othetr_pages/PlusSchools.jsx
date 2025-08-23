@@ -10,13 +10,14 @@ import VTPSFAQSection from "@/components/trainingProvidersAllComponents/VTPSFAQS
 import VarifiedSchoolRatting from "@/components/trainingProvidersAllComponents/VarifiedSchoolRatting";
 import PlusSchoolRating from "@/components/trainingProvidersAllComponents/PlusSchoolRating";
 import VTPSFAQSection2 from "@/components/trainingProvidersAllComponents/VTPSFAQSection2";
+import EnhancedTrainingProviders from "@/components/faq_Components/EnhancedTrainingProviders";
 
 const PlusSchools = () => {
   return (
     <div>
       <CommonBanner
         image={triningprovider}
-        title="Plus Schools​​​​"
+        title="Enhanced Flight Schools"
       />
         <div className="flex flex-col-reverse md:flex-row items-center py-16 gap-10 md:gap-20 bg-Secondary section-padding-x">
           <div className="space-y-10 flex-1">
@@ -51,8 +52,9 @@ const PlusSchools = () => {
         <BrandSection />
         <VTPSFAQSection2 />
 
-      <div className="section-padding-x">
-      <PlusSchoolRating />
+      <div className="section-padding-x mb-10">
+        <EnhancedTrainingProviders />
+      {/* <PlusSchoolRating /> */}
       </div>
       <CommonAds />
     </div>

@@ -9,39 +9,39 @@ import {
 const faqData = [
   {
     id: 1,
-    question: "Pilot Network General Frequently Asked Questions",
+    question: "What is the Pilot Network Rating?",
     answer:
-      "Our General FAQs section is here to provide clear, concise answers to the most common questions asked by aspiring and current pilots. Whether you're just beginning your aviation journey or already enrolled in a training program, this section is designed to support you with trusted information, gathered from real experiences and expert insights.",
+      "The Pilot Network Rating is a particular training providers overall student satisfaction rating. It is calculated from the average scores each providers reviews considering everything from training facilities to customer service. A high Pilot Network Rating suggests that a student graduates from that school extremely satisfied with the overall service they have received. The Pilot Network Rating should only be used as a guide, individual experiences may differ.",
   },
   {
     id: 2,
-    question: "How do I choose the right flight school?",
+    question: "What is a Top Rated Training Provider?",
     answer:
-      "Compare school accreditations, training programs, instructor-to-student ratio, and reviews from current or past students.",
+      "Pilot Network publish our ‘top rated training providers’ on an ongoing basis. This is not a sponsored or paid promotion post and the ratings are review based. The only way a training provider can be included is to have reached a minimum number of reviews and have received high satisfaction ratings from its reviewers. We do not influence these ratings as this would go against our core values of impartiality and integrity.",
   },
   {
     id: 3,
-    question: "What licenses do I need to become a commercial pilot?",
+    question: "What are Enhanced Profile Providers?",
     answer:
-      "You typically need a PPL, CPL, and ATPL theory or a full ATPL depending on the country's aviation authority.",
+      "Enhanced Profile Training Providers are the providers which we are in direct contact with through our Plus Training Providers Scheme, to ensure the information we display for them is both regularly updated and accurate. Training providers can join our Plus Scheme to enhance their profiles and respond to reviews, but they cannot influence their reviews. You can see which providers are already verified and some of the other benefits here.",
   },
   {
     id: 4,
-    question: "How much does flight training cost?",
+    question: "How much does Pilot Network cost?",
     answer:
-      "Flight training can range from $50,000 to $150,000 depending on the country, school, and type of program (integrated or modular).",
+      "Pilot Network is, and always will be, free to use. We do not believe students should have to pay to receive honest advice, nor to see the range of training providers that are available to them. It will always be free for training providers to be listed on Pilot Network, while there will be further premium features available too. If you would like to find out more or wish to join Pilot Network please get in touch with us.",
   },
   {
     id: 5,
-    question: "Can I become a pilot without a degree?",
+    question: "What are Pilot Network Giveaways?",
     answer:
-      "Yes, a university degree is not required to become a pilot, but it can help with airline hiring qualifications.",
+      "To say thank-you for supporting Pilot Network and leaving reviews we run giveaways of aviation related content. To find out more about what we are giving away visit our social media channels. To enter, follow Pilot Network, Share the post (on either Facebook, LinkedIn or Instagram) and of course leave a review. For more about our giveaways and full terms click here.",
   },
   {
     id: 6,
-    question: "What are modular and integrated courses?",
+    question: "What are 'Verified Users'?",
     answer:
-      "Modular allows training step-by-step and at your own pace. Integrated is full-time, intensive training in one go.",
+      "As part of our aim of providing the largest source of honest student feedback we allow reviewers to have their review published anonymously. Before a review is published anonymously it is strictly moderated to ensure it is a genuine review, then we apply our verification procedure to ensure we can ensure beyond reasonable doubt that the reviewer did in-fact train at this school. The most severe method of verification we use requires a reviewer to provide us with a course completion certificate.",
   },
   {
     id: 7,
