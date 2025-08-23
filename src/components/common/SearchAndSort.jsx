@@ -2,10 +2,8 @@ import React from "react";
 import { FiSearch } from "react-icons/fi";
 
 const SearchAndSort = ({
-  schoolValue = "",
-  courseValue = "",
-  onSchoolChange,
-  onCourseChange,
+  searchValue = "",
+  onSearchChange,
   onSearch,
   sortValue,
   onSortChange,
@@ -13,25 +11,18 @@ const SearchAndSort = ({
 }) => {
   return (
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6 mb-6">
-      {/* Search Inputs */}
-      <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+      {/* Search Input */}
+      <div className="flex gap-2 w-full sm:w-auto">
         <input
           type="text"
-          value={schoolValue}
-          onChange={onSchoolChange}
-          placeholder="Search School..."
-          className="w-full sm:w-72 border border-gray-300 rounded-md px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        <input
-          type="text"
-          value={courseValue}
-          onChange={onCourseChange}
-          placeholder="Search Course..."
-          className="w-full sm:w-72 border border-gray-300 rounded-md px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
+          value={searchValue}
+          onChange={onSearchChange}
+          placeholder="Search School or Course..."
+          className="w-full sm:w-80 border border-gray-300 rounded-md px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button
           onClick={onSearch}
-          className="bg-gray-900 text-white p-2 rounded-md hover:bg-gray-700 transition self-center sm:self-auto"
+          className="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition"
         >
           <FiSearch size={18} />
         </button>

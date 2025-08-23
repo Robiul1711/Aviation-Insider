@@ -1,6 +1,7 @@
 import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import TopTrainingProviders from "../faq_Components/TopTrainingProviders";
 
 const Progress = () => (
   <div className="w-10 h-10">
@@ -16,14 +17,6 @@ const Progress = () => (
     />
   </div>
 );
-
-const TopTrainingProviders = [
-  { name: "Flight Performance Training LTD", reviews: 32 },
-  { name: "Euro Flight Training", reviews: 7 },
-  { name: "Diamond Flight Academy Scandinavia", reviews: 8 },
-  { name: "Jet Masterclass", reviews: 14 },
-  { name: "ASG", reviews: 24 },
-];
 
 const IntegratedCourses = [
   {
@@ -208,19 +201,11 @@ export default function TrainingOverview() {
           Training providers require a minimum of 3 reviews to be ranked
         </p>
         <div className="space-y-4">
-          {TopTrainingProviders.map((provider, i) => (
-            <div key={i} className="flex justify-between items-center bg-gray-100 p-4 rounded shadow">
-              <div>
-                <p className="font-semibold">{provider.name}</p>
-                <p className="text-xs text-gray-500">{provider.reviews} reviews</p>
-              </div>
-              <Progress />
-            </div>
-          ))}
+      <TopTrainingProviders />
         </div>
-        <button className="mt-2 px-4 py-2 bg-Secondary-light text-white rounded hover:bg-Secondary">
+        {/* <button className="mt-2 px-4 py-2 bg-Secondary-light text-white rounded hover:bg-Secondary">
           Find Out More
-        </button>
+        </button> */}
       </div>
     </div>
   );

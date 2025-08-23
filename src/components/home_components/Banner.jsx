@@ -14,7 +14,7 @@ const data = [
     name: "Find an ATO",
     icon: <SearchIcon className="size-6 md:size-auto"/>,
     description: "Find and compare schools that meet your needs.",
-    link: "/all-training-providers",
+    link: "/all-flight-schools",
   },
   {
     name: "Future Pilot",

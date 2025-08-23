@@ -17,7 +17,7 @@ const aboutLinks = [
 
 const traningProviders = [
   { label: "TOP FLIGHT SCHOOLS", path: "/top-flight-schools" },
-  { label: "ALL FLIGHT SCHOOLS", path: "/all-training-providers" },
+  { label: "ALL FLIGHT SCHOOLS", path: "/all-flight-schools" },
   { label: "FLIGHT SCHOOL REVIEWS", path: "/flight-school-reviews" },
   { label: "FLIGHT SCHOOLS - MAP", path: "/flight-school-map" },
   { label: "MODULAR COURSES", path: "/modular-courses" },

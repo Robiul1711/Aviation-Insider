@@ -3,15 +3,20 @@ import SearchAndSort from "@/components/common/SearchAndSort";
 import Title from "@/components/common/Title";
 import React, { useState } from "react";
 
-const DynamicCourseDetail = ({ details, categoryId,categoryTitle }) => {
-  const courseData = details?.data?.data?.flight_schools;
-  const [school, setSchool] = useState("");
-  const [course, setCourse] = useState("");
+const DynamicCourseDetail = ({ details, categoryId, categoryTitle }) => {
+  const courseData = details?.data?.data?.flight_schools || [];
+  console.log("courseData:", courseData);
+  const [search, setSearch] = useState("");
   const [sort, setSort] = useState("Low to High");
+  const handleSearch = () => {
+
+    console.log("Searching for:", search);
+  };
+
   if (!details?.data) return null;
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-Primary">  
+      <h2 className="text-2xl font-bold text-Primary">
         {details.data.title || "Course Title"}
       </h2>
 
@@ -29,27 +34,27 @@ const DynamicCourseDetail = ({ details, categoryId,categoryTitle }) => {
       {categoryId === 9 && <p>{categoryTitle}</p>}
 
       <div className="text-black">
-        {console.log(details?.data?.data)}
         {/* Title */}
         <Title level="title40" className="text-black mb-6">
-          We recommend you study a {details?.data?.data?.title}.
+          {details?.data?.data?.title}.
         </Title>
 
         {/* Content Section */}
         <div className="space-y-4 sm:text-lg text-base leading-relaxed">
-          <p className="text-gray-700" dangerouslySetInnerHTML={{ __html: details?.data?.data?.description }}>
-          </p>
-
+          <p
+            className="text-gray-700"
+            dangerouslySetInnerHTML={{
+              __html: details?.data?.data?.description,
+            }}
+          ></p>
         </div>
 
         {/* Search and Sort Section */}
         <div className="pt-16">
           <SearchAndSort
-            schoolValue={school}
-            onSchoolChange={(e) => setSchool(e.target.value)}
-            courseValue={course}
-            onCourseChange={(e) => setCourse(e.target.value)}
-            //   onSearch={handleSearch}
+            searchValue={search}
+            onSearchChange={(e) => setSearch(e.target.value)}
+            onSearch={handleSearch} // optional if you want a button click
             sortValue={sort}
             onSortChange={(e) => setSort(e.target.value)}
           />
@@ -58,7 +63,6 @@ const DynamicCourseDetail = ({ details, categoryId,categoryTitle }) => {
           <CourseList courseData={courseData} />
         </div>
       </div>
-   
     </div>
   );
 };

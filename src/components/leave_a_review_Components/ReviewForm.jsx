@@ -56,7 +56,7 @@ const ReviewForm = () => {
       {/* Headline Section */}
       <section className="mb-10">
         <h3 className="text-xl font-semibold text-gray-800 mb-3">
-          Section 1 - Write a Headline
+        Write a Headline
         </h3>
         <div className="bg-gray-50 p-4 rounded-lg">
           <label className="block mb-2 text-gray-700 font-medium">
@@ -74,7 +74,7 @@ const ReviewForm = () => {
       {/* Ratings Section */}
       <section className="mb-10">
         <h3 className="text-xl font-semibold text-gray-800 mb-4">
-          Section 2 - Ratings
+          General - Ratings
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
           {[

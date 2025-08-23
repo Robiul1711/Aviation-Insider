@@ -41,7 +41,6 @@ const TrainingCoursesMenu = () => {
     enabled: !!categoryId,
     onError: (err) => console.error("Error fetching details:", err),
   });
-
   return (
     <div>
       <CommonBanner
