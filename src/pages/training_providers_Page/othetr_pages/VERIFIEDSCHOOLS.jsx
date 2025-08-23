@@ -14,7 +14,7 @@ const VERIFIEDSCHOOLS = () => {
     <div>
       <CommonBanner
         image={triningprovider}
-        title="Verified Training Providers Scheme ​​​​"
+        title="Verified Schools ​​​​"
       />
         <div className="flex flex-col-reverse md:flex-row items-center py-16 gap-10 md:gap-20 bg-Secondary section-padding-x">
   {/* Text Content */}

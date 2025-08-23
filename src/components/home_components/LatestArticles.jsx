@@ -1,111 +1,76 @@
 import React from "react";
-import L1 from "@/assets/images/l1.png";
-import L2 from "@/assets/images/l2.png";
-import L3 from "@/assets/images/l3.png";
-import L4 from "@/assets/images/l4.png";
-import L5 from "@/assets/images/l5.png";
 import { Link } from "react-router-dom";
-import Title from "../common/Title";
 import { Calendar } from "lucide-react";
+import Title from "../common/Title";
 import CommonButton from "../common/CommonButton";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const LatestArticles = () => {
-  const items = [
-    {
-      id: 1,
-      image: L2,
-      title:
-        "Ryanair Invests $500 Million in 30 Spare LEAP-1B Engines to Boost Fleet Reliability",
-      date: "May 21, 2025",
+  const axiosPublic = useAxiosPublic();
+
+  const { data: latestArticles, isLoading } = useQuery({
+    queryKey: ["latest-articles"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/articles");
+      return res.data;
     },
-    {
-      id: 2,
-      image: L3,
-      title:
-        "Ryanair Invests $500 Million in 30 Spare LEAP-1B Engines to Boost Fleet Reliability",
-      date: "May 21, 2025",
-    },
-    {
-      id: 3,
-      image: L4,
-      title:
-        "Ryanair Invests $500 Million in 30 Spare LEAP-1B Engines to Boost Fleet Reliability",
-      date: "May 21, 2025",
-    },
-    {
-      id: 4,
-      image: L5,
-      title:
-        "Ryanair Invests $500 Million in 30 Spare LEAP-1B Engines to Boost Fleet Reliability",
-      date: "May 21, 2025",
-    },
-  ];
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+  });
+
+  // ✅ Take only latest 5
+  const articles = latestArticles?.data?.slice(0, 6) || [];
+
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <div className="section-gap section-padding-x py-8 md:py-16">
       {/* Heading */}
-      <div className="flex w-full justify-center mb-10 items-center gap-6">
+      <div className="flex w-full justify-center mb-10 items-center">
         <Title level="title40" className="!text-center">
-          Latest Article
+          Latest Articles
         </Title>
       </div>
 
-      {/* Content */}
-      <div className="flex flex-col lg:flex-row gap-6 items-start">
-        {/* Left Large Article */}
-        <Link to="#" className="w-full lg:w-[40%] flex flex-col">
-          <div className="w-full h-[250px] sm:h-[400px] lg:h-[700px]">
-            <img
-              src={L1}
-              alt="latest news"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </div>
-          <div className="w-full p-6 bg-[#E9EAEB] flex flex-col gap-2">
-            <Title level="title24" className="text-[#010101]">
-              Ryanair Invests $500 Million in 30 Spare LEAP-1B Engines to Boost Fleet Reliability
-            </Title>
-            <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-gray-700" />
-              <Title level="title16" className="!text-[#010101]">
-                May 21, 2025
-              </Title>
+      {/* Simple Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {articles.map((item) => (
+          <Link
+            to={`/aviation-article-details/${item.id}`}
+            className="flex flex-col bg-[#E9EAEB] rounded-lg overflow-hidden"
+            key={item.id}
+          >
+            <div className="w-full h-[220px] sm:h-[260px] md:h-[300px]">
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-full h-full object-cover"
+              />
             </div>
-          </div>
-        </Link>
-
-        {/* Right Grid of Articles */}
-        <div className="w-full lg:w-[60%] grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {items.map((item, index) => (
-            <Link to="#" className="flex flex-col" key={index}>
-              <div className="w-full h-[220px] sm:h-[260px] md:h-[291px]">
-                <img
-                  src={item.image}
-                  alt="latest news"
-                  className="w-full h-full object-cover rounded-lg"
-                />
-              </div>
-              <div className="w-full p-6 bg-[#E9EAEB] rounded-2xl flex flex-col gap-2">
-                <Title level="title24" className="text-[#010101]">
-                  {item.title}
+            <div className="p-4 flex flex-col gap-2">
+              <Title level="title20" className="text-[#010101] line-clamp-1">
+                {item.title}
+              </Title>
+              <Title level="title16" className="text-[#010101] line-clamp-2">
+                {item.description}
+              </Title>
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-gray-700" />
+                <Title level="title16" className="!text-[#010101]">
+                  {item.published_at}
                 </Title>
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-gray-700" />
-                  <Title level="title16" className="!text-[#010101]">
-                    {item.date}
-                  </Title>
-                </div>
               </div>
-            </Link>
-          ))}
-        </div>
+            </div>
+          </Link>
+        ))}
       </div>
 
       {/* Button */}
       <CommonButton
         className="!mt-10 text-center mx-auto block"
         variant="secondary"
-        onClick={() => (window.location.href = "/blog")}
+        onClick={() => (window.location.href = "/aviation-articles")}
       >
         More Articles
       </CommonButton>

@@ -2,6 +2,7 @@ import React from "react";
 import Marquee from "react-fast-marquee";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 const BrandSection = () => {
 const axiosPublic = useAxiosPublic();
 const {data: flightSchools} = useQuery({
@@ -13,7 +14,8 @@ const FlightSchools = flightSchools?.data?.data || [];
       <div className="overflow-hidden w-full md:py-12 py-6 section-padding-x">
   <Marquee pauseOnHover speed={40}>
     {FlightSchools?.map((brand) => (
-      <div
+      <Link
+        to={`/school-profile/${brand?.id}`}
         key={brand.id}
         className="mx-4 sm:mx-8 flex items-center justify-center"
       >
@@ -22,7 +24,7 @@ const FlightSchools = flightSchools?.data?.data || [];
           alt={`Brand ${brand.id}`}
           className="w-[80px] h-[80px] sm:w-[130px] sm:h-[130px] object-contain"
         />
-      </div>
+      </Link>
     ))}
   </Marquee>
 </div>
