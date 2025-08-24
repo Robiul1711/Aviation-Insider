@@ -170,7 +170,7 @@ const router = createBrowserRouter([
         element: <AddYourReview />,
       },
       {
-        path: "/review-view",
+        path: "/review-view/:id",
         element: <ReviewViewPage />,
       },
       // Become a pilot start

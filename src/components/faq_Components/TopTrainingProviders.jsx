@@ -7,6 +7,8 @@ import 'react-circular-progressbar/dist/styles.css';
 import useAxiosPublic from '@/hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import ReactPaginate from 'react-paginate';
+import FlightSchoolSkeleton from '../common/FlightSchoolSkeleton';
+import { Link } from 'react-router-dom';
 
 
 
@@ -22,7 +24,7 @@ const TopTrainingProviders = () => {
       return response.data;
     },
   })
-    if (isLoading) return <p>Loading...</p>;
+    if (isLoading) return <p><FlightSchoolSkeleton  showRatting={true} showButton={false} count={5}  /></p>;
   if (error) return <p>Error fetching data</p>;
   return (
     <div className="space-y-4">
@@ -31,10 +33,11 @@ const TopTrainingProviders = () => {
           key={item.flight_school_id}
           className="flex items-center justify-between bg-[#F3F4F6] p-4 rounded-md"
         >
+          {console.log(item)}
           <div className="flex items-center gap-8">
             <img src={item.image} alt={item.name} className="w-16 h-16 object-contain" />
             <div className="flex flex-col gap-1">
-              <p className="sm:text-xl font-bold">{item.name}</p>
+              <Link to={`/school-profile/${item.flight_school_id}`} className="sm:text-xl font-bold">{item.name}</Link>
               <p className="text-gray-600 text-sm sm:text-base">{item.total_review_count} reviews</p>
             </div>
           </div>

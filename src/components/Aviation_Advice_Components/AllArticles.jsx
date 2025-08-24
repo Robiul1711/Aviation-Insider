@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import CardSkeleton from "../common/CardSkeleton";
 
-const AllArticles = ({ article }) => {
+const AllArticles = ({ article, isLoading }) => {
 const articles = Array.isArray(article?.data?.data) ? article.data.data : [];
+  if (isLoading) return <CardSkeleton count={8} />;
 
+  if (!articles.length) return <p>No articles found.</p>;
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {articles?.map((article) => (

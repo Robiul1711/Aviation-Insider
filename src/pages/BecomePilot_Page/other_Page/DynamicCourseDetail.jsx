@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 const DynamicCourseDetail = ({ details, categoryId, categoryTitle }) => {
   const courseData = details?.data?.data?.flight_schools || [];
-  console.log("courseData:", courseData);
+
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("Low to High");
   const handleSearch = () => {

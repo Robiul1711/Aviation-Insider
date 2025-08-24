@@ -21,6 +21,7 @@ const CommentsSection = () => {
 
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState("");
+  const [editSubject, setEditSubject] = useState("");
 
   // Fetch comments
   const { data, isLoading, isError } = useQuery({
@@ -48,38 +49,40 @@ const CommentsSection = () => {
     },
   });
 
+  // Edit
+  const editMutation = useMutation({
+    mutationFn: async ({ commentId, newText, newSubject }) => {
+      const res = await axiosSecure.post(`/comment/${commentId}`, { 
+        comment: newText,
+        subject: newSubject
+      });
+      return res.data;
+    },
+    onMutate: () => {
+      const toastId = showLoadingToast("Updating comment...");
+      return { toastId };
+    },
+    onSuccess: (response, _variables, context) => {
+      queryClient.invalidateQueries(["article-comments", id]);
+      setEditingId(null);
+      setEditText("");
+      setEditSubject("");
+      updateToastSuccess(
+        context.toastId,
+        response?.message || "Comment updated successfully"
+      );
+    },
+    onError: (error, _variables, context) => {
+      console.error("Error updating comment:", error);
 
-// Edit
-const editMutation = useMutation({
-  mutationFn: async ({ commentId, newText }) => {
-    const res = await axiosSecure.post(`/comment/${commentId}`, { comment: newText });
-    return res.data; // return response so we can access it
-  },
-  onMutate: () => {
-    const toastId = showLoadingToast("Updating comment...");
-    return { toastId };
-  },
-  onSuccess: (response, _variables, context) => {
-    queryClient.invalidateQueries(["article-comments", id]);
-    setEditingId(null);
-    setEditText("");
-    updateToastSuccess(
-      context.toastId,
-      response?.message || "Comment updated successfully"
-    );
-  },
-  onError: (error, _variables, context) => {
-    console.error("Error updating comment:", error);
+      const errorMessage =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Something went wrong, try again later!!";
 
-    // Extract safe message
-    const errorMessage =
-      error?.response?.data?.message ||
-      error?.message ||
-      "Something went wrong, try again later!!";
-
-    updateToastError(context.toastId, errorMessage);
-  },
-});
+      updateToastError(context.toastId, errorMessage);
+    },
+  });
 
   if (isLoading)
     return <p className="p-4 text-gray-500">Loading comments...</p>;
@@ -108,26 +111,32 @@ const editMutation = useMutation({
 
               {/* Comment Content */}
               <div className="flex-1">
-                <div className="flex justify-between items-center">
-                  <h4 className="font-medium text-gray-900">{c.subject}</h4>
-                  <span className="text-xs text-gray-500 font-bold">
-                    {c.user_name}
-                  </span>
-                </div>
-
                 {editingId === c.id ? (
-                  <div className="mt-2">
-                    <textarea
-                      value={editText}
-                      onChange={(e) => setEditText(e.target.value)}
-                      className="w-full border rounded-md p-2 text-sm focus:ring-2 focus:ring-blue-500"
-                    />
+                  <>
+                    <div className="mb-2">
+                      <input
+                        type="text"
+                        value={editSubject}
+                        onChange={(e) => setEditSubject(e.target.value)}
+                        className="w-full border rounded-md p-2 text-sm focus:ring-2 focus:ring-blue-500 font-medium"
+                        placeholder="Subject"
+                      />
+                    </div>
+                    <div>
+                      <textarea
+                        value={editText}
+                        onChange={(e) => setEditText(e.target.value)}
+                        className="w-full border rounded-md p-2 text-sm focus:ring-2 focus:ring-blue-500"
+                        placeholder="Comment"
+                      />
+                    </div>
                     <div className="flex gap-2 mt-2">
                       <button
                         onClick={() =>
                           editMutation.mutate({
                             commentId: c.id,
                             newText: editText,
+                            newSubject: editSubject,
                           })
                         }
                         className="px-3 py-1 text-xs text-white bg-green-500 rounded-md hover:bg-green-600"
@@ -138,39 +147,49 @@ const editMutation = useMutation({
                         onClick={() => {
                           setEditingId(null);
                           setEditText("");
+                          setEditSubject("");
                         }}
                         className="px-3 py-1 text-xs text-gray-600 border rounded-md hover:bg-gray-100"
                       >
                         Cancel
                       </button>
                     </div>
-                  </div>
+                  </>
                 ) : (
-                  <p className="text-gray-700 text-sm mt-1">{c.comment}</p>
-                )}
-
-                {/* ✅ Show Edit/Delete only if user is the owner */}
-                {user?.id === c.user_id && editingId !== c.id && (
-                  <div className="flex gap-2 mt-2">
-                    <button
-                      onClick={() => {
-                        setEditingId(c.id);
-                        setEditText(c.comment);
-                      }}
-                      className="px-3 py-1 text-xs text-white bg-blue-500 rounded-md hover:bg-blue-600"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => {
-                        console.log(`Deleting comment with ID: ${c.id}`);
-                        deleteMutation.mutate(c.id);
-                      }}
-                      className="px-3 py-1 text-xs text-white bg-red-500 rounded-md hover:bg-red-600"
-                    >
-                      Delete
-                    </button>
-                  </div>
+                  <>
+                    <div className="flex justify-between items-center">
+                      <h4 className="font-medium text-gray-900">{c.subject}</h4>
+                      <span className="text-xs text-gray-500 font-bold">
+                        {c.user_name}
+                      </span>
+                    </div>
+                    <p className="text-gray-700 text-sm mt-1">{c.comment}</p>
+                    
+                    {/* Show Edit/Delete only if user is the owner */}
+                    {user?.id === c.user_id && (
+                      <div className="flex gap-2 mt-2">
+                        <button
+                          onClick={() => {
+                            setEditingId(c.id);
+                            setEditText(c.comment);
+                            setEditSubject(c.subject);
+                          }}
+                          className="px-3 py-1 text-xs text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => {
+                            console.log(`Deleting comment with ID: ${c.id}`);
+                            deleteMutation.mutate(c.id);
+                          }}
+                          className="px-3 py-1 text-xs text-white bg-red-500 rounded-md hover:bg-red-600"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
             </div>

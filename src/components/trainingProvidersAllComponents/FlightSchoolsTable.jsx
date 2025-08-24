@@ -4,6 +4,7 @@ import { Search } from "lucide-react";
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
+import FlightSchoolSkeleton from "../common/FlightSchoolSkeleton";
 
 const FlightSchoolsTable = () => {
   const axiosPublic = useAxiosPublic();
@@ -11,22 +12,27 @@ const FlightSchoolsTable = () => {
   const [pageCount, setPageCount] = useState(1);
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["flightSchools", pageCount],
+    queryKey: ["flightSchools", pageCount, search], // include search in queryKey
     queryFn: async () => {
       const response = await axiosPublic.get("/flight-schools/all", {
-        params: { page: pageCount },
+        params: {
+          page: pageCount,
+          search: search || undefined, // send search if not empty
+        },
       });
       return response.data;
     },
+    keepPreviousData: true, // Smooth transitions between pages
   });
 
-  // ✅ Filter schools by name, base_code, or country
-  const filteredSchools = data?.data?.filter((school) =>
-    [school.name, school.base_code, school.country]
-      .join(" ")
-      .toLowerCase()
-      .includes(search.toLowerCase())
-  );
+  // Extract data and meta from response
+const schools = data?.data || [];
+const meta = data?.meta || {};
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+    setPageCount(1); // reset to first page on search
+  };
 
   return (
     <div className="md:p-6 bg-white">
@@ -37,10 +43,10 @@ const FlightSchoolsTable = () => {
           type="text"
           placeholder="Search schools, base code, or country..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={handleSearchChange}
           className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-2xl 
-                     shadow-sm outline-none focus:ring-2 focus:ring-blue-500 
-                     focus:border-blue-500 transition"
+             shadow-sm outline-none focus:ring-2 focus:ring-blue-500 
+             focus:border-blue-500 transition"
         />
       </div>
 
@@ -54,8 +60,8 @@ const FlightSchoolsTable = () => {
 
       {/* School Rows */}
       <div className="space-y-4">
-        {filteredSchools?.length > 0 ? (
-          filteredSchools.map((school, index) => (
+        {schools.length > 0 ? (
+          schools.map((school, index) => (
             <div
               key={index}
               className="grid grid-cols-1 sm:grid-cols-4 gap-4 sm:gap-6 items-center 
@@ -69,6 +75,9 @@ const FlightSchoolsTable = () => {
                     src={school.image}
                     alt={school.name}
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.src = "https://via.placeholder.com/48"; // Fallback image
+                    }}
                   />
                 </div>
                 <Link
@@ -101,7 +110,7 @@ const FlightSchoolsTable = () => {
                   to={`/school-profile/${school.id}`}
                   className="bg-blue-600 hover:bg-blue-700 text-white font-medium 
                              px-4 py-2 rounded-lg transition-colors duration-200 
-                             w-full sm:w-auto"
+                             w-full sm:w-auto text-center"
                 >
                   Read More
                 </Link>
@@ -109,32 +118,36 @@ const FlightSchoolsTable = () => {
             </div>
           ))
         ) : (
-          <p className="text-center text-gray-500 py-8">No schools found.</p>
+          <FlightSchoolSkeleton count={10} columns={3} showButton={true} />
         )}
-         {/* Pagination */}
-        <div className="flex">
+      </div>
+
+      {/* Pagination - Only show if we have multiple pages AND search is empty */}
+      {meta.last_page > 1 && !search && (
+        <div className="flex justify-center mt-8">
           <ReactPaginate
             breakLabel="..."
-            // nextLabel={<Next />}
-            // previousLabel={<Previous />}
-            pageCount={filteredSchools?.meta?.last_page || 1}
+            pageCount={meta.last_page || 1}
             pageRangeDisplayed={3}
             marginPagesDisplayed={2}
             onPageChange={(event) => {
               setPageCount(event.selected + 1);
-              // window.scrollTo({ top: 0, behavior: "smooth" });
             }}
             containerClassName="flex items-center md:gap-3 gap-1 flex-wrap"
-            previousClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md cursor-pointer xxs:block hidden"
-            nextClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md cursor-pointer xxs:block hidden"
-            activeLinkClassName="font-[700] bg-Secondary rounded-lg text-white border-none"
-            disabledClassName="bg-none cursor-not-allowed"
-            breakClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700"
-            pageLinkClassName="w-[42px] h-[42px] border-[1px] border-primary flex justify-center items-center text-primary rounded-lg"
+            previousLabel="Previous"
+            nextLabel="Next"
+            previousClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md cursor-pointer"
+            nextClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md cursor-pointer"
+            activeClassName="font-[700] bg-Secondary rounded-lg border-none"
+            activeLinkClassName="text-white" // ✅ white when active
+            disabledClassName="opacity-50 cursor-not-allowed"
+            breakClassName="md:px-4 px-2 py-2 text-sm font-medium"
+            pageClassName="mx-1 cursor-pointer"
+            pageLinkClassName="w-[42px] h-[42px] border border-primary flex justify-center items-center text-black rounded-lg hover:bg-Secondary hover:text-white transition-colors"
             forcePage={pageCount - 1}
           />
         </div>
-      </div>
+      )}
     </div>
   );
 };

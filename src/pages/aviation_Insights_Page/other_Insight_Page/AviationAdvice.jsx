@@ -7,7 +7,7 @@ import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 const AviationAdvice = () => {
   const axiosPublic = useAxiosPublic();
-  const { data: articleData } = useQuery({
+  const { data: articleData, isLoading } = useQuery({
     queryKey: ["advices"],
     queryFn: () => axiosPublic.get("/aviation-advices"),
   });
@@ -20,7 +20,7 @@ const AviationAdvice = () => {
           Our individually written articles offering you advice to all things to
           do with flight training.
         </p>
-        <AllAdviceAricle articleData={articleData} />
+        <AllAdviceAricle articleData={articleData} isLoading={isLoading} />
       </div>
       <CommonAds />
     </div>
