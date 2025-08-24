@@ -35,7 +35,7 @@ const AllReviewsSections = () => {
         response?.message || "Review sent successfully"
       );
 
-      navigate("/review-view");
+      navigate("/review-view" + `/${response.data.flight_school_id}`);
     },
     onError: (error, _variables, context) => {
       const errorMessage =

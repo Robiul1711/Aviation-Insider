@@ -7,6 +7,8 @@ import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import ReactPaginate from "react-paginate";
 import { useState } from "react";
+import FlightSchoolSkeleton from "../common/FlightSchoolSkeleton";
+import { Link } from "react-router-dom";
 
 const EnhancedTrainingProviders = () => {
   const [pageCount, setPageCount] = useState(1);
@@ -26,7 +28,7 @@ const EnhancedTrainingProviders = () => {
     keepPreviousData: true, // keeps old data while fetching new page
   });
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <p><FlightSchoolSkeleton showRatting={true} showButton={false} count={5} /></p>;
   if (error) return <p>Error fetching data</p>;
 
   return (
@@ -43,7 +45,7 @@ const EnhancedTrainingProviders = () => {
               className="w-16 h-16 object-contain"
             />
             <div className="flex flex-col gap-1">
-              <p className="sm:text-xl font-bold">{item.name}</p>
+              <Link to={`/school-profile/${item.flight_school_id}`} className="sm:text-xl font-bold">{item.name}</Link>
               <p className="text-gray-600 text-sm sm:text-base">
                 {item.total_review_count} reviews
               </p>

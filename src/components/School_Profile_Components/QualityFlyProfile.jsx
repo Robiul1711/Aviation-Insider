@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const QualityFlyProfile = ({ SchoolDetail }) => {
+  console.log(SchoolDetail);
   return (
     <div className="section-padding-x p-4 md:p-6 bg-white">
       {/* Header Section */}
@@ -9,7 +10,7 @@ const QualityFlyProfile = ({ SchoolDetail }) => {
         <div className="flex items-center gap-4">
           {/* Logo */}
           <div className="w-14 h-14 md:w-16 md:h-16 bg-red-800 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-lg md:text-xl">Q</span>
+           <img src={SchoolDetail?.image} alt="" />
           </div>
 
           {/* Title and Location */}

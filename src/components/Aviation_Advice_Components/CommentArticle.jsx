@@ -6,13 +6,15 @@ import {
   updateToastSuccess,
 } from "@/lib/utils";
 import CommentsSection from "@/pages/aviation_Insights_Page/other_Insight_Page/CommentsSection";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 
-const CommentArticle = ({articleDetails}) => {
-  const {id} = useParams();
+const CommentArticle = ({ articleDetails, isLoading }) => {
+  const { id } = useParams();
   const { user } = useAuth();
+  const queryClient = useQueryClient();
+
   const {
     register,
     handleSubmit,
@@ -21,56 +23,97 @@ const CommentArticle = ({articleDetails}) => {
   } = useForm();
 
   const axiosSecure = useAxiosSecure();
+
+  // ✅ Optimistic Mutation for Adding Comment
   const CommentMutation = useMutation({
     mutationFn: async (data) => {
       const response = await axiosSecure.post("/comment", data);
       return response.data;
     },
-    onMutate: () => {
+    onMutate: async (newComment) => {
       const toastId = showLoadingToast("Comment submitting...");
-      return { toastId };
+
+      await queryClient.cancelQueries(["article-comments", id]);
+
+      const previousData = queryClient.getQueryData(["article-comments", id]);
+
+      // ✅ Optimistically add new comment
+      const fakeId = Math.random().toString(36).substr(2, 9);
+      queryClient.setQueryData(["article-comments", id], (old) => {
+        if (!old) return { data: [] };
+        return {
+          ...old,
+          data: [
+            ...old.data,
+            {
+              id: fakeId,
+              subject: newComment.subject,
+              comment: newComment.comment,
+              user_id: user?.id,
+              user_name: user?.name || user?.email,
+            },
+          ],
+        };
+      });
+
+      return { toastId, previousData };
     },
     onSuccess: (response, _variables, context) => {
+      reset();
       updateToastSuccess(
         context.toastId,
         response?.message || "Comment submitted successfully"
       );
-          reset();
+      // ensure sync with backend
+      queryClient.invalidateQueries(["article-comments", id]);
     },
     onError: (error, _variables, context) => {
+      if (context?.previousData) {
+        queryClient.setQueryData(["article-comments", id], context.previousData);
+      }
       const errorMessage =
         error.response?.data?.message ||
         "Something went wrong, try again later!!";
-
       updateToastError(context.toastId, errorMessage);
     },
   });
+
   const onSubmit = (data) => {
-    console.log("Submitted Data:", data);
-    CommentMutation.mutate({ ...data , article_id: id});
-
+    CommentMutation.mutate({ ...data, article_id: id });
   };
-  console.log(articleDetails);
+
   return (
-    <div className="max-w-7xl mx-auto  bg-white">
+    <div className="max-w-7xl mx-auto bg-white">
       {/* Article Header */}
-      <div className="mb-6">
-      {articleDetails?.data?.data?.article && (
-        <div className="bg-gray-50 p-6 rounded-lg">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            {articleDetails?.data?.data?.article?.title}
-          </h2>
-          <p className="text-gray-700">
-            {articleDetails?.data?.data?.article?.description}
-          </p>
-        </div>
-      )}
+<div className="mb-6">
+  {isLoading ? (
+    // 🔹 Skeleton loader while fetching
+    <div className="bg-gray-50 p-6 rounded-lg animate-pulse">
+      <div className="h-6 bg-gray-300 rounded w-2/3 mb-4"></div> {/* title skeleton */}
+      <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
+      <div className="h-4 bg-gray-300 rounded w-5/6 mb-2"></div>
+      <div className="h-4 bg-gray-300 rounded w-4/6"></div>
+    </div>
+  ) : (
+    articleDetails?.data?.data?.article && (
+      <div className="bg-gray-50 p-6 rounded-lg">
+        <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+          {articleDetails?.data?.data?.article?.title}
+        </h2>
+        <p className="text-gray-700">
+          {articleDetails?.data?.data?.article?.description}
+        </p>
+      </div>
+    )
+  )}
+</div>
+
+      {/* ✅ Comments List */}
+      <div>
+        <CommentsSection />
       </div>
 
-      <div>
-          <CommentsSection />
-      </div>
-      {/* Comment Form */}
+      {/* ✅ Comment Form */}
       {user ? (
         <div className="mt-12 bg-gray-50 p-6 rounded-lg">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">
@@ -90,7 +133,8 @@ const CommentArticle = ({articleDetails}) => {
                 type="text"
                 id="subject"
                 {...register("subject", { required: "Subject is required" })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md 
+                  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
               {errors.subject && (
                 <p className="text-red-500 text-sm mt-1">
@@ -111,7 +155,9 @@ const CommentArticle = ({articleDetails}) => {
                 id="comment"
                 rows={6}
                 {...register("comment", { required: "Comment is required" })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md 
+                  focus:outline-none focus:ring-2 focus:ring-blue-500 
+                  focus:border-transparent resize-vertical"
               />
               {errors.comment && (
                 <p className="text-red-500 text-sm mt-1">
@@ -123,8 +169,9 @@ const CommentArticle = ({articleDetails}) => {
             <button
               type="submit"
               className="bg-Secondary-light hover:bg-Secondary text-white font-medium px-6 py-2 rounded-md transition-colors duration-200"
+              disabled={CommentMutation.isLoading}
             >
-              Post Comment
+              {CommentMutation.isLoading ? "Posting..." : "Post Comment"}
             </button>
           </form>
         </div>

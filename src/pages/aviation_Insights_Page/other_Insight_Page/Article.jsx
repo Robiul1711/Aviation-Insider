@@ -8,7 +8,7 @@ import { useQuery } from '@tanstack/react-query'
 const Article = () => {
 
   const axiosPublic = useAxiosPublic();
-  const { data: article } = useQuery({
+  const { data: article , isLoading} = useQuery({
     queryKey: ["articles"],
     queryFn: () => axiosPublic.get("/articles"),
   });
@@ -17,7 +17,7 @@ const Article = () => {
       <CommonBanner image={aviationadvice} title="Aviation Articles" />
       <div className='section-padding-x py-16'>
        <p className='p-3 bg-[#F3F4F6] rounded-md text-xl mb-10'>Our individually written articles offering you advice to all things to do with flight training.</p>
-      <AllArticles article={article} />
+      <AllArticles article={article} isLoading={isLoading} />
       </div>
       <CommonAds  />
 

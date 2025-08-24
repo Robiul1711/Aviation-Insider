@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use } from "react";
 import { FaStar } from "react-icons/fa6";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
@@ -7,6 +7,7 @@ import CommonAds from "../common/CommonAds";
 import OtherCommonLinks from "../common/OtherCommonLinks";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "@/hooks/useAuth";
 
 const StarRow = ({ label, value }) => (
   <div className="flex flex-col items-center bg-white border p-4 rounded-lg min-w-[180px]">
@@ -52,6 +53,7 @@ const Section = ({ title, items }) => (
 
 const ReviewViewPage = () => {
 
+  const {user}=useAuth();
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -68,7 +70,12 @@ const ReviewViewPage = () => {
       return response.data;
     }
   })
-  console.log('review', review)
+
+
+const userReview = review?.data?.find(r => r.email === user?.email);
+
+console.log("User's review:", userReview);
+
   return (
     <>
     <div className="flex section-padding-x py-16 gap-10">

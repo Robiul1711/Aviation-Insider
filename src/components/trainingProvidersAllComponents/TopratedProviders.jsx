@@ -1,14 +1,10 @@
 import React from "react";
 
-import {
-  CircularProgressbar,
-  buildStyles,
-} from "react-circular-progressbar";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import dayjs from "dayjs";
 
-
-
-const TopratedProviders = ({ data}) => {
+const TopratedProviders = ({ data }) => {
   return (
     <div className="space-y-4 ">
       {data?.map((item) => (
@@ -19,29 +15,29 @@ const TopratedProviders = ({ data}) => {
           {/* Left Column */}
           <div className="flex items-center gap-5">
             <img
-              src={item.image}
+              src={item.user_avatar || item.image}
               alt={item.name}
               className="w-16 h-16 rounded-md object-cover border"
             />
             <div>
               <h3 className="text-lg font-semibold text-gray-800">
-                {item.name}
+                {item.message}
               </h3>
-              <p className="text-sm text-gray-500">{item.category}</p>
+              <p className="text-sm text-gray-500">{item.flight_school_name}</p>
             </div>
           </div>
 
           {/* Middle Column */}
           <div className="flex justify-center sm:justify-center mt-4 sm:mt-0">
-            <p className=""> <span className=" font-bold">({item.review}) </span> reviews</p>
+            {dayjs(item.created_at).format("DD/MM/YY")}
           </div>
 
           {/* Right Column */}
           <div className="flex justify-end mt-4 sm:mt-0">
             <div className="w-14 h-14">
               <CircularProgressbar
-                value={item.percentage}
-                text={`${item.percentage}%`}
+                value={item.rating}
+                text={`${item.rating}%`}
                 styles={buildStyles({
                   pathColor: "#10B981",
                   textColor: "#111827",
