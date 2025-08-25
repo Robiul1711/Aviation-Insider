@@ -8,6 +8,7 @@ import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import DynamicCourseDetail from "./DynamicCourseDetail";
 import ReactPaginate from "react-paginate";
+import { CourseListSkeleton } from "@/components/common/FlightSchoolSkeleton";
 
 const TrainingCoursesMenu = () => {
   const [pageCount, setPageCount] = useState("");
@@ -39,7 +40,11 @@ const TrainingCoursesMenu = () => {
     error,
   } = useQuery({
     queryKey: ["category-details", categoryId, pageCount],
-    queryFn: () => axiosPublic.get(`/course-category/details/${categoryId}, { params: { page: pageCount } }`),
+    queryFn: () =>
+      axiosPublic.get(
+        `/course-category/details/${categoryId}`,
+        { params: { page: pageCount } }
+      ),
     enabled: !!categoryId,
     onError: (err) => console.error("Error fetching details:", err),
   });
@@ -74,8 +79,8 @@ const TrainingCoursesMenu = () => {
         {/* Main Content */}
         <div className="w-[80%]">
           {isLoading ? (
-            <div className="flex items-center justify-center w-full h-40">
-              <div className="animate-spin rounded-full h-10 w-10 border-4 border-Secondary border-t-transparent"></div>
+            <div >
+             <CourseListSkeleton count={3} />
             </div>
           ) : error ? (
             <div className="text-red-500 text-lg">
@@ -83,34 +88,34 @@ const TrainingCoursesMenu = () => {
             </div>
           ) : (
             <>
-            <DynamicCourseDetail
-              details={detailResponse}
-              categoryId={categoryId}
-              categoryTitle={activeCategory.title}
-            />
-         <div className="flex mt-10">
-        <ReactPaginate
-          breakLabel="..."
-          pageCount={detailResponse?.data?.meta?.last_page || 1}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={2}
-          onPageChange={(event) => {
-            setPageCount(event.selected + 1);
-          }}
-          containerClassName="flex items-center md:gap-3 gap-1 flex-wrap"
-          previousLabel="Previous"
-          nextLabel="Next"
-          previousClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md cursor-pointer"
-          nextClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md cursor-pointer"
-          activeClassName="font-[700] bg-Secondary rounded-lg border-none"
-          activeLinkClassName="text-white" // ✅ white when active
-          disabledClassName="opacity-50 cursor-not-allowed"
-          breakClassName="md:px-4 px-2 py-2 text-sm font-medium"
-          pageClassName="mx-1 cursor-pointer"
-          pageLinkClassName="w-[42px] h-[42px] border border-primary flex justify-center items-center text-black rounded-lg hover:bg-Secondary hover:text-white transition-colors"
-          forcePage={pageCount - 1}
-        />
-      </div>
+              <DynamicCourseDetail
+                details={detailResponse}
+                categoryId={categoryId}
+                categoryTitle={activeCategory.title}
+              />
+              <div className="flex mt-10">
+                <ReactPaginate
+                  breakLabel="..."
+                  pageCount={detailResponse?.data?.meta?.last_page || 1}
+                  pageRangeDisplayed={3}
+                  marginPagesDisplayed={2}
+                  onPageChange={(event) => {
+                    setPageCount(event.selected + 1);
+                  }}
+                  containerClassName="flex items-center md:gap-3 gap-1 flex-wrap"
+                  previousLabel="Previous"
+                  nextLabel="Next"
+                  previousClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md cursor-pointer"
+                  nextClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md cursor-pointer"
+                  activeClassName="font-[700] bg-Secondary rounded-lg border-none"
+                  activeLinkClassName="text-white" // ✅ white when active
+                  disabledClassName="opacity-50 cursor-not-allowed"
+                  breakClassName="md:px-4 px-2 py-2 text-sm font-medium"
+                  pageClassName="mx-1 cursor-pointer"
+                  pageLinkClassName="w-[42px] h-[42px] border border-primary flex justify-center items-center text-black rounded-lg hover:bg-Secondary hover:text-white transition-colors"
+                  forcePage={pageCount - 1}
+                />
+              </div>
             </>
           )}
         </div>
