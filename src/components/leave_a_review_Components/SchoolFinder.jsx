@@ -6,7 +6,7 @@ import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { debounce } from "lodash";
 import ReactPaginate from "react-paginate";
-import FlightSchoolSkeleton from "../common/FlightSchoolSkeleton";
+import { FlightSchoolSkeleton } from "../common/FlightSchoolSkeleton";
 
 const SchoolFinder = () => {
   const axiosPublic = useAxiosPublic();

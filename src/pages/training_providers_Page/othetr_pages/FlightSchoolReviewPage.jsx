@@ -6,7 +6,7 @@ import TopratedProviders from "@/components/trainingProvidersAllComponents/Topra
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import ReactPaginate from "react-paginate";
-import FlightSchoolSkeleton from "@/components/common/FlightSchoolSkeleton";
+import { FlightSchoolSkeleton } from "@/components/common/FlightSchoolSkeleton";
 
 const FlightSchoolReviewPage = () => {
   const [pageCount, setPageCount] = useState(1);

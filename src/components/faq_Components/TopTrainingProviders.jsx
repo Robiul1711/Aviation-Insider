@@ -7,8 +7,8 @@ import 'react-circular-progressbar/dist/styles.css';
 import useAxiosPublic from '@/hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import ReactPaginate from 'react-paginate';
-import FlightSchoolSkeleton from '../common/FlightSchoolSkeleton';
 import { Link } from 'react-router-dom';
+import { FlightSchoolSkeleton } from '../common/FlightSchoolSkeleton';
 
 
 

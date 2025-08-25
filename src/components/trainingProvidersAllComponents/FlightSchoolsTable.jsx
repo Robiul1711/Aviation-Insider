@@ -4,7 +4,7 @@ import { Search } from "lucide-react";
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
-import FlightSchoolSkeleton from "../common/FlightSchoolSkeleton";
+import { FlightSchoolSkeleton } from "../common/FlightSchoolSkeleton";
 
 const FlightSchoolsTable = () => {
   const axiosPublic = useAxiosPublic();

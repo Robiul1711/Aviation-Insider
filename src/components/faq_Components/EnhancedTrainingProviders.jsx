@@ -7,8 +7,9 @@ import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import ReactPaginate from "react-paginate";
 import { useState } from "react";
-import FlightSchoolSkeleton from "../common/FlightSchoolSkeleton";
+
 import { Link } from "react-router-dom";
+import { FlightSchoolSkeleton } from "../common/FlightSchoolSkeleton";
 
 const EnhancedTrainingProviders = () => {
   const [pageCount, setPageCount] = useState(1);
