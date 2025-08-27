@@ -60,12 +60,7 @@ const SideBar = ({ sidebar, open, setOpen }) => {
         </div>
 
         {/* Logout */}
-        <div className="px-4 mt-6 border-t border-gray-700 pt-4">
-          <button className="w-full flex items-center gap-3 px-4 py-2 rounded-lg text-red-500 hover:bg-red-500/10 transition font-medium">
-            <IoLogOutOutline className="text-lg" />
-            Log Out
-          </button>
-        </div>
+
       </div>
     </>
   );
