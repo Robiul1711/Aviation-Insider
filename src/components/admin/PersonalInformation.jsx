@@ -1,46 +1,143 @@
-import React from 'react';
-import { Info } from 'lucide-react';
-import { useForm } from 'react-hook-form';
+import React, { useState, useEffect } from "react";
+import { Info } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useAuth } from "@/hooks/useAuth";
+import {
+  showLoadingToast,
+  updateToastError,
+  updateToastSuccess,
+} from "@/lib/utils";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const PersonalInformation = () => {
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+
+  // ✅ Fetch profile data
+  const { data: userData } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/profile`);
+      return res.data;
+    },
+  });
+
+  console.log(userData);
+  // ✅ Preview image state
+  const [preview, setPreview] = useState("");
+
+  // ✅ Set preview image when API data arrives
+  useEffect(() => {
+    if (userData?.userdata?.avatar) {
+      setPreview(userData.userdata.avatar);
+    }
+  }, [userData]);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      name: 'Rainer Yager',
-      email: 'yourname@gmail.com',
+  } = useForm();
+
+  // ✅ Update name mutation
+  const ChangeNameMutation = useMutation({
+    mutationFn: async (data) => {
+      const response = await axiosSecure.post("/profile/update", data);
+      return response?.data;
+    },
+    onMutate: () => {
+      const toastId = showLoadingToast("Updating profile...");
+      return { toastId };
+    },
+    onSuccess: (response, _variables, context) => {
+      updateToastSuccess(
+        context.toastId,
+        response?.message || "Profile updated successfully"
+      );
+    },
+    onError: (error, _variables, context) => {
+      const errorMessage =
+        error.response?.data?.message ||
+        "Something went wrong, try again later!!";
+      updateToastError(context.toastId, errorMessage);
     },
   });
 
   const onSubmit = (data) => {
-    console.log('Updated Info:', data);
+    ChangeNameMutation.mutate({ ...data, email: user?.email });
   };
 
-  const handleUploadImage = () => {
-    console.log('Upload image clicked');
+  // ✅ Profile image mutation
+  const ProfileMutation = useMutation({
+    mutationFn: async (data) => {
+      const response = await axiosSecure.post("/profile/update-avatar", data);
+      return response?.data;
+    },
+    onMutate: () => {
+      const toastId = showLoadingToast("Updating profile photo...");
+      return { toastId };
+    },
+    onSuccess: (response, _variables, context) => {
+      updateToastSuccess(
+        context.toastId,
+        response?.message || "Profile photo updated successfully"
+      );
+    },
+    onError: (error, _variables, context) => {
+      const errorMessage =
+        error.response?.data?.message ||
+        "Something went wrong, try again later!!";
+      updateToastError(context.toastId, errorMessage);
+    },
+  });
+
+ const handleUploadImage = () => {
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = "image/*";
+
+  input.onchange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setPreview(URL.createObjectURL(file));
+
+      const formData = new FormData();
+-     formData.append("image", file);
++     formData.append("avatar", file);
+
+      ProfileMutation.mutate(formData);
+    }
   };
+
+  input.click();
+};
+
 
   return (
-    <div className="max-w-4xl  p-6 rounded-md shadow-sm">
+    <div className="max-w-4xl p-6 rounded-md shadow-sm">
       {/* Header */}
       <div className="flex items-center gap-2 mb-8">
-        <h1 className="text-lg font-medium text-gray-900">Personal Information</h1>
+        <h1 className="text-lg font-medium text-gray-900">
+          Personal Information
+        </h1>
         <Info size={16} className="text-gray-400" />
       </div>
 
       {/* Photo Profile */}
       <div className="mb-8">
-        <label className="block text-sm text-gray-600 mb-4">Photo Profile</label>
+        <label className="block text-sm text-gray-600 mb-4">
+          Photo Profile
+        </label>
         <div className="flex items-center gap-4">
           <img
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            src={preview || "/default-avatar.png"}
             alt="Profile"
-            className="w-16 h-16 rounded-full object-cover"
+            className="w-16 h-16 rounded-full object-cover border"
           />
           <button
             onClick={handleUploadImage}
+            type="button"
             className="bg-Secondary-light hover:bg-Secondary text-white text-sm font-medium px-4 py-2 rounded-md"
           >
             Upload Image
@@ -56,9 +153,10 @@ const PersonalInformation = () => {
             Name
           </label>
           <input
+            defaultValue={userData?.userdata?.name || user?.name}
             id="name"
             type="text"
-            {...register('name', { required: 'Name is required' })}
+            {...register("name", { required: "Name is required" })}
             className="w-full px-3 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.name && (
@@ -74,18 +172,13 @@ const PersonalInformation = () => {
           <input
             id="email"
             type="email"
-            {...register('email', {
-              required: 'Email is required',
-              pattern: {
-                value: /^\S+@\S+$/i,
-                message: 'Invalid email address',
-              },
-            })}
-            className="w-full px-3 py-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            defaultValue={userData?.userdata?.email || user?.email}
+            disabled
+            className="w-full px-3 py-3 border border-gray-200 rounded-md 
+             focus:outline-none focus:ring-2 focus:ring-blue-500 
+             disabled:bg-gray-100 disabled:text-gray-500 
+             disabled:cursor-not-allowed"
           />
-          {errors.email && (
-            <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>
-          )}
         </div>
 
         {/* Submit Button */}

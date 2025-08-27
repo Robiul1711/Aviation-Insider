@@ -8,35 +8,45 @@ import {
   SearchIcon,
 } from "../common/icons/HomeIcons";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const data = [
   {
     name: "Find an ATO",
-    icon: <SearchIcon className="size-6 md:size-auto"/>,
+    icon: <SearchIcon className="size-6 md:size-auto" />,
     description: "Find and compare schools that meet your needs.",
     link: "/all-flight-schools",
   },
   {
     name: "Future Pilot",
-    icon: <PlaneIcon className="size-6 md:size-auto"/>,
+    icon: <PlaneIcon className="size-6 md:size-auto" />,
     description: "Interactive guide to starting YOUR aviation career",
     link: "/training-providers",
   },
   {
     name: "Trainee Pilot",
-    icon: <BookIcon className="size-6 md:size-auto"/>,
+    icon: <BookIcon className="size-6 md:size-auto" />,
     description: "All the tools you need through your training",
     link: "/become-pilot",
   },
   {
     name: "Leave A Review",
-    icon: <MessageIcon className="size-6 md:size-auto"/>,
+    icon: <MessageIcon className="size-6 md:size-auto" />,
     description: "Review your flight training experience",
     link: "/pilot-network",
   },
 ];
 
 const Banner = () => {
+  const axiosPublic = useAxiosPublic();
+  const { data: bannerData } = useQuery({
+    queryKey: ["banner"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/cms/home_page/banner_section");
+      return res.data;
+    },
+  });
   return (
     <div className="relative w-full">
       {/* Overlay */}
@@ -44,7 +54,7 @@ const Banner = () => {
 
       {/* Banner Image */}
       <img
-        src={banner}
+        src={bannerData?.data?.banner_section?.image}
         alt="Flight school banner"
         className="w-full h-[650px] sm:h-[600px] xmd:h-[750px] object-cover"
       />
@@ -55,13 +65,15 @@ const Banner = () => {
           {/* Left: Text */}
           <div className="lg:w-2/3 w-full text-center lg:text-left ">
             <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-              Behind Every Pilot is a Story
+              {bannerData?.data?.banner_section?.title}
             </h1>
-            <Title level="title24" className="text-white !font-normal mt-6">
-              Read reviews, find a flight school and start your own journey to
-              the flight deck using Europe's first flight school comparison and
-              review platform
-            </Title>
+            <Title
+              level="title24"
+              className="text-white !font-normal mt-6"
+              dangerouslySetInnerHTML={{
+                __html: bannerData?.data?.banner_section?.description || "",
+              }}
+            />
           </div>
 
           {/* Right: Cards */}

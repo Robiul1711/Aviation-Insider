@@ -108,10 +108,7 @@ const CommentArticle = ({ articleDetails, isLoading }) => {
   )}
 </div>
 
-      {/* ✅ Comments List */}
-      <div>
-        <CommentsSection />
-      </div>
+
 
       {/* ✅ Comment Form */}
       {user ? (
@@ -189,6 +186,10 @@ const CommentArticle = ({ articleDetails, isLoading }) => {
           </p>
         </div>
       )}
+            {/* ✅ Comments List */}
+      <div className="mt-12">
+        <CommentsSection />
+      </div>
     </div>
   );
 };

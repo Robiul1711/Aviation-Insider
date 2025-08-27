@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff, Info } from "lucide-react";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
+import { showLoadingToast, updateToastError, updateToastSuccess } from "@/lib/utils";
+import { useMutation } from "@tanstack/react-query";
 
 const Security = () => {
+  const axiosSecure  = useAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -15,14 +19,39 @@ const Security = () => {
     new: false,
     repeat: false,
   });
-
+  const PasswordChangeNameMutation=useMutation({
+    mutationFn: async (data) => {
+      const response = await axiosSecure.post("/update-password", data);
+      return response?.data;
+    },
+    onMutate: () => {
+      const toastId = showLoadingToast("Updating password...");
+      return { toastId };
+    },
+    onSuccess: (response, _variables, context) => {
+      updateToastSuccess(
+        context.toastId,
+        response?.message || "Password updated successfully"
+      );
+  
+    },
+    onError: (error, _variables, context) => {
+      const errorMessage =
+        error.response?.data?.message ||
+        "Something went wrong, try again later!!";
+  
+      updateToastError(context.toastId, errorMessage);
+    },
+  })
   const onSubmit = (data) => {
     console.log("Form Data", data);
+    PasswordChangeNameMutation.mutate(data);
     // handle password update here
   };
 
   const toggleVisibility = (field) => {
     setShowPassword((prev) => ({ ...prev, [field]: !prev[field] }));
+
   };
 
   return (
@@ -44,7 +73,7 @@ const Security = () => {
           <div className="relative">
             <input
               type={showPassword.old ? "text" : "password"}
-              {...register("oldPassword", { required: "Old password is required" })}
+              {...register("old_password", { required: "Old password is required" })}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
             <button
@@ -55,8 +84,8 @@ const Security = () => {
               {showPassword.old ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
-          {errors.oldPassword && (
-            <p className="text-red-500 text-xs mt-1">{errors.oldPassword.message}</p>
+          {errors.old_password && (
+            <p className="text-red-500 text-xs mt-1">{errors.old_password.message}</p>
           )}
         </div>
 
@@ -68,7 +97,7 @@ const Security = () => {
           <div className="relative">
             <input
               type={showPassword.new ? "text" : "password"}
-              {...register("newPassword", { required: "New password is required" })}
+              {...register("new_password", { required: "New password is required" })}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
             <button
@@ -79,8 +108,8 @@ const Security = () => {
               {showPassword.new ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
-          {errors.newPassword && (
-            <p className="text-red-500 text-xs mt-1">{errors.newPassword.message}</p>
+          {errors.new_password && (
+            <p className="text-red-500 text-xs mt-1">{errors.new_password.message}</p>
           )}
         </div>
 
@@ -92,10 +121,10 @@ const Security = () => {
           <div className="relative">
             <input
               type={showPassword.repeat ? "text" : "password"}
-              {...register("repeatPassword", {
+              {...register("new_password_confirmation", {
                 required: "Please confirm your password",
                 validate: (value) =>
-                  value === watch("newPassword") || "Passwords do not match",
+                  value === watch("new_password") || "Passwords do not match",
               })}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
@@ -107,8 +136,8 @@ const Security = () => {
               {showPassword.repeat ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
-          {errors.repeatPassword && (
-            <p className="text-red-500 text-xs mt-1">{errors.repeatPassword.message}</p>
+          {errors.new_password_confirmation && (
+            <p className="text-red-500 text-xs mt-1">{errors.new_password_confirmation.message}</p>
           )}
         </div>
 

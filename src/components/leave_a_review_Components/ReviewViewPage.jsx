@@ -72,9 +72,7 @@ const ReviewViewPage = () => {
   })
 
 
-const userReview = review?.data?.find(r => r.email === user?.email);
-
-console.log("User's review:", userReview);
+console.log(review);
 
   return (
     <>

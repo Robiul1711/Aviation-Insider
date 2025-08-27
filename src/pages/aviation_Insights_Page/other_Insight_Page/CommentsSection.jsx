@@ -27,12 +27,12 @@ const CommentsSection = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["article-comments", id],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/comments`);
+      const res = await axiosSecure.get(`/comments/article/${id}`);
       return res.data;
     },
     enabled: !!id,
   });
-
+console.log(data)
   const comments = data?.data || [];
 
   // Delete
@@ -106,7 +106,7 @@ const CommentsSection = () => {
             >
               {/* Avatar */}
               <div className="flex-shrink-0">
-                <FaUserCircle className="w-10 h-10 text-gray-400" />
+                <img src={c.user_avatar} alt={c.user_name} className="w-10 h-10 rounded-full" />
               </div>
 
               {/* Comment Content */}
