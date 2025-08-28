@@ -1,6 +1,7 @@
 import React from 'react'
 import Title from '../common/Title'
 import b1 from '@/assets/images/b1.png'
+import { Link } from 'react-router-dom'
 const data = [
     {
         id: 1,
@@ -39,7 +40,7 @@ const data = [
 
     },
 ]
-const SchoolDetails = () => {
+const SchoolDetails = ({SchoolDetail}) => {
   return (
     <div className='section-padding-x p-6 bg-white'>
         <div className='max-w-6xl mx-auto text-center'>
@@ -49,11 +50,11 @@ const SchoolDetails = () => {
         </div>
         <div className='mt-10  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
 {
-            data.map((item) => (
-                <div key={item.id} className='bg-white p-4 rounded-lg shadow-sm flex gap-4 items-center border'>
-                <img src={item.image} alt={item.title} className='w-full h-20 object-cover rounded-lg mb-4' />
-                <h3 className='text-[#111827]'>{item.title}</h3>
-                </div>
+            SchoolDetail?.airline_partners?.map((item) => (
+                <Link to={item.website_url} key={item.id} className='bg-white p-4 rounded-lg shadow-sm flex gap-4 items-center border'>
+                <img src={item.logo_path} alt={item.title} className='w-full h-20 object-cover rounded-lg mb-4' />
+                <h3 className='text-[#111827]'>{item.description}</h3>
+                </Link>
             ))
 }
         </div>

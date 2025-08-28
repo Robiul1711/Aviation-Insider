@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CourseList = ({ courseData }) => {
+const ModularCourseList = ({ courseData }) => {
   return (
     <div className="space-y-8">
-      {courseData?.map((school, index) => (
+       {courseData?.flight_schools?.map((school, index) => (
         <div
         key={index}
         className="border border-gray-200 rounded-lg overflow-hidden"
@@ -70,4 +70,4 @@ const CourseList = ({ courseData }) => {
   );
 };
 
-export default CourseList;
+export default ModularCourseList;

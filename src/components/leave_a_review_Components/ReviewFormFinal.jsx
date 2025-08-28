@@ -1,13 +1,11 @@
+import { useAuth } from '@/hooks/useAuth';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
 export default function ReviewFormFinal() {
   const { register, watch, formState: { errors } } = useFormContext();
 
-  const securityContact = watch('securityContact', false);
-  const recommend = watch('recommend', false);
-  const agreeTerms = watch('agreeTerms', false);
-
+const {user}=useAuth();
   return (
     <div className="border rounded-md mt-10 p-6">
       <div className="space-y-6">
@@ -15,6 +13,7 @@ export default function ReviewFormFinal() {
         <div>
           <label className="block text-gray-700 mb-2">Enter Your Name</label>
           <input
+          defaultValue={user?.name}
             type="text"
             {...register('name', { required: 'Name is required' })}
             className={`w-full px-3 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
@@ -29,6 +28,7 @@ export default function ReviewFormFinal() {
         <div>
           <label className="block text-gray-700 mb-2">Enter Your Email</label>
           <input
+            defaultValue={user?.email}
             type="email"
             {...register('email', {
               required: 'Email is required',
