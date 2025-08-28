@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { Link } from "react-router-dom";
 
 
 const Dashboard = () => {
@@ -14,7 +15,6 @@ const Dashboard = () => {
       return res.data;
     },
   })
-
   return (
     <div className=" text-black">
       {/* Header */}
@@ -33,10 +33,12 @@ const Dashboard = () => {
       {/* Review Cards */}
       <div className="grid gap-4 ">
         {data?.data?.map((item) => (
-          <div
+          <Link 
+            // to={`/school-profile/${item.flight_school_id}`}
             key={item.id}
             className="bg-white border flex items-center justify-between border-gray-200 p-5 rounded-xl shadow-sm hover:shadow-md transition"
           >
+          
             <div>
             <h2 className="text-xl font-semibold text-gray-800 mb-1">{item.flight_school_name}</h2>
             <h2 className="text-sm font-semibold text-gray-800">{item.message}</h2>
@@ -54,7 +56,7 @@ const Dashboard = () => {
                 })}
               />
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

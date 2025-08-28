@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FlightSchoolSkeleton } from "./FlightSchoolSkeleton";
 
-const CourseList = ({ courseData }) => {
+const LicenceProficiencyData = ({ courseData , isLoading, error}) => {
+   if (isLoading) return <p className=" mb-10"><FlightSchoolSkeleton  showRatting={true} showButton={false} count={5}  /></p>;
+  if (error) return <p className=" mb-10">Error fetching data</p>
   return (
     <div className="space-y-8">
-      {courseData?.map((school, index) => (
+   {courseData?.flight_schools?.map((school, index) => (
         <div
         key={index}
         className="border border-gray-200 rounded-lg overflow-hidden"
@@ -70,4 +73,4 @@ const CourseList = ({ courseData }) => {
   );
 };
 
-export default CourseList;
+export default LicenceProficiencyData;

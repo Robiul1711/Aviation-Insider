@@ -9,6 +9,7 @@ const SearchAndSort = ({
   onSortChange,
   sortOptions = ["Low to High", "High to Low"],
 }) => {
+  console.log(searchValue, sortValue);
   return (
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6 mb-6">
       {/* Search Input */}

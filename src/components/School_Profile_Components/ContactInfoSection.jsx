@@ -1,26 +1,26 @@
 import React from 'react';
 import { Globe, Mail, Phone, MapPin } from 'lucide-react';
 
-const ContactInfoSection = () => {
+const ContactInfoSection = ({ SchoolDetail}) => {
   const contactDetails = [
     {
       icon: <Globe size={20} />,
-      text: "https://www.qualityfly.com/",
+      text:SchoolDetail?.contact_information?.website_url,
       isLink: true
     },
     {
       icon: <Mail size={20} />,
-      text: "Customer@qualityfly.com",
+      text: SchoolDetail?.contact_information?.email,
       isLink: true
     },
     {
       icon: <Phone size={20} />,
-      text: "+34 91 411 77 94",
+      text: SchoolDetail?.contact_information?.phone,
       isLink: false
     },
     {
       icon: <MapPin size={20} />,
-      text: "Ctra. Barrio de la Fortuna, s/n E-28054 Madrid, Spain",
+      text: SchoolDetail?.contact_information?.address,
       isLink: false
     }
   ];
@@ -37,21 +37,21 @@ const ContactInfoSection = () => {
           </p>
 
           <div className="space-y-6">
-            {contactDetails.map((item, index) => (
+            {contactDetails?.map((item, index) => (
               <div key={index} className="flex items-center gap-4">
                 <div className="w-10 h-10 border border-gray-300 rounded-full flex items-center justify-center text-gray-600">
-                  {item.icon}
+                  {item?.icon}
                 </div>
-                {item.isLink ? (
+                {item?.isLink ? (
                   <a
-                    href={item.text.includes('@') ? `mailto:${item.text}` : item.text}
+                    href={item?.text}
                     className="text-gray-900 hover:text-blue-600 transition-colors duration-200 lg:text-lg"
                     target="_blank" rel="noopener noreferrer"
                   >
-                    {item.text}
+                    {item?.text}
                   </a>
                 ) : (
-                  <span className="text-gray-900 lg:text-lg">{item.text}</span>
+                  <span className="text-gray-900 lg:text-lg">{item?.text}</span>
                 )}
               </div>
             ))}

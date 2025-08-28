@@ -29,16 +29,16 @@ const SchoolProfilePage = () => {
       <SchoolBanner SchoolDetail={SchoolDetail}/>
       <QualityFlyProfile SchoolDetail={SchoolDetail} />
       <SchoolSwiper SchoolDetail={SchoolDetail} />
-      <SchoolDetails />
+      <SchoolDetails SchoolDetail={SchoolDetail}  />
       <StudentStatsSection />
       <QualityFlyReviews />
-      <TrainingOverview />
+      <TrainingOverview SchoolDetail={SchoolDetail} />
       <SchoolStatsSection />
       <div className='py-8 md:py-16'>
     <h1 className='text-3xl font-semibold mb-4 text-center'>Students went on to work at these airlines</h1>
       <BrandSection />
       </div>
-      <ContactInfoSection />
+      <ContactInfoSection SchoolDetail={SchoolDetail} />
       <ReviewsForSchool />
       <OtherCommonLinks className={'flex flex-wrap justify-center items-center gap-5 section-padding-x py-7 md:py-14'} />
       <CommonAds />
