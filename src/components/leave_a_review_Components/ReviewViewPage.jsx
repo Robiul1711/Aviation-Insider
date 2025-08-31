@@ -148,8 +148,9 @@ if (isLoading)
             >
               View
             </Link>
+         
             <Link
-              to={`/add-your-review/${id}`}
+              to={`/edit-review/${id}`}
               className={`${isEditActive ? "border-b-2 border-blue-600 text-blue-600 font-semibold" : "text-gray-600 hover:text-blue-500"}`}
             >
               Edit

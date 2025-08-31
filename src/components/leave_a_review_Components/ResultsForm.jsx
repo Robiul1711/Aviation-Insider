@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { useFormContext } from 'react-hook-form';
 
-export default function ResultsForm() {
+export default function ResultsForm({ data }) {
   const { watch, setValue, register } = useFormContext();
-
+  useEffect(() => {
+  if (data?.data) {
+    // ✅ Set values for each field separately
+    setValue("cpl_test_first_time", data.data.cpl_test_first_time);
+    setValue("meir_test_first_time", data.data.meir_test_first_time);
+    setValue("atpl_theory_first_time", data.data.atpl_theory_first_time);
+    setValue("atpl_average", data.data.atpl_average);
+  }
+}, [data, setValue]);
   const radioOptions = [
     { value: 'N/A', label: 'N/A' },
     { value: 'No', label: 'No' },
@@ -13,6 +21,7 @@ export default function ResultsForm() {
 
   const RadioGroup = ({ name, label }) => {
     const value = watch(name) || '';
+
 
     return (
       <div className="space-y-2">

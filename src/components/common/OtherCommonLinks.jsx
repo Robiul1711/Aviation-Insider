@@ -1,32 +1,37 @@
 import React from 'react';
-import a1 from '../../assets/images/a1.png';
-import a2 from '../../assets/images/a2.png';
-import a3 from '../../assets/images/a3.png';
-import a4 from '../../assets/images/a4.png';
+import useAxiosPublic from '@/hooks/useAxiosPublic';
+import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 
 const OtherCommonLinks = ({ className, image }) => {
-  const imageLinks = [
-    { src: a1, url: 'https://ifrsimulator.com/campaign-redirect/pilot-network-300x250' },
-    { src: a2, url: 'https://www.pooleys.com/' },
-    { src: a3, url: 'https://aviationinsider.com/?ref=5888' },
-    { src: a4, url: 'http://coradine.com/logten4pilot-network/' },
-  ];
+  const axiosPublic = useAxiosPublic();
+  const { data: adsData2, isLoading } = useQuery({
+    queryKey: ['ads2'],
+    queryFn: () => axiosPublic.get('/cms/about_page/sponsor_section'),
+  });
+
+  console.log(adsData2?.data?.data?.sponsor_section);
+
+  // Convert object to array
+  const sponsorItems = adsData2?.data?.data?.sponsor_section
+    ? Object.values(adsData2.data.data.sponsor_section)
+    : [];
 
   return (
-    <div className={`${className}`}>
-      {imageLinks.map((item, index) => (
-        <a
+    <div className={`${className} flex flex-wrap gap-4`}>
+      {sponsorItems.map((item, index) => (
+        <Link
           key={index}
-          href={item.url}
+          to={item.link_url || '#'}
           target="_blank"
           rel="noopener noreferrer"
         >
           <img
-            src={item.src}
+            src={item.image}
             alt={`link-${index + 1}`}
             className={`${image}`}
           />
-        </a>
+        </Link>
       ))}
     </div>
   );

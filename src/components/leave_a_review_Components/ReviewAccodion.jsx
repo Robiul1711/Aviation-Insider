@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -32,8 +32,21 @@ const RatingRow = ({ name, label }) => {
   );
 };
 
-const ReviewAccordion = () => {
-  const { watch } = useFormContext();
+const ReviewAccordion = ({ data }) => {
+  const { setValue } = useFormContext();
+
+  useEffect(() => {
+    if (data?.data) {
+      // Map all ratings dynamically from each section
+      const sectionsData = ["aircraft", "simulator", "theory", "practical"];
+      sectionsData.forEach((section) => {
+        const items = data.data.sections?.[section]?.items || {};
+        Object.entries(items).forEach(([key, value]) => {
+          setValue(key, value);
+        });
+      });
+    }
+  }, [data, setValue]);
 
   const sections = [
     {
@@ -85,6 +98,7 @@ const ReviewAccordion = () => {
         { name: "practical_lesson_regularity", label: "Lesson Regularity Rating" },
         { name: "practical_lesson_scheduling", label: "Lesson Scheduling Rating" },
         { name: "practical_instructor_per_student", label: "Practical Instructors per Student" },
+        { name: "practical_sop", label: "SOP Rating" }, // optional if exists
       ],
     },
   ];
