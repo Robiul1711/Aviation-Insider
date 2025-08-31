@@ -54,6 +54,7 @@ import SchoolProfilePage from "@/pages/school_profile_page/SchoolProfilePage";
 import ReviewViewPage from "@/components/leave_a_review_Components/ReviewViewPage";
 import ForgetVerifyCode from "@/pages/Auth_Pages/ForgetVerifyCode";
 import PrivateRoute from "./PrivateRoute";
+import EditReview from "@/pages/leave_a_review_Page/EditReview";
 
 
 const router = createBrowserRouter([
@@ -168,6 +169,10 @@ const router = createBrowserRouter([
       {
         path: "/add-your-review/:id",
         element: <AddYourReview />,
+      },
+      {
+        path: "/edit-review/:id",
+        element: <EditReview />,
       },
       {
         path: "/review-view/:id",

@@ -3,23 +3,11 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import EnhancedTrainingProviders from "../faq_Components/EnhancedTrainingProviders";
 
-const reviews = [
-  "best in quality-price",
-  "Fantastic school in sunny Madrid",
-  "It was a great decision to graduate at Quality Fly",
-  "Great school with a great environment",
-  "Unbeatable place to start your aviation career",
-  "Unbeatable place to start your aviation career",
-  "Unbeatable place to start your aviation career",
-];
-
-
-
-const Progress = () => (
+const Progress = ({ percentage }) => (
   <div className="w-10 h-10">
     <CircularProgressbar
-      value={97}
-      text={`97%`}
+      value={percentage}
+      text={`${percentage}%`}
       styles={buildStyles({
         textSize: "28px",
         pathColor: "#00c49a",
@@ -30,7 +18,7 @@ const Progress = () => (
   </div>
 );
 
-export default function QualityFlyReviews() {
+export default function QualityFlyReviews({ SchoolDetail }) {
   return (
     <div className="p-6 section-padding-x bg-gray-50 py-20">
       <div className="grid md:grid-cols-3 gap-8">
@@ -38,19 +26,21 @@ export default function QualityFlyReviews() {
         <div className="md:col-span-2">
           <h2 className="text-2xl font-bold mb-4">Top Reviews for Quality Fly</h2>
           <div className="space-y-4">
-            {reviews.map((review, index) => (
-              <div
-                key={index}
-                className="flex justify-between items-center bg-gray-100 p-4 rounded shadow"
-              >
-                <p className="text-sm md:text-base">{review}</p>
-                <Progress />
-              </div>
-            ))}
+            {SchoolDetail?.review?.top_reviews
+              ?.slice(0, 8) // 👈 show only 3 reviews
+              .map((review, index) => (
+                <div
+                  key={index}
+                  className="flex justify-between items-center bg-gray-100 p-4 rounded shadow"
+                >
+                  <p className="text-sm md:text-base">{review?.message}</p>
+                  <Progress percentage={review?.percentage} />
+                </div>
+              ))}
           </div>
-          <button className="mt-4 px-4 py-2 bg-Secondary-light text-white rounded hover:bg-Secondary">
+          {/* <a href="/reviews" className="mt-4 px-4 py-2 bg-Secondary-light text-white rounded hover:bg-Secondary">
             All Reviews
-          </button>
+          </a> */}
         </div>
 
         {/* Right Section */}
@@ -60,11 +50,8 @@ export default function QualityFlyReviews() {
             Training providers require a minimum of 3 reviews to be ranked
           </p>
           <div className="space-y-4">
-           <EnhancedTrainingProviders />
+            <EnhancedTrainingProviders />
           </div>
-          {/* <button className="mt-4 px-4 py-2 bg-Secondary-light text-white rounded hover:bg-Secondary">
-            Find Out More
-          </button> */}
         </div>
       </div>
     </div>

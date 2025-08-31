@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa6";
 import { useFormContext } from "react-hook-form";
 
 // ⭐ StarRating Component
 const StarRating = ({ name, readOnly = false }) => {
   const { watch, setValue } = useFormContext();
-  const rating = watch(name);
+  const rating = watch(name) || 0; // default 0
   const [hovered, setHovered] = useState(0);
 
   return (
@@ -29,9 +29,33 @@ const StarRating = ({ name, readOnly = false }) => {
   );
 };
 
-// 📝 ReviewForm Body (no form, no submit button)
-const ReviewForm = () => {
-  const { register } = useFormContext();
+// 📝 ReviewForm Body
+const ReviewForm = ({ data }) => {
+  const { register, setValue } = useFormContext();
+
+  useEffect(() => {
+    if (data?.data) {
+      // Set basic fields
+      setValue("anonymous", data.data.anonymous || false);
+      setValue("headline", data.data.headline || "");
+      
+      // Set all ratings dynamically
+      const ratings = data.data.sections?.general?.items || {};
+      Object.entries(ratings).forEach(([key, value]) => {
+        setValue(key, value);
+      });
+    }
+  }, [data, setValue]);
+
+  const ratingFields = [
+    { name: "facilities_rating", label: "Facilities Rating" },
+    { name: "customer_service_rating", label: "Customer Service Rating" },
+    { name: "atmosphere_rating", label: "Atmosphere Rating" },
+    { name: "communication_rating", label: "Communication Rating" },
+    { name: "graduation_support_rating", label: "Graduation Support Rating" },
+    { name: "student_support_rating", label: "Student Support Rating" },
+    { name: "social_life_rating", label: "Social Life Rating" },
+  ];
 
   return (
     <div className="border p-4 md:p-6 rounded-lg bg-white shadow-sm">
@@ -56,7 +80,7 @@ const ReviewForm = () => {
       {/* Headline Section */}
       <section className="mb-10">
         <h3 className="text-xl font-semibold text-gray-800 mb-3">
-        Write a Headline
+          Write a Headline
         </h3>
         <div className="bg-gray-50 p-4 rounded-lg">
           <label className="block mb-2 text-gray-700 font-medium">
@@ -77,15 +101,7 @@ const ReviewForm = () => {
           General - Ratings
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-          {[
-            { name: "facilities_rating", label: "Facilities Rating" },
-            { name: "customer_service_rating", label: "Customer Service Rating" },
-            { name: "atmosphere_rating", label: "Atmosphere Rating" },
-            { name: "communication_rating", label: "Communication Rating" },
-            { name: "graduation_support_rating", label: "Graduation Support Rating" },
-            { name: "student_support_rating", label: "Student Support Rating" },
-            { name: "social_life_rating", label: "Social Life Rating" },
-          ].map(({ name, label }) => (
+          {ratingFields.map(({ name, label }) => (
             <div key={name} className="bg-gray-50 p-4 rounded-lg">
               <div className="mb-2 text-gray-700 font-medium">{label}</div>
               <StarRating name={name} />
