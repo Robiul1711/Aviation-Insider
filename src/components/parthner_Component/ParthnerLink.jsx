@@ -7,22 +7,66 @@ import ReactPaginate from "react-paginate";
 
 const ParthnerLink = () => {
   const axiosPublic = useAxiosPublic();
-    const [pageCount, setPageCount] = useState(1);
-
+  const [pageCount, setPageCount] = useState(1);
 
   const { data, isLoading } = useQuery({
     queryKey: ["parthner-link", pageCount],
     queryFn: () => axiosPublic.get("/airline-partners", {
       params: {
         page: pageCount,
+        per_page: 8,
       },
     }),
   });
 
+  // Loading Skeleton Component
+  const SkeletonCard = () => (
+    <div className="flex flex-col items-center text-center bg-white p-6 rounded-xl shadow-sm border animate-pulse">
+      {/* Logo Skeleton */}
+      <div className="w-28 h-20 bg-gray-200 rounded-md mb-4"></div>
+      
+      {/* Airline Name Skeleton */}
+      <div className="h-6 bg-gray-200 rounded-md w-3/4 mb-2"></div>
+      
+      {/* Description Skeleton */}
+      <div className="w-full mb-4">
+        <div className="h-4 bg-gray-200 rounded-md mb-2"></div>
+        <div className="h-4 bg-gray-200 rounded-md mb-2"></div>
+        <div className="h-4 bg-gray-200 rounded-md w-2/3"></div>
+      </div>
+      
+      {/* Button Skeleton */}
+      <div className="h-10 bg-gray-200 rounded-md w-32"></div>
+    </div>
+  );
+
+  // Pagination Skeleton
+  const SkeletonPagination = () => (
+    <div className="flex justify-center mt-8 animate-pulse">
+      <div className="flex items-center gap-3">
+        <div className="w-20 h-10 bg-gray-200 rounded-md"></div>
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="w-10 h-10 bg-gray-200 rounded-md"></div>
+        ))}
+        <div className="w-20 h-10 bg-gray-200 rounded-md"></div>
+      </div>
+    </div>
+  );
+
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center py-20">
-        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-Secondary"></div>
+      <div className="section-padding-x py-16 bg-gray-50">
+        <Title level="title40" className="text-black text-center mb-14">
+          OUR PARTNERS
+        </Title>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {[...Array(8)].map((_, index) => (
+            <SkeletonCard key={index} />
+          ))}
+        </div>
+        
+        <SkeletonPagination />
       </div>
     );
   }
@@ -54,9 +98,10 @@ const ParthnerLink = () => {
             </h3>
 
             {/* Description */}
-            <p className="text-sm text-gray-600 mb-4 line-clamp-3">
-              {item.description}
-            </p>
+            <p 
+              className="text-sm text-gray-600 mb-4 line-clamp-3" 
+              dangerouslySetInnerHTML={{ __html: item.description }}
+            />
 
             {/* Website Button */}
             {item.website_url && (
@@ -72,7 +117,8 @@ const ParthnerLink = () => {
           </div>
         ))}
       </div>
-       {/* Pagination */}
+      
+      {/* Pagination */}
       <div className="flex justify-center mt-8">
         <ReactPaginate
           breakLabel="..."
@@ -88,7 +134,7 @@ const ParthnerLink = () => {
           previousClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md cursor-pointer"
           nextClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md cursor-pointer"
           activeClassName="font-[700] bg-Secondary rounded-lg border-none"
-          activeLinkClassName="text-white" // ✅ white when active
+          activeLinkClassName="text-white"
           disabledClassName="opacity-50 cursor-not-allowed"
           breakClassName="md:px-4 px-2 py-2 text-sm font-medium"
           pageClassName="mx-1 cursor-pointer"
