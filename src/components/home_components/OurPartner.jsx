@@ -24,7 +24,7 @@ const OurPartner = () => {
         </Title>
         <Title
           level="title20"
-          className="text-black mt-3 md:mt-5 text-gray-700"
+          className="text-black mt-3 md:mt-5 "
         >
           We are recognised as a source of flight school information and reviews
           by leading aviation media outlets.

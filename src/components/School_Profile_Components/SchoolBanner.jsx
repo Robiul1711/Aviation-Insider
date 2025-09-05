@@ -7,8 +7,8 @@ import {
 import 'react-circular-progressbar/dist/styles.css';
 
 const SchoolBanner = ({ SchoolDetail }) => {
+  console.log('SchoolDetail', SchoolDetail);
   const item = SchoolDetail?.review || {};
-  console.log('item:', item);
 
   // Mapping categories to API fields
   const categories = [
@@ -23,7 +23,7 @@ const SchoolBanner = ({ SchoolDetail }) => {
     <div className="w-full h-130 md:h-160 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full bg-black/10 backdrop-blur-sm"></div>
       <img
-        src={SchoolDetail?.image || schoolpp}
+        src={SchoolDetail?.cover_image || schoolpp}
         alt="School Banner"
         className="w-full h-full object-cover object-center"
       />

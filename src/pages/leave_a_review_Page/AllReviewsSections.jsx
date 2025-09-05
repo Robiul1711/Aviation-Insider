@@ -69,7 +69,7 @@ const AllReviewsSections = () => {
         <ReviewAccodion />
         <ResultsForm />
         <ReviewSubmitForm />
-        <ReviewFormFinal />
+        {/* <ReviewFormFinal /> */}
 
         {/* Submit Button */}
         <div className="flex justify-end mt-5">
