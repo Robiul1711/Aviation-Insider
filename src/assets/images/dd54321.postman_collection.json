@@ -1,0 +1,738 @@
+{
+	"info": {
+		"_postman_id": "d9707e6e-6e83-42e0-85a5-cc4ea26a5003",
+		"name": "dd54321",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46544446",
+		"_collection_link": "https://codehydra-4973.postman.co/workspace/Team-Workspace~1b2ffb18-7042-4c0f-8292-ae83a47cc535/collection/46544446-d9707e6e-6e83-42e0-85a5-cc4ea26a5003?action=share&source=collection_link&creator=46544446"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jubair2\",\r\n    \"email\": \"mdnasir9712@gmail.com\",\r\n    \"password\": \"Test@12345\",\r\n    \"confirm_password\": \"Test@12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}account/register/",
+							"host": [
+								"{{base_url}}account"
+							],
+							"path": [
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"mdnasir9712@gmail.com\",\r\n    \"password\": \"nas@12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}account/login/",
+							"host": [
+								"{{base_url}}account"
+							],
+							"path": [
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2ODkyNTA5LCJpYXQiOjE3NTY4MDYxMDksImp0aSI6IjA4YjAxZWRmNzAyOTQ2MGQ4Yjc1OTY5N2U1NDFjZGViIiwidXNlcl9pZCI6IjE3In0.p75Z7-DdRrR1ZvngfCs5dmZq07yoO45Yx77KepkeUOw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"mdnasir9712@gmail.com\",\r\n    \"password\": \"New@12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}account/profile/",
+							"host": [
+								"{{base_url}}account"
+							],
+							"path": [
+								"profile",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update_Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2ODkyNTA5LCJpYXQiOjE3NTY4MDYxMDksImp0aSI6IjA4YjAxZWRmNzAyOTQ2MGQ4Yjc1OTY5N2U1NDFjZGViIiwidXNlcl9pZCI6IjE3In0.p75Z7-DdRrR1ZvngfCs5dmZq07yoO45Yx77KepkeUOw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"email\": \"mdnasir9712@gmail.com\",\r\n        \"name\": \"Nasir Uddin\",\r\n        \"profile_photo_url\": null\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}account/profile/",
+							"host": [
+								"{{base_url}}account"
+							],
+							"path": [
+								"profile",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot_Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"mdnasir9712@gmail.com\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}account/reset-password/request-otp/",
+							"host": [
+								"{{base_url}}account"
+							],
+							"path": [
+								"reset-password",
+								"request-otp",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set_New_password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"mdnasir9712@gmail.com\",\r\n    \"otp\":\"6144\",\r\n    \"new_password\": \"New@12345\",\r\n    \"confirm_password\": \"New@12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}account/reset-password/confirm-password/",
+							"host": [
+								"{{base_url}}account"
+							],
+							"path": [
+								"reset-password",
+								"confirm-password",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change_password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2ODkyMTE4LCJpYXQiOjE3NTY4MDU3MTksImp0aSI6IjZhYzQwMGU0ZTdkZDQ4NDg4MGVmYmJiYWNkMzkzM2E2IiwidXNlcl9pZCI6IjE3In0.LEjk4kAraFthyMg7Z0zuPsib5oEtz78cd3wactb57N0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"current_password\":\"New@12345\",\r\n    \"new_password\": \"nas@12345\",\r\n    \"confirm_password\": \"nas@12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}account/change-password/",
+							"host": [
+								"{{base_url}}account"
+							],
+							"path": [
+								"change-password",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2ODkyMTE4LCJpYXQiOjE3NTY4MDU3MTksImp0aSI6IjZhYzQwMGU0ZTdkZDQ4NDg4MGVmYmJiYWNkMzkzM2E2IiwidXNlcl9pZCI6IjE3In0.LEjk4kAraFthyMg7Z0zuPsib5oEtz78cd3wactb57N0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"current_password\":\"New@12345\",\r\n    \"new_password\": \"nas@12345\",\r\n    \"confirm_password\": \"nas@12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}account/logout/",
+							"host": [
+								"{{base_url}}account"
+							],
+							"path": [
+								"logout",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subscriptions",
+			"item": [
+				{
+					"name": "plans",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}plans/",
+							"host": [
+								"{{base_url}}plans"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start checkout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1NzUzNjY4LCJpYXQiOjE3NTU2NjcyNjgsImp0aSI6IjdjYjQ3NzIxZjllNjQ3ZTU4YmQyM2EyYzdmNTUwZjNiIiwidXNlcl9pZCI6IjE2In0.F-dDN1BWRUoH3qu8Kw2Qc2y-MUHA5KyaFOhUPSOhKiY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"plan_id\": 4}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}stripe/checkout/",
+							"host": [
+								"{{base_url}}stripe"
+							],
+							"path": [
+								"checkout",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "current subscription",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2ODkyNTA5LCJpYXQiOjE3NTY4MDYxMDksImp0aSI6IjA4YjAxZWRmNzAyOTQ2MGQ4Yjc1OTY5N2U1NDFjZGViIiwidXNlcl9pZCI6IjE3In0.p75Z7-DdRrR1ZvngfCs5dmZq07yoO45Yx77KepkeUOw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nasir12@example.com\",\r\n    \"password\": \"Test@12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}me/subscription/",
+							"host": [
+								"{{base_url}}me"
+							],
+							"path": [
+								"subscription",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Billing portal",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MTY2OTI4LCJpYXQiOjE3NTUwODA1MjgsImp0aSI6IjMyYWUzMDQ2MGI4MzRkOTE4NmM2ZDY5MGQ4ZDVhNWM0IiwidXNlcl9pZCI6IjEifQ.1UygPX77sWRx0fYYa3dW5hKkLQ_PfiT_eybb-Zaq_8g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nasir12@example.com\",\r\n    \"password\": \"Test@12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000//api/stripe/portal/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"",
+								"api",
+								"stripe",
+								"portal",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Webhook",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MTcxMTU0LCJpYXQiOjE3NTUwODQ3NTQsImp0aSI6ImU2MTM5YzZkMDY3YjRkYWJiNWJlZmNmMmY2NGZjN2Q0IiwidXNlcl9pZCI6IjMifQ.Ily-64xxZDWQJ-QpIsldhMW-M3VaU0q9YbnY7Qxr4EA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nasir12@example.com\",\r\n    \"password\": \"Test@12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000//api/stripe/webhook/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"",
+								"api",
+								"stripe",
+								"webhook",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subscriptions Success",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1MTcxMTU0LCJpYXQiOjE3NTUwODQ3NTQsImp0aSI6ImU2MTM5YzZkMDY3YjRkYWJiNWJlZmNmMmY2NGZjN2Q0IiwidXNlcl9pZCI6IjMifQ.Ily-64xxZDWQJ-QpIsldhMW-M3VaU0q9YbnY7Qxr4EA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}subscription/success/",
+							"host": [
+								"{{base_url}}subscription"
+							],
+							"path": [
+								"success",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Subscriptions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1NDk1Njc2LCJpYXQiOjE3NTU0MDkyNzYsImp0aSI6IjAzYmEwOTIxN2Y0OTRhOTRhNzUwYjZmZDMwNzUxZThjIiwidXNlcl9pZCI6IjEwIn0.8Ck9RLqX8NYre84Cnsyf8AdrbRR70-IGzLpTY3weigo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}subscription/cancel/",
+							"host": [
+								"{{base_url}}subscription"
+							],
+							"path": [
+								"cancel",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CMS",
+			"item": [
+				{
+					"name": "All CMS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}cms/",
+							"host": [
+								"{{base_url}}cms"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "video_generator",
+			"item": [
+				{
+					"name": "dashboard data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1Njg5NjQzLCJpYXQiOjE3NTU2MDMyNDMsImp0aSI6ImU4MGM1YzE0NjliZjQ1N2M4Y2NiYmFjMjQ4YjA1MDA4IiwidXNlcl9pZCI6IjE1In0.OFfWG8kcjABXGW0eoZcJGegE6LhaelKwHpeJNLRQAqQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}video-generator/dashboard/",
+							"host": [
+								"{{base_url}}video-generator"
+							],
+							"path": [
+								"dashboard",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a Video Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1Njg5NjQzLCJpYXQiOjE3NTU2MDMyNDMsImp0aSI6ImU4MGM1YzE0NjliZjQ1N2M4Y2NiYmFjMjQ4YjA1MDA4IiwidXNlcl9pZCI6IjE1In0.OFfWG8kcjABXGW0eoZcJGegE6LhaelKwHpeJNLRQAqQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"title\": \"A New Adventure\",\r\n        \"prompt\": \"Create a video of a dog skateboarding in a park.\",\r\n        \"video_type\": \"Emotional Video\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}video-generator/projects/",
+							"host": [
+								"{{base_url}}video-generator"
+							],
+							"path": [
+								"projects",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Video Projects/serach",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1NTc4ODE2LCJpYXQiOjE3NTU0OTI0MTYsImp0aSI6ImNlZGY0MjhhYWU3NTQ5MDNhM2U4YWRkMWZjMDI4MzNiIiwidXNlcl9pZCI6IjEwIn0.CSUI2Ui3ygn8tSsbiQO0Nd3fs1RfJVDwfUOxJexdQD0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}video-generator/projects/",
+							"host": [
+								"{{base_url}}video-generator"
+							],
+							"path": [
+								"projects",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve a Specific Video Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1NTc4ODE2LCJpYXQiOjE3NTU0OTI0MTYsImp0aSI6ImNlZGY0MjhhYWU3NTQ5MDNhM2U4YWRkMWZjMDI4MzNiIiwidXNlcl9pZCI6IjEwIn0.CSUI2Ui3ygn8tSsbiQO0Nd3fs1RfJVDwfUOxJexdQD0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}video-generator/projects/2/",
+							"host": [
+								"{{base_url}}video-generator"
+							],
+							"path": [
+								"projects",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Video Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1NTc4ODE2LCJpYXQiOjE3NTU0OTI0MTYsImp0aSI6ImNlZGY0MjhhYWU3NTQ5MDNhM2U4YWRkMWZjMDI4MzNiIiwidXNlcl9pZCI6IjEwIn0.CSUI2Ui3ygn8tSsbiQO0Nd3fs1RfJVDwfUOxJexdQD0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"title\": \"An Updated Adventure Title\",\r\n        \"prompt\": \"A better prompt for a dog skateboarding.\",\r\n        \"video_type\": \"Short Film\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}video-generator/projects/2/",
+							"host": [
+								"{{base_url}}video-generator"
+							],
+							"path": [
+								"projects",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Video Project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU1NjY1MzAwLCJpYXQiOjE3NTU1Nzg5MDAsImp0aSI6ImUzMmZiOTk5NzA5OTRjOGRhZWI2MDIyZjllYjgxMGI3IiwidXNlcl9pZCI6IjEwIn0.KuNQG2rJYqexXcviq7YfTso_XaBtmnFAHTafkquA0wQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}video-generator/projects/2/",
+							"host": [
+								"{{base_url}}video-generator"
+							],
+							"path": [
+								"projects",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

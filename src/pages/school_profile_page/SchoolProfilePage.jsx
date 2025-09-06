@@ -10,6 +10,7 @@ import SchoolDetails from '@/components/School_Profile_Components/SchoolDetails'
 import SchoolStatsSection from '@/components/School_Profile_Components/SchoolStatsSection'
 import SchoolSwiper from '@/components/School_Profile_Components/SchoolSwiper'
 import StudentStatsSection from '@/components/School_Profile_Components/StudentStatsSection'
+import StudentsWentOnWork from '@/components/School_Profile_Components/StudentsWentOnWork'
 import TrainingOverview from '@/components/School_Profile_Components/TrainingOverview'
 import useAxiosPublic from '@/hooks/useAxiosPublic'
 import { useQuery } from '@tanstack/react-query'
@@ -36,7 +37,7 @@ const SchoolProfilePage = () => {
       <SchoolStatsSection SchoolDetail={SchoolDetail} />
       <div className='py-8 md:py-16'>
     <h1 className='text-3xl font-semibold mb-4 text-center'>Students went on to work at these airlines</h1>
-      <BrandSection />
+      <StudentsWentOnWork SchoolDetail={SchoolDetail} />
       </div>
       <ContactInfoSection SchoolDetail={SchoolDetail} />
       <ReviewsForSchool SchoolDetail={SchoolDetail} />

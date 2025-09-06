@@ -55,6 +55,9 @@ import ReviewViewPage from "@/components/leave_a_review_Components/ReviewViewPag
 import ForgetVerifyCode from "@/pages/Auth_Pages/ForgetVerifyCode";
 import PrivateRoute from "./PrivateRoute";
 import EditReview from "@/pages/leave_a_review_Page/EditReview";
+import ComingSoon from "@/pages/CommingSoon/ComingSoon";
+import PrivacyPolicy from "@/pages/TearmAndPrivacy/PrivacyPolicy";
+import TermsAndConditions from "@/pages/TearmAndPrivacy/TermsAndConditions";
 
 
 const router = createBrowserRouter([
@@ -94,6 +97,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     children: [
+
       {
         path: "/",
         element: <Home />,
@@ -283,6 +287,15 @@ const router = createBrowserRouter([
         element: <SchoolProfilePage />
       },
       //school profile page end
+      {
+        path: "/privacy-policy/:slug",
+        element: <PrivacyPolicy />
+      },
+      {
+        path: "/terms-and-conditions",
+        element: <TermsAndConditions />
+      },
+  
     ],
   },
   // Admin routes
