@@ -6,10 +6,19 @@ import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { Bell, Settings } from "lucide-react";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+import ComingSoon from "@/pages/CommingSoon/ComingSoon";
 const AdminLayout = () => {
+    const axiosPublic = useAxiosPublic();
   const [Open, setOpen] = useState(false);
 
-  const sideBar = [
+  const { data: holdingPage, isLoading } = useQuery({
+    queryKey: ["holdingPage"],
+    queryFn: () => axiosPublic.get("/holding-page/status"),
+  });
+
+    const sideBar = [
     {
         id: 1,
         icon: <MdDashboard />,
@@ -45,10 +54,27 @@ const AdminLayout = () => {
       behavior: "smooth",
     });
   }, [location]);
+  // ✅ Show loading while fetching
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="w-12 h-12 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+
+
   return (
     <>
       <ScrollRestoration />
-      <div className="flex  h-screen min-h-screen w-full">
+      {
+        holdingPage?.data.holding_page === true ? (
+         <div>
+          <ComingSoon />
+         </div>
+        )
+        :
+         <div className="flex  h-screen min-h-screen w-full">
         <SideBar open={Open} setOpen={setOpen} sidebar={sideBar} />
         <div className="flex-1 bg-dark text-white flex flex-col overflow-auto custom-scrollbar">
           <div className=" flex flex-col lg:px-[30px] px-2.5 sm:px-5">
@@ -57,6 +83,8 @@ const AdminLayout = () => {
           </div>
         </div>
       </div>
+      }
+    
     </>
   );
 };

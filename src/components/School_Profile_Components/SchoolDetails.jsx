@@ -48,16 +48,31 @@ const SchoolDetails = ({SchoolDetail}) => {
       <Title level="title18" className="text-black">Quality Fly maintains strong connections and collaborations with various airlines, helping students gain real-world exposure and better career opportunities in the aviation industry.</Title>
 
         </div>
-        <div className='mt-10  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-{
-            SchoolDetail?.airline_partners?.map((item) => (
-                <Link to={item.website_url} key={item.id} className='bg-white p-4 rounded-lg shadow-sm flex gap-4 items-center border'>
-                <img src={item.logo_path} alt={item.title} className='w-full h-20 object-cover rounded-lg mb-4' />
-                <h3 className='text-[#111827]'>{item.description}</h3>
-                </Link>
-            ))
-}
-        </div>
+  <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {SchoolDetail?.airline_partners?.map((item) => (
+    <Link
+      to={item.website_url}
+      key={item.id}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="bg-white p-6 rounded-xl shadow-md border hover:shadow-lg transition duration-300 flex flex-col items-center text-center"
+    >
+      {/* Logo */}
+      <img
+        src={item.logo_path}
+        alt={item.title}
+        className="w-32 h-20 object-contain mb-4"
+      />
+
+      {/* Description */}
+      <h3
+        className="text-[#111827] text-sm md:text-base font-medium leading-relaxed"
+        dangerouslySetInnerHTML={{ __html: item.description }}
+      ></h3>
+    </Link>
+  ))}
+</div>
+
     </div>
   )
 }

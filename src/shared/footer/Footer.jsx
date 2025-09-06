@@ -6,10 +6,10 @@ import { RiTwitterXFill } from "react-icons/ri";
 import { IoLogoLinkedin } from "react-icons/io5";
 
 const navLinks = [
-  { label: "Home", path: "/" },
-  { label: "About Us", path: "/about" },
+  { label: "Home", path: "/home" },
+  { label: "About Us", path: "/about-us" },
   { label: "Leave a Review", path: "/review" },
-  { label: "Become a Pilot", path: "/become-a-pilot" },
+  { label: "Become a Pilot", path: "/become-pilot" },
   { label: "Training Providers", path: "/training-providers" },
   { label: "Aviation Insights", path: "/aviation-insights" },
   { label: "Contact Us", path: "/contact" },
@@ -42,9 +42,12 @@ const Footer = () => {
 
         {/* Bottom Section */}
         <div className="w-full border-t border-white/20 pt-5 md:pt-8 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 text-sm">
-          <p className="text-center md:text-left md:text-xl">
-            Terms & Conditions | Privacy Policy
-          </p>
+   <p className="text-center md:text-left md:text-xl flex gap-2">
+  <Link to="/terms-and-conditions">Terms & Conditions</Link> 
+  | 
+  <Link to="/privacy-policy/privacy-policy">Privacy Policy</Link> 
+</p>
+
 
           <div className="flex gap-8 ">
             <a href="https://www.facebook.com/PilotNetworkLTD/">

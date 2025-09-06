@@ -30,7 +30,7 @@ const EnhancedTrainingProviders = () => {
   });
 
   if (isLoading) return <p><FlightSchoolSkeleton showRatting={true} showButton={false} count={5} /></p>;
-  if (error) return <p>Error fetching data</p>;
+  if (error) return <p className="text-[#FF0000]">No available data at the moment</p>;
 
   return (
     <div className="space-y-4">

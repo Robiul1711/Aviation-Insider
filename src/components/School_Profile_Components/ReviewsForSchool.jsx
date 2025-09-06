@@ -57,12 +57,32 @@ const ReviewsForSchool = ({ SchoolDetail }) => {
           </div>
         ))}
 
-        {(!SchoolDetail?.review?.reviewed_users ||
-          SchoolDetail?.review?.reviewed_users.length === 0) && (
-          <p className="text-gray-500 text-sm">
-            No reviews available for this school.
-          </p>
-        )}
+ {(!SchoolDetail?.review?.reviewed_users ||
+  SchoolDetail?.review?.reviewed_users.length === 0) && (
+  <div className="flex flex-col items-center justify-center p-6 bg-blue-50 border border-blue-200 rounded-lg mt-6">
+    {/* Icon */}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-12 w-12 text-blue-400 mb-4"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M13 16h-1v-4h-1m0-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z"
+      />
+    </svg>
+
+    {/* Message */}
+    <p className="text-gray-700 text-center text-sm md:text-base">
+      No reviews available for this school.
+    </p>
+  </div>
+)}
+
       </div>
     </div>
   );

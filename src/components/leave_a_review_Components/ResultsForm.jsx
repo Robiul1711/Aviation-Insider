@@ -72,15 +72,22 @@ export default function ResultsForm({ data }) {
         />
 
         {/* ATPL Average */}
+        {/* ATPL Average */}
         <div>
           <h3 className="md:text-xl font-medium text-gray-800 mb-3">
             What was your ATPL Average?
           </h3>
           <div className="relative">
             <input
-              type="number" // ✅ numeric input
+              type="number"
               placeholder="Enter your average (e.g. 85)"
               {...register("atpl_average")}
+              min={1}
+              max={100}
+              onInput={(e) => {
+                if (e.target.value > 100) e.target.value = 100;
+                if (e.target.value < 0) e.target.value = 0;
+              }}
               className="w-full px-3 py-2 md:text-xl border border-gray-300 rounded-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>

@@ -51,10 +51,12 @@ const StudentStatsSection = ({ SchoolDetail }) => {
           <p className="text-center text-sm">
             Students who go on to employment
           </p>
+          {console.log(SchoolDetail?.student_pass_rates)}
           <div className="w-20 h-20">
             <CircularProgressbar
-              value={85}
-              text="85%"
+              value={SchoolDetail?.student_pass_rates?.employment_rate}
+            text={`${SchoolDetail?.student_pass_rates?.employment_rate}%`}
+
               styles={buildStyles({
                 pathColor: "#3B82F6",
                 textColor: "#fff",
@@ -70,8 +72,8 @@ const StudentStatsSection = ({ SchoolDetail }) => {
           <p className="text-center text-sm">Quality Fly recommended by</p>
           <div className="w-20 h-20">
             <CircularProgressbar
-              value={100}
-              text="100%"
+              value={SchoolDetail?.student_pass_rates?.recommendation_rate}
+              text={`${SchoolDetail?.student_pass_rates?.recommendation_rate}%`}
               styles={buildStyles({
                 pathColor: "#3B82F6",
                 textColor: "#fff",

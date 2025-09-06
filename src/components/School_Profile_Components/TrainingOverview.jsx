@@ -120,7 +120,7 @@ export default function TrainingOverview({ SchoolDetail }) {
         )}
 
         {/* Student Pass Rates */}
-        <div className="border rounded shadow">
+        {/* <div className="border rounded shadow">
           <h3 className="bg-gray-100 px-4 py-2 font-semibold">Student Provided Pass Rates</h3>
           <table className="w-full text-sm">
             <thead className="bg-white text-left">
@@ -143,15 +143,15 @@ export default function TrainingOverview({ SchoolDetail }) {
           <p className="text-xs text-gray-500 px-4 py-2">
             This information is calculated from the data provided by reviewers and may vary from the school's actual averages therefore should be used as a guide
           </p>
-        </div>
+        </div> */}
       </div>
 
       {/* Right Panel - Top Training Providers */}
       <div className="space-y-4">
         <h2 className="text-2xl font-bold">Top Training Providers</h2>
-        <p className="text-sm text-gray-500">
+        {/* <p className="text-sm text-gray-500">
           Training providers require a minimum of 3 reviews to be ranked
-        </p>
+        </p> */}
         <div className="space-y-4">
           <TopTrainingProviders />
         </div>
