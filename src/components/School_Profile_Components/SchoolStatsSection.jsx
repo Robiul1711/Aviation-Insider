@@ -6,18 +6,42 @@ import { X, Check } from "lucide-react";
 const SchoolStatsSection = ({ SchoolDetail }) => {
   const passRates = SchoolDetail?.student_pass_rates
     ? [
-        { label: "CPL Pass Rate", percentage: SchoolDetail.student_pass_rates.cpl_pass_rate },
-        { label: "MEIR Pass Rate", percentage: SchoolDetail.student_pass_rates.meir_pass_rate },
-        { label: "ATPL Pass Rate", percentage: SchoolDetail.student_pass_rates.atpl_pass_rate },
-        { label: "ATPL Average", percentage: SchoolDetail.student_pass_rates.atpl_average },
+        {
+          label: "CPL Pass Rate",
+          percentage: SchoolDetail.student_pass_rates.cpl_pass_rate,
+        },
+        {
+          label: "MEIR Pass Rate",
+          percentage: SchoolDetail.student_pass_rates.meir_pass_rate,
+        },
+        {
+          label: "ATPL Pass Rate",
+          percentage: SchoolDetail.student_pass_rates.atpl_pass_rate,
+        },
+        {
+          label: "ATPL Average",
+          percentage: SchoolDetail.student_pass_rates.atpl_average,
+        },
       ]
     : [];
-
+  console.log(SchoolDetail?.student_pass_rates);
   const supportItems = [
-    { label: "Practical Instructors", value: SchoolDetail?.practical_instructors ?? "N/A" },
-    { label: "Theoretical Instructors", value: SchoolDetail?.theoretical_instructors ?? "N/A" },
-    { label: "Accommodation", hasX: SchoolDetail?.accommodation === false },
-    { label: "Graduation Support", hasX: SchoolDetail?.graduation_support === false },
+    {
+      label: "Practical Instructors",
+      value: SchoolDetail?.student_pass_rates?.practical_instructors,
+    },
+    {
+      label: "Theoretical Instructors",
+      value: SchoolDetail?.student_pass_rates?.theoretical_instructors,
+    },
+    {
+      label: "Accommodation",
+      hasX: SchoolDetail?.student_pass_rates?.accommodation,
+    },
+    {
+      label: "Graduation Support",
+      hasX: SchoolDetail?.student_pass_rates?.graduation_support,
+    },
   ];
 
   return (
@@ -49,7 +73,9 @@ const SchoolStatsSection = ({ SchoolDetail }) => {
                 </div>
               ))}
               {passRates.length === 0 && (
-                <p className="text-gray-400 text-sm">No pass rate data available.</p>
+                <p className="text-gray-400 text-sm">
+                  No pass rate data available.
+                </p>
               )}
             </div>
           </div>
@@ -61,12 +87,13 @@ const SchoolStatsSection = ({ SchoolDetail }) => {
               {supportItems.map((item, index) => (
                 <div key={index} className="text-center">
                   <p className="text-sm text-gray-300 mb-2">{item.label}</p>
-                  {item.hasX ? (
-                    <X size={20} className="text-red-400 mx-auto" />
-                  ) : item.value !== "N/A" ? (
+
+                  {item.value && item.value !== "N/A" ? (
+                    <p className="text-sm text-gray-400">{item.value}</p>
+                  ) : item.hasX === "Yes" ? (
                     <Check size={20} className="text-green-400 mx-auto" />
                   ) : (
-                    <p className="text-sm text-gray-400">{item.value}</p>
+                    <X size={20} className="text-red-400 mx-auto" />
                   )}
                 </div>
               ))}

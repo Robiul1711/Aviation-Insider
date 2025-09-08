@@ -158,34 +158,33 @@ const QualityFlyProfile = ({ SchoolDetail }) => {
           <h3 className="font-medium text-gray-900 mb-4 text-xl md:text-2xl">
             Videos
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {SchoolDetail?.video_url?.map((videoUrl, index) => (
-              <div key={index} className="bg-gray-50 rounded-lg overflow-hidden shadow-sm">
-                {isYouTubeUrl(videoUrl) && (
-                  // YouTube video thumbnail with play button
-                  <div 
-                    className="relative cursor-pointer group"
-                    onClick={() => setSelectedVideo(videoUrl)}
-                  >
-                    <div className="relative pt-[56.25%]"> {/* 16:9 aspect ratio */}
-                      <img 
-                        src={`https://img.youtube.com/vi/${getYouTubeId(videoUrl)}/hqdefault.jpg`}
-                        alt={`Video ${index + 1}`}
-                        className="absolute top-0 left-0 w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                       <VideoButton  />
-                      </div>
-                    </div>
-                    {/* <div className="p-3">
-                      <p className="text-sm font-medium text-gray-700 truncate">Video {index + 1}</p>
-                    </div> */}
-                  </div>
-      
-                )}
-              </div>
-            ))}
+    <div className="flex flex-wrap justify-center gap-4">
+  {SchoolDetail?.video_url?.map((videoUrl, index) => (
+    <div
+      key={index}
+      className="bg-gray-50 rounded-lg overflow-hidden shadow-sm w-full sm:w-72"
+    >
+      {isYouTubeUrl(videoUrl) && (
+        <div
+          className="relative cursor-pointer group"
+          onClick={() => setSelectedVideo(videoUrl)}
+        >
+          <div className="relative pt-[56.25%]"> {/* 16:9 aspect ratio */}
+            <img
+              src={`https://img.youtube.com/vi/${getYouTubeId(videoUrl)}/hqdefault.jpg`}
+              alt={`Video ${index + 1}`}
+              className="absolute top-0 left-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <VideoButton />
+            </div>
           </div>
+        </div>
+      )}
+    </div>
+  ))}
+</div>
+
         </div>
       )}
     </div>

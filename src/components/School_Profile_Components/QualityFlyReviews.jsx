@@ -24,7 +24,7 @@ export default function QualityFlyReviews({ SchoolDetail }) {
       <div className="grid md:grid-cols-3 gap-8">
         {/* Left Section */}
         <div className="md:col-span-2">
-          <h2 className="text-2xl font-bold mb-4">Top Reviews for Quality Fly</h2>
+          <h2 className="text-2xl font-bold mb-4">Top Reviews for {SchoolDetail?.name}</h2>
           <div className="space-y-4">
             {SchoolDetail?.review?.top_reviews
               ?.slice(0, 8) // 👈 show only 3 reviews
