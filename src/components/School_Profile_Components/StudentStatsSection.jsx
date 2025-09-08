@@ -46,43 +46,48 @@ const StudentStatsSection = ({ SchoolDetail }) => {
           </div>
         </div>
 
-        {/* Middle: Employment Rate */}
-        <div className="flex flex-col items-center justify-center gap-3 bg-[#2a2a2a] p-6 rounded-xl shadow-md">
-          <p className="text-center text-sm">
-            Students who go on to employment
-          </p>
-          {console.log(SchoolDetail?.student_pass_rates)}
-          <div className="w-20 h-20">
-            <CircularProgressbar
-              value={SchoolDetail?.student_pass_rates?.employment_rate}
-            text={`${SchoolDetail?.student_pass_rates?.employment_rate}%`}
+{/* Middle: Employment Rate */}
+{SchoolDetail?.student_pass_rates?.employment_rate != null && (
+  <div className="flex flex-col items-center justify-center gap-3 bg-[#2a2a2a] p-6 rounded-xl shadow-md">
+    <p className="text-center text-sm">
+      Students who go on to employment
+    </p>
+    <div className="w-20 h-20">
+      <CircularProgressbar
+        value={SchoolDetail?.student_pass_rates?.employment_rate}
+        text={`${SchoolDetail?.student_pass_rates?.employment_rate}%`}
+        styles={buildStyles({
+          pathColor: "#3B82F6",
+          textColor: "#fff",
+          trailColor: "#444",
+        })}
+      />
+    </div>
+    {/* <p className="text-xs text-center">(within 6 months)</p> */}
+  </div>
+)}
 
-              styles={buildStyles({
-                pathColor: "#3B82F6",
-                textColor: "#fff",
-                trailColor: "#444",
-              })}
-            />
-          </div>
-          <p className="text-xs text-center">(within 6 months)</p>
-        </div>
+{/* Right: Recommendation Rate */}
+{SchoolDetail?.student_pass_rates?.recommendation_rate != null && (
+  <div className="flex flex-col items-center justify-center gap-3 bg-[#2a2a2a] p-6 rounded-xl shadow-md">
+    <p className="text-center text-sm">
+      {SchoolDetail?.name} is recommended by
+    </p>
+    <div className="w-20 h-20">
+      <CircularProgressbar
+        value={SchoolDetail?.student_pass_rates?.recommendation_rate}
+        text={`${SchoolDetail?.student_pass_rates?.recommendation_rate}%`}
+        styles={buildStyles({
+          pathColor: "#3B82F6",
+          textColor: "#fff",
+          trailColor: "#444",
+        })}
+      />
+    </div>
+    {/* <p className="text-xs text-center">of 7 students</p> */}
+  </div>
+)}
 
-        {/* Right: Recommendation Rate */}
-        <div className="flex flex-col items-center justify-center gap-3 bg-[#2a2a2a] p-6 rounded-xl shadow-md">
-          <p className="text-center text-sm">Quality Fly recommended by</p>
-          <div className="w-20 h-20">
-            <CircularProgressbar
-              value={SchoolDetail?.student_pass_rates?.recommendation_rate}
-              text={`${SchoolDetail?.student_pass_rates?.recommendation_rate}%`}
-              styles={buildStyles({
-                pathColor: "#3B82F6",
-                textColor: "#fff",
-                trailColor: "#444",
-              })}
-            />
-          </div>
-          <p className="text-xs text-center">of 7 students</p>
-        </div>
       </div>
     </div>
   );

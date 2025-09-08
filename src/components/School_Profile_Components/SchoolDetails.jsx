@@ -44,8 +44,8 @@ const SchoolDetails = ({SchoolDetail}) => {
   return (
     <div className='section-padding-x p-6 bg-white'>
         <div className='max-w-6xl mx-auto text-center'>
-      <Title level="title32" className="text-black">Quality Fly works in collaboration with several airlines</Title>
-      <Title level="title18" className="text-black">Quality Fly maintains strong connections and collaborations with various airlines, helping students gain real-world exposure and better career opportunities in the aviation industry.</Title>
+      <Title level="title32" className="text-black"> {SchoolDetail?.name} works in collaboration with several airlines</Title>
+      <Title level="title18" className="text-black">{SchoolDetail?.name} maintains strong connections and collaborations with various airlines, helping students gain real-world exposure and better career opportunities in the aviation industry.</Title>
 
         </div>
   <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
