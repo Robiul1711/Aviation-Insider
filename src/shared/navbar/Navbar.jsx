@@ -1,4 +1,4 @@
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
@@ -48,27 +48,25 @@ const Navbar = () => {
 
   const isActive = (path) => location.pathname === path;
 
-
-const handleLogout = () => {
-  Swal.fire({
-    title: 'Are you sure?',
-    text: "You will be logged out!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, logout!',
-    cancelButtonText: 'No'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      localStorage.clear();
-      toast.success("Logout successful");
-      setUser(null);
-      navigate("/auth/sign-in");
-    }
-  });
-};
-
+  const handleLogout = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will be logged out!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, logout!",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.clear();
+        toast.success("Logout successful");
+        setUser(null);
+        navigate("/auth/sign-in");
+      }
+    });
+  };
 
   const handleSettings = () => {
     navigate("/dashboard");
@@ -93,7 +91,7 @@ const handleLogout = () => {
     <header className="bg-Primary text-white z-50 sticky top-0">
       <div className="section-padding-x py-5 flex justify-between items-center">
         <Link to="/">
-          <img src={logo} alt="Logo" className="w-40 md:w-60" />
+          <img src={logo} alt="Logo" className="w-40 xl:w-60" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -105,9 +103,7 @@ const handleLogout = () => {
                   <Link
                     to={item.path}
                     className={`transition-colors duration-200 ${
-                      isActive(item.path)
-                        ? "text-yellow-400"
-                        : "text-white"
+                      isActive(item.path) ? "text-yellow-400" : "text-white"
                     }`}
                   >
                     {item.label}
