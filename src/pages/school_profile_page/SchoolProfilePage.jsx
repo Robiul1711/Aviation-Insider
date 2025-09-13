@@ -36,7 +36,7 @@ const SchoolProfilePage = () => {
       <TrainingOverview SchoolDetail={SchoolDetail} />
       <SchoolStatsSection SchoolDetail={SchoolDetail} />
       <div className='py-8 md:py-16'>
-    <h1 className='text-3xl font-semibold mb-4 text-center'>Students went on to work at these airlines</h1>
+    {/* <h1 className='text-3xl font-semibold mb-4 text-center'>Students went on to work at these airlines</h1> */}
       <StudentsWentOnWork SchoolDetail={SchoolDetail} />
       </div>
       <ContactInfoSection SchoolDetail={SchoolDetail} />

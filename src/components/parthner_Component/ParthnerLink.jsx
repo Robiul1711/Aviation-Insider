@@ -11,7 +11,7 @@ const ParthnerLink = () => {
 
   const { data, isLoading } = useQuery({
     queryKey: ["parthner-link", pageCount],
-    queryFn: () => axiosPublic.get("/airline-partners", {
+    queryFn: () => axiosPublic.get("/pilot-network-sponsors", {
       params: {
         page: pageCount,
         per_page: 8,
@@ -72,7 +72,7 @@ const ParthnerLink = () => {
   }
 
   const partners = data?.data?.data || [];
-
+console.log(partners);
   return (
     <div className="section-padding-x py-16 bg-gray-50">
       <Title level="title40" className="text-black text-center mb-14">
