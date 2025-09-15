@@ -74,7 +74,26 @@ export default function ReviewSubmitForm({ data }) {
           Section 4 – Your Review
         </h2>
       </div>
-
+      <div className="pb-5">
+        <p>
+          You now have the opportunity to write about your experience at this
+          ATO. A balanced review of both positive and negative aspects of your
+          training will be the most beneficial for future students. Pilot
+          Network welcomes constructive criticism. You could talk about:
+        </p>
+        <ul className="mt-5 space-y-1 list-disc list-inside">
+          <li>What you studied and when/where and how long it took.</li>
+          <li>The facilities, airport, aircraft and simulators.</li>
+          <li>The instructors generally and mention your favourites.</li>
+          <li>Constructively criticise the ATO.</li>
+          <li>Where you stayed during training.</li>
+          <li>
+            If you were successful in finding employment, and what support you
+            received.
+          </li>
+          <li>3 positive and 3 negative parts of this ATO.</li>
+        </ul>
+      </div>
       <div className="space-y-6">
         {/* Review Text Area */}
         <div>
@@ -111,26 +130,7 @@ export default function ReviewSubmitForm({ data }) {
         </div>
       </div>
 
-      <div className="py-5">
-        <p>
-          You now have the opportunity to write about your experience at this
-          ATO. A balanced review of both positive and negative aspects of your
-          training will be the most beneficial for future students. Pilot
-          Network welcomes constructive criticism. You could talk about:
-        </p>
-        <ul className="mt-5 space-y-1 list-disc list-inside">
-          <li>What you studied and when/where and how long it took.</li>
-          <li>The facilities, airport, aircraft and simulators.</li>
-          <li>The instructors generally and mention your favourites.</li>
-          <li>Constructively criticise the ATO.</li>
-          <li>Where you stayed during training.</li>
-          <li>
-            If you were successful in finding employment, and what support you
-            received.
-          </li>
-          <li>3 positive and 3 negative parts of this ATO.</li>
-        </ul>
-      </div>
+
     </div>
   );
 }

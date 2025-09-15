@@ -6,17 +6,26 @@ import {
   PlaneIcon,
 } from "../common/icons/HomeIcons";
 import Title from "../common/Title";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
-const data = [
+
+const BannerBottom = () => {
+  const axiosPublic = useAxiosPublic();
+  const { data: bannerbottom, isLoading } = useQuery({
+    queryKey: ["bannerbottom"],
+    queryFn: () => axiosPublic.get("/home-page/stats"),
+  })
+  const data = [
   {
     name: "Reviews",
     icon: <MessageIcon className="size-6 md:size-auto" />,
-    description: "XX verified reviews from flight school students",
+    description: `${bannerbottom?.data?.data?.verified_reviews} verified reviews from flight school students`,
   },
   {
     name: "Training Providers",
     icon: <PlaneIcon className="size-6 md:size-auto" />,
-    description: "Up-to-date database featuring XX flight schools",
+    description: `Up-to-date database featuring ${bannerbottom?.data?.data?.training_providers} verified flight schools`,
   },
   {
     name: "Aviator Tips",
@@ -32,7 +41,7 @@ const data = [
   },
 ];
 
-const BannerBottom = () => {
+  // console.log(bannerbottom?.data?.data);
   return (
     <div className="section-padding-x py-10 bg-[#EBF2F8]">
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
