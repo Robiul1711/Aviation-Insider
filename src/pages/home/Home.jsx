@@ -9,6 +9,7 @@ import LeadingFlightSchool from "@/components/home_components/LeadingFlightSchoo
 import LeaveReview from "@/components/home_components/LeaveReview";
 import MoreFlightSchool from "@/components/home_components/MoreFlightSchool";
 import OurPartner from "@/components/home_components/OurPartner";
+import ParthnerLink from "@/components/parthner_Component/ParthnerLink";
 import React from "react";
 
 const Home = () => {
@@ -23,7 +24,7 @@ const Home = () => {
       <LeaveReview />
       <LatestArticles />
       <ContactForm />
-      <OurPartner />
+      <ParthnerLink />
     </div>
   );
 };

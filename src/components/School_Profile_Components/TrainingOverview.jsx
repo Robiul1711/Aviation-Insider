@@ -8,6 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+
 const Progress = () => (
   <div className="w-10 h-10">
     <CircularProgressbar
@@ -24,45 +25,43 @@ const Progress = () => (
 );
 
 export default function TrainingOverview({ SchoolDetail }) {
-  // Extract categories and aircraft_simulators from SchoolDetail
   const categories = SchoolDetail?.categories || [];
   const aircraftSimulators = SchoolDetail?.aircraft_simulators || [];
 
-  console.log(SchoolDetail?.categories);
   const modularCourse = SchoolDetail?.categories;
 
   return (
-    <div className="p-6 section-padding-x text-gray-800 grid md:grid-cols-3 gap-8">
+    <div className="p-4 md:p-6 section-padding-x text-gray-800 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+      {/* Left & Center Panel */}
       <div className="md:col-span-2 space-y-6">
+        {/* Modular Courses */}
         <div className="w-full rounded-lg space-y-2 shadow-sm">
           {modularCourse?.map((item, index) => (
             <Accordion key={index} type="single" collapsible>
-              <AccordionItem value="item-1" className="border-b-0">
-                <AccordionTrigger className="bg-gray-100 px-4 py-3 text-left text-lg font-medium">
+              <AccordionItem value={`item-${index}`} className="border-b-0">
+                <AccordionTrigger className="bg-gray-100 px-4 py-3 text-left text-base md:text-lg font-medium">
                   {item?.title}
                 </AccordionTrigger>
                 <AccordionContent className="p-0">
                   <div className="overflow-x-auto">
-                    <table className="w-full text-sm text-left text-gray-700">
+                    <table className="w-full text-sm text-left text-gray-700 min-w-[500px] md:min-w-full">
                       <thead className="bg-gray-50 text-gray-900">
                         <tr>
-                          <th className="px-6 py-3 font-medium">name</th>
-                          <th className="px-6 py-3 font-medium">duration</th>
-                          <th className="px-6 py-3 font-medium">price</th>
-                          <th className="px-6 py-3 font-medium">country</th>
+                          <th className="px-4 py-2 font-medium">Name</th>
+                          <th className="px-4 py-2 font-medium">Duration</th>
+                          <th className="px-4 py-2 font-medium">Price</th>
+                          <th className="px-4 py-2 font-medium">Country</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr className="border-t">
-                          {item?.courses?.map((course, index) => (
-                            <React.Fragment key={index}>
-                              <td className="px-6 py-4">{course?.name}</td>
-                              <td className="px-6 py-4">{course?.duration}</td>
-                              <td className="px-6 py-4">{course?.price}</td>
-                              <td className="px-6 py-4">{course?.country}</td>
-                            </React.Fragment>
-                          ))}
-                        </tr>
+                        {item?.courses?.map((course, idx) => (
+                          <tr key={idx} className="border-t">
+                            <td className="px-4 py-2">{course?.name}</td>
+                            <td className="px-4 py-2">{course?.duration}</td>
+                            <td className="px-4 py-2">{course?.price}</td>
+                            <td className="px-4 py-2">{course?.country}</td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </div>
@@ -74,27 +73,27 @@ export default function TrainingOverview({ SchoolDetail }) {
 
         {/* Aircraft & Simulators */}
         {aircraftSimulators.length > 0 && (
-          <div className="border rounded shadow">
-            <h3 className="bg-gray-100 px-4 py-2 font-semibold">
+          <div className="border rounded shadow overflow-x-auto">
+            <h3 className="bg-gray-100 px-4 py-2 font-semibold text-base md:text-lg">
               Aircraft & Simulators
             </h3>
-            <table className="w-full text-sm">
+            <table className="w-full text-sm md:text-base min-w-[500px] md:min-w-full">
               <thead className="bg-white text-left">
                 <tr className="border-t">
-                  <th className="px-4 py-2">Title</th>
-                  <th className="px-2 text-center">SE</th>
-                  <th className="px-2 text-center">ME</th>
-                  <th className="px-2 text-center">CPL</th>
-                  <th className="px-2 text-center">MEIR</th>
-                  <th className="px-2 text-center">MCC</th>
-                  <th className="px-2 text-center">UPRT</th>
-                  <th className="px-4 text-center py-2">Quantity</th>
+                  <th className="px-2 py-2">Title</th>
+                  <th className="px-1 text-center">SE</th>
+                  <th className="px-1 text-center">ME</th>
+                  <th className="px-1 text-center">CPL</th>
+                  <th className="px-1 text-center">MEIR</th>
+                  <th className="px-1 text-center">MCC</th>
+                  <th className="px-1 text-center">UPRT</th>
+                  <th className="px-2 text-center">Quantity</th>
                 </tr>
               </thead>
               <tbody>
                 {aircraftSimulators.map((item, i) => (
                   <tr key={i} className="border-t text-center">
-                    <td className="px-4 py-2 text-left">{item.title}</td>
+                    <td className="px-2 py-2 text-left">{item.title}</td>
                     <td>{item.se ? "✓" : ""}</td>
                     <td>{item.me ? "✓" : ""}</td>
                     <td>{item.cpl ? "✓" : ""}</td>
@@ -108,40 +107,11 @@ export default function TrainingOverview({ SchoolDetail }) {
             </table>
           </div>
         )}
-
-        {/* Student Pass Rates */}
-        {/* <div className="border rounded shadow">
-          <h3 className="bg-gray-100 px-4 py-2 font-semibold">Student Provided Pass Rates</h3>
-          <table className="w-full text-sm">
-            <thead className="bg-white text-left">
-              <tr className="border-t">
-                <th className="px-4 py-2">CPL Pass Rate</th>
-                <th className="px-4 py-2">MEIR Pass Rate</th>
-                <th className="px-4 py-2">ATPL Pass Rate</th>
-                <th className="px-4 py-2">ATPL Average</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="border-t">
-                <td className="px-4 py-2">100%</td>
-                <td className="px-4 py-2">100%</td>
-                <td className="px-4 py-2">100%</td>
-                <td className="px-4 py-2">92%</td>
-              </tr>
-            </tbody>
-          </table>
-          <p className="text-xs text-gray-500 px-4 py-2">
-            This information is calculated from the data provided by reviewers and may vary from the school's actual averages therefore should be used as a guide
-          </p>
-        </div> */}
       </div>
 
       {/* Right Panel - Top Training Providers */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">Top Training Providers</h2>
-        {/* <p className="text-sm text-gray-500">
-          Training providers require a minimum of 3 reviews to be ranked
-        </p> */}
+        <h2 className="text-xl md:text-2xl font-bold">Top Training Providers</h2>
         <div className="space-y-4">
           <TopTrainingProviders />
         </div>

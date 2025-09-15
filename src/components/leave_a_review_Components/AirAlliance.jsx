@@ -1,11 +1,17 @@
 import React from 'react'
 import Title from '../common/Title'
+import { useLocation, useParams } from 'react-router-dom';
 
 const AirAlliance = () => {
+    const { id } = useParams(); // school.id
+  const location = useLocation();
+
+  const queryParams = new URLSearchParams(location.search);
+  const name = queryParams.get("name"); // school.name
   return (
     <div>
       <Title level="title56" className="text-black text-center mb-10">
-        Air Alliance Flight Center
+        {name}
       </Title>
 
       <div className="bg-gray-50 p-6 rounded-lg">
