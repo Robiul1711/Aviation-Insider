@@ -111,13 +111,13 @@ const ReviewAccordion = ({ data }) => {
             <AccordionTrigger className="md:text-xl text-lg font-semibold bg-[#F3F4F6] px-5">
               {section.question}
             </AccordionTrigger>
+                <p className="py-2 px-4 italic text-sm text-gray-600">{section.answer}</p>
             <AccordionContent className="px-5 py-4 text-base">
               <div className="flex flex-wrap gap-6">
                 {section.ratings.map((r) => (
                   <RatingRow key={r.name} name={r.name} label={r.label} />
                 ))}
               </div>
-              <p className="mt-6 italic text-sm text-gray-600">{section.answer}</p>
             </AccordionContent>
           </AccordionItem>
         ))}

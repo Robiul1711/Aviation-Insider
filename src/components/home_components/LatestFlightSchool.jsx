@@ -11,90 +11,47 @@ import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
-const reviews = [
-  {
-    id: 1,
-    image:
-      "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg",
-    rating: 90,
-    commentTitle: "Excellent! Training School",
-    school: "SkyPath Training Academy (STA)",
-    comment:
-      "ASG were recommended to me by a friend and I can see why. Their instructors were professional and supportive throughout.",
-  },
-  {
-    id: 2,
-    image:
-      "https://img.freepik.com/free-photo/portrait-smiling-handsome-man_171337-19090.jpg",
-    rating: 75,
-    commentTitle: "Highly recommended",
-    school: "Eagle Wings Aviation",
-    comment:
-      "The best aviation school I’ve attended. Modern equipment and passionate instructors.",
-  },
-  {
-    id: 3,
-    image:
-      "https://img.freepik.com/free-photo/handsome-man-posing-outdoor_144627-26771.jpg",
-    rating: 85,
-    commentTitle: "Supportive staff",
-    school: "Cloud Nine Flight School",
-    comment:
-      "Staff are very friendly and supportive. I’ve learned so much about flying and safety.",
-  },
-  {
-    id: 4,
-    image:
-      "https://img.freepik.com/free-photo/handsome-man-posing-outdoor_144627-26771.jpg",
-    rating: 85,
-    commentTitle: "Supportive staff",
-    school: "Cloud Nine Flight School",
-    comment:
-      "Staff are very friendly and supportive. I’ve learned so much about flying and safety.",
-  },
-  {
-    id: 5,
-    image:
-      "https://img.freepik.com/free-photo/handsome-man-posing-outdoor_144627-26771.jpg",
-    rating: 85,
-    commentTitle: "Supportive staff",
-    school: "Cloud Nine Flight School",
-    comment:
-      "Staff are very friendly and supportive. I’ve learned so much about flying and safety.",
-  },
-];
-
 const LatestFlightSchool = () => {
   const navigationPrevRef = useRef(null);
   const navigationNextRef = useRef(null);
-  const axiosPublic=useAxiosPublic();
-  const {data:LatestFlight}=useQuery({
-    queryKey:["larestflight"],
-    queryFn:()=>axiosPublic.get("/reviews/latest-flight-schools")
-  })
+  const axiosPublic = useAxiosPublic();
+
+  const { data: LatestFlight, isLoading } = useQuery({
+    queryKey: ["latestFlightSchools"],
+    queryFn: () => axiosPublic.get("/reviews/latest-flight-schools"),
+  });
+
+  if (isLoading) {
+    return (
+      <div className="section-padding-x py-8 md:py-16 text-center text-gray-500">
+        Loading reviews...
+      </div>
+    );
+  }
+
   return (
     <div className="section-padding-x py-8 md:py-16">
-      <Title level="title40" className="text-black text-center mb-5 md:mb-10">
+      <Title level="title40" className="text-black text-center mb-10">
         Latest Flight School Reviews
       </Title>
 
-      <div className="relative ">
+      <div className="relative">
         {/* Navigation Buttons */}
         <div
           ref={navigationPrevRef}
-          className="absolute top-[40%] left-0 md:-left-5 z-10 cursor-pointer bg-white shadow-md rounded-full p-2 hover:bg-Primary hover:text-white transition"
+          className="absolute top-1/2 -left-6 z-10 transform -translate-y-1/2 cursor-pointer bg-white shadow-md rounded-full p-2 hover:bg-Primary hover:text-white transition"
         >
           <ChevronLeft size={24} />
         </div>
         <div
           ref={navigationNextRef}
-          className="absolute top-[40%] right-0 md:-right-5 z-10 cursor-pointer bg-white shadow-md rounded-full p-2 hover:bg-Primary hover:text-white transition"
+          className="absolute top-1/2 -right-6 z-10 transform -translate-y-1/2 cursor-pointer bg-white shadow-md rounded-full p-2 hover:bg-Primary hover:text-white transition"
         >
           <ChevronRight size={24} />
         </div>
 
         <Swiper
-          spaceBetween={24}
+          spaceBetween={30}
           slidesPerView={1}
           modules={[Navigation]}
           navigation={{
@@ -106,28 +63,30 @@ const LatestFlightSchool = () => {
             swiper.params.navigation.nextEl = navigationNextRef.current;
           }}
           breakpoints={{
-            768: {
-              slidesPerView: 2,
-            },
-            1024: {
-              slidesPerView: 4,
-            },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
           }}
         >
           {LatestFlight?.data?.data?.map((review) => (
             <SwiperSlide key={review.id}>
-              <div className="w-full p-6 rounded-2xl  border  h-full">
+              <Link  to={`/school-profile/${review?.flight_school_id}`} className="w-full h-full flex flex-col justify-between p-6 rounded-2xl border bg-white hover:shadow-lg transition">
+                {/* Top Section */}
                 <div className="flex justify-between items-center">
-                  <div className="flex items-center gap-4 ">
+                  <div className="flex items-center gap-4">
                     <img
-                      src={review?.image || "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg"}
+                      src={
+                        review?.image ||
+                        "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg"
+                      }
                       alt={review.commentTitle}
-                      className="w-[40px] h-[40px] object-cover rounded-full"
+                      className="w-12 h-12 object-cover rounded-full"
                     />
-
-                    <Link to={`/school-profile/${review?.flight_school_id}`} className="text-[1rem] font-[500] text-[#414652]">
+                    <p
+                     
+                      className="text-base font-semibold text-gray-800 hover:text-Primary transition"
+                    >
                       {review?.name}
-                    </Link>
+                    </p>
                   </div>
                   <div style={{ width: 50, height: 50 }}>
                     <CircularProgressbar
@@ -136,20 +95,27 @@ const LatestFlightSchool = () => {
                       styles={buildStyles({
                         pathColor: "#10B981",
                         textColor: "#111827",
-                        trailColor: "#D1D5DB",
+                        trailColor: "#E5E7EB",
                       })}
                     />
                   </div>
                 </div>
 
-                <h2 className="text-[1.2rem] font-semibold mt-5">
+                {/* Title */}
+                <h2 className="text-lg font-semibold mt-4 text-gray-900 line-clamp-1">
                   {review?.description}
                 </h2>
 
-                <p className="text-justify text-[0.9rem] my-3 text-[#414652]">
+                {/* Message */}
+                <p className="text-sm text-gray-600 mt-2 line-clamp-3">
                   {review?.message}
                 </p>
-              </div>
+
+                {/* Footer */}
+                <div className="mt-4 text-xs text-gray-500 italic">
+                  {review?.school || "Unknown Flight School"}
+                </div>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>

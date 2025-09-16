@@ -8,7 +8,8 @@ import OtherCommonLinks from "../common/OtherCommonLinks";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/hooks/useAuth";
-
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import dummy from "@/assets/images/dummy.webp";
 const StarRow = ({ label, value }) => (
   <div className="flex flex-col items-center bg-white border p-4 rounded-lg min-w-[180px]">
     <p className="text-gray-700 font-medium mb-2">{label}</p>
@@ -109,6 +110,7 @@ const Section = ({ title, percentage, items }) => {
 };
 
 const ReviewViewPage = () => {
+  
   const { user } = useAuth();
   const location = useLocation();
   const currentPath = location.pathname;
@@ -116,24 +118,39 @@ const ReviewViewPage = () => {
   const isEditActive = currentPath === "/add-your-review";
 
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const { id } = useParams();
   
   const { data, isLoading, error } = useQuery({
     queryKey: ['user-reviews', id],
     queryFn: async () => {
-      const response = await axiosSecure.get(`/user/reviews/${id}`);
+      const response = await axiosPublic.get(`/user/reviews/${id}`);
       return response.data;
     }
   });
 
 if (isLoading)
   return (
-    <div className="w-full h-[300px] flex items-center justify-center">
+    <div className="w-full h-screen flex items-center justify-center">
       <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600"></div>
     </div>
   );
 
-  if (error) return <div className="section-padding-x py-16">Error loading review</div>;
+if (error) {
+  return (
+    <div className="section-padding-x py-16 h-screen flex items-center justify-center">
+      <div className="text-center">
+        <h2 className="text-2xl font-semibold text-red-600 mb-2">
+          Oops! Something went wrong
+        </h2>
+        <p className="text-gray-600">
+          We couldn’t load the review at the moment. Please try again later.
+        </p>
+      </div>
+    </div>
+  );
+}
+
   const reviewData = data?.data;
 
   return (
@@ -160,7 +177,7 @@ if (isLoading)
           {/* Submitted Info */}
           <div className="flex items-center gap-3 mb-4">
             <img
-              src={reviewData?.submitted_by?.avatar}
+              src={reviewData?.submitted_by?.avatar || dummy}
               alt="avatar"
               className="rounded-full w-10 h-10"
             />

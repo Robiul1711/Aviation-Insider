@@ -31,7 +31,7 @@ const EditReview = () => {
     }
   });
 
-
+console.log(data);
   const EditReviewMutation = useMutation({
     mutationFn: async (data) => {
       const response = await axiosSecure.post(`/reviews/${id}`, data);

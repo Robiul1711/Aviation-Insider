@@ -4,6 +4,7 @@ import ReviewForm from "@/components/leave_a_review_Components/ReviewForm";
 import ReviewFormFinal from "@/components/leave_a_review_Components/ReviewFormFinal";
 import ReviewSubmitForm from "@/components/leave_a_review_Components/ReviewSubmitForm";
 import { useAuth } from "@/hooks/useAuth";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import {
   showLoadingToast,
@@ -20,11 +21,12 @@ const AllReviewsSections = () => {
   const methods = useForm();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const { id } = useParams();
 
   const ReviewMutation = useMutation({
     mutationFn: async (data) => {
-      const response = await axiosSecure.post("/reviews", data);
+      const response = await axiosPublic.post("/reviews", data);
       return response?.data;
     },
     onMutate: () => {
@@ -47,11 +49,11 @@ const AllReviewsSections = () => {
   });
 
   const onSubmit = (data) => {
-    if (!user) {
-      // 🚫 If no user, show error notification
-      updateToastError(null, "You must be logged in to submit a review");
-      return;
-    }
+    // if (!user) {
+    //   // 🚫 If no user, show error notification
+    //   updateToastError(null, "You must be logged in to submit a review");
+    //   return;
+    // }
 
     const payload = {
       ...data,
@@ -69,7 +71,7 @@ const AllReviewsSections = () => {
         <ReviewAccodion />
         <ResultsForm />
         <ReviewSubmitForm />
-        {/* <ReviewFormFinal /> */}
+        <ReviewFormFinal />
 
         {/* Submit Button */}
         <div className="flex justify-end mt-5">

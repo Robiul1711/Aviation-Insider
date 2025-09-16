@@ -11,9 +11,13 @@ export default function ReviewFormFinal({ data }) {
   const { user } = useAuth();
 
   useEffect(() => {
+    // Prefill if data exists or from logged-in user
     if (data?.data?.submitted_by) {
       setValue("name", data.data.submitted_by.name || user?.name || "");
       setValue("email", data.data.submitted_by.email || user?.email || "");
+    } else {
+      setValue("name", user?.name || "");
+      setValue("email", user?.email || "");
     }
     setValue("securityContact", false);
   }, [data, user, setValue]);
@@ -25,21 +29,23 @@ export default function ReviewFormFinal({ data }) {
         <div>
           <label className="block text-gray-700 mb-2">Enter Your Name</label>
           <input
-          defaultValue={user?.name || ""}
-            disabled
             type="text"
-            {...register("name")}
+            {...register("name", {
+              required: "Name is required",
+            })}
+            placeholder="Enter your name"
             className={`w-full px-3 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
               ${errors.name ? "border-red-500" : "border-gray-300"}`}
           />
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+          )}
         </div>
 
         {/* Email Input */}
         <div>
           <label className="block text-gray-700 mb-2">Enter Your Email</label>
           <input
-          defaultValue={user?.email || ""}
-            disabled
             type="email"
             {...register("email", {
               required: "Email is required",
@@ -48,6 +54,7 @@ export default function ReviewFormFinal({ data }) {
                 message: "Invalid email address",
               },
             })}
+            placeholder="Enter your email"
             className={`w-full px-3 py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
               ${errors.email ? "border-red-500" : "border-gray-300"}`}
           />
