@@ -26,7 +26,7 @@ const AllReviewsSections = () => {
 
   const ReviewMutation = useMutation({
     mutationFn: async (data) => {
-      const response = await axiosPublic.post("/reviews", data);
+      const response = await axiosSecure.post("/reviews", data);
       return response?.data;
     },
     onMutate: () => {

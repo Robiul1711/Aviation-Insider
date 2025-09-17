@@ -124,7 +124,7 @@ const ReviewViewPage = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['user-reviews', id],
     queryFn: async () => {
-      const response = await axiosPublic.get(`/user/reviews/${id}`);
+      const response = await axiosSecure.get(`/user/reviews/${id}`);
       return response.data;
     }
   });
@@ -152,7 +152,7 @@ if (error) {
 }
 
   const reviewData = data?.data;
-
+console.log("Review Data:", reviewData);
   return (
     <>
       <div className="flex section-padding-x py-16 gap-10">

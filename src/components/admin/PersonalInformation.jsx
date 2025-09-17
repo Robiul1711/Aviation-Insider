@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Info } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "@/hooks/useAuth";
 import {
   showLoadingToast,
@@ -13,6 +13,7 @@ import useAxiosSecure from "@/hooks/useAxiosSecure";
 const PersonalInformation = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const queryClient = useQueryClient();
 
   // ✅ Fetch profile data
   const { data: userData } = useQuery({
@@ -23,22 +24,26 @@ const PersonalInformation = () => {
     },
   });
 
-  console.log(userData);
-  // ✅ Preview image state
   const [preview, setPreview] = useState("");
 
-  // ✅ Set preview image when API data arrives
-  useEffect(() => {
-    if (userData?.userdata?.avatar) {
-      setPreview(userData.userdata.avatar);
-    }
-  }, [userData]);
-
+  // ✅ Hook form with reset
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
+
+  // ✅ Reset form when userData changes
+  useEffect(() => {
+    if (userData?.userdata) {
+      reset({
+        name: userData.userdata.name,
+        email: userData.userdata.email,
+      });
+      setPreview(userData.userdata.avatar || "");
+    }
+  }, [userData, reset]);
 
   // ✅ Update name mutation
   const ChangeNameMutation = useMutation({
@@ -55,6 +60,7 @@ const PersonalInformation = () => {
         context.toastId,
         response?.message || "Profile updated successfully"
       );
+      queryClient.invalidateQueries(["user"]); // refresh user data
     },
     onError: (error, _variables, context) => {
       const errorMessage =
@@ -83,6 +89,7 @@ const PersonalInformation = () => {
         context.toastId,
         response?.message || "Profile photo updated successfully"
       );
+      queryClient.invalidateQueries(["user"]);
     },
     onError: (error, _variables, context) => {
       const errorMessage =
@@ -92,27 +99,25 @@ const PersonalInformation = () => {
     },
   });
 
- const handleUploadImage = () => {
-  const input = document.createElement("input");
-  input.type = "file";
-  input.accept = "image/*";
+  const handleUploadImage = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
 
-  input.onchange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setPreview(URL.createObjectURL(file));
+    input.onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        setPreview(URL.createObjectURL(file));
 
-      const formData = new FormData();
--     formData.append("image", file);
-+     formData.append("avatar", file);
+        const formData = new FormData();
+        formData.append("avatar", file);
 
-      ProfileMutation.mutate(formData);
-    }
+        ProfileMutation.mutate(formData);
+      }
+    };
+
+    input.click();
   };
-
-  input.click();
-};
-
 
   return (
     <div className="max-w-4xl p-6 rounded-md shadow-sm">
@@ -153,7 +158,6 @@ const PersonalInformation = () => {
             Name
           </label>
           <input
-            defaultValue={userData?.userdata?.name || user?.name}
             id="name"
             type="text"
             {...register("name", { required: "Name is required" })}
@@ -172,8 +176,8 @@ const PersonalInformation = () => {
           <input
             id="email"
             type="email"
-            defaultValue={userData?.userdata?.email || user?.email}
             disabled
+            {...register("email")}
             className="w-full px-3 py-3 border border-gray-200 rounded-md 
              focus:outline-none focus:ring-2 focus:ring-blue-500 
              disabled:bg-gray-100 disabled:text-gray-500 
