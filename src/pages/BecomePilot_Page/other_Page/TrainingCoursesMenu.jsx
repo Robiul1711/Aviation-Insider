@@ -9,15 +9,21 @@ import { useQuery } from "@tanstack/react-query";
 import DynamicCourseDetail from "./DynamicCourseDetail";
 import ReactPaginate from "react-paginate";
 import { CourseListSkeleton } from "@/components/common/FlightSchoolSkeleton";
+import { useAuth } from "@/hooks/useAuth";
 
 const TrainingCoursesMenu = () => {
   const [pageCount, setPageCount] = useState("");
   const axiosPublic = useAxiosPublic();
   const [categoryId, setCategoryId] = useState(null);
   const [activeCategory, setActiveCategory] = useState({ id: null, title: "" });
+  const { catSearch, sortBy, setCatSearch } = useAuth();
 
   // Fetch all course categories
-  const { data: categoryResponse } = useQuery({
+  const {
+    data: categoryResponse,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["categories"],
     queryFn: () => axiosPublic.get("/course-categories"),
   });
@@ -34,19 +40,18 @@ const TrainingCoursesMenu = () => {
   }, [allCategories]);
 
   // Fetch category details based on active category ID
-  const {
-    data: detailResponse,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["category-details", categoryId, pageCount],
+
+  const { data: detailResponse } = useQuery({
+    queryKey: ["category-details", categoryId, pageCount, catSearch, sortBy],
     queryFn: () =>
-      axiosPublic.get(
-        `/course-category/details/${categoryId}`,
-        { params: { page: pageCount } }
-      ),
+      axiosPublic.get(`/course-category/details/${categoryId}`, {
+        params: {
+          page: pageCount,
+          search: catSearch || undefined, // only committed search
+          sort: sortBy || undefined,
+        },
+      }),
     enabled: !!categoryId,
-    onError: (err) => console.error("Error fetching details:", err),
   });
   return (
     <div>
@@ -64,6 +69,7 @@ const TrainingCoursesMenu = () => {
               onClick={() => {
                 setActiveCategory({ id: category.id, title: category.title });
                 setCategoryId(category.id);
+                setCatSearch(""); // ✅ clear search immediately
               }}
               className={`px-10 py-3 rounded-md text-white text-center font-semibold duration-300 ${
                 activeCategory.title === category.title
@@ -79,8 +85,8 @@ const TrainingCoursesMenu = () => {
         {/* Main Content */}
         <div className="w-[80%]">
           {isLoading ? (
-            <div >
-             <CourseListSkeleton count={3} />
+            <div>
+              <CourseListSkeleton count={3} />
             </div>
           ) : error ? (
             <div className="text-red-500 text-lg">

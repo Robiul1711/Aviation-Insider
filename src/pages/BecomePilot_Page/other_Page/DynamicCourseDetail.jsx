@@ -1,16 +1,17 @@
 import CourseList from "@/components/common/CourseList";
 import SearchAndSort from "@/components/common/SearchAndSort";
 import Title from "@/components/common/Title";
-import React, { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
+import React, { useEffect, useState } from "react";
 
 const DynamicCourseDetail = ({ details, categoryId, categoryTitle }) => {
   const courseData = details?.data?.data?.flight_schools || [];
+  const { catSearch, setCatSearch, sortBy, setSortBy } = useAuth();
+  const [search, setSearch] = useState(catSearch || ""); // 👈 keep local input
 
-  const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("Low to High");
+  // Search only when button clicked
   const handleSearch = () => {
-
-    console.log("Searching for:", search);
+    setCatSearch(search); // update global query state
   };
 
   if (!details?.data) return null;
@@ -32,6 +33,17 @@ const DynamicCourseDetail = ({ details, categoryId, categoryTitle }) => {
       {categoryId === 7 && <p>{categoryTitle}</p>}
       {categoryId === 8 && <p>{categoryTitle}</p>}
       {categoryId === 9 && <p>{categoryTitle}</p>}
+      {categoryId === 10 && <p>{categoryTitle}</p>}
+      {categoryId === 11 && <p>{categoryTitle}</p>}
+      {categoryId === 12 && <p>{categoryTitle}</p>}
+      {categoryId === 13 && <p>{categoryTitle}</p>}
+      {categoryId === 14 && <p>{categoryTitle}</p>}
+      {categoryId === 15 && <p>{categoryTitle}</p>}
+      {categoryId === 16 && <p>{categoryTitle}</p>}
+      {categoryId === 17 && <p>{categoryTitle}</p>}
+      {categoryId === 18 && <p>{categoryTitle}</p>}
+      {categoryId === 19 && <p>{categoryTitle}</p>}
+      {categoryId === 20 && <p>{categoryTitle}</p>}
 
       <div className="text-black">
         {/* Title */}
@@ -49,18 +61,25 @@ const DynamicCourseDetail = ({ details, categoryId, categoryTitle }) => {
           ></p>
         </div>
 
-        {/* Search and Sort Section */}
+        {/* 🔍 Search and Sort Section */}
         <div className="pt-16">
           <SearchAndSort
-            searchValue={search}
-            onSearchChange={(e) => setSearch(e.target.value)}
-            onSearch={handleSearch} // optional if you want a button click
-            sortValue={sort}
-            onSortChange={(e) => setSort(e.target.value)}
+            searchValue={search} // controlled input
+            onSearchChange={(e) => setSearch(e.target.value)} // update input only
+            onSearch={handleSearch} // commit to query
+            sortValue={sortBy}
+            onSortChange={(e) => setSortBy(e.target.value)}
           />
         </div>
         <div className="pt-16">
-          <CourseList courseData={courseData} />
+          {/* Course List */}
+          {courseData.length === 0 ? (
+            <div className="text-center text-gray-500 py-10 text-lg">
+              🚫 No search results found
+            </div>
+          ) : (
+            <CourseList courseData={courseData} />
+          )}
         </div>
       </div>
     </div>
