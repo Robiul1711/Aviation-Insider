@@ -165,15 +165,8 @@ export default function SignIn() {
           </div>
 
           {/* Remember Me + Forgot Password */}
-          <div className="flex items-center justify-between text-sm">
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                {...register("rememberMe")}
-                className="h-4 w-4 text-blue-600 border-gray-300 rounded"
-              />
-              Remember me
-            </label>
+          <div className="flex items-center justify-end text-sm">
+    
             <Link
               to={"/auth/forget-password"}
               type="button"

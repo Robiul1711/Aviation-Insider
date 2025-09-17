@@ -16,6 +16,7 @@ const ReviewsForSchool = ({ SchoolDetail }) => {
             key={item.user_id}
             className="grid grid-cols-1 sm:grid-cols-3 items-center gap-6 bg-white border border-gray-200 p-6 rounded-xl shadow-sm hover:shadow-lg transition"
           >
+            {console.log(item)}
             {/* Left Column */}
             <div className="flex items-center gap-4">
               <img
@@ -28,7 +29,7 @@ const ReviewsForSchool = ({ SchoolDetail }) => {
                   {item.name}
                 </h3>
                 <p className="text-sm text-gray-500">
-                  {item.flight_school_name || "Aviation School"}
+                  {item.headline || "Aviation School"}
                 </p>
               </div>
             </div>
