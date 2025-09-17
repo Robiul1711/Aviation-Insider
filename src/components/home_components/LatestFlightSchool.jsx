@@ -112,9 +112,10 @@ const LatestFlightSchool = () => {
                 </p>
 
                 {/* Footer */}
+                {/* {console.log(review)}
                 <div className="mt-4 text-xs text-gray-500 italic">
-                  {review?.school || "Unknown Flight School"}
-                </div>
+                  {review?.school}
+                </div> */}
               </Link>
             </SwiperSlide>
           ))}
