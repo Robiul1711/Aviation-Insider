@@ -26,8 +26,8 @@ const FlightSchoolsTable = () => {
   });
 
   // Extract data and meta from response
-const schools = data?.data || [];
-const meta = data?.meta || {};
+  const schools = data?.data || [];
+  const meta = data?.meta || {};
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
@@ -62,7 +62,8 @@ const meta = data?.meta || {};
       <div className="space-y-4">
         {schools.length > 0 ? (
           schools.map((school, index) => (
-            <div
+            <Link
+              to={`/school-profile/${school.id}`}
               key={index}
               className="grid grid-cols-1 sm:grid-cols-4 gap-4 sm:gap-6 items-center 
                          p-4 border border-gray-100 rounded-xl hover:shadow-md 
@@ -80,12 +81,9 @@ const meta = data?.meta || {};
                     }}
                   />
                 </div>
-                <Link
-                  to={`/school-profile/${school.id}`}
-                  className="text-blue-600 hover:underline"
-                >
+                <button className="text-blue-600 hover:underline">
                   <h3 className="font-medium text-gray-900">{school.name}</h3>
-                </Link>
+                </button>
               </div>
 
               {/* Base Code */}
@@ -115,7 +113,7 @@ const meta = data?.meta || {};
                   Read More
                 </Link>
               </div>
-            </div>
+            </Link>
           ))
         ) : (
           <FlightSchoolSkeleton count={10} columns={3} showButton={true} />

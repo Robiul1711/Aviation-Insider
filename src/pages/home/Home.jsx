@@ -21,7 +21,7 @@ const Home = () => {
       <LeadingFlightSchool />
       <ImageGallery />
       <MoreFlightSchool />
-      <LeaveReview />
+      {/* <LeaveReview /> */}
       <LatestArticles />
       <ContactForm />
       <ParthnerLink />

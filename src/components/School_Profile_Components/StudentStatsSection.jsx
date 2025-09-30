@@ -5,89 +5,89 @@ import "react-circular-progressbar/dist/styles.css";
 const StudentStatsSection = ({ SchoolDetail }) => {
   const passRates = SchoolDetail?.student_pass_rates;
 
-  // Convert object into a displayable array
+  // Convert object into a displayable array (exclude null/undefined)
   const passRateData = passRates
     ? [
         { label: "CPL Pass Rate", value: passRates.cpl_pass_rate },
         { label: "MEIR Pass Rate", value: passRates.meir_pass_rate },
         { label: "ATPL Pass Rate", value: passRates.atpl_pass_rate },
         { label: "ATPL Average", value: passRates.atpl_average },
-      ]
+      ].filter((item) => item.value != null)
     : [];
 
   return (
+
     <div className="bg-[#1a1a1a] text-white py-12 section-padding-x">
       <div className="flex flex-col md:flex-row justify-between items-center gap-12">
         {/* Left: Pass Rates */}
-        <div className="flex-1">
-          <h2 className="text-xl font-semibold mb-6">
-            Student Provided Pass Rates
-          </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-            {passRateData.map((item, idx) => (
-              <div
-                key={idx}
-                className="flex flex-col items-center bg-[#2a2a2a] p-4 rounded-xl shadow-md"
-              >
-                <div className="w-20 h-20 mb-3">
-                  <CircularProgressbar
-                    value={item.value}
-                    text={`${item.value}%`}
-                    styles={buildStyles({
-                      pathColor: "#3B82F6",
-                      textColor: "#fff",
-                      trailColor: "#444",
-                    })}
-                  />
+        {passRateData.length > 0 && (
+          <div className="flex-1">
+            <h2 className="text-xl font-semibold mb-6">
+              Student Provided Pass Rates
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+              {passRateData.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex flex-col items-center bg-[#2a2a2a] p-4 rounded-xl shadow-md"
+                >
+                  <div className="w-20 h-20 mb-3">
+                    <CircularProgressbar
+                      value={item.value}
+                      text={`${item.value}%`}
+                      styles={buildStyles({
+                        pathColor: "#3B82F6",
+                        textColor: "#fff",
+                        trailColor: "#444",
+                      })}
+                    />
+                  </div>
+                  <span className="text-sm text-center">{item.label}</span>
                 </div>
-                <span className="text-sm text-center">{item.label}</span>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
-{/* Middle: Employment Rate */}
-{SchoolDetail?.student_pass_rates?.employment_rate != null && (
-  <div className="flex flex-col items-center justify-center gap-3 bg-[#2a2a2a] p-6 rounded-xl shadow-md">
-    <p className="text-center text-sm">
-      Students who go on to employment
-    </p>
-    <div className="w-20 h-20">
-      <CircularProgressbar
-        value={SchoolDetail?.student_pass_rates?.employment_rate}
-        text={`${SchoolDetail?.student_pass_rates?.employment_rate}%`}
-        styles={buildStyles({
-          pathColor: "#3B82F6",
-          textColor: "#fff",
-          trailColor: "#444",
-        })}
-      />
-    </div>
-    {/* <p className="text-xs text-center">(within 6 months)</p> */}
-  </div>
-)}
+        {/* Middle: Employment Rate */}
+        {passRates?.employment_rate != null && (
+          <div className="flex flex-col items-center justify-center gap-3 bg-[#2a2a2a] p-6 rounded-xl shadow-md">
+            <p className="text-center text-sm">
+              Students who go on to employment
+            </p>
+            <div className="w-20 h-20">
+              <CircularProgressbar
+                value={passRates.employment_rate}
+                text={`${passRates.employment_rate}%`}
+                styles={buildStyles({
+                  pathColor: "#3B82F6",
+                  textColor: "#fff",
+                  trailColor: "#444",
+                })}
+              />
+            </div>
+          </div>
+        )}
 
-{/* Right: Recommendation Rate */}
-{SchoolDetail?.student_pass_rates?.recommendation_rate != null && (
-  <div className="flex flex-col items-center justify-center gap-3 bg-[#2a2a2a] p-6 rounded-xl shadow-md">
-    <p className="text-center text-sm">
-      {SchoolDetail?.name} is recommended by
-    </p>
-    <div className="w-20 h-20">
-      <CircularProgressbar
-        value={SchoolDetail?.student_pass_rates?.recommendation_rate}
-        text={`${SchoolDetail?.student_pass_rates?.recommendation_rate}%`}
-        styles={buildStyles({
-          pathColor: "#3B82F6",
-          textColor: "#fff",
-          trailColor: "#444",
-        })}
-      />
-    </div>
-    {/* <p className="text-xs text-center">of 7 students</p> */}
-  </div>
-)}
-
+        {/* Right: Recommendation Rate */}
+        {passRates?.recommendation_rate != null && (
+          <div className="flex flex-col items-center justify-center gap-3 bg-[#2a2a2a] p-6 rounded-xl shadow-md">
+            <p className="text-center text-sm">
+              {SchoolDetail?.name} is recommended by
+            </p>
+            <div className="w-20 h-20">
+              <CircularProgressbar
+                value={passRates.recommendation_rate}
+                text={`${passRates.recommendation_rate}%`}
+                styles={buildStyles({
+                  pathColor: "#3B82F6",
+                  textColor: "#fff",
+                  trailColor: "#444",
+                })}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -37,14 +37,17 @@ export default function TrainingOverview({ SchoolDetail }) {
         {/* Modular Courses */}
         <div className="w-full rounded-lg space-y-2 shadow-sm">
           {modularCourse?.map((item, index) => (
-            <Accordion key={index} type="single" collapsible>
-              <AccordionItem value={`item-${index}`} className="border-b-0">
-                <AccordionTrigger className="bg-gray-100 px-4 py-3 text-left text-base md:text-lg font-medium">
-                  {item?.title}
-                </AccordionTrigger>
-                <AccordionContent className="p-0">
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm text-left text-gray-700 min-w-[500px] md:min-w-full">
+        <Accordion
+  type="multiple"
+  defaultValue={modularCourse.map((_, i) => `item-${i}`)}
+>
+  {modularCourse?.map((item, index) => (
+    <AccordionItem value={`item-${index}`} key={index} className="border-b-0">
+      <AccordionTrigger className="bg-gray-100 px-4 py-3 text-left text-base md:text-lg font-medium">
+        {item?.title}
+      </AccordionTrigger>
+      <AccordionContent className="p-0">
+            <table className="w-full text-sm text-left text-gray-700 min-w-[500px] md:min-w-full">
                       <thead className="bg-gray-50 text-gray-900">
                         <tr>
                           <th className="px-4 py-2 font-medium">Name</th>
@@ -64,10 +67,11 @@ export default function TrainingOverview({ SchoolDetail }) {
                         ))}
                       </tbody>
                     </table>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+      </AccordionContent>
+    </AccordionItem>
+  ))}
+</Accordion>
+
           ))}
         </div>
 

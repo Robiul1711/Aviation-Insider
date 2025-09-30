@@ -58,6 +58,7 @@ import EditReview from "@/pages/leave_a_review_Page/EditReview";
 import ComingSoon from "@/pages/CommingSoon/ComingSoon";
 import PrivacyPolicy from "@/pages/TearmAndPrivacy/PrivacyPolicy";
 import TermsAndConditions from "@/pages/TearmAndPrivacy/TermsAndConditions";
+import UsersReviewsView from "@/components/leave_a_review_Components/UsersReviewsView";
 
 
 const router = createBrowserRouter([
@@ -181,6 +182,10 @@ const router = createBrowserRouter([
       {
         path: "/review-view/:id",
         element: <ReviewViewPage />,
+      },
+      {
+        path: "/users-reviews/:id",
+        element: <UsersReviewsView />,
       },
       // Become a pilot start
       {

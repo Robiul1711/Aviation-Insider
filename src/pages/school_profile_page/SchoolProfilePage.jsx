@@ -21,7 +21,7 @@ const SchoolProfilePage = () => {
   const {id}=useParams()
   const axiosPublic = useAxiosPublic();
   const {data:schoolDetals ,isLoading } = useQuery({
-    queryKey: ['school-details'],
+    queryKey: ['school-details', id],
     queryFn: () => axiosPublic.get(`/flight-school/details/${id}`),
   })
   const SchoolDetail = schoolDetals?.data?.data || [];

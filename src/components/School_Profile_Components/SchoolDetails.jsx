@@ -48,7 +48,7 @@ const SchoolDetails = ({SchoolDetail}) => {
       <Title level="title18" className="text-black">{SchoolDetail?.name} maintains strong connections and collaborations with various airlines, helping students gain real-world exposure and better career opportunities in the aviation industry.</Title>
 
         </div>
-  <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
   {SchoolDetail?.airline_partners?.map((item) => (
     <Link
       to={item.website_url}
@@ -61,7 +61,7 @@ const SchoolDetails = ({SchoolDetail}) => {
       <img
         src={item.logo_path}
         alt={item.title}
-        className="w-32 h-20 object-contain mb-4"
+        className="w-full h-20 md:w-full md:h-44 object-cover sm:object-contain mb-4"
       />
 
       {/* Description */}

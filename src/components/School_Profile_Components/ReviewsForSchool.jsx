@@ -2,8 +2,10 @@ import React from "react";
 import Title from "../common/Title";
 import dayjs from "dayjs";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import { Link, useParams } from "react-router-dom";
 
 const ReviewsForSchool = ({ SchoolDetail }) => {
+  const { id } = useParams();
   return (
     <div className="section-padding-x md:py-20">
       <Title level="title32" className="mb-8">
@@ -12,11 +14,11 @@ const ReviewsForSchool = ({ SchoolDetail }) => {
 
       <div className="space-y-5">
         {SchoolDetail?.review?.reviewed_users?.map((item) => (
-          <div
+          <Link
+            to={`/users-reviews/${item.review_id}`}
             key={item.user_id}
             className="grid grid-cols-1 sm:grid-cols-3 items-center gap-6 bg-white border border-gray-200 p-6 rounded-xl shadow-sm hover:shadow-lg transition"
           >
-            {console.log(item)}
             {/* Left Column */}
             <div className="flex items-center gap-4">
               <img
@@ -55,35 +57,34 @@ const ReviewsForSchool = ({ SchoolDetail }) => {
                 />
               </div>
             </div>
-          </div>
+          </Link>
         ))}
 
- {(!SchoolDetail?.review?.reviewed_users ||
-  SchoolDetail?.review?.reviewed_users.length === 0) && (
-  <div className="flex flex-col items-center justify-center p-6 bg-blue-50 border border-blue-200 rounded-lg mt-6">
-    {/* Icon */}
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-12 w-12 text-blue-400 mb-4"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M13 16h-1v-4h-1m0-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z"
-      />
-    </svg>
+        {(!SchoolDetail?.review?.reviewed_users ||
+          SchoolDetail?.review?.reviewed_users.length === 0) && (
+          <div className="flex flex-col items-center justify-center p-6 bg-blue-50 border border-blue-200 rounded-lg mt-6">
+            {/* Icon */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-12 w-12 text-blue-400 mb-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13 16h-1v-4h-1m0-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z"
+              />
+            </svg>
 
-    {/* Message */}
-    <p className="text-gray-700 text-center text-sm md:text-base">
-      No reviews available for this school.
-    </p>
-  </div>
-)}
-
+            {/* Message */}
+            <p className="text-gray-700 text-center text-sm md:text-base">
+              No reviews available for this school.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

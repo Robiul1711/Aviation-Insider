@@ -23,7 +23,7 @@ const ContactInfoSection = ({ SchoolDetail }) => {
       text: SchoolDetail?.contact_information?.address,
       isLink: false,
     },
-  ];
+  ].filter(item => item.text); // ✅ filter out null/empty
 
   return (
     <div className="section-padding-x p-8 bg-white">
@@ -40,24 +40,24 @@ const ContactInfoSection = ({ SchoolDetail }) => {
           </p>
 
           <div className="space-y-6">
-            {contactDetails?.map((item, index) => (
+            {contactDetails.map((item, index) => (
               <div key={index} className="flex items-center gap-4">
                 <div className="w-10 h-10 border border-gray-300 rounded-full flex items-center justify-center text-gray-600">
-                  {item?.icon}
+                  {item.icon}
                 </div>
-                {item?.isLink ? (
+                {item.isLink ? (
                   <a
-                    href={item?.text}
+                    href={item.text}
                     className="text-gray-900 hover:text-blue-600 transition-colors duration-200 lg:text-lg"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {item?.text}
+                    {item.text}
                   </a>
                 ) : (
                   <span
                     className="text-gray-900 lg:text-lg"
-                    dangerouslySetInnerHTML={{ __html: item?.text }}
+                    dangerouslySetInnerHTML={{ __html: item.text }}
                   ></span>
                 )}
               </div>
@@ -67,16 +67,15 @@ const ContactInfoSection = ({ SchoolDetail }) => {
 
         {/* Map Section */}
         <div className="w-full h-96 rounded-lg overflow-hidden shadow">
-          {console.log(SchoolDetail?.contact_information)}
-         <iframe
-  title="Location"
-  src={`https://maps.google.com/maps?q=${SchoolDetail?.contact_information?.latitude},${SchoolDetail?.contact_information?.longitude}&hl=es&z=14&output=embed`}
-  width="100%"
-  height="100%"
-  style={{ border: 0 }}
-  allowFullScreen=""
-  loading="lazy"
-></iframe>
+          <iframe
+            title="Location"
+            src={`https://maps.google.com/maps?q=${SchoolDetail?.contact_information?.latitude},${SchoolDetail?.contact_information?.longitude}&hl=es&z=14&output=embed`}
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+          ></iframe>
         </div>
       </div>
     </div>
