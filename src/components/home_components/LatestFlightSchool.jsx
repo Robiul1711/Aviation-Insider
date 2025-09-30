@@ -69,26 +69,35 @@ const LatestFlightSchool = () => {
         >
           {LatestFlight?.data?.data?.map((review) => (
             <SwiperSlide key={review.id}>
-              <Link  to={`/school-profile/${review?.flight_school_id}`} className="w-full h-full flex flex-col justify-between p-6 rounded-2xl border bg-white hover:shadow-lg transition">
+              <Link
+                to={`/users-reviews/${review?.review_id}`}
+                className="w-full h-full flex flex-col justify-between p-4 xlg:p-6 rounded-2xl border bg-white hover:shadow-lg transition"
+              >
                 {/* Top Section */}
-                <div className="flex justify-between items-center">
-                  <div className="flex items-center gap-4">
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
+                  {/* Reviewer Info */}
+                  <div className="flex flex-col md:flex-row items-center  gap-3 md:gap-4 w-full md:w-auto">
                     <img
                       src={
-                        review?.image ||
+                        review?.reviewer_image ||
                         "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg"
                       }
                       alt={review.commentTitle}
                       className="w-12 h-12 object-cover rounded-full"
                     />
-                    <p
-                     
-                      className="text-base font-semibold text-gray-800 hover:text-Primary transition"
-                    >
-                      {review?.name}
-                    </p>
+                    <div className="flex flex-col md:flex-row gap-2 md:items-center text-center md:text-left">
+                      <p className="text-base font-semibold xlg:text-lg text-gray-800 hover:text-Primary transition">
+                        {review?.reviewer_name}
+                      </p>
+                      <span className="hidden md:block text-gray-500 w-0.5 h-5 bg-Secondary"></span>
+                      <p className="text-base font-semibold xlg:text-lg text-gray-800 hover:text-Primary transition">
+                        {review?.name}
+                      </p>
+                    </div>
                   </div>
-                  <div style={{ width: 50, height: 50 }}>
+
+                  {/* Circular Progress */}
+                  <div className="w-16 h-16 md:w-12 md:h-12 mt-3 md:mt-0">
                     <CircularProgressbar
                       value={review.overall_percentage}
                       text={`${review.overall_percentage}%`}
@@ -101,21 +110,10 @@ const LatestFlightSchool = () => {
                   </div>
                 </div>
 
-                {/* Title */}
-                <h2 className="text-lg font-semibold mt-4 text-gray-900 line-clamp-1">
-                  {review?.description}
-                </h2>
-
-                {/* Message */}
-                <p className="text-sm text-gray-600 mt-2 line-clamp-3">
+                {/* Title / Message */}
+                <h2 className="font-semibold mt-4 text-gray-900 text-center md:text-left">
                   {review?.message}
-                </p>
-
-                {/* Footer */}
-                {/* {console.log(review)}
-                <div className="mt-4 text-xs text-gray-500 italic">
-                  {review?.school}
-                </div> */}
+                </h2>
               </Link>
             </SwiperSlide>
           ))}

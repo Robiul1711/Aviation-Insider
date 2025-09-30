@@ -22,13 +22,13 @@ const data = [
     name: "Future Pilot",
     icon: <PlaneIcon className="size-6 md:size-auto" />,
     description: "Interactive guide to starting YOUR aviation career",
-    link: "/training-providers",
+    link: "/become-pilot",
   },
   {
     name: "Trainee Pilot",
     icon: <BookIcon className="size-6 md:size-auto" />,
     description: "All the tools you need through your training",
-    link: "/become-pilot",
+    link: "/training-providers",
   },
   {
     name: "Leave A Review",

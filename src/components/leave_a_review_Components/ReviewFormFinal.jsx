@@ -11,15 +11,15 @@ export default function ReviewFormFinal({ data }) {
   const { user } = useAuth();
 
   useEffect(() => {
-    // Prefill if data exists or from logged-in user
     if (data?.data?.submitted_by) {
       setValue("name", data.data.submitted_by.name || user?.name || "");
       setValue("email", data.data.submitted_by.email || user?.email || "");
+      setValue("consent", data.data.consent === 1 ? 1 : 0); // ✅ set initial value from API
     } else {
       setValue("name", user?.name || "");
       setValue("email", user?.email || "");
+      setValue("consent", 0); // default unchecked
     }
-    setValue("securityContact", false);
   }, [data, user, setValue]);
 
   return (
@@ -65,17 +65,27 @@ export default function ReviewFormFinal({ data }) {
 
         {/* Security Contact Checkbox */}
         <div>
-          <label className="flex items-start space-x-3 cursor-pointer">
+          <label className="flex items-center space-x-2 cursor-pointer">
             <input
               type="checkbox"
-              {...register("securityContact")}
+              {...register("consent", {
+                required: "You must agree before submitting",
+                setValueAs: (v) => (v ? 1 : 0), // ✅ convert true/false → 1/0
+              })}
               className="w-4 h-4 mt-0.5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
             />
+
             <span className="text-gray-700">
-              For security, we need your details in case we need to contact you
-              regarding your review
+              Please tick to agree to our terms, which include the need for your
+              contact details in case we need to contact you regarding your
+              review.
             </span>
           </label>
+          {errors.consent && (
+            <p className="text-red-500 text-sm mt-1">
+              {errors.consent.message}
+            </p>
+          )}
         </div>
       </div>
     </div>

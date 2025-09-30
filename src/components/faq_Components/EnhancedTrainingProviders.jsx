@@ -1,10 +1,7 @@
-import {
-  CircularProgressbar,
-  buildStyles,
-} from "react-circular-progressbar";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import ReactPaginate from "react-paginate";
 import { useState } from "react";
 
@@ -14,8 +11,12 @@ import { FlightSchoolSkeleton } from "../common/FlightSchoolSkeleton";
 const EnhancedTrainingProviders = () => {
   const [pageCount, setPageCount] = useState(1);
   const axiosPublic = useAxiosPublic();
-
-  const { data: fetchedData, isLoading, error } = useQuery({
+  const queryClient = useQueryClient();
+  const {
+    data: fetchedData,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["enhancedTrainingProviders", pageCount],
     queryFn: async () => {
       const response = await axiosPublic.get(
@@ -24,13 +25,21 @@ const EnhancedTrainingProviders = () => {
           params: { page: pageCount, per_page: 5 }, // ✅ request 5 per page
         }
       );
+
       return response.data;
     },
+
     keepPreviousData: true, // keeps old data while fetching new page
   });
 
-  if (isLoading) return <p><FlightSchoolSkeleton showRatting={true} showButton={false} count={5} /></p>;
-  if (error) return <p className="text-[#FF0000]">No available data at the moment</p>;
+  if (isLoading)
+    return (
+      <p>
+        <FlightSchoolSkeleton showRatting={true} showButton={false} count={5} />
+      </p>
+    );
+  if (error)
+    return <p className="text-[#FF0000]">No available data at the moment</p>;
 
   return (
     <div className="space-y-4">
@@ -46,7 +55,23 @@ const EnhancedTrainingProviders = () => {
               className="w-16 h-16 object-contain"
             />
             <div className="flex flex-col gap-1">
-              <Link to={`/school-profile/${item.flight_school_id}`} className="sm:text-xl font-bold">{item.name}</Link>
+              <Link
+                to={`/school-profile/${item.flight_school_id}`}
+                className="sm:text-xl font-bold"
+                onMouseEnter={() => {
+                  queryClient.prefetchQuery({
+                    queryKey: ["school-details", item.flight_school_id],
+                    queryFn: () =>
+                      axiosPublic
+                        .get(`/flight-school/details/${item.flight_school_id}`)
+                        .then((res) => res.data),
+                    staleTime: 1000 * 60 * 5, // optional: keep data fresh for 5 mins
+                  });
+                }}
+              >
+                {item.name}
+              </Link>
+
               <p className="text-gray-600 text-sm sm:text-base">
                 {item.total_review_count} reviews
               </p>
