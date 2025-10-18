@@ -100,9 +100,13 @@ const CommentArticle = ({ articleDetails, isLoading }) => {
         <h2 className="text-2xl font-semibold text-gray-900 mb-4">
           {articleDetails?.data?.data?.article?.title}
         </h2>
-        <p className="text-gray-700">
-          {articleDetails?.data?.data?.article?.description}
-        </p>
+  <p
+  className="text-gray-700"
+  dangerouslySetInnerHTML={{
+    __html: articleDetails?.data?.data?.article?.description
+  }}
+></p>
+
       </div>
     )
   )}

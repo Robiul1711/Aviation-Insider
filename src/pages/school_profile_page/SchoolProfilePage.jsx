@@ -27,7 +27,7 @@ const SchoolProfilePage = () => {
   const SchoolDetail = schoolDetals?.data?.data || [];
   return (
     <div>
-      <SchoolBanner SchoolDetail={SchoolDetail}/>
+      <SchoolBanner SchoolDetail={SchoolDetail} isLoading={isLoading}/>
       <QualityFlyProfile SchoolDetail={SchoolDetail} />
       <SchoolSwiper SchoolDetail={SchoolDetail} />
       <SchoolDetails SchoolDetail={SchoolDetail}  />

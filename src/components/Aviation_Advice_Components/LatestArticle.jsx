@@ -12,20 +12,18 @@ const LatestArticle = ({ articleDetails }) => {
 
   return (
     <div className="section-padding-x py-10 md:py-16 relative">
-      <h2 className="text-2xl font-bold text-Secondary mb-8">Latest Articles</h2>
+      <h2 className="text-2xl font-bold text-Secondary mb-8">
+        Latest Articles
+      </h2>
 
       <div className="relative">
         {/* Left Arrow */}
-        <button
-          className="swiper-button-prev-custom absolute z-10 -left-5 top-1/2 -translate-y-1/2 bg-white border border-gray-300 shadow-md rounded-full p-2 hover:bg-gray-100"
-        >
+        <button className="swiper-button-prev-custom absolute z-10 -left-5 top-1/2 -translate-y-1/2 bg-white border border-gray-300 shadow-md rounded-full p-2 hover:bg-gray-100">
           <ChevronLeft size={24} />
         </button>
 
         {/* Right Arrow */}
-        <button
-          className="swiper-button-next-custom absolute z-10 -right-5 top-1/2 -translate-y-1/2 bg-white border border-gray-300 shadow-md rounded-full p-2 hover:bg-gray-100"
-        >
+        <button className="swiper-button-next-custom absolute z-10 -right-5 top-1/2 -translate-y-1/2 bg-white border border-gray-300 shadow-md rounded-full p-2 hover:bg-gray-100">
           <ChevronRight size={24} />
         </button>
 
@@ -61,9 +59,11 @@ const LatestArticle = ({ articleDetails }) => {
                     <h2 className="font-semibold text-xl text-Secondary line-clamp-1">
                       {article.title}
                     </h2>
-                    <p className="mt-2 text-gray-700 line-clamp-2">
-                      {article.description}
-                    </p>
+                    <p
+                      className="mt-2 text-gray-700 line-clamp-2"
+                      dangerouslySetInnerHTML={{ __html: article?.description }}
+                    ></p>
+
                     <p className="text-sm text-gray-500 mt-1 flex items-center gap-1">
                       <CiCalendar /> {article.published_at}
                     </p>
