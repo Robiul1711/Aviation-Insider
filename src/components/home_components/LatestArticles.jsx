@@ -52,9 +52,12 @@ const LatestArticles = () => {
               <Title level="title20" className="text-[#010101] line-clamp-1">
                 {item.title}
               </Title>
-              <Title level="title16" className="text-[#010101] line-clamp-2">
-                {item.description}
-              </Title>
+              <Title
+                level="title16"
+                className="text-[#010101] line-clamp-2"
+                dangerouslySetInnerHTML={{ __html: item?.description }}
+              />
+
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-gray-700" />
                 <Title level="title16" className="!text-[#010101]">

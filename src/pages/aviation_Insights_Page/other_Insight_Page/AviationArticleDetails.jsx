@@ -30,24 +30,23 @@ const AviationArticleDetails = () => {
 
       {/* Content Section */}
       <div className="section-padding-x py-10 md:py-16 max-w-7xl mx-auto">
-{isLoading ? (
-  // 🔹 Shimmer skeleton for image
-  <div className="relative w-full h-[250px] md:h-[500px] mb-8 rounded-md shadow-md overflow-hidden bg-gray-300">
-    <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-  </div>
-) : (
-  <img
-    src={article?.image}
-    alt={article?.title}
-    className="w-full h-[250px] md:h-[500px] mb-8 rounded-md shadow-md object-cover"
-  />
-)}
+        {isLoading ? (
+          // 🔹 Shimmer skeleton for image
+          <div className="relative w-full h-[250px] md:h-[500px] mb-8 rounded-md shadow-md overflow-hidden bg-gray-300">
+            <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+          </div>
+        ) : (
+          <img
+            src={article?.image}
+            alt={article?.title}
+            className="w-full h-[250px] md:h-[500px] mb-8 rounded-md shadow-md object-cover"
+          />
+        )}
 
-
-         <CommentArticle articleDetails={articleDetails} isLoading={isLoading} />
+        <CommentArticle articleDetails={articleDetails} isLoading={isLoading} />
       </div>
 
-    <LatestArticle articleDetails={articleDetails} />
+      <LatestArticle articleDetails={articleDetails} />
 
       {/* Links and Ads */}
       <OtherCommonLinks className="flex flex-wrap justify-center items-center gap-5 section-padding-x py-10 md:py-14" />
