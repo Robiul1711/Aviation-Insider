@@ -37,8 +37,7 @@ export default function TrainingOverview({ SchoolDetail }) {
       {/* Left & Center Panel */}
       <div className="md:col-span-2 space-y-6">
         {/* Modular Courses */}
-        {/* Modular Courses */}
-        <div className="w-full rounded-lg space-y-2 shadow-sm">
+        <div className="w-full rounded-lg space-y-2 ">
           {Array.isArray(modularCourse) && modularCourse.length > 0 ? (
             <Accordion
               type="multiple"
@@ -75,7 +74,7 @@ export default function TrainingOverview({ SchoolDetail }) {
               ))}
             </Accordion>
           ) : (
-            <p className="text-gray-500">No modular course available.</p>
+            <p className="text-gray-500">No modular course available!</p>
           )}
         </div>
 
@@ -92,7 +91,7 @@ export default function TrainingOverview({ SchoolDetail }) {
   const showTitle = aircraftSimulators.some(item => item.title)
 
   return (
-    <div className="border rounded shadow overflow-x-auto">
+    <div className="border rounded  overflow-x-auto">
       <h3 className="bg-gray-100 px-4 py-2 font-semibold text-base md:text-lg">
         Aircraft & Simulators
       </h3>

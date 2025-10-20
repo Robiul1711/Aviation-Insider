@@ -1,33 +1,47 @@
-import React, { useState } from 'react';
-import {
-  CircularProgressbar,
-  buildStyles,
-} from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
-import useAxiosPublic from '@/hooks/useAxiosPublic';
-import { useQuery } from '@tanstack/react-query';
-import ReactPaginate from 'react-paginate';
-import { Link } from 'react-router-dom';
-import { FlightSchoolSkeleton } from '../common/FlightSchoolSkeleton';
-
-
+import React, { useState } from "react";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+import ReactPaginate from "react-paginate";
+import { Link } from "react-router-dom";
+import { FlightSchoolSkeleton } from "../common/FlightSchoolSkeleton";
 
 const TopTrainingProviders = () => {
-    const [pageCount, setPageCount] = useState(1);
-    const axiosPublic=useAxiosPublic();
-  const {data: TopTrainingPro, isLoading, error} = useQuery({
-    queryKey: ['topTrainingProviders', pageCount],
+  const [pageCount, setPageCount] = useState(1);
+  const axiosPublic = useAxiosPublic();
+  const {
+    data: TopTrainingPro,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["topTrainingProviders", pageCount],
     queryFn: async () => {
-      const response = await axiosPublic.get('/reviews/enhanced-training-providers', {
-        params: { page: pageCount, per_page: 5 }, // ✅ request 5 per page
-      });
+      const response = await axiosPublic.get(
+        "/reviews/enhanced-training-providers",
+        {
+          params: { page: pageCount, per_page: 5 }, // ✅ request 5 per page
+        }
+      );
       return response.data;
     },
-  })
-    if (isLoading) return <p><FlightSchoolSkeleton  showRatting={true} showButton={false} count={5}  /></p>;
-   if (error) return <p className="text-[#FF0000]">No available data at the moment</p>;
+  });
+  if (isLoading)
+    return (
+      <p>
+        <FlightSchoolSkeleton showRatting={true} showButton={false} count={5} />
+      </p>
+    );
+  if (error)
+    return <p className="text-[#FF0000]">No available data at the moment</p>;
   return (
     <div className="space-y-4">
+      {/* Top Training Providers */}
+      {
+        !TopTrainingPro?.data || TopTrainingPro?.data.length === 0 ? (
+          <p className="text-[#FF0000]">No available data at the moment</p>
+        ) : (
+          <>
       {TopTrainingPro?.data?.map((item) => (
         <div
           key={item.flight_school_id}
@@ -35,10 +49,21 @@ const TopTrainingProviders = () => {
         >
           {console.log(item)}
           <div className="flex items-center gap-8">
-            <img src={item.image} alt={item.name} className="w-16 h-16 object-contain" />
+            <img
+              src={item.image}
+              alt={item.name}
+              className="w-16 h-16 object-contain"
+            />
             <div className="flex flex-col gap-1">
-              <Link to={`/school-profile/${item.flight_school_id}`} className="sm:text-xl font-bold">{item.name}</Link>
-              <p className="text-gray-600 text-sm sm:text-base">{item.total_review_count} reviews</p>
+              <Link
+                to={`/school-profile/${item.flight_school_id}`}
+                className="sm:text-xl font-bold"
+              >
+                {item.name}
+              </Link>
+              <p className="text-gray-600 text-sm sm:text-base">
+                {item.total_review_count} reviews
+              </p>
             </div>
           </div>
           <div style={{ width: 50, height: 50 }}>
@@ -46,15 +71,15 @@ const TopTrainingProviders = () => {
               value={item.overall_percentage}
               text={`${item.overall_percentage}%`}
               styles={buildStyles({
-                pathColor: "#10B981",        // ✅ Main circle (green in this case)
-                textColor: "#111827",        // Text inside
-                trailColor: "#D1D5DB",       // Background circle
+                pathColor: "#10B981", // ✅ Main circle (green in this case)
+                textColor: "#111827", // Text inside
+                trailColor: "#D1D5DB", // Background circle
               })}
             />
           </div>
         </div>
       ))}
-           {/* Pagination */}
+      {/* Pagination */}
       <div className="flex">
         <ReactPaginate
           breakLabel="..."
@@ -74,9 +99,11 @@ const TopTrainingProviders = () => {
           forcePage={pageCount - 1}
         />
       </div>
+          </>
+      )
+      }
     </div>
   );
 };
 
 export default TopTrainingProviders;
-

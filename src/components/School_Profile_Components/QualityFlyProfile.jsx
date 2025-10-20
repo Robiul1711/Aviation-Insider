@@ -59,7 +59,7 @@ const QualityFlyProfile = ({ SchoolDetail }) => {
             <img
               src={SchoolDetail?.image}
               alt={SchoolDetail?.name}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover "
             />
           </div>
 

@@ -43,6 +43,11 @@ const EnhancedTrainingProviders = () => {
 
   return (
     <div className="space-y-4">
+      {fetchedData?.data?.length === 0 ? (
+        <p className="text-[#FF0000]">No available data at the moment</p>
+      ) : (
+        <>
+              {/* Top Training Providers */}
       {fetchedData?.data?.map((item) => (
         <div
           key={item.flight_school_id}
@@ -112,6 +117,10 @@ const EnhancedTrainingProviders = () => {
           forcePage={pageCount - 1}
         />
       </div>
+          </>
+      )
+        }
+
     </div>
   );
 };
