@@ -25,6 +25,8 @@ const SchoolProfilePage = () => {
     queryFn: () => axiosPublic.get(`/flight-school/details/${id}`),
   })
   const SchoolDetail = schoolDetals?.data?.data || [];
+
+  
   return (
     <div>
       <SchoolBanner SchoolDetail={SchoolDetail} isLoading={isLoading}/>

@@ -23,11 +23,14 @@ const EuropePPL = () => {
       return res.data;
     },
   })
-  console.log(EuPPl);
+
+  // console.log(EuPPl);
   return (
     <div>
       <CommonBanner image={image} title={EuPPl?.data?.title} />
       <EuropeDetail data={EuPPl?.data} />
+      {
+        EuPPl?.data?.flight_schools && EuPPl?.data?.flight_schools.length > 0 && (
       <div className="section-padding-x">
         <Title level="title40" className="text-black text-center py-5 md:py-10">
           Flight Training Courses
@@ -58,6 +61,8 @@ const EuropePPL = () => {
         />
       </div>
       </div>
+        )
+      }
       <CommonAds isShow />
     </div>
   );
