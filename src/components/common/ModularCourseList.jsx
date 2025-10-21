@@ -1,13 +1,48 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ModularCourseList = ({ courseData }) => {
+const ModularCourseList = ({ courseData, isLoading }) => {
+  // ✅ Simple skeleton placeholder
+  const LoadingSkeleton = () => (
+    <div className="animate-pulse space-y-6">
+      {[...Array(3)].map((_, idx) => (
+        <div
+          key={idx}
+          className="border border-gray-200 rounded-lg overflow-hidden"
+        >
+          <div className="flex items-center gap-4 p-4 bg-gray-50 border-b border-gray-200">
+            <div className="w-16 h-16 bg-gray-200 rounded-md"></div>
+            <div className="space-y-2">
+              <div className="h-3 w-24 bg-gray-200 rounded"></div>
+              <div className="h-4 w-40 bg-gray-300 rounded"></div>
+            </div>
+          </div>
+
+          <div className="px-4 py-3 space-y-3">
+            {[...Array(3)].map((_, i) => (
+              <div
+                key={i}
+                className="grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-4 items-center border-t border-gray-100 py-3"
+              >
+                {[...Array(5)].map((__, j) => (
+                  <div key={j} className="h-4 bg-gray-200 rounded w-3/4"></div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+
+  if (isLoading) return <LoadingSkeleton />;
+
   return (
     <div className="space-y-8">
-       {courseData?.flight_schools?.map((school, index) => (
+      {courseData?.flight_schools?.map((school, index) => (
         <div
-        key={index}
-        className="border border-gray-200 rounded-lg overflow-hidden"
+          key={index}
+          className="border border-gray-200 rounded-lg overflow-hidden"
         >
           <div className="flex items-center gap-4 p-4 bg-gray-50 border-b border-gray-200">
             <img
@@ -33,7 +68,6 @@ const ModularCourseList = ({ courseData }) => {
             <div>Price</div>
             <div>Country</div>
           </div>
-
 
           <div className="px-4 py-2 space-y-3">
             {school.courses.map((course, idx) => (

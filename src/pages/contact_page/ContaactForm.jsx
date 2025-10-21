@@ -1,6 +1,6 @@
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { showLoadingToast, updateToastError, updateToastSuccess } from "@/lib/utils";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { BeatLoader } from "react-spinners";
@@ -43,21 +43,28 @@ const ContaactForm = () => {
     console.log(data);
     ContactMutation.mutate(data);
   };
+const {data:contactInfo,isLoading,error}=useQuery({
+    queryKey:["contact-info"],
+    queryFn:async()=>{
+        const response=await axiosPublic.get("/cms/contact_page/get_in_touch_section");
+        return response?.data;
+    }
+})
 
   return (
     <div className="py-12 bg-white flex flex-col lg:flex-row gap-10 max-w-7xl mx-auto section-padding-x">
       {/* Left: Contact Info */}
       <div className="flex-1 space-y-4">
-        <h2 className="text-2xl font-semibold">Contact Us</h2>
-        <p className=" text-gray-700 max-w-sm">
-          Whether you have a question, need a quote, or want to schedule a service we're here to help. Fast, friendly, and ready when you are.
-        </p>
+        <h2 className="text-2xl font-semibold">{contactInfo?.data?.get_in_touch_section?.title||""}</h2>
+        <p className=" text-gray-700 max-w-sm" dangerouslySetInnerHTML={{__html:contactInfo?.data?.get_in_touch_section?.description||""}}></p>
+         
+        
         <div className="flex items-center gap-3 mt-4">
           <div className="w-10 h-10 rounded-full border flex items-center justify-center">
             <MdEmail size={20} />
           </div>
           <span className="text-gray-800 font-medium text-base">
-            contact@pilot-network.com
+           {contactInfo?.data?.get_in_touch_section?.email||""}
           </span>
         </div>
       </div>

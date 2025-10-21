@@ -7,11 +7,26 @@ import gal5 from "../../assets/images/gal5.png";
 import gal6 from "../../assets/images/gal6.png";
 import gal7 from "../../assets/images/gal7.png";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
-const imageData = [
+
+
+const ImageGallery = () => {
+  const axiosPublic=useAxiosPublic();
+  const {data:galleryImages}=useQuery({
+    queryKey:['gallery-images'],
+    queryFn:async()=>{
+      const res=await axiosPublic.get('/cms/home_page/explore_section');
+      return res.data;
+    }
+  })
+  const imagesFromApi=galleryImages?.data?.explore_section;
+  console.log(galleryImages?.data?.explore_section)
+  const imageData = [
     {
       id: 1,
-      title: "Become A Pilot",
+      title: "BECOME A PILOT",
       subtitle: "Our interactive guide to becoming a pilot",
       className: "md:col-span-2 md:row-span-2",
       src: gal1,
@@ -66,8 +81,6 @@ const imageData = [
     link: "/review",
   },
 ];
-
-const ImageGallery = () => {
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-12  max-w-7xl mx-auto">
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 auto-rows-[minmax(180px,auto)]">
