@@ -7,30 +7,31 @@ import { useQuery } from "@tanstack/react-query";
 import { debounce } from "lodash";
 import ReactPaginate from "react-paginate";
 import { FlightSchoolSkeleton } from "../common/FlightSchoolSkeleton";
+import PaginationComponent from "../common/PaginationComponent";
 
 const SchoolFinder = () => {
   const axiosPublic = useAxiosPublic();
   const [pageCount, setPageCount] = useState(1);
-const [search, setSearch] = useState("");
-const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
 
-useEffect(() => {
-  const handler = setTimeout(() => {
-    setDebouncedSearch(search); // update only after 500ms
-  }, 500);
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(search); // update only after 500ms
+    }, 500);
 
-  return () => clearTimeout(handler);
-}, [search]);
+    return () => clearTimeout(handler);
+  }, [search]);
 
-const { data: schoolsData, isLoading } = useQuery({
-  queryKey: ["flight-schools", debouncedSearch, pageCount],
-  queryFn: () =>
-    axiosPublic.get("/flight-schools/leave-review", {
-      params: { page: pageCount, search: debouncedSearch },
-    }),
-  keepPreviousData: true,
-});
-console.log(schoolsData?.data?.data);
+  const { data: schoolsData, isLoading } = useQuery({
+    queryKey: ["flight-schools", debouncedSearch, pageCount],
+    queryFn: () =>
+      axiosPublic.get("/flight-schools/leave-review", {
+        params: { page: pageCount, search: debouncedSearch },
+      }),
+    keepPreviousData: true,
+  });
+  // console.log(schoolsData?.data?.data);
   return (
     <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-white min-h-screen">
       {/* Header */}
@@ -93,20 +94,27 @@ console.log(schoolsData?.data?.data);
                 </Link>
               </div>
 
-        <CommonButton
-  link={`/add-your-review/${school.id}?name=${encodeURIComponent(school.name)}`}
-  variant="secondary"
->
-  Add Your Review
-</CommonButton>
-
+              <CommonButton
+                link={`/add-your-review/${school.id}?name=${encodeURIComponent(
+                  school.name
+                )}`}
+                variant="secondary"
+              >
+                Add Your Review
+              </CommonButton>
             </div>
           ))
         )}
       </div>
       {/* Pagination */}
       <div className="flex">
-        <ReactPaginate
+        <PaginationComponent
+          pageCount={schoolsData?.data?.meta?.last_page || 1}
+          setPageCount={setPageCount}
+          forcePage={pageCount}
+        />
+
+        {/* <ReactPaginate
           breakLabel="..."
           pageCount={schoolsData?.data?.meta?.last_page || 1}
           pageRangeDisplayed={3}
@@ -126,7 +134,7 @@ console.log(schoolsData?.data?.data);
           pageClassName="mx-1 cursor-pointer"
           pageLinkClassName="w-[42px] h-[42px] border border-primary flex justify-center items-center text-black rounded-lg hover:bg-Secondary hover:text-white transition-colors"
           forcePage={pageCount - 1}
-        />
+        /> */}
       </div>
     </div>
   );

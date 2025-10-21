@@ -7,11 +7,14 @@ const SearchAndSort = ({
   onSearch,
   sortValue,
   onSortChange,
-  sortOptions = ["Low to High", "High to Low"],
+  sortOptions = [
+    { label: "Low to High", value: "low_to_high" },
+    { label: "High to Low", value: "high_to_low" },
+  ],
 }) => {
-  console.log(searchValue, sortValue);
+  // console.log(searchValue, sortValue);
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6 mb-6">
+    <div className="flex flex-col md:flex-row sm:items-center md:justify-between gap-4 sm:gap-6 mb-6">
       {/* Search Input */}
       <div className="flex gap-2 w-full sm:w-auto">
         <input
@@ -38,8 +41,8 @@ const SearchAndSort = ({
           className="w-full sm:w-48 border border-gray-300 rounded-md py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500"
         >
           {sortOptions.map((option, idx) => (
-            <option key={idx} value={option}>
-              {option}
+            <option key={idx} value={option.value}>
+              {option.label}
             </option>
           ))}
         </select>

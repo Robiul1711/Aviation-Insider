@@ -3,12 +3,14 @@ import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import dayjs from "dayjs";
+import { Link } from "react-router-dom";
 
 const TopratedProviders = ({ data }) => {
   return (
     <div className="space-y-4 ">
+      {console.log(data)}
       {data?.map((item) => (
-        <div
+        <Link to={`/users-reviews/${item.review_id}`}
           key={item.id}
           className="grid grid-cols-1 sm:grid-cols-3 items-center bg-gray-100 p-5 rounded-xl shadow-sm hover:shadow-md transition"
         >
@@ -20,10 +22,10 @@ const TopratedProviders = ({ data }) => {
               className="w-16 h-16 rounded-md object-cover border"
             />
             <div>
-              <h3 className="text-lg font-semibold text-gray-800">
-                {item.message}
+              <h3 className="text-lg font-semibold text-gray-800 ">
+              {item.flight_school_name}
               </h3>
-              <p className="text-sm text-gray-500">{item.flight_school_name}</p>
+              <p className="text-sm text-gray-500 line-clamp-1">  {item.message}</p>
             </div>
           </div>
 
@@ -46,7 +48,7 @@ const TopratedProviders = ({ data }) => {
               />
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
