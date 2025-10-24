@@ -81,9 +81,9 @@ const CommentArticle = ({ articleDetails, isLoading }) => {
   const onSubmit = (data) => {
     CommentMutation.mutate({ ...data, article_id: id });
   };
-
+console.log(articleDetails)
   return (
-    <div className="max-w-7xl mx-auto bg-white">
+    <div className="">
       {/* Article Header */}
 <div className="mb-6">
   {isLoading ? (
@@ -96,16 +96,20 @@ const CommentArticle = ({ articleDetails, isLoading }) => {
     </div>
   ) : (
     articleDetails?.data?.data?.article && (
-      <div className="bg-gray-50 p-6 rounded-lg">
+      <div className="sm:bg-gray-50 sm:p-6 sm:rounded-lg">
         <h2 className="text-2xl font-semibold text-gray-900 mb-4">
           {articleDetails?.data?.data?.article?.title}
         </h2>
-  <p
-  className="text-gray-700"
-  dangerouslySetInnerHTML={{
-    __html: articleDetails?.data?.data?.article?.description
-  }}
-></p>
+<div className="overflow-x-auto">
+  <div
+    className="prose lg:prose-lg max-w-none article-content "
+    dangerouslySetInnerHTML={{
+      __html: articleDetails?.data?.data?.article?.long_description,
+    }}
+  ></div>
+</div>
+
+
 
       </div>
     )

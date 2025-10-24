@@ -47,14 +47,16 @@ const LatestArticle = ({ articleDetails }) => {
             LatestArticles.map((article) => (
               <SwiperSlide key={article.id}>
                 <Link
-                  to={`/aviation-article-details/${article.id}`}
+                  to={`/aviation-article-details/${article.slug}`}
                   className="block w-full shadow-md bg-[#F3F4F6] rounded overflow-hidden hover:shadow-lg transition"
                 >
-                  <img
-                    src={article.image}
-                    alt={article.title}
-                    className="w-full object-cover"
-                  />
+                  <div className="w-full h-60 sm:h-64 md:h-54 xl:h-72 overflow-hidden">
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="w-full h-full object-cover object-center"
+                    />
+                  </div>
                   <div className="p-4">
                     <h2 className="font-semibold text-xl text-Secondary line-clamp-1">
                       {article.title}

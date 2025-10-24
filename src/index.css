@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @import "tailwindcss";
-
+@plugin '@tailwindcss/typography';
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -260,4 +260,47 @@ button {
 }
 .wave-3 {
   animation-delay: 2s;
+}
+
+
+
+.article-content {
+  width: 100%;
+  overflow-x: auto; /* 👈 enables horizontal scroll if table is too wide */
+}
+
+.article-content .table {
+  width: 100%;              /* 👈 makes table take full width */
+  border-collapse: collapse; /* removes double borders */
+  table-layout: auto;        /* ensures flexible column width */
+}
+
+.article-content th,
+.article-content td {
+  border: 1px solid #000; /* 👈 solid black borders */
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.article-content th {
+  background-color: #f8f8f8;
+  font-weight: 600;
+}
+
+.article-content ul {
+  list-style-type: disc;
+
+}
+
+.article-content ul li::marker {
+  color: #000; /* black bullet points */
+}
+
+.article-content ol {
+  list-style-type: decimal;
+
+}
+
+.article-content ol li::marker {
+  color: #000; /* black number color */
 }

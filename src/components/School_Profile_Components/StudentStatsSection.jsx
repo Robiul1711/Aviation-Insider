@@ -16,7 +16,8 @@ const StudentStatsSection = ({ SchoolDetail }) => {
     : [];
 
   return (
-
+    <>
+   
     <div className="bg-[#1a1a1a] text-white py-12 section-padding-x">
       <div className="flex flex-col md:flex-row justify-between items-center gap-12">
         {/* Left: Pass Rates */}
@@ -90,6 +91,9 @@ const StudentStatsSection = ({ SchoolDetail }) => {
         )}
       </div>
     </div>
+
+    </>
+
   );
 };
 

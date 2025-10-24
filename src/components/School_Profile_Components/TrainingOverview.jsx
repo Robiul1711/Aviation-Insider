@@ -42,15 +42,16 @@ export default function TrainingOverview({ SchoolDetail }) {
             <Accordion
               type="multiple"
               defaultValue={modularCourse.map((_, i) => `item-${i}`)}
+              className=""
             >
               {modularCourse.map((item, index) => (
-                <AccordionItem value={`item-${index}`} key={index}>
+                <AccordionItem value={`item-${index}`} key={index} className="mb-6 border rounded">
                   <AccordionTrigger className="bg-gray-100 px-4 py-3 text-left text-base md:text-lg font-medium">
                     {item?.title}
                   </AccordionTrigger>
                   <AccordionContent className="p-0">
-                    <table className="w-full text-sm text-left text-gray-700">
-                      <thead className="bg-gray-50 text-gray-900">
+                    <table className="w-full text-sm text-left text-gray-700 ">
+                      <thead className=" text-gray-900 ">
                         <tr>
                           <th className="px-4 py-2">Name</th>
                           <th className="px-4 py-2">Duration</th>
