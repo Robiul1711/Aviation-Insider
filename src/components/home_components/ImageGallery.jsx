@@ -17,74 +17,94 @@ const ImageGallery = () => {
   const {data:galleryImages}=useQuery({
     queryKey:['gallery-images'],
     queryFn:async()=>{
-      const res=await axiosPublic.get('/cms/home_page/explore_section');
+      const res=await axiosPublic.get('/explore-data');
       return res.data;
     }
   })
-  const imagesFromApi=galleryImages?.data?.explore_section;
-  console.log(galleryImages?.data?.explore_section)
-  const imageData = [
-    {
-      id: 1,
-      title: "BECOME A PILOT",
-      subtitle: "Our interactive guide to becoming a pilot",
-      className: "md:col-span-2 md:row-span-2",
-      src: gal1,
-      link: "/become-pilot",
-    },
-  {
-    id: 2,
-    title: "Top Rated Training Providers",
-    subtitle: "View our top rated training providers",
-    className: "md:col-span-2",
-    src: gal2,
-    link: "/all-flight-schools",
-  },
-  {
-    id: 3,
-    title: "INTEGRATED PROVIDERS",
-    subtitle: "View our database of integrated courses",
-    className: "md:col-span-2 md:row-span-2",
-    src: gal3,
-    link: "/integrated-courses",
-  },
-  {
-    id: 4,
-    title: "MODULAR COURSES",
-    subtitle: "View our database of modular providers",
-    className: "md:col-span-2",
-    src: gal4,
-    link: "/modular-courses",
-  },
-  {
-    id: 5,
-    title: "OUR MAP OF ATOS",
-    subtitle: "Find your nearest ATO",
-    className: "md:col-span-2",
-    src: gal5,
-    link: "/flight-school-map",
-  },
-  {
-    id: 6,
-    title: "ALL TRAINING PROVIDERS",
-    subtitle: "View our database of training providers",
-    className: "md:col-span-2",
-    src: gal6,
-    link: "/all-flight-schools",
-  },
-  {
-    id: 7,
-    title: "FLIGHT SCHOOL REVIEWS",
-    subtitle: "Read all of our reviews",
-    className: "md:col-span-2",
-    src: gal7,
-    link: "/review",
-  },
+
+
+  const layoutClasses = [
+  "md:col-span-2 md:row-span-2",
+  "md:col-span-2",
+  "md:col-span-2 md:row-span-2",
+  "md:col-span-2",
+  "md:col-span-2",
+  "md:col-span-2",
+  "md:col-span-2",
 ];
+const imagesFromApi = galleryImages?.data || [];
+
+const mergedImages = imagesFromApi.map((item, index) => ({
+  id: item.id,
+  title: item.title,
+  subtitle: item.subtitle,
+  src: item.image,
+  link: item.link,
+  className: layoutClasses[index] || "md:col-span-2", // fallback
+}));
+
+//   const imageData = [
+//     {
+//       id: 1,
+//       title: "BECOME A PILOT",
+//       subtitle: "Our interactive guide to becoming a pilot",
+//       className: "md:col-span-2 md:row-span-2",
+//       src: gal1,
+//       link: "/become-pilot",
+//     },
+//   {
+//     id: 2,
+//     title: "Top Rated Training Providers",
+//     subtitle: "View our top rated training providers",
+//     className: "md:col-span-2",
+//     src: gal2,
+//     link: "/all-flight-schools",
+//   },
+//   {
+//     id: 3,
+//     title: "INTEGRATED PROVIDERS",
+//     subtitle: "View our database of integrated courses",
+//     className: "md:col-span-2 md:row-span-2",
+//     src: gal3,
+//     link: "/integrated-courses",
+//   },
+//   {
+//     id: 4,
+//     title: "MODULAR COURSES",
+//     subtitle: "View our database of modular providers",
+//     className: "md:col-span-2",
+//     src: gal4,
+//     link: "/modular-courses",
+//   },
+//   {
+//     id: 5,
+//     title: "OUR MAP OF ATOS",
+//     subtitle: "Find your nearest ATO",
+//     className: "md:col-span-2",
+//     src: gal5,
+//     link: "/flight-school-map",
+//   },
+//   {
+//     id: 6,
+//     title: "ALL TRAINING PROVIDERS",
+//     subtitle: "View our database of training providers",
+//     className: "md:col-span-2",
+//     src: gal6,
+//     link: "/all-flight-schools",
+//   },
+//   {
+//     id: 7,
+//     title: "FLIGHT SCHOOL REVIEWS",
+//     subtitle: "Read all of our reviews",
+//     className: "md:col-span-2",
+//     src: gal7,
+//     link: "/review",
+//   },
+// ];
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-12  max-w-7xl mx-auto">
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 auto-rows-[minmax(180px,auto)]">
-        {imageData.map((image) => (
+         {mergedImages.map((image) => (
           <div
             key={image.id}
             className={`relative group overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl h-full min-h-[200px] ${image.className}`}

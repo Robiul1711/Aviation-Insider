@@ -18,7 +18,7 @@ const AllAdviceAricle = ({ articleData, isLoading }) => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {articles.map((article) => (
         <Link
-          to={`/aviation-advice-details/${article.id}`}
+          to={`/aviation-advice-details/${article.slug}`}
           key={article.id}
           className="w-full shadow-lg bg-[#F3F4F6] rounded"
         >

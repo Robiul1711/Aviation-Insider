@@ -15,7 +15,7 @@ const AviationArticleDetails = () => {
 
   const { data: articleDetails, isLoading } = useQuery({
     queryKey: ["article-details", id],
-    queryFn: () => axiosPublic.get("/article/details/" + id),
+    queryFn: () => axiosPublic.get("/article/" + id),
     enabled: !!id,
   });
 
@@ -36,11 +36,12 @@ const AviationArticleDetails = () => {
             <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/60 to-transparent" />
           </div>
         ) : (
-          <img
-            src={article?.image}
-            alt={article?.title}
-            className="w-full h-[250px] md:h-[500px] mb-8 rounded-md shadow-md object-cover"
-          />
+         <img
+  src={article?.image}
+  alt={article?.title}
+  className="w-full h-[250px] md:h-[600px] mb-8 rounded-md shadow-md object-cover "
+/>
+
         )}
 
         <CommentArticle articleDetails={articleDetails} isLoading={isLoading} />

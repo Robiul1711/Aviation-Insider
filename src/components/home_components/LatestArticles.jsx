@@ -37,7 +37,7 @@ const LatestArticles = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {articles.map((item) => (
           <Link
-            to={`/aviation-article-details/${item.id}`}
+            to={`/aviation-article-details/${item.slug}`}
             className="flex flex-col bg-[#E9EAEB] rounded-lg overflow-hidden"
             key={item.id}
           >

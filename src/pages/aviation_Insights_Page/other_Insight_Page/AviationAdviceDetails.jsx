@@ -13,7 +13,7 @@ const AviationAdviceDetails = () => {
   const axiosPublic = useAxiosPublic();
   const { data: adviceDetails, isLoading } = useQuery({
     queryKey: ["advice-details"],
-    queryFn: () => axiosPublic.get("/aviation-advice/details/" + id),
+    queryFn: () => axiosPublic.get("/aviation-advice/" + id),
   });
 
   return (
@@ -44,8 +44,8 @@ const AviationAdviceDetails = () => {
             {adviceDetails?.data?.data?.title}
           </h2>
           <p
-            className="text-lg mb-4 "
-            dangerouslySetInnerHTML={{
+         className="prose lg:prose-lg max-w-none article-content "
+    dangerouslySetInnerHTML={{
               __html: adviceDetails?.data?.data?.description,
             }}
           ></p>

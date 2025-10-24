@@ -3,7 +3,18 @@ import Title from "../common/Title";
 import { Link } from "react-router-dom";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-import ReactPaginate from "react-paginate";
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
+
+// import required modules
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
 const ParthnerLink = () => {
   const axiosPublic = useAxiosPublic();
@@ -40,16 +51,25 @@ const ParthnerLink = () => {
     </div>
   );
 
-  // Pagination Skeleton
-  const SkeletonPagination = () => (
-    <div className="flex justify-center mt-8 animate-pulse">
-      <div className="flex items-center gap-3">
-        <div className="w-20 h-10 bg-gray-200 rounded-md"></div>
-        {[...Array(5)].map((_, i) => (
-          <div key={i} className="w-10 h-10 bg-gray-200 rounded-md"></div>
+  // Swiper Skeleton
+  const SkeletonSwiper = () => (
+    <div className="animate-pulse">
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={20}
+        breakpoints={{
+          640: { slidesPerView: 2 },
+          768: { slidesPerView: 3 },
+          1024: { slidesPerView: 4 },
+        }}
+        className="mySwiper"
+      >
+        {[...Array(8)].map((_, index) => (
+          <SwiperSlide key={index}>
+            <SkeletonCard />
+          </SwiperSlide>
         ))}
-        <div className="w-20 h-10 bg-gray-200 rounded-md"></div>
-      </div>
+      </Swiper>
     </div>
   );
 
@@ -59,89 +79,102 @@ const ParthnerLink = () => {
         <Title level="title40" className="text-black text-center mb-14">
           OUR PARTNERS
         </Title>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {[...Array(8)].map((_, index) => (
-            <SkeletonCard key={index} />
-          ))}
-        </div>
-        
-        <SkeletonPagination />
+        <SkeletonSwiper />
       </div>
     );
   }
 
   const partners = data?.data?.data || [];
-console.log(partners);
+
   return (
     <div className="section-padding-x py-16 bg-gray-50">
       <Title level="title40" className="text-black text-center mb-14">
         OUR PARTNERS
       </Title>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {partners.map((item) => (
-          <div
-            key={item.id}
-            className="flex flex-col items-center text-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md hover:scale-[1.02] transition-transform border"
-          >
-            {/* Logo */}
-            <img
-              src={item.image}
-              alt={item.airline_name}
-              className="w-28 h-20 object-contain mb-4"
-            />
-
-            {/* Airline Name */}
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">
-              {item.airline_name}
-            </h3>
-
-            {/* Description */}
-            <p 
-              className="text-sm text-gray-600 mb-4 line-clamp-3" 
-              dangerouslySetInnerHTML={{ __html: item.description }}
-            />
-
-            {/* Website Button */}
-            {item.website_url && (
-              <Link
-                to={item.website_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 text-sm bg-Secondary text-white rounded-md hover:bg-Secondary-light transition"
-              >
-                Visit Website
-              </Link>
-            )}
-          </div>
-        ))}
-      </div>
-      
-      {/* Pagination */}
-      <div className="flex justify-center mt-8">
-        <ReactPaginate
-          breakLabel="..."
-          pageCount={data?.data?.meta?.last_page || 1}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={2}
-          onPageChange={(event) => {
-            setPageCount(event.selected + 1);
+      {/* Swiper Component */}
+      <div className="relative">
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          slidesPerView={1}
+          spaceBetween={20}
+          navigation={{
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
           }}
-          containerClassName="flex items-center md:gap-3 gap-1 flex-wrap"
-          previousLabel="Previous"
-          nextLabel="Next"
-          previousClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md cursor-pointer"
-          nextClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md cursor-pointer"
-          activeClassName="font-[700] bg-Secondary rounded-lg border-none"
-          activeLinkClassName="text-white"
-          disabledClassName="opacity-50 cursor-not-allowed"
-          breakClassName="md:px-4 px-2 py-2 text-sm font-medium"
-          pageClassName="mx-1 cursor-pointer"
-          pageLinkClassName="w-[42px] h-[42px] border border-primary flex justify-center items-center text-black rounded-lg hover:bg-Secondary hover:text-white transition-colors"
-          forcePage={pageCount - 1}
-        />
+          pagination={{
+            clickable: true,
+            el: '.swiper-pagination',
+          }}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          breakpoints={{
+            // when window width is >= 640px
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            // when window width is >= 768px
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 25,
+            },
+            // when window width is >= 1024px
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 30,
+            },
+          }}
+          className="mySwiper"
+        >
+          {partners.map((item) => (
+            <SwiperSlide key={item.id}>
+              <div className="flex flex-col items-center text-center bg-white p-6 rounded-xl shadow-sm hover:shadow-md hover:scale-[1.02] transition-transform border h-full">
+                {/* Logo */}
+                <img
+                  src={item.image}
+                  alt={item.airline_name}
+                  className="w-28 h-20 object-contain mb-4"
+                />
+
+                {/* Airline Name */}
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                  {item.airline_name}
+                </h3>
+
+                {/* Description */}
+                <p 
+                  className="text-sm text-gray-600 mb-4 line-clamp-3 flex-grow" 
+                  dangerouslySetInnerHTML={{ __html: item.description }}
+                />
+
+                {/* Website Button */}
+                {item.website_url && (
+                  <Link
+                    to={item.website_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 text-sm bg-Secondary text-white rounded-md hover:bg-Secondary-light transition mt-auto"
+                  >
+                    Visit Website
+                  </Link>
+                )}
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        {/* Custom Navigation Buttons */}
+        <div className="swiper-button-prev !-left-2 md:!-left-4 !w-10 !h-10 !bg-white !rounded-full !shadow-lg after:!text-sm after:!text-gray-700 hover:!bg-Secondary hover:after:!text-white"></div>
+        <div className="swiper-button-next !-right-2 md:!-right-4 !w-10 !h-10 !bg-white !rounded-full !shadow-lg after:!text-sm after:!text-gray-700 hover:!bg-Secondary hover:after:!text-white"></div>
+        
+        {/* Custom Pagination */}
+        <div className="swiper-pagination !relative !mt-8"></div>
       </div>
+
+
     </div>
   );
 };
