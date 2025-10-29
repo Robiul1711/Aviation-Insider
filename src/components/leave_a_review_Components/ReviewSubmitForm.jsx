@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form";
 export default function ReviewSubmitForm({ data }) {
   const { register, watch, setValue } = useFormContext();
 
-  console.log("Incoming Data:", data?.data?.course_types);
+  // console.log("Incoming Data:", data?.data?.course_types);
 
   // ✅ Static course options (not from API)
   const courseOptions = [
@@ -61,7 +61,7 @@ export default function ReviewSubmitForm({ data }) {
       if (data.data.course_types) {
         // map API course_types into IDs
         const normalized = data.data.course_types.map((c) => c.id);
-        console.log("Normalized course IDs:", normalized);
+        // console.log("Normalized course IDs:", normalized);
         setValue("course_type_id", normalized);
       }
     }

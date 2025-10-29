@@ -81,7 +81,7 @@ const CommentArticle = ({ articleDetails, isLoading }) => {
   const onSubmit = (data) => {
     CommentMutation.mutate({ ...data, article_id: id });
   };
-console.log(articleDetails)
+// console.log(articleDetails)
   return (
     <div className="">
       {/* Article Header */}

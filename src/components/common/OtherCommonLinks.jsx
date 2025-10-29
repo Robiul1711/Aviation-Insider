@@ -10,7 +10,7 @@ const OtherCommonLinks = ({ className, image }) => {
     queryFn: () => axiosPublic.get('/cms/about_page/sponsor_section'),
   });
 
-  console.log(adsData2?.data?.data?.sponsor_section);
+  // console.log(adsData2?.data?.data?.sponsor_section);
 
   // Convert object to array
   const sponsorItems = adsData2?.data?.data?.sponsor_section

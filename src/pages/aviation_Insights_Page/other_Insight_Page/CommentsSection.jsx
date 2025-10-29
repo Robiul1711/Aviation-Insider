@@ -32,7 +32,7 @@ const CommentsSection = () => {
     },
     enabled: !!id,
   });
-console.log(data)
+// console.log(data)
   const comments = data?.data || [];
 
   // Delete
@@ -180,7 +180,7 @@ console.log(data)
                         </button>
                         <button
                           onClick={() => {
-                            console.log(`Deleting comment with ID: ${c.id}`);
+                            // console.log(`Deleting comment with ID: ${c.id}`);
                             deleteMutation.mutate(c.id);
                           }}
                           className="px-3 py-1 text-xs text-white bg-red-500 rounded-md hover:bg-red-600"

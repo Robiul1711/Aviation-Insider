@@ -15,7 +15,7 @@ const ContactUs = () => {
         return response?.data;
     }
 })
-console.log(contactBanner?.data?.banner_section?.image);
+// console.log(contactBanner?.data?.banner_section?.image);
   return (
     <div>
       <CommonBanner image={contactBanner?.data?.banner_section?.image} title={contactBanner?.data?.banner_section?.title} />

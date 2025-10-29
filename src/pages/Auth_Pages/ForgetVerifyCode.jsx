@@ -10,7 +10,7 @@ import { useEmail } from "@/hooks/useEmail";
 import { BeatLoader } from "react-spinners";
 const ForgetVerifyCode = () => {
   const {email, setResetToken}=useEmail();
-  console.log(email);
+  // console.log(email);
     const navigate=useNavigate();
        const axiosPublic = useAxiosPublic();
   const {
@@ -34,14 +34,14 @@ const ForgetVerifyCode = () => {
        navigate('/auth/reset-password');
     },
     onError: (error) => {
-      console.log(error);
+      // console.log(error);
       const errorMessage =
         error.response?.data?.message || "Something went wrong, try again later!!";
       toast.error(errorMessage);
     },
   })
 const onSubmit = (data) => {
-  console.log("Submitted OTP:", data.otp);
+  // console.log("Submitted OTP:", data.otp);
   OTPMutation.mutate({ ...data, email});
 };
 

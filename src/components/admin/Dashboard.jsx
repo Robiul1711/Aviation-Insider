@@ -32,7 +32,7 @@ const Dashboard = () => {
 
       {/* Review Cards */}
       <div className="grid gap-4 ">
-        {console.log(data)}
+        {/* {console.log(data)} */}
         {data?.data?.map((item) => (
           <Link 
             to={`/school-profile/${item.flight_school_id}`}

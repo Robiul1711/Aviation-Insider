@@ -7,10 +7,10 @@ const Preferences = () => {
   const [emailNotification, setEmailNotification] = useState(true);
 
   const handleSaveUpdate = () => {
-    console.log('Save & Update clicked', {
-      updateSystems,
-      emailNotification
-    });
+    // console.log('Save & Update clicked', {
+    //   updateSystems,
+    //   emailNotification
+    // });
   };
 
   return (

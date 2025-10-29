@@ -47,7 +47,7 @@ export default function ForgetPassword() {
     },
   });
   const onSubmit = (data) => {
-    console.log("Reset request sent to:", data);
+    // console.log("Reset request sent to:", data);
     setEmail(data.email);
     ForgetMutation.mutate(data);
   };

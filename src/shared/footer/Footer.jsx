@@ -66,7 +66,7 @@ const Footer = () => {
           </div>
 
           <p className="text-center md:text-right md:text-xl">
-            © {new Date().getFullYear()} Aviation Insider. All rights reserved.
+            © Owned by Aviation Insider. All rights reserved.
           </p>
         </div>
       </div>

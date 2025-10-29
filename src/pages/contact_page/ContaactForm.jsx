@@ -32,7 +32,7 @@ const ContaactForm = () => {
             reset();
     },
     onError: (error, _variables, context) => {
-      console.log(error);
+      // console.log(error);
       const errorMessage =
         error.response?.data?.message || "Something went wrong, try again later!!";
     updateToastError(context.toastId, errorMessage);
@@ -40,7 +40,7 @@ const ContaactForm = () => {
   })
   
   const onSubmit = data => {
-    console.log(data);
+    // console.log(data);
     ContactMutation.mutate(data);
   };
 const {data:contactInfo,isLoading,error}=useQuery({

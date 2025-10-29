@@ -47,7 +47,7 @@ const TopTrainingProviders = () => {
           key={item.flight_school_id}
           className="flex items-center justify-between bg-[#F3F4F6] p-4 rounded-md"
         >
-          {console.log(item)}
+          {/* {console.log(item)} */}
           <div className="flex items-center gap-8">
             <img
               src={item.image}

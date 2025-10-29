@@ -44,7 +44,7 @@ const Security = () => {
     },
   })
   const onSubmit = (data) => {
-    console.log("Form Data", data);
+    // console.log("Form Data", data);
     PasswordChangeNameMutation.mutate(data);
     // handle password update here
   };
