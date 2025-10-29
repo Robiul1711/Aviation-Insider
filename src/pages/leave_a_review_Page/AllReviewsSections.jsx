@@ -60,7 +60,7 @@ const AllReviewsSections = () => {
       flight_school_id: id, // backend expects this
     };
 
-    console.log("Final form data:", payload);
+    // console.log("Final form data:", payload);
     ReviewMutation.mutate(payload);
   };
 

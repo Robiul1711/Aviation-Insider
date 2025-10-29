@@ -4,12 +4,12 @@ import SearchAndSort from "@/components/common/SearchAndSort";
 import CourseList from "../common/CourseList";
 
 const ModularCourse = ({details}) => {
-  console.log(details);
+  // console.log(details);
   const [school, setSchool] = useState("");
   const [course, setCourse] = useState("");
   const [sort, setSort] = useState("Low to High");
   const handleSearch = () => {
-    console.log("Searching for:", school, course, sort);
+    // console.log("Searching for:", school, course, sort);
   };
   const courseData=details?.data?.data?.flight_schools
 

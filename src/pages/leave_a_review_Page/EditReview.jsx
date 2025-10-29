@@ -31,7 +31,7 @@ const EditReview = () => {
     }
   });
 
-console.log(data);
+// console.log(data);
   const EditReviewMutation = useMutation({
     mutationFn: async (data) => {
       const response = await axiosSecure.post(`/reviews/${id}`, data);
@@ -64,7 +64,7 @@ const onSubmit = (formData) => {
     flight_school_id: data?.data?.flight_school_id,
   };
 
-  console.log("Final form data:", payload);
+  // console.log("Final form data:", payload);
   EditReviewMutation.mutate(payload);
 };
 

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const TopratedProviders = ({ data }) => {
   return (
     <div className="space-y-4 ">
-      {console.log(data)}
+      {/* {console.log(data)} */}
       {data?.map((item) => (
         <Link to={`/users-reviews/${item.review_id}`}
           key={item.id}

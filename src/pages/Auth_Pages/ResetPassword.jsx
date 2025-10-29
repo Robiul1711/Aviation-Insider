@@ -53,8 +53,8 @@ const ResetPassword = () => {
   });
 
   const onSubmit = (data) => {
-    console.log("Form submitted:", data);
-    console.log("Reset token is:", resetToken);
+    // console.log("Form submitted:", data);
+    // console.log("Reset token is:", resetToken);
     ResetPassMutation.mutate({ ...data, reset_token: resetToken });
   };
 

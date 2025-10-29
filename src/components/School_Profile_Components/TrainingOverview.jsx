@@ -30,7 +30,7 @@ export default function TrainingOverview({ SchoolDetail }) {
 
   const modularCourse = SchoolDetail?.categories || [];
 
-  console.log(modularCourse);
+  // console.log(modularCourse);
 
   return (
     <div className="p-4 md:p-6 section-padding-x text-gray-800 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">

@@ -6,7 +6,7 @@ const PrivateRoute = ({ children }) => {
   const { user } = useAuth();
   const location = useLocation();
 
-  console.log(user?.email, token); // Use optional chaining
+  // console.log(user?.email, token); // Use optional chaining
 
   if (token && user && user.email) {
     return children;

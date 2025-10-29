@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function CommonCourseList({ data, isLoading }) {
-  console.log(data);
+  // console.log(data);
   const schoolsData = [
     {
       id: 1,

@@ -26,7 +26,7 @@ const UKPPL = () => {
       return res.data;
     },
   });
-  console.log(UKPPL?.data?.flight_schools);
+  // console.log(UKPPL?.data?.flight_schools);
   return (
     <div>
       <CommonBanner image={image} title={UKPPL?.data?.title} />

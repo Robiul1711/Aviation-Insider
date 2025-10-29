@@ -39,11 +39,11 @@ const FlightSchoolMap = () => {
   const { data: flightSchoolsmap } = useQuery({
     queryKey: ["flightSchoolsMaps"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/flight-school-maps");
+      const res = await axiosPublic.get("/flight-schools/locations");
       return res.data;
     },
   });
-
+// console.log(flightSchoolsmap)
   // Convert API data to [lat, lng] numbers
   const schoolPositions =
     flightSchoolsmap?.data?.map((school) => [
@@ -98,7 +98,7 @@ const FlightSchoolMap = () => {
                 icon={redIcon}
               >
                 <Popup>
-                  <strong>{school.school_name}</strong>
+                  <strong>{school.flight_school_name}</strong>
                   <br />
                   Location: {parseFloat(school.latitude).toFixed(4)},{" "}
                   {parseFloat(school.longitude).toFixed(4)}

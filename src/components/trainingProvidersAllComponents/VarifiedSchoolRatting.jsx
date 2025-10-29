@@ -23,7 +23,7 @@ const VarifiedSchoolRatting = () => {
       return response.data;
     },
   });
-  console.log("Verified Schools Data:", verifiedSchools?.data);
+  // console.log("Verified Schools Data:", verifiedSchools?.data);
 
   return (
     <div className="p-6 bg-white">
