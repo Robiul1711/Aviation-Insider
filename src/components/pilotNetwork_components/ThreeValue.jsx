@@ -1,5 +1,7 @@
 import React from 'react';
 import Title from '../common/Title';
+import useAxiosPublic from '@/hooks/useAxiosPublic';
+import { useQuery } from '@tanstack/react-query';
 
 const data = [
   {
@@ -23,6 +25,20 @@ const data = [
 ];
 
 const ThreeValue = () => {
+  const axiosPublic = useAxiosPublic();
+  const { data: keyvalue } = useQuery({
+    queryKey: ["keyvalue"],
+    queryFn: () => axiosPublic.get("/cms/pilot_network_page/key_value_section"),
+  });
+
+  // Extract object
+  const KEYVALUE_OBJ = keyvalue?.data?.data?.key_value_section;
+
+  // Convert object to array
+  const KEYVALUE = KEYVALUE_OBJ ? Object.values(KEYVALUE_OBJ) : [];
+
+  console.log(KEYVALUE);
+
   return (
     <div className="section-padding-x py-16 bg-[#F3F4F6]">
       <Title level="title40" className="text-black text-center">
@@ -30,13 +46,13 @@ const ThreeValue = () => {
       </Title>
 
       <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {data.map((item) => (
-          <div key={item.id} className="bg-white p-6 rounded-lg shadow text-center">
+        {KEYVALUE.map((item, index) => (
+          <div key={index} className="bg-white p-6 rounded-lg shadow text-center">
             <Title level="title24" className="text-black">
               {item.title}
             </Title>
             <Title level="title16" className="text-[#666667] mt-4 text-balance">
-              {item.description}
+              <span dangerouslySetInnerHTML={{ __html: item.description }} />
             </Title>
           </div>
         ))}

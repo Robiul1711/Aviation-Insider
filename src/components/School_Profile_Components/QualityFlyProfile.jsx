@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import VideoButton from "../common/VideoButton";
-
+import badge from "@/assets/images/badge.png";
 const QualityFlyProfile = ({ SchoolDetail }) => {
   const [selectedVideo, setSelectedVideo] = useState(null);
 
@@ -30,21 +30,19 @@ const QualityFlyProfile = ({ SchoolDetail }) => {
           <div className="relative w-full max-w-6xl">
             <button
               onClick={closeVideoModal}
-              className="absolute -top-12 right-0 text-white text-4xl z-10"
+              className="absolute -top-12 right-0 text-white text-4xl z-10 hover:text-gray-300 transition-colors"
             >
               &times;
             </button>
-            <div className="relative pt-[56.25%]">
-              {/* Bigger iframe */}
+            <div className="relative pt-[56.25%] bg-black rounded-xl">
               <iframe
-                src={`https://www.youtube.com/embed/${getYouTubeId(
-                  selectedVideo
-                )}?autoplay=1`}
+                src={`https://www.youtube.com/embed/${getYouTubeId(selectedVideo)}?autoplay=1&rel=0&modestbranding=1`}
                 className="absolute top-0 left-0 w-full h-full rounded-xl"
                 frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
                 title="Video player"
+                referrerPolicy="strict-origin-when-cross-origin"
               ></iframe>
             </div>
           </div>
@@ -64,9 +62,17 @@ const QualityFlyProfile = ({ SchoolDetail }) => {
           </div>
 
           {/* Title and Location - Larger font sizes */}
-          <div>
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-              {SchoolDetail?.name}
+          <div className="space-y-2 mt-2">
+            <h1 className="text-3xl flex items-center gap-2 md:text-4xl font-bold text-gray-900">
+              {SchoolDetail?.name}  
+            
+                  {SchoolDetail?.is_verified === 1 && (
+                    <img
+                      src={badge}
+                      alt="Verified badge"
+                      className=" w-5 h-5 md:w-6 md:h-6 drop-shadow-md"
+                    />
+                  )}
             </h1>
             <p className="text-gray-600 text-lg md:text-xl font-medium">
               {SchoolDetail?.country}
@@ -173,7 +179,7 @@ const QualityFlyProfile = ({ SchoolDetail }) => {
             {SchoolDetail?.video_url?.map((videoUrl, index) => (
               <div
                 key={index}
-                className="bg-gray-50 rounded-xl overflow-hidden shadow-md w-full sm:w-[22rem]"
+                className="bg-gray-50 rounded-xl overflow-hidden shadow-md w-full sm:w-[40rem] hover:shadow-lg transition-shadow duration-300"
               >
                 {isYouTubeUrl(videoUrl) && (
                   <div
@@ -184,9 +190,13 @@ const QualityFlyProfile = ({ SchoolDetail }) => {
                       <img
                         src={`https://img.youtube.com/vi/${getYouTubeId(
                           videoUrl
-                        )}/hqdefault.jpg`}
+                        )}/maxresdefault.jpg`}
                         alt={`Video ${index + 1}`}
-                        className="absolute top-0 left-0 w-full h-full object-cover rounded-lg"
+                        className="absolute top-0 left-0 w-full h-full object-cover rounded-lg group-hover:opacity-90 transition-opacity"
+                        onError={(e) => {
+                          // Fallback to hqdefault if maxresdefault doesn't exist
+                          e.target.src = `https://img.youtube.com/vi/${getYouTubeId(videoUrl)}/hqdefault.jpg`;
+                        }}
                       />
                       <div className="absolute inset-0 flex items-center justify-center">
                         <VideoButton size="lg" />

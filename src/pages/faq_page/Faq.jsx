@@ -9,7 +9,7 @@ import { useQuery } from '@tanstack/react-query'
 const Faq = () => {
     const axiosPublic = useAxiosPublic();
   const { data: faqbanner, isLoading } = useQuery({
-    queryKey: ['ads2'],
+    queryKey: ['faqbanner'],
     queryFn: () => axiosPublic.get('/cms/faq_page/banner_section'),
   });
   return (

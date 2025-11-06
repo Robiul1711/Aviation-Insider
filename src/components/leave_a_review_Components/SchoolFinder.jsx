@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import CommonButton from "../common/CommonButton";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-import { debounce } from "lodash";
-import ReactPaginate from "react-paginate";
+import badge from "@/assets/images/badge.png";
 import { FlightSchoolSkeleton } from "../common/FlightSchoolSkeleton";
 import PaginationComponent from "../common/PaginationComponent";
 
@@ -79,18 +78,29 @@ const SchoolFinder = () => {
               className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
             >
               <div className="flex items-center space-x-4">
-                <div className="w-16 h-12 bg-gray-100 rounded border flex items-center justify-center overflow-hidden">
+                <div className=" w-16 h-16 bg-gray-50 rounded-lg border border-gray-200 flex items-center justify-center overflow-hidden shadow-sm">
                   <img
                     src={school?.image}
                     alt={`${school.name} logo`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain p-1 transition-transform duration-200 hover:scale-105"
                   />
+
+                 
                 </div>
+
                 <Link
                   to={`/school-profile/${school.id}`}
-                  className="text-base sm:text-lg font-medium text-gray-900 hover:text-blue-600 break-words"
+                  className="text-base flex items-center gap-2 sm:text-lg font-medium text-gray-900 hover:text-blue-600 break-words"
                 >
                   {school.name}
+                   {/* Verified Badge */}
+                  {school?.is_verified === 1 && (
+                    <img
+                      src={badge}
+                      alt="Verified badge"
+                      className="w-5 h-5 md:w-6 md:h-6 drop-shadow-md"
+                    />
+                  )}
                 </Link>
               </div>
 

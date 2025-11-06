@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
 import { FlightSchoolSkeleton } from "../common/FlightSchoolSkeleton";
-
+import badge from "@/assets/images/badge.png";
 const FlightSchoolsTable = () => {
   const axiosPublic = useAxiosPublic();
   const [search, setSearch] = useState("");
@@ -82,7 +82,16 @@ const FlightSchoolsTable = () => {
                   />
                 </div>
                 <button className="text-blue-600 hover:underline">
-                  <h3 className="font-medium text-gray-900">{school.name}</h3>
+                  <h3 className="font-medium text-gray-900 flex items-center gap-2" >
+                    {school.name}{" "}
+                    {school?.is_verified === 1 && (
+                      <img
+                        src={badge}
+                        alt="Verified badge"
+                        className=" w-5 h-5 md:w-6 md:h-6 drop-shadow-md"
+                      />
+                    )}
+                  </h3>
                 </button>
               </div>
 
