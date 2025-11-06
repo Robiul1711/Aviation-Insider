@@ -64,7 +64,7 @@ const {data:contactInfo,isLoading,error}=useQuery({
             <MdEmail size={20} />
           </div>
           <span className="text-gray-800 font-medium text-base">
-           {contactInfo?.data?.get_in_touch_section?.email||""}
+           {contactInfo?.data?.get_in_touch_section?.email||"contact@pilot-network.com"}
           </span>
         </div>
       </div>

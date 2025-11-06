@@ -87,19 +87,19 @@ const LatestFlightSchool = () => {
                           alt={review.commentTitle}
                           className="w-12 h-12 object-cover rounded-full"
                         />
-                        <div className="flex flex-col md:flex-row gap-2 md:items-center text-center md:text-left">
+                        <div className="flex flex-col  items-center md:items-start text-center md:text-left">
                           <p className="text-base font-semibold xlg:text-lg text-gray-800 hover:text-Primary transition">
                             {review?.reviewer_name}
                           </p>
-                          <span className="hidden md:block text-gray-500 w-0.5 h-5 bg-Secondary"></span>
-                          <p className="text-base font-semibold xlg:text-lg text-gray-800 hover:text-Primary transition">
+                          {/* <span className="hidden md:block text-gray-500 w-0.5 h-5 bg-Secondary"></span> */}
+                          <p className="text-base font-semibold  text-Secondary-light ">
                             {review?.name}
                           </p>
                         </div>
                       </div>
 
                       {/* Circular Progress */}
-                      <div className="w-16 h-16 md:w-12 md:h-12 mt-3 md:mt-0">
+                      <div className="w-16 h-16 md:w-12 md:h-12  ">
                         <CircularProgressbar
                           value={review.overall_percentage}
                           text={`${review.overall_percentage}%`}

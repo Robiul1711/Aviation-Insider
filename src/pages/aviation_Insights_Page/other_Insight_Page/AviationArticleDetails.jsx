@@ -24,13 +24,14 @@ const AviationArticleDetails = () => {
     <div>
       {/* Hero Banner */}
       <CommonBanner
-        image={aviationadvice}
+        image={article?.image}
         title={articleDetails?.data?.data?.article?.title}
+             className="min-h-[40vh] xs:min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh]"
       />
 
       {/* Content Section */}
       <div className="section-padding-x py-10 md:py-16 max-w-7xl mx-auto">
-        {isLoading ? (
+        {/* {isLoading ? (
           // 🔹 Shimmer skeleton for image
           <div className="relative w-full h-[250px] md:h-[500px] mb-8 rounded-md shadow-md overflow-hidden bg-gray-300">
             <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/60 to-transparent" />
@@ -42,7 +43,7 @@ const AviationArticleDetails = () => {
   className="w-full h-[250px] md:h-[600px] mb-8 rounded-md shadow-md object-cover "
 />
 
-        )}
+        )} */}
 
         <CommentArticle articleDetails={articleDetails} isLoading={isLoading} />
       </div>

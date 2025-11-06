@@ -17,17 +17,17 @@ const StudentsWentOnWork = ({ SchoolDetail }) => {
             {graduates.map((grad) => (
               <div
                 key={grad.id}
-                className="mx-6 sm:mx-10 border  rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg  w-[280px] sm:w-[350px] flex flex-col items-center text-center"
+                className="mx-6 sm:mx-10 border  rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg  w-[280px] sm:w-[300px] flex flex-col items-center text-center"
               >
                 {/* Logo */}
                 <img
                   src={grad?.logo_path}
                   alt={grad?.airline_name}
-                  className="w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[150px] md:h-[150px] object-contain mb-4"
+                  className="w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[150px] md:h-[150px]  object-contain mb-4"
                 />
 
                 {/* Airline Name */}
-                <h3 className="text-lg sm:text-xl font-semibold text-white">
+                <h3 className="text-lg sm:text-xl font-semibold ">
                   {grad?.airline_name}
                 </h3>
 

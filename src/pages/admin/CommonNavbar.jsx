@@ -5,10 +5,22 @@ import UserDropdown from "@/shared/navbar/UserDropdown";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import Swal from 'sweetalert2';
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const CommonNavbar = ({ open, setOpen }) => {
   const {user,setUser}=useAuth();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
+
+    // ✅ Fetch user details
+  const { data: userDetails } = useQuery({
+    queryKey: ["userDetails"],
+    queryFn: async () => {
+      const response = await axiosSecure.get(`/profile`);
+      return response.data;
+    },
+  });
 
 
 const handleLogout = () => {
@@ -46,7 +58,7 @@ const handleLogout = () => {
           <GiHamburgerMenu color="black" size={26} />
         </span>
         <div className="">
-          <p className=" text-black text-lg md:text-3xl font-bold">Welcome back, {user?.name}</p>
+          <p className=" text-black text-lg md:text-3xl font-bold">Welcome back, {userDetails?.userdata?.name}</p>
         </div>
       </div>
 
@@ -54,6 +66,7 @@ const handleLogout = () => {
           {user?.role && (
               <UserDropdown
                 user={user}
+             
                 onLogout={handleLogout}
                 onSettings={handleSettings}
               />

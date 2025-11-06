@@ -110,7 +110,7 @@ import "react-circular-progressbar/dist/styles.css";
 const SchoolBanner = ({ SchoolDetail, isLoading }) => {
   if (isLoading) {
     return (
-      <div className="w-full h-130 md:h-160 flex items-center justify-center bg-gray-100">
+      <div className="w-full h-100 sm:h-130 md:h-160 flex items-center justify-center bg-gray-100">
         <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
@@ -144,7 +144,7 @@ const coverImageUrl =
     : null;
 
   return (
-    <div className="w-full h-130 md:h-160 relative overflow-hidden">
+    <div className="w-full h-100 sm:h-130 md:h-160 relative overflow-hidden">
   {coverImageUrl ? (
     <img
       src={coverImageUrl}
