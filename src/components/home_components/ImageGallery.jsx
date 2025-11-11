@@ -105,7 +105,7 @@ const mergedImages = imagesFromApi.map((item, index) => ({
     <div className="px-4 sm:px-6 lg:px-8 py-12  max-w-7xl mx-auto">
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 auto-rows-[minmax(180px,auto)]">
          {mergedImages.map((image) => (
-          <div
+          <Link to={image.link}
             key={image.id}
             className={`relative group overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl h-full min-h-[200px] ${image.className}`}
           >
@@ -124,7 +124,7 @@ const mergedImages = imagesFromApi.map((item, index) => ({
                 View Details
               </Link>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
