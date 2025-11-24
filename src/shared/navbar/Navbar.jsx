@@ -24,7 +24,7 @@ const traningProviders = [
   { label: "LICENCE PROFICIENCY CHECKS", path: "/licence-proficiency-checks" },
   { label: "INTEGRATED COURSES", path: "/integrated-courses" },
   { label: "VERIFIED SCHOOLS", path: "/verified-schools" },
-  { label: "ENHANCED FLIGHT SCHOOLS", path: "/plus-schools" },
+  // { label: "ENHANCED FLIGHT SCHOOLS", path: "/plus-schools" },
 ];
 
 const aviationInsights = [

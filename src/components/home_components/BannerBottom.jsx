@@ -16,6 +16,7 @@ const BannerBottom = () => {
     queryKey: ["bannerbottom"],
     queryFn: () => axiosPublic.get("/home-page/stats"),
   })
+  console.log(bannerbottom)
   const data = [
   {
     name: "Reviews",
@@ -25,7 +26,7 @@ const BannerBottom = () => {
   {
     name: "Training Providers",
     icon: <PlaneIcon className="size-6 md:size-auto" />,
-    description: `Up-to-date database featuring ${bannerbottom?.data?.data?.training_providers} verified flight schools`,
+    description: `Up-to-date flight training database featuring ${bannerbottom?.data?.data?.training_providers} training organisations`,
   },
   {
     name: "Aviator Tips",

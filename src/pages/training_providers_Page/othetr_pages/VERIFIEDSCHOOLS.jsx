@@ -8,41 +8,42 @@ import FlightSchoolsTable from "@/components/trainingProvidersAllComponents/Flig
 import BrandSection from "@/components/home_components/BrandSection";
 import VTPSFAQSection from "@/components/trainingProvidersAllComponents/VTPSFAQSection";
 import VarifiedSchoolRatting from "@/components/trainingProvidersAllComponents/VarifiedSchoolRatting";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const VERIFIEDSCHOOLS = () => {
+  const axiosPublic = useAxiosPublic();
+  const {data:triningproviderBanner}=useQuery({
+    queryKey: ["triningproviderBanner"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/cms/verified_school_page/banner_section");
+      return res.data;
+    },
+  })
+  const {data:triningproviderHero}=useQuery({
+    queryKey: ["triningproviderHero"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/cms/verified_school_page/hero_section");
+      return res.data;
+    },
+  })
+
   return (
     <div>
-      <CommonBanner image={triningprovider} title="Verified Schools ​​​​" />
+      <CommonBanner image={triningproviderBanner?.data?.banner_section?.image} title={triningproviderBanner?.data?.banner_section?.title} />
       <div className="flex flex-col-reverse md:flex-row items-center py-16 gap-10 md:gap-20 bg-Secondary section-padding-x">
         {/* Text Content */}
         <div className="space-y-10 text-white flex-1">
           <Title level="title20">
-            At Pilot Network we are building the largest database of flight
-            schools, training courses and student reviews with the aim of
-            providing a platform for the next generation of pilots to fully
-            research their options for flight training. While we endeavour to
-            include as many training providers as possible, with over 200 in our
-            database so far, it’s not possible to update these ourselves. This
-            is where the Verified Training Providers Scheme (VTPS) comes in.
+           <span dangerouslySetInnerHTML={{__html:triningproviderHero?.data?.hero_section?.description}}></span>
           </Title>
-          <Title level="title20">
-            The VTPS allows training providers to keep their own information up
-            to date by being in direct contact with us. This ensures the data we
-            hold is both accurate and truly reflective of the provider, while
-            also allowing us to include more detailed profiles for those
-            providers.
-          </Title>
-          <Title level="title20">
-            VTPS Members also help us to shape the future of Pilot Network
-            through regular discussions and a welcoming of feedback to the Pilot
-            Network Team.
-          </Title>
+         
         </div>
 
         {/* Image */}
-        <div className="flex-1 w-full max-w-sm md:max-w-md">
+        <div className="flex-1  w-[200px] sm:max-w-sm md:max-w-md">
           <img
-            src={tiq}
+            src={triningproviderHero?.data?.hero_section?.image}
             alt="Training Info"
             className="w-full h-auto object-contain"
           />

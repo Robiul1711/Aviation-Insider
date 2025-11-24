@@ -144,10 +144,10 @@ const router = createBrowserRouter([
         path: "/verified-schools",
         element: <VERIFIEDSCHOOLS />
       },
-      {
-        path: "/plus-schools",
-        element: <PlusSchools />
-      },
+      // {
+      //   path: "/plus-schools",
+      //   element: <PlusSchools />
+      // },
       // training providers end
       // about start
       {
