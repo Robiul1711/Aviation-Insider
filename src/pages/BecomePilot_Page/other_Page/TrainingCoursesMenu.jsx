@@ -60,72 +60,69 @@ const TrainingCoursesMenu = () => {
         title={activeCategory.title || "Training Courses"}
       />
 
-      <div className="section-padding-x py-16 w-full flex justify-between gap-12">
-        {/* Sidebar */}
-        <div className="w-[20%] flex flex-col gap-5">
-          {allCategories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => {
-                setActiveCategory({ id: category.id, title: category.title });
-                setCategoryId(category.id);
-                setCatSearch(""); // ✅ clear search immediately
-              }}
-              className={`px-10 py-3 rounded-md text-white text-center font-semibold duration-300 ${
-                activeCategory.title === category.title
-                  ? "bg-Secondary shadow-md scale-[1.03]"
-                  : "bg-Secondary-light hover:bg-Secondary/80"
-              }`}
-            >
-              {category.title}
-            </button>
-          ))}
-        </div>
+  <div className="section-padding-x py-16 w-full flex flex-col lg:flex-row justify-between gap-10">
 
-        {/* Main Content */}
-        <div className="w-[80%]">
-          {isLoading ? (
-            <div>
-              <CourseListSkeleton count={3} />
-            </div>
-          ) : error ? (
-            <div className="text-red-500 text-lg">
-              Failed to load course details.
-            </div>
-          ) : (
-            <>
-              <DynamicCourseDetail
-                details={detailResponse}
-                categoryId={categoryId}
-                categoryTitle={activeCategory.title}
-              />
-              <div className="flex mt-10">
-                <ReactPaginate
-                  breakLabel="..."
-                  pageCount={detailResponse?.data?.meta?.last_page || 1}
-                  pageRangeDisplayed={3}
-                  marginPagesDisplayed={2}
-                  onPageChange={(event) => {
-                    setPageCount(event.selected + 1);
-                  }}
-                  containerClassName="flex items-center md:gap-3 gap-1 flex-wrap"
-                  previousLabel="Previous"
-                  nextLabel="Next"
-                  previousClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md cursor-pointer"
-                  nextClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md cursor-pointer"
-                  activeClassName="font-[700] bg-Secondary rounded-lg border-none"
-                  activeLinkClassName="text-white" // ✅ white when active
-                  disabledClassName="opacity-50 cursor-not-allowed"
-                  breakClassName="md:px-4 px-2 py-2 text-sm font-medium"
-                  pageClassName="mx-1 cursor-pointer"
-                  pageLinkClassName="w-[42px] h-[42px] border border-primary flex justify-center items-center text-black rounded-lg hover:bg-Secondary hover:text-white transition-colors"
-                  forcePage={pageCount - 1}
-                />
-              </div>
-            </>
-          )}
+  {/* Sidebar */}
+  <div className="w-full lg:w-[22%] flex flex-row lg:flex-col flex-wrap gap-3">
+    {allCategories.map((category) => (
+      <button
+        key={category.id}
+        onClick={() => {
+          setActiveCategory({ id: category.id, title: category.title });
+          setCategoryId(category.id);
+          setCatSearch("");
+        }}
+        className={`px-6 py-3 w-[48%] lg:w-full text-center rounded-md text-white text-sm font-semibold duration-300
+          ${
+            activeCategory.title === category.title
+              ? "bg-Secondary shadow-md scale-[1.02]"
+              : "bg-Secondary-light hover:bg-Secondary/80"
+          }
+        `}
+      >
+        {category.title}
+      </button>
+    ))}
+  </div>
+
+  {/* Main Content */}
+  <div className="w-full lg:w-[78%]">
+    {isLoading ? (
+      <CourseListSkeleton count={3} />
+    ) : error ? (
+      <div className="text-red-500 text-lg">Failed to load course details.</div>
+    ) : (
+      <>
+        <DynamicCourseDetail
+          details={detailResponse}
+          categoryId={categoryId}
+          categoryTitle={activeCategory.title}
+        />
+
+        {/* Pagination */}
+        <div className="flex mt-10 justify-center">
+          <ReactPaginate
+            breakLabel="..."
+            pageCount={detailResponse?.data?.meta?.last_page || 1}
+            pageRangeDisplayed={2}
+            marginPagesDisplayed={1}
+            onPageChange={(event) => setPageCount(event.selected + 1)}
+            containerClassName="flex items-center gap-2 flex-wrap"
+            previousLabel="Prev"
+            nextLabel="Next"
+            previousClassName="px-3 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md cursor-pointer"
+            nextClassName="px-3 py-2 text-sm font-medium text-gray-700 bg-white border rounded-md cursor-pointer"
+            activeClassName="bg-Secondary text-white rounded-md"
+            pageClassName="cursor-pointer"
+            pageLinkClassName="w-9 h-9 border border-primary flex justify-center items-center rounded-md hover:bg-Secondary hover:text-white transition"
+            forcePage={pageCount - 1}
+          />
         </div>
-      </div>
+      </>
+    )}
+  </div>
+</div>
+
 
       <CommonAds isShow />
     </div>

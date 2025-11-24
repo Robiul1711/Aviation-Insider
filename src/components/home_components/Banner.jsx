@@ -12,6 +12,12 @@ import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
 const data = [
+    {
+    name: "Leave A Review",
+    icon: <MessageIcon className="size-6 md:size-auto" />,
+    description: "Review your flight training experience",
+    link: "/review",
+  },
   {
     name: "Find an ATO",
     icon: <SearchIcon className="size-6 md:size-auto" />,
@@ -30,12 +36,7 @@ const data = [
     description: "All the tools you need through your training",
     link: "/training-providers",
   },
-  {
-    name: "Leave A Review",
-    icon: <MessageIcon className="size-6 md:size-auto" />,
-    description: "Review your flight training experience",
-    link: "/pilot-network",
-  },
+
 ];
 
 const Banner = () => {
