@@ -25,7 +25,7 @@ const LeadingFlightSchool = () => {
       <span dangerouslySetInnerHTML={{ __html: leadingSchool?.data?.show_case_section?.description }}></span>
         </Title>
         <BrandSection />
-        <CommonButton variant="secondary" onClick={() => window.location.href = "/plus-schools"}>Find Out More</CommonButton>
+        <CommonButton variant="secondary" onClick={() => window.location.href = "/all-flight-schools"}>Find Out More</CommonButton>
       </div>
     </div>
   )
