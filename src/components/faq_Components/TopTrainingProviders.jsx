@@ -18,7 +18,7 @@ const TopTrainingProviders = () => {
     queryKey: ["topTrainingProviders", pageCount],
     queryFn: async () => {
       const response = await axiosPublic.get(
-        "/reviews/enhanced-training-providers",
+        "/reviews/top-rated-training-providers",
         {
           params: { page: pageCount, per_page: 5 }, // ✅ request 5 per page
         }
@@ -36,7 +36,7 @@ const TopTrainingProviders = () => {
     return <p className="text-[#FF0000]">No available data at the moment</p>;
   return (
     <div className="space-y-4">
-      {/* Top Training Providers */}
+      {/*  Top Rated Training Providers */}
       {
         !TopTrainingPro?.data || TopTrainingPro?.data.length === 0 ? (
           <p className="text-[#FF0000]">No available data at the moment</p>
@@ -63,6 +63,11 @@ const TopTrainingProviders = () => {
               </Link>
               <p className="text-gray-600 text-sm sm:text-base">
                 {item.total_review_count} reviews
+                
+              </p>
+              <p className="text-gray-600 font-semibold text-sm sm:text-base">
+            Rank: {item.rank} 
+                
               </p>
             </div>
           </div>

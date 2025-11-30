@@ -87,7 +87,7 @@ export default function QualityFlyReviews({ SchoolDetail }) {
         {/* ===== Right Section (Enhanced Providers) ===== */}
         <div className="w-full">
           <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-800">
-            Enhanced Training Providers
+            Verified Training Providers
           </h2>
           <p className="text-sm sm:text-base text-gray-500 mb-5">
             Training providers require a minimum of 3 reviews to be ranked.
