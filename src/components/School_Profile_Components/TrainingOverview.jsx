@@ -130,10 +130,10 @@ export default function TrainingOverview({ SchoolDetail }) {
 
       </div>
 
-      {/* Right Panel - Top Training Providers */}
+      {/* Right Panel -  Top Rated Training Providers */}
       <div className="space-y-4">
         <h2 className="text-xl md:text-2xl font-bold">
-          Top Training Providers
+           Top Rated Training Providers
         </h2>
         <div className="space-y-4">
           <TopTrainingProviders />
