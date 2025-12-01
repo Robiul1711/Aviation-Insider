@@ -22,7 +22,7 @@ const TrainingProviders = () => {
                   : "text-gray-500"
               }`}
             >
-              Enhanced Training Providers
+              Verified Training Providers
             </Title>
             <Title
               level="title32"
@@ -33,7 +33,7 @@ const TrainingProviders = () => {
                   : "text-gray-500"
               }`}
             >
-              Top Training Providers
+               Top Rated Training Providers
             </Title>
           </div>
 
