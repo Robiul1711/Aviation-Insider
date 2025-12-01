@@ -25,17 +25,31 @@ const ImageGallery = () => {
 
   const imagesFromApi = galleryImages?.data || [];
 
-  const mergedImages = imagesFromApi.map((item, index) => ({
+const mergedImages = imagesFromApi.map((item, index) => {
+  let customClass = layoutClasses[index] || "md:col-span-2";
+
+  // Force same size for 2nd & 4th images on lg screens
+  if (index === 1 || index === 3) {
+    customClass =
+      customClass +
+      " lg:col-span-2 lg:row-span-1 lg:h-[300px]"; // same size for both
+  }
+
+  // Last item special style
+  if (index === imagesFromApi.length - 1) {
+    customClass =
+      "col-span-2 row-span-1 h-[130px] xs:h-[200px] md:h-[300px]";
+  }
+
+  return {
     id: item.id,
     title: item.title,
     subtitle: item.subtitle,
     src: item.image,
     link: item.link,
-    className:
-      index === imagesFromApi.length - 1
-        ? "col-span-2 row-span-1 h-[130px] xs:h-[200px] md:h-[300px]" // Use h-[80px] instead of min-h-[80px]
-        : layoutClasses[index] || "md:col-span-2",
-  }));
+    className: customClass,
+  };
+});
 
   return (
     <div className="section-padding-x py-8 sm:py-12 max-w-7xl mx-auto">
@@ -45,7 +59,7 @@ const ImageGallery = () => {
           <Link
             to={image.link}
             key={image.id}
-            className={`relative group overflow-hidden rounded-lg lg:rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl ${image.className}`}
+            className={`relative group overflow-hidden rounded-lg lg:rounded-xl h-[180px] xs:h-auto shadow-lg transition-all duration-300 hover:shadow-xl ${image.className}`}
           >
             <img
               src={image.src}
