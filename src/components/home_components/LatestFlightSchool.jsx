@@ -41,13 +41,13 @@ const LatestFlightSchool = () => {
             {/* Navigation Buttons */}
             <div
               ref={navigationPrevRef}
-              className="absolute top-1/2 -left-6 z-10 transform -translate-y-1/2 cursor-pointer bg-white shadow-md rounded-full p-2 hover:bg-Primary hover:text-white transition"
+              className="absolute top-1/2 -left-3 z-10 transform -translate-y-1/2 cursor-pointer bg-white shadow-md rounded-full p-2 hover:bg-Primary hover:text-white transition"
             >
               <ChevronLeft size={24} />
             </div>
             <div
               ref={navigationNextRef}
-              className="absolute top-1/2 -right-6 z-10 transform -translate-y-1/2 cursor-pointer bg-white shadow-md rounded-full p-2 hover:bg-Primary hover:text-white transition"
+              className="absolute top-1/2 -right-3 z-10 transform -translate-y-1/2 cursor-pointer bg-white shadow-md rounded-full p-2 hover:bg-Primary hover:text-white transition"
             >
               <ChevronRight size={24} />
             </div>
