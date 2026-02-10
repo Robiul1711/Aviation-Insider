@@ -8,7 +8,7 @@ const StudentsWentOnWork = ({ SchoolDetail }) => {
   return (
     <>
       {graduates.length > 0 && (
-        <div className="overflow-hidden w-full md:py-12 py-6 section-padding-x">
+        <div className="overflow-hidden w-full md:pt-12 pt-6 section-padding-x">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-10 text-Primary">
             Our Graduates Work With
           </h2>
@@ -17,28 +17,28 @@ const StudentsWentOnWork = ({ SchoolDetail }) => {
             {graduates.map((grad) => (
               <div
                 key={grad.id}
-                className="mx-6 sm:mx-10 border  rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg  w-[280px] sm:w-[300px] flex flex-col items-center text-center"
+                className="mx-4 sm:mx-8 lg:mx-12"
               >
                 {/* Logo */}
                 <img
                   src={grad?.logo_path}
                   alt={grad?.airline_name}
-                  className="w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[150px] md:h-[150px]  object-contain mb-4"
+                  className="w-[100px] h-[100px] md:w-[150px] md:h-[150px]  object-contain"
                 />
 
-                {/* Airline Name */}
+{/*          
                 <h3 className="text-lg sm:text-xl font-semibold ">
                   {grad?.airline_name}
                 </h3>
 
-                {/* Description */}
+           
                 <p
                   className="text-sm text-black mt-2 line-clamp-3"
                   dangerouslySetInnerHTML={{ __html: grad?.description }}
-                />
-
+                /> */}
+{/* {console.log(grad)} */}
                 {/* Website Link */}
-                {grad?.website_url && (
+                {/* {grad?.website_url && (
                   <Link
                     to={grad?.website_url}
                     target="_blank"
@@ -47,7 +47,7 @@ const StudentsWentOnWork = ({ SchoolDetail }) => {
                   >
                     Visit Website →
                   </Link>
-                )}
+                )} */}
               </div>
             ))}
           </Marquee>

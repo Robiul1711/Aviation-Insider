@@ -106,13 +106,15 @@ const QualityFlyProfile = ({ SchoolDetail }) => {
       )}
 
       {/* Description */}
-      <div className="mb-10 space-y-5 text-lg text-gray-700 leading-relaxed">
-        <p
-          dangerouslySetInnerHTML={{
-            __html: SchoolDetail?.description || "",
-          }}
-        ></p>
-      </div>
+<div className="mb-10 space-y-5 text-lg text-gray-700 leading-relaxed">
+  <p
+    className="prose prose-lg max-w-none prose-a:text-blue-600 prose-a:underline"
+    dangerouslySetInnerHTML={{
+      __html: SchoolDetail?.description || "",
+    }}
+  />
+</div>
+
 
       {/* Info Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">

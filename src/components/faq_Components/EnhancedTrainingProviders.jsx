@@ -22,7 +22,7 @@ const EnhancedTrainingProviders = () => {
       const response = await axiosPublic.get(
         "/reviews/verified-training-providers",
         {
-          params: { page: pageCount, per_page: 5 }, // ✅ request 5 per page
+          params: { page: pageCount, per_page: 10 }, // ✅ request 5 per page
         }
       );
 
@@ -42,67 +42,70 @@ const EnhancedTrainingProviders = () => {
     return <p className="text-[#FF0000]">No available data at the moment</p>;
 // console.log(fetchedData?.data)
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {fetchedData?.data?.length === 0 ? (
         <p className="text-[#FF0000]">No available data at the moment</p>
       ) : (
         <>
           {/*  Top Rated Training Providers */}
           {fetchedData?.data?.map((item) => (
-            <div
-              key={item.flight_school_id}
-              className="flex items-center justify-between bg-[#F3F4F6] p-4 rounded-md"
-            >
-              <div className="flex items-center gap-8">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-16 h-16 object-contain"
-                />
-                <div className="flex flex-col gap-1">
-                  <Link
-                    to={`/school-profile/${item.flight_school_id}`}
-                    className="sm:text-xl font-bold flex items-center gap-2"
-                    onMouseEnter={() => {
-                      queryClient.prefetchQuery({
-                        queryKey: ["school-details", item.flight_school_id],
-                        queryFn: () =>
-                          axiosPublic
-                            .get(
-                              `/flight-school/details/${item.flight_school_id}`
-                            )
-                            .then((res) => res.data),
-                        staleTime: 1000 * 60 * 5, // optional: keep data fresh for 5 mins
-                      });
-                    }}
-                  >
-                    {item.name}
-                       {item?.is_verified === 1 && (
-                    <img
-                      src={badge}
-                      alt="Verified badge"
-                      className=" w-5 h-5  drop-shadow-md"
-                    />
-                  )}
-                  </Link>
+       <div
+  key={item.flight_school_id}
+  className="flex items-center justify-between bg-[#F3F4F6] px-2 py-2 rounded-md"
+>
+  <div className="flex items-center gap-4">
+    <img
+      src={item.image}
+      alt={item.name}
+      className="w-12 h-12 object-contain"
+    />
 
-                  <p className="text-gray-600 text-sm sm:text-base">
-                    {item.total_review_count} reviews
-                  </p>
-                </div>
-              </div>
-              <div style={{ width: 50, height: 50 }}>
-                <CircularProgressbar
-                  value={item.overall_percentage}
-                  text={`${item.overall_percentage}%`}
-                  styles={buildStyles({
-                    pathColor: "#10B981", // ✅ circle color
-                    textColor: "#111827", // ✅ text color
-                    trailColor: "#D1D5DB", // ✅ background circle
-                  })}
-                />
-              </div>
-            </div>
+    <div className="flex flex-col gap-0.5">
+      <Link
+        to={`/school-profile/${item.flight_school_id}`}
+        className="text-sm sm:text-base font-semibold flex items-center gap-1.5 leading-tight"
+        onMouseEnter={() => {
+          queryClient.prefetchQuery({
+            queryKey: ["school-details", item.flight_school_id],
+            queryFn: () =>
+              axiosPublic
+                .get(`/flight-school/details/${item.flight_school_id}`)
+                .then((res) => res.data),
+            staleTime: 1000 * 60 * 5,
+          });
+        }}
+      >
+        {item.name}
+
+        {item?.is_verified === 1 && (
+          <img
+            src={badge}
+            alt="Verified badge"
+            className="w-4 h-4 drop-shadow-sm"
+          />
+        )}
+      </Link>
+
+      <p className="text-gray-600 text-xs sm:text-sm">
+        {item.total_review_count} reviews
+      </p>
+    </div>
+  </div>
+
+  <div className="w-10 h-10">
+    <CircularProgressbar
+      value={item.overall_percentage}
+      text={`${item.overall_percentage}%`}
+      styles={buildStyles({
+        pathColor: "#10B981",
+        textColor: "#111827",
+        trailColor: "#D1D5DB",
+        textSize: "28px",
+      })}
+    />
+  </div>
+</div>
+
           ))}
 
           {/* Pagination */}
@@ -122,7 +125,7 @@ const EnhancedTrainingProviders = () => {
               activeLinkClassName="font-[700] bg-Secondary rounded-lg text-white border-none"
               disabledClassName="bg-none cursor-not-allowed"
               breakClassName="md:px-4 px-2 py-2 text-sm font-medium text-gray-700"
-              pageLinkClassName="w-[42px] h-[42px] border-[1px] border-primary flex justify-center items-center text-primary rounded-lg"
+              pageLinkClassName="w-[42px] h-[36px] border-[1px] border-primary flex justify-center items-center text-primary rounded-md"
               forcePage={pageCount - 1}
             />
           </div>

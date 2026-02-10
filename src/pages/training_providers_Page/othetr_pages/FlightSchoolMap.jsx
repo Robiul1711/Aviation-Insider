@@ -38,7 +38,7 @@ const FitMapBounds = ({ positions }) => {
 const FlightSchoolMap = () => {
   const axiosPublic = useAxiosPublic();
 
-  // Fetch banner
+  // Fetch bannere
   const { data: flightSchoolsmapBanner } = useQuery({
     queryKey: ["flightSchoolsmapBanner"],
     queryFn: async () => {

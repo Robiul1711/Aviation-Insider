@@ -21,17 +21,21 @@ const PrivacyPolicy = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800 px-6 py-12">
-      <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-xl p-8">
-        <h1 className="text-4xl font-bold text-Primary mb-6 text-center">
+      <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-xl p-8">
+        <h1 className="text-3xl sm:text-5xl font-bold text-Primary mb-8 lg:mb-16 text-center">
           {pageData?.data?.data?.page_title}
         </h1>
 
-        <section className="mb-6">
+        <section className="">
           <div
+            className="prose prose-slate lg:prose-lg max-w-none 
+                   prose-headings:font-bold 
+                   prose-a:text-blue-600 hover:prose-a:text-blue-500
+                   prose-img:rounded-xl prose-img:shadow-lg"
             dangerouslySetInnerHTML={{
-              __html: pageData?.data?.data?.page_content,
+              __html: pageData?.data?.data?.page_content || "",
             }}
-          ></div>
+          />
         </section>
       </div>
     </div>

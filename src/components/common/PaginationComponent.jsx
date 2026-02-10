@@ -22,7 +22,7 @@ const PaginationComponent = ({ pageCount, setPageCount, forcePage }) => {
         disabledClassName="opacity-50 cursor-not-allowed"
         breakClassName="md:px-4 px-2 py-2 text-sm font-medium"
         pageClassName="mx-1 cursor-pointer"
-        pageLinkClassName="w-[42px] h-[42px] border border-primary flex justify-center items-center text-black rounded-lg hover:bg-Secondary hover:text-white transition-colors"
+        pageLinkClassName="w-[42px] h-[36px] border border-primary flex justify-center items-center text-black rounded-md hover:bg-Secondary hover:text-white transition-colors"
         forcePage={forcePage - 1}
       />
     </div>

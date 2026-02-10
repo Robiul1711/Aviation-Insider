@@ -4,7 +4,6 @@ import EnhancedTrainingProviders from "../faq_Components/EnhancedTrainingProvide
 import TopTrainingProviders from "../faq_Components/TopTrainingProviders";
 import OtherCommonLinks from "../common/OtherCommonLinks";
 
-
 const MoreFlightSchool = () => {
   const [activeTab, setActiveTab] = useState("enhanced");
 
@@ -34,7 +33,7 @@ const MoreFlightSchool = () => {
                   : "text-gray-500"
               }`}
             >
-             Top Rated Training Providers
+              Top Rated Training Providers
             </Title>
           </div>
 
@@ -44,7 +43,6 @@ const MoreFlightSchool = () => {
             {activeTab === "top" && <TopTrainingProviders />}
           </div>
         </div>
-  
       </div>
     </div>
   );

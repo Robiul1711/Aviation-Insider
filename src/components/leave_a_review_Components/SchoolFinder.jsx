@@ -30,7 +30,7 @@ const SchoolFinder = () => {
       }),
     keepPreviousData: true,
   });
-  // console.log(schoolsData?.data?.data);
+  // console.log(schoolsData);
   return (
     <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-white min-h-screen">
       {/* Header */}
@@ -61,7 +61,7 @@ const SchoolFinder = () => {
       </div>
 
       {/* School Listings */}
-      <div className="space-y-4 mb-8">
+      <div className="space-y-3 mb-8">
         {isLoading ? (
           <>
             <FlightSchoolSkeleton
@@ -75,10 +75,10 @@ const SchoolFinder = () => {
           schoolsData?.data?.data?.map((school) => (
             <div
               key={school.id}
-              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-3 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
             >
-              <div className="flex items-center space-x-4">
-                <div className=" w-16 h-16 bg-gray-50 rounded-lg border border-gray-200 flex items-center justify-center overflow-hidden shadow-sm">
+              <div className="flex items-center space-x-3">
+                <div className=" w-14 h-14 bg-gray-50 rounded-lg border border-gray-200 flex items-center justify-center overflow-hidden shadow-sm">
                   <img
                     src={school?.image}
                     alt={`${school.name} logo`}
@@ -90,7 +90,7 @@ const SchoolFinder = () => {
 
                 <Link
                   to={`/school-profile/${school.id}`}
-                  className="text-base flex items-center gap-2 sm:text-lg font-medium text-gray-900 hover:text-blue-600 break-words"
+                  className="text-base flex items-center gap-2  font-medium text-gray-900 hover:text-blue-600 break-words"
                 >
                   {school.name}
                    {/* Verified Badge */}
@@ -98,7 +98,7 @@ const SchoolFinder = () => {
                     <img
                       src={badge}
                       alt="Verified badge"
-                      className="w-5 h-5 md:w-6 md:h-6 drop-shadow-md"
+                      className="w-5 h-5  drop-shadow-md"
                     />
                   )}
                 </Link>
@@ -109,6 +109,7 @@ const SchoolFinder = () => {
                   school.name
                 )}`}
                 variant="secondary"
+                className="!px-4 !py-2"
               >
                 Add Your Review
               </CommonButton>
